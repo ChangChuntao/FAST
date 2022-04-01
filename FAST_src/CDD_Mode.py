@@ -54,7 +54,7 @@ def CDD_Mode():
             for day in range(cddarg['day1'], cddarg['day2'] + 1):
                 ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
                 urllist.append(ftpsitelist)  # 按天下载
-            cddpooldownload(urllist, 12)  # 多线程下载
+            cddpooldownload(urllist, 6)  # 多线程下载
             getuncompress()
 
         elif obj in objneedyd1d2loc:  # 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型
@@ -73,12 +73,12 @@ def CDD_Mode():
                         f = f.replace('<SITE>', s)
                         siteftp.append(f)
                     urllist.append(siteftp)  # 按天下载
-            cddpooldownload(urllist, 12)  # 多线程下载
+            cddpooldownload(urllist, 6)  # 多线程下载
             getuncompress()
 
         elif obj in objneedn:
             ftpsite = FTP_S[cddarg['datatype']]
             for ftp in ftpsite:
                 wgets(ftp)
-            cddpooldownload(urllist, 12)  # 多线程下载
+            cddpooldownload(urllist, 6)  # 多线程下载
             getuncompress()
