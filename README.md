@@ -144,18 +144,20 @@ After installation, as under Windows system, you can directly run the program or
 1. **Chang Chuntao** @China Academy of Surveying and mapping  
     Program design/ Program writing/ Document writing/ Program testing/ Program maintenance  
 
+2. Postdoc. **Jiang Kecai**@WuHan University  
+    Program design/ Parallel processing thoughts and methods
 
-2. Dr. **Mu Renhai**@WuHan University  
+3. Dr. **Mu Renhai**@WuHan University  
     Program design/ program testing/ Documentation
 
 
-3. Dr. **Li Bo** @Liaoning Technical University&China Academy of Surveying and mapping  
+4. Dr. **Li Bo** @Liaoning Technical University&China Academy of Surveying and mapping  
     Program testing/ Documentation/ Download node summary
 
 
-4.  **Li Yongxi** @Lanzhou Jiaotong University&China Academy of Surveying and mapping  
+5.  **Li Yongxi** @Lanzhou Jiaotong University&China Academy of Surveying and mapping  
     Program testing/ Download node summary
 
 
-5.  **Cao Duoming** @Shandong University of Science and Technology&China Academy of Surveying and mapping  
+6.  **Cao Duoming** @Shandong University of Science and Technology&China Academy of Surveying and mapping  
     Program testing/ Download node summary
