@@ -64,7 +64,7 @@ After installation, as under Windows system, you can directly run the program or
 
   Where the following are some of the options avaiable:
 
-  -v,  --version                   display the version of GDD and exit
+  -v,  --version                   display the version of FAST and exit
   -h,  --help                      print this help
   -t,  --type                      GNSS type, if you need to download multiple data,
                                    Please separate characters with " , "
