@@ -1,28 +1,30 @@
 # FAST （Fusion Abundant multi-Source data download Terminal）
 
-#### 介绍
+####Introduce
 **FAST**
-针对目前GNSS数据下载步骤繁琐、下载速度慢等问题，开发了一套较为完备的融合多源数据下载终端软件——FAST。  
-软件目前包含GNSS科研学习过程中绝大部分所需的数据源，采用并行下载的方式极大的提升了下载的效率。
+Aiming at the problems of cumbersome steps and slow download speed of GNSS data, a relatively complete set of integrated multi-source data download terminal software fast is developed.   
+The software contains most of the data sources required in the process of GNSS scientific research and learning. The way of parallel download greatly improves the efficiency of download.
 
-#### Git地址
+#### Git
 - [https://github.com/ChangChuntao/FAST](https://github.com/ChangChuntao/FAST)
 - [https://gitee.com/changchuntao/FAST](https://gitee.com/changchuntao/FAST)
 
 
-#### 软件特点
-- **多平台**：同时支持windows与linux系统；
-- **资源丰富**：基本囊括了GNSS科研学习中所需的数据源，目前支持15个大类、62个小类，具体支持数据见**数据支持**；
-- **快速**：软件采用并行下载方式，在命令行参数运行模式可自行指定下载线程数，经测试下载100天的brdc+igs+clk文件只需要48.93s！
-- **易拓展**：如需支持更多数据源，可在FTP_Source.py、GNSS_TYPE.py中指定所需的数据与数据源；
-- **简单易行**：程序有引导下载模式与命令行带参数运行模式两种方式下载，直接运行程序便可进入引导下载模式，命令行带参数运行`FAST -h`可查看带参数运行模式介绍；
-- **灵活**：在带参数运行模式下，用户可灵活指定下载类型、下载位置、下载时间、是否解压、线程数等，可根据自我需求编写bat、shell、python等脚本运行；
-- **轻便**：windows程序包仅有18.9 MB，Liunx程序包仅有6.63 MB.
+#### Software features
+
+- **Multi platform**: Support both windows and Linux systems;
+- **Abundant Resources**: It basically includes the data sources required in GNSS scientific research and learning. At present, it supports 15 categories and 62 subcategories. See the specific **Data support**;
+- **Fast**: The software adopts parallel download mode, and the number of download threads can be specified in the command line parameter operation mode. After testing, it only takes 48.93s to download the 100 days BRDC+IGS+CLK file!
+- **Easy to expand**: If you need to support more data sources, you can specify the required data and data sources in FTP_Source.py and GNSS_TYPE.py;
+- **Easy to run**: The program can be downloaded in two ways: boot download mode and terminal input mode with parameters. Run the program directly to enter the boot download mode. Run `FAST -h` on the terminal with parameters to view the introduction of operation mode with parameters;
+- **Flexible**: In the operation mode with parameters, users can flexibly specify the download type, download location, download time, whether to decompress, number of threads, etc., and can write scripts such as bat, shell and python to run according to their own needs;
+- **Portable**: the windows package is only 18.9 MB, and the Linux package is only 6.63 MB
 
 
-#### 安装教程
-- **Windows系统**下仅需解压程序包即可直接运行,CMD运行`FAST.exe -h`可查看带参数运行模式介绍；
-- **Linux系统**下需安装先导软件wget\lftp\ncompress\python3，以Ubuntu系统为例，于终端中输入以下代码：  
+#### Installation tutorial
+
+- **Windows**you only need to unzip the package to run directly, enter `FAST.exe -h` can view the introduction of operation mode with parameters;
+- **Linux**The pilot software wget\LFTP\ncompress\python3 needs to be installed. Take Ubuntu system as an example, enter the following code in the terminal：  
 
 ```
 apt-get install wget
@@ -30,28 +32,29 @@ apt-get install lftp
 apt-get install ncompress
 apt-get install python3
 ```
-安装后如windows系统下相同可直接运行程序，或将程序配置至环境变量中。
 
-#### 使用说明
+After installation, as under Windows system, you can directly run the program or configure the program to environment variables.
 
-**引导下载模式**Windows系统双击运行FAST.exe便可进入引导下载，若为Linux系统终端输入`FAST`运行即可：  
-1.  以下载武汉大学多系统精密星历为例，在一级选择目录中选择SP3，即为输入2后回车；  
-![输入图片说明](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%B8%BB%E7%9B%AE%E5%BD%95.png)
+#### Instructions
+
+**Boot Download Mode**: In Windows system, click run fast Exe can enter the boot download. If it is a Linux system, the terminal can enter `FAST` to run;  
+1. Take downloading the multi system precise ephemeris of Wuhan University as an example, select SP3 in the primary selection directory, enter 2 and press enter；  
+![一级目录](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%B8%BB%E7%9B%AE%E5%BD%95.png)
   
-2.  选择MGEX_WUH_sp3即为输入6并回车，其中MGEX代表多系统，WUH代表武汉大学IGS数据处理中心，SP3代表精密星历；
-![输入图片说明](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95.png)  
+2. Select MGEX_WUH_SP3 is input 6 and enter, where MGEX represents multi system GNSS, WHU represents Wuhan University, IGS data processing center and SP3 represents precision ephemeris;
+![二级目录](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95.png)  
   
-3.  根据引导输入时间，回车完成输入；
-![输入图片说明](Windows/RUN_image/%E8%BE%93%E5%85%A5%E6%97%B6%E9%97%B4.png)
+3. Enter the time according to the prompt and press enter to complete the input;
+![输入时间](Windows/RUN_image/%E8%BE%93%E5%85%A5%E6%97%B6%E9%97%B4.png)
 
-4.  下载完成，根据提示直接回车完成解压或者输入任意字符回车不解压；
-![输入图片说明](Windows/RUN_image/%E8%A7%A3%E5%8E%8B.png)
-![输入图片说明](Windows/RUN_image/%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90.png)  
+4. After the download is completed, press enter directly according to the prompt to complete the decompression, or press enter without decompression;
+![下载完成](Windows/RUN_image/%E8%A7%A3%E5%8E%8B.png)
+![解压完成](Windows/RUN_image/%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90.png)  
 
-5.  根据提示输入y再次进入引导或退出；  
-![输入图片说明](Windows/RUN_image/%E5%86%8D%E6%AC%A1%E5%BC%95%E5%AF%BC.png)
+5. Enter y or exit again according to the prompt;
+![在此引导](Windows/RUN_image/%E5%86%8D%E6%AC%A1%E5%BC%95%E5%AF%BC.png)
   
-**命令行带参数运行模式**Windows系统CMD或power shell运行`FAST.exe -h`可查看命令行运行帮助，若为Linux系统终端输入`FAST -h`查看帮助：  
+**Terminal input mode**: In Windows system, run `FAST.exe -h` in CMD or power shell software to view the help. If it is a Linux system terminal, enter `FAST -h` to view the help;
 ```
   FAST : Fusion Abundant multi-Source data download Terminal
   ©Copyright 2022.01 @ Chang Chuntao
@@ -89,51 +92,70 @@ apt-get install python3
 
 1.  BRDC : GPS_brdc / MGEX_brdm  
   
+
 2.  SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3   
     MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZ_sp3 / MGEX_COD_sp3  
     MGEX_SHA_sp3 / MGEX_GRG_sp3
 
+
 3.  RINEX :GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors  
     GPS_AU_cors
+
 
 4.  CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / GPS_GFZ_clk / GPS_GRG_clk   
     MGEX_WUH_clk / MGEX_COD_clk / MGEX_GFZ_clk / MGEX_GRG_clk / WUH_PRIDE_clk
 
+
 5.  ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp
+
 
 6.  BIA : MGEX_WHU_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia
 
+
 7.  ION : IGS_ion / WUH_ion / COD_ion
+
 
 8.  SINEX : IGS_day_snx / IGS_week_snx / IVS_week_snx / ILS_week_snx / IDS_week_snx
 
+
 9.  CNES_AR : CNES_post / CNES_realtime
+
 
 10. ATX : MGEX_IGS_atx
 
+
 11. DCB : GPS_COD_dcb / MGEX_CAS_dcb / MGEX_CAS_dcb  
+
 
 12. Time_Series : IGS14_TS_ENU / IGS14_TS_XYZ / Series_TS_Plot  
 
+
 13. Velocity_Fields : IGS14_Venu / IGS08_Venu / PLATE_Venu  
+
 
 14. SLR : HY_SLR  
 
+
 15. OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx / MGEX_GFZ_obx
 
-#### 参与贡献
+#### Participation and contribution
 
-1.  **常春涛**@中国测绘科学研究院  
-    程序思路、主程序编写、文档编写、程序测试
 
-2.  **慕任海**博士@武汉大学  
-    程序思路、程序编写、程序测试
+1. **Chang Chuntao** @China Academy of Surveying and mapping  
+    Program design/ Program writing/ Document writing/ Program testing/ Program maintenance  
 
-3.  **李博**博士@辽宁工程技术大学&中国测绘科学研究院  
-    程序测试、文档编写、节点汇总
 
-4.  **李勇熹**@兰州交通大学&中国测绘科学研究院  
-    程序测试、节点汇总
+2. Dr. **Mu Renhai**@WuHan University  
+    Program design/ program testing/ Documentation
 
-5.  **曹多明**@山东科技大学&中国测绘科学研究院  
-    程序测试、节点汇总
+
+3. Dr. **Li Bo** @Liaoning Technical University&China Academy of Surveying and mapping  
+    Program testing/ Documentation/ Download node summary
+
+
+4.  **Li Yongxi** @Lanzhou Jiaotong University&China Academy of Surveying and mapping  
+    Program testing/ Download node summary
+
+
+5.  **Cao Duoming** @Shandong University of Science and Technology&China Academy of Surveying and mapping  
+    Program testing/ Download node summary
