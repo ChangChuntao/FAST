@@ -55,7 +55,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.Z",
                           "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/wum<GPSWD>.sp3.Z"],
 
-         "MGEX_WUH_ultra_sp3": [
+         "MGEX_WUHU_sp3": [
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0100_01D_05M_ORB.SP3.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0200_01D_05M_ORB.SP3.gz",
