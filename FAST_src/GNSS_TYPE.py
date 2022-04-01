@@ -9,7 +9,7 @@
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["SP3", ["GPS_IGS_sp3", "GPS_IGR_sp3", "GPS_IGU_sp3", "GPS_GFZ_sp3", "GPS_GRG_sp3", "MGEX_WUH_sp3",
-                      "MGEX_WUHU_sp3", "MGEX_GFZ_sp3", "MGEX_COD_sp3", "MGEX_SHA_sp3", "MGEX_GRG_sp3"]],
+                      "MGEX_WUH_ultra_sp3", "MGEX_GFZ_sp3", "MGEX_COD_sp3", "MGEX_SHA_sp3", "MGEX_GRG_sp3"]],
 
              ["RINEX", ["GPS_IGS_rnx", "MGEX_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_EU_cors", "GPS_AU_cors"]],
 
@@ -26,6 +26,8 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["CNES_AR", ["CNES_post", "CNES_realtime"]],
 
+             # ["UPD", ["MGEX_WUH_IGMAS_upd"]],
+
              ["ATX", ["MGEX_IGS_atx"]],
 
              ["DCB", ["GPS_COD_dcb", "MGEX_CAS_dcb"]],
@@ -38,11 +40,9 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["OBX", ["GPS_COD_obx", "GPS_GRG_obx", "MGEX_WUH_obx", "MGEX_COD_obx", "MGEX_GFZ_obx"]]]
 
-
 objnum = []
 for sub_type in gnss_type:
     objnum.append(len(sub_type[1]))
-
 
 objneedydqd2 = [1, 2, 4, 5, 6, 7, 8, 9, 11, 15]  # 输入为年， 起始年积日， 终止年积日 的数据类型
 objneedyd1d2loc = [3, 12]  # 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型

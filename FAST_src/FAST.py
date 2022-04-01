@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# FAST_Main      : MAIN
+# GDD_Main       : MAIN
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.00

@@ -4,8 +4,8 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.00
 # Date           : 2022.03.27
-
 import os
+
 from FAST_Print import PrintGDD
 from GNSS_TYPE import objnum, gnss_type
 from Get_Ftp import getsite
@@ -15,6 +15,16 @@ from help import cddhelp
 
 def top_cdd():
     print("")
+    # print("     -----------------------------------GDD--------------------------------------")
+    # print("    |                                                                            |")
+    # print("    |    0 : HELP                                                                |")
+    # print("    |    1 : BRDC                   2 : SP3                   3 : RINEX          |")
+    # print("    |    4 : CLK                    5 : ERP                   6 : BIA            |")
+    # print("    |    7 : ION                    8 : SINEX                 9 : CNES           |")
+    # print("    |   10 : UPD                   11 : ATX                  12 : DCB            |")
+    # print("    |   13 : Time_Series           14 : Velocity_Fields                          |")
+    # print("    |                                                                            |")
+    # print("     ----------------------------------------------------------------------------")
     print("     ----------------------------------FAST--------------------------------------")
     print("    |                                                                            |")
     print("    |    0 : HELP                                                                |")
@@ -54,8 +64,9 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_sp3            2 : GPS_IGR_sp3             3 : GPS_IGU_sp3  |")
         print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
-        print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHU_sp3           8 : MGEX_GFZ_sp3 |")
-        print("    |    9 : MGEX_COD_sp3           10: MGEX_SHA_sp3            11: MGEX_GRG_sp3 |")
+        print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHR_sp3           8 : MGEX_WUHU_sp3|")
+        print("    |    9 : MGEX_GFZ_sp3           10: MGEX_COD_sp3            11: MGEX_SHA_sp3 |")
+        print("    |   12 : MGEX_GRG_sp3                                                        |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 3:
@@ -82,6 +93,12 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 6:
+        # print("     -----------------------------------BIA--------------------------------------")
+        # print("    |                                                                            |")
+        # print("    |    1 : MGEX_WUHN_IGMAS_bia    2 : WUH_PRIDE_bia          3 : GPS_COD_bia   |")
+        # print("    |    4 : MGEX_COD_bia           5 : MGEX_GFZ_bia                             |")
+        # print("    |                                                                            |")
+        # print("     ----------------------------------------------------------------------------")
         print("     -----------------------------------BIA--------------------------------------")
         print("    |                                                                            |")
         print("    |    1 : MGEX_WHU_bia           2 : GPS_COD_bia          3 : MGEX_COD_bia    |")
@@ -107,6 +124,12 @@ def sub_cdd(obj):
         print("    |    1 : CNES_post              2 : CNES_realtime                            |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
+    # elif obj == 10:
+    #     print("     -----------------------------------UPD--------------------------------------")
+    #     print("    |                                                                            |")
+    #     print("    |    1 : MGEX_WUH_IGMAS_upd                                                  |")
+    #     print("    |                                                                            |")
+    #     print("     ----------------------------------------------------------------------------")
     elif obj == 10:
         print("     -----------------------------------ATX--------------------------------------")
         print("    |                                                                            |")
