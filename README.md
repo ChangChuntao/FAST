@@ -89,19 +89,19 @@ apt-get install python3
 
 1.  BRDC : GPS_brdc / MGEX_brdm  
   
-2.  SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3  
-    MGEX_WUH_sp3 / MGEX_WUH_ultra_sp3 / MGEX_GFZ_sp3 / MGEX_COD_sp3  
+2.  SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3   
+    MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZ_sp3 / MGEX_COD_sp3  
     MGEX_SHA_sp3 / MGEX_GRG_sp3
 
-3.  RINEX : GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors  
+3.  RINEX :GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors  
     GPS_AU_cors
 
-4.  CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / GPS_GBM_clk / GPS_GRG_clk   
-    MGEX_WUH_clk / MGEX_COD_clk / MGEX_GBM_clk / MGEX_GRG_clk / WUH_PRIDE_clk
+4.  CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / GPS_GFZ_clk / GPS_GRG_clk   
+    MGEX_WUH_clk / MGEX_COD_clk / MGEX_GFZ_clk / MGEX_GRG_clk / WUH_PRIDE_clk
 
-5.  ERP : IGS_erp / WUH_erp / COD_erp / GBM_erp
+5.  ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp
 
-6.  BIA : MGEX_WHU_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GBM_bia
+6.  BIA : MGEX_WHU_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia
 
 7.  ION : IGS_ion / WUH_ion / COD_ion
 
@@ -124,16 +124,16 @@ apt-get install python3
 #### 参与贡献
 
 1.  **常春涛**@中国测绘科学研究院  
-    程序思路、主程序编写、文档编写
+    程序思路、主程序编写、文档编写、程序测试
 
 2.  **慕任海**博士@武汉大学  
     程序思路、程序编写、程序测试
 
-3.  **李博**博士@辽宁工程技术大学&中国中国测绘科学研究院  
+3.  **李博**博士@辽宁工程技术大学&中国测绘科学研究院  
     程序测试、文档编写、节点汇总
 
-4.  **李勇熹**@兰州交通大学&中国中国测绘科学研究院  
+4.  **李勇熹**@兰州交通大学&中国测绘科学研究院  
     程序测试、节点汇总
 
-5.  **曹多明**@山东科技大学&中国中国测绘科学研究院  
+5.  **曹多明**@山东科技大学&中国测绘科学研究院  
     程序测试、节点汇总
