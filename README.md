@@ -13,7 +13,7 @@ The software contains most of the data sources required in the process of GNSS s
 #### Software features
 
 - **Multi platform**: Support both windows and Linux systems;
-- **Abundant Resources**: It basically includes the data sources required in GNSS scientific research and learning. At present, it supports 15 categories and 62 subcategories. See the specific **Data support**;
+- **Abundant Resources**: It basically includes the data sources required in GNSS scientific research and learning. At present, it supports 15 categories and 63 subcategories. See the specific **Data support**;
 - **Fast**: The software adopts parallel download mode, and the number of download threads can be specified in the command line parameter operation mode. After testing, it only takes 48.93s to download the 100 days BRDC+IGS+CLK file!
 - **Easy to expand**: If you need to support more data sources, you can specify the required data and data sources in FTP_Source.py and GNSS_TYPE.py;
 - **Easy to run**: The program can be downloaded in two ways: boot download mode and terminal input mode with parameters. Run the program directly to enter the boot download mode. Run `FAST -h` on the terminal with parameters to view the introduction of operation mode with parameters;
