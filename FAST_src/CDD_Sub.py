@@ -2,17 +2,21 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.00
-# Date           : 2022.03.27
+# Latest Version : 1.10
+# Creation Date  : 2022.03.27 - Version 1.0
+# Date           : 2022.04.12 - Version 1.1
 
 import os
-from FAST_Print import PrintGDD
-from GNSS_TYPE import objnum, gnss_type
-from Get_Ftp import getsite
-from Format import unzip_format
+from Format import unzip_vlbi, unzipfile
 from help import cddhelp
+from Dowload import cddpooldownload, wgets, lftps
+from FTP_Source import FTP_S
+from FAST_Print import PrintGDD
+from GNSS_TYPE import gnss_type, objneedyd1d2loc, objneedn, objneedydqd2, objnum
+from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
 
 
+# 2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
 def top_cdd():
     print("")
     print("     ----------------------------------FAST--------------------------------------")
@@ -41,6 +45,10 @@ def top_cdd():
             obj = input("     ")
 
 
+# 2022-03-27 : 二级菜单 by Chang Chuntao -> Version : 1.00
+# 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+#              *新增返回上级菜单操作，输入y回到上级菜单
+#              by Chang Chuntao  -> Version : 1.10
 def sub_cdd(obj):
     print("")
     if obj == 1:
@@ -56,6 +64,7 @@ def sub_cdd(obj):
         print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
         print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHU_sp3           8 : MGEX_GFZ_sp3 |")
         print("    |    9 : MGEX_COD_sp3           10: MGEX_SHA_sp3            11: MGEX_GRG_sp3 |")
+        print("    |   12 : GLO_IGL_sp3                                                         |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 3:
@@ -69,16 +78,16 @@ def sub_cdd(obj):
         print("     -----------------------------------CLK--------------------------------------")
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_clk            2 : GPS_IGR_clk            3 : GPS_GFZ_clk   |")
-        print("    |    4 : GPS_GRG_clk                                                         |")
-        print("    |    5 : MGEX_WUH_clk           6 : MGEX_COD_clk           7 : MGEX_GFZ_clk  |")
-        print("    |    8 : MGEX_GRG_clk           9 : WUH_PRIDE_clk                            |")
+        print("    |    4 : GPS_GRG_clk            5 : GPS_IGS_clk_30s                          |")
+        print("    |    6 : MGEX_WUH_clk           7 : MGEX_COD_clk           8 : MGEX_GFZ_clk  |")
+        print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk                            |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 5:
         print("     -----------------------------------ERP--------------------------------------")
         print("    |                                                                            |")
         print("    |    1 : IGS_erp                2 : WUH_erp                3 : COD_erp       |")
-        print("    |    4 : GFZ_erp                                                             |")
+        print("    |    4 : GFZ_erp                5 : IGR_erp                                  |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 6:
@@ -116,7 +125,8 @@ def sub_cdd(obj):
     elif obj == 11:
         print("     -----------------------------------DCB--------------------------------------")
         print("    |                                                                            |")
-        print("    |    1 : GPS_COD_dcb            2 : MGEX_CAS_dcb                             |")
+        print("    |    1 : GPS_COD_dcb            2 : MGEX_CAS_dcb           3 : MGEX_WHU_OSB  |")
+        print("    |    4 : P1C1                   5 : P1P2                   6 : P2C2          |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 12:
@@ -134,7 +144,7 @@ def sub_cdd(obj):
     elif obj == 14:
         print("     -----------------------------------SLR--------------------------------------")
         print("    |                                                                            |")
-        print("    |    1 : HY_SLR                                                              |")
+        print("    |    1 : HY_SLR                 2 : GRACE_SLR              3 : BEIDOU_SLR    |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 15:
@@ -148,59 +158,85 @@ def sub_cdd(obj):
         cddhelp()
         return 0
     PrintGDD("Note: 请输入数据编号 (eg. 2)", "input")  # 二级索引
+    PrintGDD("Note: 如需返回上级目录，请输入y", "input")  # 二级索引
     subnum = input("     ")
     while True:
-        if subnum.isdigit():  # 判断是否为数字
-            if int(subnum) > objnum[obj - 1] or int(subnum) < 1:  # 判断输入是否超出列表范围
-                print("")
-                PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2)", "input")
-                subnum = input("     ")  # 二级索引
-            else:
-                subnum = int(subnum)
-                return subnum
+        if subnum == "y" or subnum == "Y":
+            return "y"
         else:
-            PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2)", "input")
-            subnum = input("     ")
+            if subnum.isdigit():  # 判断是否为数字
+                if int(subnum) > objnum[obj - 1] or int(subnum) < 1:  # 判断输入是否超出列表范围
+                    print("")
+                    PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2)", "input")
+                    PrintGDD("Note: 如需返回上级目录，请输入y", "input")  # 二级索引
+                    subnum = input("     ")  # 二级索引
+                else:
+                    subnum = int(subnum)
+                    return subnum
+            else:
+                PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2)", "input")
+                PrintGDD("Note: 如需返回上级目录，请输入y", "input")  # 二级索引
+                subnum = input("     ")
 
 
+# 2022-03-27 : 输入年日时间 by Chang Chuntao -> Version : 1.00
+# 2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
+#              by Chang Chuntao  -> Version : 1.10
 def yd_cdd():
     print()
     PrintGDD("若需下载多天数据，请输入 <年 起始年积日 截止年积日> <year start_doy end_doy>", "input")
     PrintGDD("若需下载单天数据，请输入 <年 年积日> <year doy>", "input")
-    YD = input("     ").split()
+    PrintGDD("Note: 如需返回上级目录，请输入y", "input")
+    yd = input("     ")
     while True:
-        if len(YD) == 2:
-            year = int(YD[0])
-            day1 = int(YD[1])
-            day2 = int(YD[1])
-            return year, day1, day2
-        elif len(YD) == 3:
-            year = int(YD[0])
-            day1 = int(YD[1])
-            day2 = int(YD[2])
-            return year, day1, day2
+        if yd == "y" or yd == "Y":
+            return "y"
+
         else:
-            PrintGDD("Warning: 请输入正确的时间!", "warning")
-            PrintGDD("若需下载多天数据，请输入 <年 起始年积日 截止年积日> <year start_doy end_doy>", "input")
-            PrintGDD("若需下载单天数据，请输入 <年 年积日> <year doy>", "input")
-            YD = input("     ").split()
+            YD = yd.split()
+            if len(YD) == 2:
+                year = int(YD[0])
+                day1 = int(YD[1])
+                day2 = int(YD[1])
+                return year, day1, day2
+            elif len(YD) == 3:
+                year = int(YD[0])
+                day1 = int(YD[1])
+                day2 = int(YD[2])
+                return year, day1, day2
+            else:
+                PrintGDD("Warning: 请输入正确的时间!", "warning")
+                PrintGDD("若需下载多天数据，请输入 <年 起始年积日 截止年积日> <year start_doy end_doy>", "input")
+                PrintGDD("若需下载单天数据，请输入 <年 年积日> <year doy>", "input")
+                PrintGDD("Note: 如需返回上级目录，请输入y", "input")
+                yd = input("     ")
 
 
+# 2022-03-27 : 输入年月时间 by Chang Chuntao -> Version : 1.00
+# 2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
+#              by Chang Chuntao  -> Version : 1.10
 def ym_cdd():
     print()
-    PrintGDD("请输入 <年 月> <year month>", "input")
-    YM = input("     ").split()
+    PrintGDD("Note: 请输入 <年 月> <year month>", "input")
+    PrintGDD("Note: 如需返回上级目录，请输入y", "input")
+    ym = input("     ")
     while True:
-        if len(YM) == 2:
-            year = int(YM[0])
-            month = int(YM[1])
-            return year, month
+        if ym == "y" or ym == "Y":
+            return "y"
         else:
-            PrintGDD("Warning: 请输入正确的时间!", "warning")
-            PrintGDD("请输入 <年 月> <year month>", "input")
-            YM = input("     ").split()
+            YM = ym.split()
+            if len(YM) == 2:
+                year = int(YM[0])
+                month = int(YM[1])
+                return year, month
+            else:
+                PrintGDD("Warning: 请输入正确的时间!", "warning")
+                PrintGDD("请输入 <年 月> <year month>", "input")
+                PrintGDD("Note: 如需返回上级目录，请输入y", "input")
+                ym = input("     ")
 
 
+# 2022-03-27 : 输入站点文件 by Chang Chuntao -> Version : 1.00
 def getfile(datatype):
     print()
     PrintGDD("请输入站点文件所在位置 / Please enter the location of the site file", "input")
@@ -209,9 +245,142 @@ def getfile(datatype):
     return getsite(sitefile, datatype)
 
 
-def getuncompress():
+# def getuncompress():
+#     print()
+#     PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
+#     isuncpmress = input("     ")
+#     if isuncpmress == "":
+#         unzip_format(os.getcwd())
+
+
+# 2022-04-12 : vlbi文件解压 by Chang Chuntao  -> Version : 1.10
+def getvlbicompress(ftpsite):
     print()
     PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
     isuncpmress = input("     ")
     if isuncpmress == "":
-        unzip_format(os.getcwd())
+        unzip_vlbi(os.getcwd(), ftpsite)
+
+
+# 2022-04-12 : 通过下载列表解压文件(年日) by Chang Chuntao  -> Version : 1.10
+def uncompress(urllist):
+    ftpsite = []
+    for i in range(len(urllist)):
+        for j in range(len(urllist[i])):
+            ftpsite.append(urllist[i][j])
+    print()
+    isuncpmress = "y"
+    for f in ftpsite:
+        if str(f).split(".")[-1] == "gz" or str(f).split(".")[-1] == "Z":
+            PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
+            isuncpmress = input("     ")
+            break
+    if isuncpmress == "":
+        unzipfile(os.getcwd(), ftpsite)
+
+
+# 2022-04-12 : 通过下载列表解压文件(年月) by Chang Chuntao  -> Version : 1.10
+def uncompress_ym(url):
+    isuncpmress = "y"
+    ftpsite = []
+    for u in url:
+        ftpsite.append(u)
+    for f in ftpsite:
+        if str(f).split(".")[-1] == "gz" or str(f).split(".")[-1] == "Z":
+            PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
+            isuncpmress = input("     ")
+            break
+    if isuncpmress == "":
+        unzipfile(os.getcwd(), ftpsite)
+
+
+# 2022-04-12 : 通过输入引导的参数获取下载列表，下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
+def geturl_download_uncompress(cddarg, obj):
+    urllist = []  # 下载列表
+
+    # 数据类型为IVS_week_snx
+    if cddarg['datatype'] == "IVS_week_snx":
+        ftpsite = FTP_S[cddarg['datatype']][0]
+        ym = ym_cdd()  # 获取下载时间
+        if ym == "y":
+            return "y"
+        else:
+            [year, month] = ym  # 获取下载时间
+            ftpsite = ftpsite.replace('<YY>', str(year)[2:4])
+            ftpsite = ReplaceMMM(ftpsite, month)
+            lftps(ftpsite)
+            getvlbicompress(ftpsite)
+            return "n"
+
+    # 数据类型为输入年月
+    elif cddarg['datatype'] == "P1C1" or cddarg['datatype'] == "P1P2" or cddarg['datatype'] == "P2C2":
+        ftpsite = FTP_S[cddarg['datatype']]
+        ym = ym_cdd()  # 获取下载时间
+        if ym == "y":
+            return "y"
+        else:
+            [year, month] = ym  # 获取下载时间
+            ftpsite_new = []
+            for ftp in ftpsite:
+                ftp = ftp.replace('<YYYY>', str(year))
+                ftp = ftp.replace('<YY>', str(year)[2:4])
+                ftp = ReplaceMM(ftp, month)
+                wgets(ftp)
+                ftpsite_new.append(ftp)
+            uncompress_ym(ftpsite_new)
+            return "n"
+
+    else:
+        # 数据类型为输入年日
+        if obj in objneedydqd2:  # 输入为年， 起始年积日， 终止年积日 的数据类型
+            yd = yd_cdd()
+            if yd == "y":
+                return "y"
+            else:
+                [year, day1, day2] = yd  # 获取下载时间
+                cddarg['year'] = year
+                cddarg['day1'] = day1
+                cddarg['day2'] = day2
+                PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
+                         "normal")
+                print("")
+                for day in range(cddarg['day1'], cddarg['day2'] + 1):
+                    ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
+                    urllist.append(ftpsitelist)  # 按天下载
+                cddpooldownload(urllist, 6)  # 多线程下载
+                uncompress(urllist)
+                return "n"
+
+        # 数据类型为输入年日站点文件
+        elif obj in objneedyd1d2loc:  # 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型
+            yd = yd_cdd()
+            if yd == "y":
+                return "y"
+            else:
+                [year, day1, day2] = yd  # 获取下载时间
+                cddarg['year'] = year
+                cddarg['day1'] = day1
+                cddarg['day2'] = day2
+                PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
+                         "normal")
+                cddarg['site'] = getfile(cddarg['datatype'])
+                for day in range(cddarg['day1'], cddarg['day2'] + 1):
+                    ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
+                    for s in cddarg['site']:
+                        siteftp = []
+                        for f in ftpsitelist:
+                            f = f.replace('<SITE>', s)
+                            siteftp.append(f)
+                        urllist.append(siteftp)  # 按天下载
+                cddpooldownload(urllist, 6)  # 多线程下载
+                uncompress(urllist)
+                return "n"
+
+        # 无需输入时间的数据类型
+        elif obj in objneedn:
+            ftpsite = FTP_S[cddarg['datatype']]
+            for ftp in ftpsite:
+                wgets(ftp)
+            cddpooldownload(urllist, 6)  # 多线程下载
+            uncompress(urllist)
+            return "n"

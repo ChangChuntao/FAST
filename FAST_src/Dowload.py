@@ -3,7 +3,7 @@
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.00
-# Date           : 2022.03.27
+# Creation Date  : 2022.03.27 - Version 1.0
 
 import os
 import sys
@@ -11,9 +11,11 @@ import time
 import timeit
 from multiprocessing.pool import ThreadPool
 import platform
+from ARG_Sub import uncompress_arg
 from FAST_Print import PrintGDD
-from Format import unzip_format
+from Format import isinpath
 
+# 2022-03-27 : 判断操作平台，获取bin下下载程序 by Chang Chuntao -> Version : 1.00
 dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
 if platform.system() == 'Windows':
     PrintGDD('当前为Windows系统', "important")
@@ -25,37 +27,7 @@ else:
     lftp = "lftp "
 
 
-def isinpath(file):  # 判断相关文件是否存在
-    orifile = str(file).split(".")[0]
-    if len(orifile) > 9:
-        filelowo = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "o"
-        filelowd = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "d"
-        filelowp = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
-        filelown = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "n"
-        fileprolow = file.lower()[0:4] + file.lower()[16:20] + ".bia"
-    else:
-        filelowo = file.lower()[0:11] + "o"
-        filelowd = file.lower()[0:11] + "d"
-        filelowp = file.lower()[0:11] + "p"
-        filelown = file.lower()[0:11] + "n"
-        fileprolow = file.lower()[0:12]
-    gzdfile = filelowd + ".gz"
-    zdfile = filelowd + ".Z"
-    gzofile = filelowo + ".gz"
-    zofile = filelowo + ".Z"
-    filebialowZ = fileprolow + ".Z"
-    filebialowgz = fileprolow + ".gz"
-    if os.path.exists(file) or os.path.exists(file[0:-2]) or os.path.exists(file[0:-3]) \
-            or os.path.exists(filelowo) or os.path.exists(filelowd) \
-            or os.path.exists(gzdfile) or os.path.exists(zdfile) \
-            or os.path.exists(gzofile) or os.path.exists(zofile) \
-            or os.path.exists(filelowp) or os.path.exists(filelown)\
-            or os.path.exists(filebialowgz) or os.path.exists(filebialowZ):
-        return True
-    else:
-        return False
-
-
+# 2022-03-27 : 调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
 def wgets(fn):  # 下载单个文件
     if isinpath(fn.split("/")[-1]):
         return 0
@@ -64,6 +36,7 @@ def wgets(fn):  # 下载单个文件
         os.system(cmd)
 
 
+# 2022-03-27 : 通过下载列表调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
 def wgetm(url):  # 下载列表内文件
     for fn in url:
         file = fn.split("/")[-1]
@@ -74,13 +47,14 @@ def wgetm(url):  # 下载列表内文件
             PrintGDD("正在下载文件：" + file + "!", "normal")
             try:
                 wgets(fn)
-                PrintGDD("文件下载结束：" + file + "!", "normal")
+                # PrintGDD("文件下载结束：" + file + "!", "normal")
             except IOError:
                 continue
             else:
                 continue
 
 
+# 2022-03-27 : 通过下载列表调取lftp下载文件 by Chang Chuntao -> Version : 1.00
 def lftps(url):  # lftp批量下载
     PrintGDD("正在开始下载!", "important")
     print("")
@@ -93,6 +67,7 @@ def lftps(url):  # lftp批量下载
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
 
 
+# 2022-03-27 : 引导模式并发下载子程序 by Chang Chuntao -> Version : 1.00
 def cddpooldownload(urllist, process):
     PrintGDD("正在开始下载!", "important")
     print("")
@@ -106,6 +81,7 @@ def cddpooldownload(urllist, process):
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
 
 
+# 2022-03-27 : 参数输入模式并发下载子程序 by Chang Chuntao -> Version : 1.00
 def argpooldownload(urllist, process, loc, compress):
     nowdir = os.getcwd()
     if len(loc) == 0:
@@ -121,7 +97,8 @@ def argpooldownload(urllist, process, loc, compress):
         pool.close()
         pool.join()
     if compress == "Y" or compress == "y":
-        unzip_format(loc)
+        # unzip_format(loc)
+        uncompress_arg(loc, urllist)
     end_time = timeit.default_timer() - start_time
     PrintGDD("全部下载结束!", "important")
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")

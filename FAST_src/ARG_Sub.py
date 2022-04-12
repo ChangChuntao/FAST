@@ -2,18 +2,20 @@
 # ARG_Sub        : Identify program arguments
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.00
-# Date           : 2022.03.27
+# Latest Version : 1.10
+# Creation Date  : 2022.03.27 - Version 1.0
+# Date           : 2022.04.12 - Version 1.1
 
 import sys
 from FAST_Print import PrintGDD
+from Format import unzipfile
 from GNSS_TYPE import isinGNSStype, getobj, objneedydqd2, objneedyd1d2loc
 import getopt
-
 from Get_Ftp import getftp, getsite
 from help import Supported_Data, arg_options, arg_help
 
 
+# 2022-03-27 : 获取输入参数 by Chang Chuntao -> Version : 1.00
 def GET_ARG(argument, cddarg):
     try:
         opts, args = getopt.getopt(argument, "hvt:l::y::o::e::d::m::f::p::u::",
@@ -58,6 +60,7 @@ def GET_ARG(argument, cddarg):
     return cddarg
 
 
+#  2022-03-27 : 判断输入参数正确性 by Chang Chuntao -> Version : 1.00
 def ARG_ifwrong(cddarg):  # 判断输入参数正确性
     datatype = str(cddarg['datatype']).split(",")
     for dt in datatype:
@@ -74,7 +77,8 @@ def ARG_ifwrong(cddarg):  # 判断输入参数正确性
                         sys.exit(2)
                     else:
                         if cddarg['day1'] == 0 and cddarg['day2'] == 0:
-                            PrintGDD("本数据类型需输入年与天，请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！", "fail")
+                            PrintGDD("本数据类型需输入年与天，请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
+                                     "fail")
                             sys.exit(2)
                 if obj + 1 in objneedyd1d2loc:
                     if cddarg['file'] == "" and cddarg['site'] == "":
@@ -91,6 +95,7 @@ def ARG_ifwrong(cddarg):  # 判断输入参数正确性
                 sys.exit(2)
 
 
+#  2022.04.12 : 获取下载列表 by Chang Chuntao -> Version : 1.10
 def geturl(cddarg):
     urllist = []
     for dt in str(cddarg['datatype']).split(","):
@@ -123,3 +128,12 @@ def geturl(cddarg):
         urllist.append(typeurl)
     return urllist
 
+
+#  2022.04.12 : 传入需解压的文件至unzipfile by Chang Chuntao -> Version : 1.10
+def uncompress_arg(path, urllist):
+    ftpsite = []
+    for a1 in urllist:
+        for a2 in a1:
+            for a3 in a2:
+                ftpsite.append(a3)
+    unzipfile(path, ftpsite)

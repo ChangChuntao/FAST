@@ -2,16 +2,22 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.00
-# Date           : 2022.01.14
+# Latest Version : 1.10
+# Creation Date  : 2022.03.27 - Version 1.0
+# Date           : 2022.04.12 - Version 1.1
 
+
+# 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
 plate = ["AF", "AN", "AR", "AU", "BU", "CA", "CO", "EU", "IN", "MA", "NA", "NB", "NZ", "OK", "ON", "PA", "PM", "PS",
          "SA", "SB", "SC", "SL", "SO", "SU", "WL"]
 plate_env = []
-
 for p in plate:
     plate_env.append("http://geodesy.unr.edu/velocities/midas." + p + ".txt")
 
+
+# 2022-03-27 : 资源列表 by Chang Chuntao -> Version : 1.00
+# 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+#              by Chang Chuntao  -> Version : 1.10
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -106,6 +112,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
                           "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
+         "GLO_IGL_sp3": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.sp3.Z"],
+
          "GPS_IGS_rnx": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.Z",
                          "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.gz",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
@@ -157,6 +165,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                          "http://garner.ucsd.edu/pub/products/<GPSW>/grg<GPSWD>.clk.Z",
                          "ftp://ftp.gfz-potsdam.de/GNSS/products/mgex/<GPSW>/grg<GPSWD>.clk.Z"],
 
+         "GPS_IGS_clk_30s": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.clk_30s.Z"],
+
          "MGEX_WUH_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
                           "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/wum<GPSWD>.clk.Z"],
@@ -177,8 +187,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "WUH_PRIDE_clk": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/clock/"
                            "WUM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "IGS_erp": ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
-                     "http://garner.ucsd.edu/pub/products/<GPSW>/igs<GPSWD>.erp.Z"],
+         "IGS_erp": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSW>7.erp.Z"],
 
          "WUH_erp": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
                      "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.Z",
@@ -189,6 +198,9 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "GFZ_erp": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz"],
+
+         "IGR_erp": ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                     "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.erp.Z"],
 
          "MGEX_WUHN_IGMAS_bia": ["--ftp-user casm_cct --ftp-password wangji531! "
                                  "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/osb/"
@@ -206,7 +218,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "MGEX_GFZ_bia": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
 
-         "IGS_ion": ["ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>>/igsg<DOY>0.<YY>i.Z"],
+         "IGS_ion": ["ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z"],
 
          "WUH_ion": ["ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z"],
 
@@ -263,6 +275,16 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "ftp://igs.ign.fr/pub/igs/products/mgex/dcb/<YYYY>/"
                           "CAS0MGXRAP_<YYYY><DOY>0000_01D_01D_DCB.BSX.gz"],
 
+         "MGEX_WHU_OSB": ["ftp://igs.gnsswhu.cn/pub/whu/MGEX/DCB/<YYYY>/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
+
+         "P1C1": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P1C1<YY><MM>.DCB.Z",
+                  "ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P1C1<YY><MM>_RINEX.DCB.Z"],
+
+         "P1P2": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P1P2<YY><MM>.DCB.Z",
+                  "ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P1P2<YY><MM>_ALL.DCB.Z"],
+
+         "P2C2": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P2C2<YY><MM>_RINEX.DCB.Z"],
+
          "IGS14_TS_ENU": ["http://geodesy.unr.edu/gps_timeseries/tenv3/IGS14/<SITE>.tenv3"],
 
          "IGS14_TS_XYZ": ["http://geodesy.unr.edu/gps_timeseries/tenv3/IGS14/<SITE>.txyz2"],
@@ -275,10 +297,34 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "PLATE_Venu": plate_env,
 
-         "HY_SLR": ["ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2a/<YYYY>/hy2a_<YYYY><MM>.npt",
-                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2b/<YYYY>/hy2b_<YYYY><MM>.npt",
-                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2c/<YYYY>/hy2c_<YYYY><MM>.npt",
-                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2d/<YYYY>/hy2d_<YYYY><MM>.npt"],
+         "HY_SLR": ["ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2a/<YYYY>/hy2a_<YYYY><MONTH>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2b/<YYYY>/hy2b_<YYYY><MONTH>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2c/<YYYY>/hy2c_<YYYY><MONTH>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2d/<YYYY>/hy2d_<YYYY><MONTH>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2a/<YYYY>/hy2a_<YYYY><MONTH><DAY>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2b/<YYYY>/hy2b_<YYYY><MONTH><DAY>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2c/<YYYY>/hy2c_<YYYY><MONTH><DAY>.npt",
+                    "ftp://edc.dgfi.tum.de/slr/data/npt_crd/hy2d/<YYYY>/hy2d_<YYYY><MONTH><DAY>.npt"],
+
+         "GRACE_SLR": ["ftp://edc.dgfi.tum.de/slr/data/npt_crd/gracea/<YYYY>/gracea_<YYYY><MONTH>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/gracea/<YYYY>/gracea_<YYYY><MONTH><DAY>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/graceb/<YYYY>/graceb_<YYYY><MONTH>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/graceb/<YYYY>/graceb_<YYYY><MONTH><DAY>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/gracefo1/<YYYY>/gracefo1_<YYYY><MONTH>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/gracefo1/<YYYY>/gracefo1_<YYYY><MONTH><DAY>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/gracefo2/<YYYY>/gracefo2_<YYYY><MONTH>.npt",
+                       "ftp://edc.dgfi.tum.de/slr/data/npt_crd/gracefo2/<YYYY>/gracefo2_<YYYY><MONTH><DAY>.npt"],
+
+         "BEIDOU_SLR": ["ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m1/<YYYY>/beidou3m1_<YYYY><MONTH>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m1/<YYYY>/beidou3m1_<YYYY><MONTH><DAY>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m10/<YYYY>/beidou3m10_<YYYY><MONTH>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m10/<YYYY>/beidou3m10_<YYYY><MONTH><DAY>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m2/<YYYY>/beidou3m2_<YYYY><MONTH>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m2/<YYYY>/beidou3m2_<YYYY><MONTH><DAY>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m3/<YYYY>/beidou3m3_<YYYY><MONTH>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m3/<YYYY>/beidou3m3_<YYYY><MONTH><DAY>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m9/<YYYY>/beidou3m9_<YYYY><MONTH>.npt",
+                        "ftp://edc.dgfi.tum.de/slr/data/npt_crd/beidou3m9/<YYYY>/beidou3m9_<YYYY><MONTH><DAY>.npt"],
 
          "GPS_COD_obx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/cod<GPSWD>.obx.Z"],
