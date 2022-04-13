@@ -14,7 +14,6 @@ plate_env = []
 for p in plate:
     plate_env.append("http://geodesy.unr.edu/velocities/midas." + p + ".txt")
 
-
 # 2022-03-27 : 资源列表 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
 #              by Chang Chuntao  -> Version : 1.10
@@ -140,7 +139,11 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "--http-user=anonymous --http-passwd=1252443496@qq.com "
                           "http://garner.ucsd.edu/pub/rinex/<YYYY>/<DOY>/<SITE><DOY>0.<YY>d.gz"],
 
-         "GPS_HK_cors": ["ftp://ftp.geodetic.gov.hk/rinex2/<YYYY>/<DOY>/<SITE>/30s/<SITE><DOY>0.<YY>o.gz"],
+         "GPS_HK_cors": ["ftp://ftp.geodetic.gov.hk/rinex2/<YYYY>/<DOY>/<SITE>/30s/<SITE><DOY>0.<YY>d.gz",
+                         "ftp://ftp.geodetic.gov.hk/rinex2/<YYYY>/<DOY>/<SITE>/30s/<SITE><DOY>0.<YY>o.gz"],
+
+         "MGEX_HK_cors": [
+             "ftp://ftp.geodetic.gov.hk/rinex3/<YYYY>/<DOY>/<SITE>/30s/<SITE_LONG>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
 
          "GPS_EU_cors": ["ftp://igs.bkg.bund.de/EUREF/obs/<YYYY>/<DOY>/<SITE><DOY>0.<YY>d.Z"],
 
