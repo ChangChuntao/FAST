@@ -4,11 +4,13 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Date           : 2022.04.22 - Version 1.11
 
 # 2022-03-27 : 所有支持的数据类型 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
 #              by Chang Chuntao  -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["SP3", ["GPS_IGS_sp3", "GPS_IGR_sp3", "GPS_IGU_sp3", "GPS_GFZ_sp3", "GPS_GRG_sp3",
@@ -40,7 +42,9 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["SLR", ["HY_SLR", "GRACE_SLR", "BEIDOU_SLR"]],
 
-             ["OBX", ["GPS_COD_obx", "GPS_GRG_obx", "MGEX_WUH_obx", "MGEX_COD_obx", "MGEX_GFZ_obx"]]]
+             ["OBX", ["GPS_COD_obx", "GPS_GRG_obx", "MGEX_WUH_obx", "MGEX_COD_obx", "MGEX_GFZ_obx"]],
+
+             ["TRO", ["IGS_zpd", "COD_tro", "JPL_tro", "GRID_1x1_VMF3", "GRID_2.5x2_VMF1", "GRID_5x5_VMF3"]]]
 
 
 # 2022-03-27 : 每个二级目录的个数 by Chang Chuntao -> Version : 1.00
@@ -48,8 +52,8 @@ objnum = []
 for sub_type in gnss_type:
     objnum.append(len(sub_type[1]))
 
-# 2022-03-27 : 输入为年， 起始年积日， 终止年积日 的数据类型 by Chang Chuntao -> Version : 1.00
-objneedydqd2 = [1, 2, 4, 5, 6, 7, 8, 9, 11, 14, 15]
+# 2022-03-27 : 输入为年， 起始年积日， 终止年积日 的数据类型 by Chang Chuntao -> Version : 1.11
+objneedydqd2 = [1, 2, 4, 5, 6, 7, 8, 9, 11, 14, 15, 16]
 
 # 2022-03-27 : 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型 by Chang Chuntao -> Version : 1.00
 objneedyd1d2loc = [3, 12]

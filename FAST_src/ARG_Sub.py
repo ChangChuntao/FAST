@@ -4,7 +4,9 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Date           : 2022.04.12 - Version 1.11
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 
 import sys
 from FAST_Print import PrintGDD
@@ -16,6 +18,7 @@ from help import Supported_Data, arg_options, arg_help
 
 
 # 2022-03-27 : 获取输入参数 by Chang Chuntao -> Version : 1.00
+
 def GET_ARG(argument, cddarg):
     try:
         opts, args = getopt.getopt(argument, "hvt:l::y::o::e::d::m::f::p::u::",
@@ -95,14 +98,16 @@ def ARG_ifwrong(cddarg):  # 判断输入参数正确性
                 sys.exit(2)
 
 
-#  2022.04.12 : 获取下载列表 by Chang Chuntao -> Version : 1.10
+# 2022.04.12 : 获取下载列表 by Chang Chuntao -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 def geturl(cddarg):
     urllist = []
     for dt in str(cddarg['datatype']).split(","):
         typeurl = []
         [obj, subnum] = getobj(dt)
         PrintGDD("数据类型为:" + dt, "normal")
-        if obj + 1 in objneedydqd2:
+        if obj + 1 in objneedydqd2 and dt != "IGS_zpd":
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']) + "\n",
                      "normal")
             for day in range(cddarg['day1'], cddarg['day2'] + 1):
@@ -112,7 +117,7 @@ def geturl(cddarg):
                     url.append(ftpsite)
                 typeurl.append(url)
 
-        elif obj + 1 in objneedyd1d2loc:
+        elif obj + 1 in objneedyd1d2loc or dt == "IGS_zpd":
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']) + "\n",
                      "normal")
             print("")

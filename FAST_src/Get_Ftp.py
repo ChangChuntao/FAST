@@ -109,7 +109,7 @@ def ReplaceMM(url, month):
 
 def getsite(file, datatype):
     site = open(file, "r").readlines()[0].split(" ")
-    if datatype == "MGEX_IGS_rnx":
+    if datatype == "MGEX_IGS_rnx" or datatype == "MGEX_HK_cors":
         for s in range(0, len(site)):
             if len(site[s]) == 9:
                 continue

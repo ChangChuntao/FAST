@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Date           : 2022.04.12 - Version 1.11
 
 from FAST_Print import PrintGDD
 
@@ -12,6 +12,8 @@ from FAST_Print import PrintGDD
 # 2022-03-27 : 输出支持的数据类型 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
 #              by Chang Chuntao  -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 def Supported_Data():
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
     print("                       SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3 / ")
@@ -47,6 +49,8 @@ def Supported_Data():
     print("                       SLR : HY_SLR / GRACE_SLR / BEIDOU_SLR")
     print("")
     print("                       OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx / MGEX_GFZ_obx")
+    print("")
+    print("                       TRO : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3")
 
 
 # 2022-03-27 : 引导模式输出帮助 by Chang Chuntao -> Version : 1.00
@@ -96,6 +100,7 @@ def arg_options():
     print("                                   Example : GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk")
     print("  -l,  --loc                       which folder is the download in")
     print("  -y,  --year                      where year are the data to be download")
+    print("  -d,  --day                       where day are the data to be download")
     print("  -o,  --day1                      where first day are the data to be download")
     print("  -e,  --day2                      where last day are the data to be download")
     print("  -m,  --month                     where month are the data to be download")

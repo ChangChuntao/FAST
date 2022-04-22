@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Date           : 2022.04.12 - Version 1.11
 
 from CDD_Sub import *
 from FAST_Print import PrintGDD
@@ -15,6 +15,8 @@ from GNSS_TYPE import gnss_type
 # 2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
 #              版本号修改
 #              by Chang Chuntao  -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 def CDD_Mode():
     print("==================================================================================")
     print("      FAST           : Fusion Abundant multi-Source data download Terminal")

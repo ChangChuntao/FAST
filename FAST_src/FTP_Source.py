@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Date           : 2022.04.12 - Version 1.11
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -17,6 +17,8 @@ for p in plate:
 # 2022-03-27 : 资源列表 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
 #              by Chang Chuntao  -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -290,7 +292,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "IGS14_TS_ENU": ["http://geodesy.unr.edu/gps_timeseries/tenv3/IGS14/<SITE>.tenv3"],
 
-         "IGS14_TS_XYZ": ["http://geodesy.unr.edu/gps_timeseries/tenv3/IGS14/<SITE>.txyz2"],
+         "IGS14_TS_XYZ": ["http://geodesy.unr.edu/gps_timeseries/txyz/IGS14/<SITE>.txyz2"],
 
          "Series_TS_Plot": ["http://geodesy.unr.edu/tsplots/IGS14/IGS14/TimeSeries/<SITE>.png"],
 
@@ -342,5 +344,36 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_15M_ATT.OBX.gz"],
 
          "MGEX_GFZ_obx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GFZ0MGXRAP_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"]
+                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GFZ0MGXRAP_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"],
+
+         "IGS_zpd": ["ftp://igs.gnsswhu.cn/pub/gps/products/troposphere/new/<YYYY>/<DOY>/<SITE><DOY>0.<YY>zpd.gz",
+                     "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                     "ftps://gdc.cddis.eosdis.nasa.gov/gnss/products/troposphere/zpd/<YYYY>/<DOY>/<SITE><DOY>0.<YY>zpd.gz"],
+
+         "COD_tro": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/cod<GPSWD>.tro.Z",
+                     "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                     "ftps://gdc.cddis.eosdis.nasa.gov/gnss/products/<GPSW>/cod<GPSWD>.tro.Z"],
+
+         "JPL_tro": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/jpl<GPSWD>.tro.Z",
+                     "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                     "ftps://gdc.cddis.eosdis.nasa.gov/gnss/products/<GPSW>/jpl<GPSWD>.tro.Z"],
+
+         "GRID_1x1_VMF3": [
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/1x1/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H00",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/1x1/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H06",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/1x1/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H12",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/1x1/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H18"],
+
+         "GRID_2.5x2_VMF1": [
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/<YYYY>/VMFG_<YYYY><MONTH><DAY>.H00",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/<YYYY>/VMFG_<YYYY><MONTH><DAY>.H06",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/<YYYY>/VMFG_<YYYY><MONTH><DAY>.H12",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/<YYYY>/VMFG_<YYYY><MONTH><DAY>.H18"],
+
+         "GRID_5x5_VMF3": [
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H00",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H06",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H12",
+             "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H18"]
+
          }

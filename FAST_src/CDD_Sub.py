@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Date           : 2022.04.12 - Version 1.11
 
 import os
 from Format import unzip_vlbi, unzipfile
@@ -17,6 +17,8 @@ from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
 
 
 # 2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 def top_cdd():
     print("")
     print("     ----------------------------------FAST--------------------------------------")
@@ -27,6 +29,7 @@ def top_cdd():
     print("    |    7 : ION                    8 : SINEX                 9 : CNES_AR        |")
     print("    |   10 : ATX                   11 : DCB                  12 : Time_Series    |")
     print("    |   13 : Velocity_Fields       14 : SLR                  15 : OBX            |")
+    print("    |   16 : TRO                                                                 |")
     print("    |                                                                            |")
     print("     ----------------------------------------------------------------------------")
     PrintGDD("Note: 请输入数据编号 (eg. 2)", "input")
@@ -49,6 +52,8 @@ def top_cdd():
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
 #              *新增返回上级菜单操作，输入y回到上级菜单
 #              by Chang Chuntao  -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 def sub_cdd(obj):
     print("")
     if obj == 1:
@@ -152,6 +157,13 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : GPS_COD_obx            2 : GPS_GRG_obx                              |")
         print("    |    3 : MGEX_WUH_obx           4 : MGEX_COD_obx           5 : MGEX_GFZ_obx  |")
+        print("    |                                                                            |")
+        print("     ----------------------------------------------------------------------------")
+    elif obj == 16:
+        print("     -----------------------------------TRO--------------------------------------")
+        print("    |                                                                            |")
+        print("    |    1 : IGS_zpd                2 : COD_tro                3 : JPL_tro       |")
+        print("    |    4 : GRID_1x1_VMF3          5 : GRID_2.5x2_VMF1        6 : GRID_5x5_VMF3 |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 0:
@@ -295,6 +307,8 @@ def uncompress_ym(url):
 
 
 # 2022-04-12 : 通过输入引导的参数获取下载列表，下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
+# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+#              by Chang Chuntao  -> Version : 1.11
 def geturl_download_uncompress(cddarg, obj):
     urllist = []  # 下载列表
 
@@ -332,7 +346,7 @@ def geturl_download_uncompress(cddarg, obj):
 
     else:
         # 数据类型为输入年日
-        if obj in objneedydqd2:  # 输入为年， 起始年积日， 终止年积日 的数据类型
+        if obj in objneedydqd2 and cddarg['datatype'] != "IGS_zpd":  # 输入为年， 起始年积日， 终止年积日 的数据类型
             yd = yd_cdd()
             if yd == "y":
                 return "y"
@@ -352,7 +366,7 @@ def geturl_download_uncompress(cddarg, obj):
                 return "n"
 
         # 数据类型为输入年日站点文件
-        elif obj in objneedyd1d2loc:  # 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型
+        elif obj in objneedyd1d2loc or cddarg['datatype'] == "IGS_zpd":  # 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型
             yd = yd_cdd()
             if yd == "y":
                 return "y"
