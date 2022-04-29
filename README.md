@@ -68,6 +68,7 @@ apt-get install python3
                                    Example : GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk
   -l,  --loc                       which folder is the download in
   -y,  --year                      where year are the data to be download
+  -d,  --day                       where day are the data to be download
   -o,  --day1                      where first day are the data to be download
   -e,  --day2                      where last day are the data to be download
   -m,  --month                     where month are the data to be download
@@ -122,19 +123,24 @@ apt-get install python3
 
 15. OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx / MGEX_GFZ_obx
 
+16. TRO : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3
+
 #### 参与贡献
 
-1.  **常春涛**@中国测绘科学研究院  
+1. **常春涛**@中国测绘科学研究院  
     程序思路、主程序编写、文档编写、程序测试
 
-2.  **慕任海**博士@武汉大学  
+2. **蒋科材**博士后@武汉大学   
+    程序思路、并行计算处理思路
+
+3. **慕任海**博士@武汉大学  
     程序思路、程序编写、程序测试
 
-3.  **李博**博士@辽宁工程技术大学&中国测绘科学研究院  
+4. **李博**博士@辽宁工程技术大学&中国测绘科学研究院  
     程序测试、文档编写、节点汇总
 
-4.  **李勇熹**@兰州交通大学&中国测绘科学研究院  
+5. **李勇熹**@兰州交通大学&中国测绘科学研究院  
     程序测试、节点汇总
 
-5.  **曹多明**@山东科技大学&中国测绘科学研究院  
+6. **曹多明**@山东科技大学&中国测绘科学研究院  
     程序测试、节点汇总
