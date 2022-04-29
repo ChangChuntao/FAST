@@ -2,11 +2,12 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
-# Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.11
+# Latest Version : 1.12
+# Creation Date  : 2022.03.27 - Version 1.00
+# Date           : 2022.04.30 - Version 1.12
 
 import os
+from GNSS_Timestran import gnssTimesTran
 from Format import unzip_vlbi, unzipfile
 from help import cddhelp
 from Dowload import cddpooldownload, wgets, lftps
@@ -19,11 +20,13 @@ from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
 # 2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
 # 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
 #              by Chang Chuntao  -> Version : 1.11
+# 2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
+#              调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
+#              by Chang Chuntao  -> Version : 1.12
 def top_cdd():
     print("")
     print("     ----------------------------------FAST--------------------------------------")
     print("    |                                                                            |")
-    print("    |    0 : HELP                                                                |")
     print("    |    1 : BRDC                   2 : SP3                   3 : RINEX          |")
     print("    |    4 : CLK                    5 : ERP                   6 : BIA            |")
     print("    |    7 : ION                    8 : SINEX                 9 : CNES_AR        |")
@@ -32,28 +35,38 @@ def top_cdd():
     print("    |   16 : TRO                                                                 |")
     print("    |                                                                            |")
     print("     ----------------------------------------------------------------------------")
-    PrintGDD("Note: 请输入数据编号 (eg. 2)", "input")
+    print("    |                                                                            |")
+    print("    |    a : HELP                   b : GNSS_Timestran                           |")
+    print("    |                                                                            |")
+    print("     ----------------------------------------------------------------------------")
+
+    PrintGDD("Note: 请输入数据编号 (eg. 2 or a)", "input")
     obj = input("     ")
     while True:
-        if obj.isdigit():  # 判断输入是否为数字
+        if obj == "a" or obj == "b":
+            return obj
+        elif obj.isdigit():  # 判断输入是否为数字
             if int(obj) > len(gnss_type) or int(obj) < 0:  # 判断输入是否超出列表范围
                 print("")
-                PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2)", "input")
+                PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2 or a)", "input")
                 obj = input("     ")
             else:
                 obj = int(obj)
                 return obj
         else:
-            PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2)", "input")
+            PrintGDD("Warning: 输入错误，请输入正确编号 (eg. 2 or a)", "input")
             obj = input("     ")
 
 
 # 2022-03-27 : 二级菜单 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-#              *新增返回上级菜单操作，输入y回到上级菜单
+#              * 新增返回上级菜单操作，输入y回到上级菜单
 #              by Chang Chuntao  -> Version : 1.10
 # 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
 #              by Chang Chuntao  -> Version : 1.11
+# 2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
+#              gnssTimesTran调用
+#              by Chang Chuntao  -> Version : 1.12
 def sub_cdd(obj):
     print("")
     if obj == 1:
@@ -166,9 +179,13 @@ def sub_cdd(obj):
         print("    |    4 : GRID_1x1_VMF3          5 : GRID_2.5x2_VMF1        6 : GRID_5x5_VMF3 |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
-    elif obj == 0:
+    elif obj == "a":
         cddhelp()
         return 0
+    elif obj == "b":
+        gnssTimesTran()
+        return 0
+
     PrintGDD("Note: 请输入数据编号 (eg. 2)", "input")  # 二级索引
     PrintGDD("Note: 如需返回上级目录，请输入y", "input")  # 二级索引
     subnum = input("     ")

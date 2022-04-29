@@ -16,6 +16,7 @@ from FAST_Print import PrintGDD
 #              by Chang Chuntao  -> Version : 1.11
 def Supported_Data():
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
+    print("")
     print("                       SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3 / ")
     print("                             MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZ_sp3 / MGEX_COD_sp3 / ")
     print("                             MGEX_SHA_sp3 / MGEX_GRG_sp3 ")

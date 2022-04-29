@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['FAST.py', 'ARG_Mode.py', 'ARG_Sub.py', 'CDD_Mode.py', 'CDD_Sub.py', 'Dowload.py', 'FTP_Source.py', 'FAST_Print.py', 'GET_Ftp.py', 'GNSS_TYPE.py', 'Help.py', 'MGEX_name.py', 'Format.py'],
+a = Analysis(['FAST.py', 'ARG_Mode.py', 'ARG_Sub.py', 'CDD_Mode.py', 'CDD_Sub.py', 'Dowload.py', 'FTP_Source.py', 'FAST_Print.py', 'GET_Ftp.py', 'GNSS_TYPE.py', 'Help.py', 'MGEX_name.py', 'Format.py', 'GNSS_Timestran.py'],
              pathex=[],
              binaries=[],
              datas=[],

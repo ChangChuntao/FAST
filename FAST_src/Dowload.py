@@ -82,7 +82,7 @@ def cddpooldownload(urllist, process):
 
 
 # 2022-03-27 : 参数输入模式并发下载子程序 by Chang Chuntao -> Version : 1.00
-def argpooldownload(urllist, process, loc, compress):
+def argpooldownload(urllist, process, loc, compress, downloadmode):
     nowdir = os.getcwd()
     if len(loc) == 0:
         os.chdir(nowdir)
