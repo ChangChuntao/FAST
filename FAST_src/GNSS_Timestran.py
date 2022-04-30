@@ -86,7 +86,7 @@ def gnssTimesTran():
                 specTime = gnssTime2datetime(YearMonthDay, "YearMonthDay")
                 break
             elif inputTime == 2:
-                PrintGDD("请输入 Year Month Day (eg. 2022 119)", "input")
+                PrintGDD("请输入 Year Doy (eg. 2022 119)", "input")
                 YearDoy = input("     ")
                 while True:
                     if len(YearDoy.split(" ")) == 2:
