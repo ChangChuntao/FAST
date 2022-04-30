@@ -1,2 +1,0 @@
-# FAST 
-# CHANG Chuntao

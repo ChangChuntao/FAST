@@ -136,7 +136,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/data/daily/<YYYY>/<DOY>/<YY>d/"
                           "<SITE>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
 
-         "GPS_USA_cors": ["--http-user=anonymous --http-passwd=1252443496@qq.com "
+         "GPS_USA_cors": ["https://geodesy.noaa.gov/corsdata/rinex/<YYYY>/<DOY>/<SITE>/<SITE><DOY>0.<YY>d.gz",
+                          "--http-user=anonymous --http-passwd=1252443496@qq.com "
                           "http://garner.ucsd.edu/pub/rinex/<YYYY>/<DOY>/<SITE><DOY>0.<YY>d.Z",
                           "--http-user=anonymous --http-passwd=1252443496@qq.com "
                           "http://garner.ucsd.edu/pub/rinex/<YYYY>/<DOY>/<SITE><DOY>0.<YY>d.gz"],
