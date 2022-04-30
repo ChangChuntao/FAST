@@ -20,6 +20,7 @@
 #
 # Version 1.12   : > 调整一级输入模式引导, 0 -> a -> Help / b -> GNSS_Timestran，增加分栏显示
 #                  * 新增GNSS日常使用工具：GNSS_Timestran
+#                  > 修正GPS_USA_cors节点
 #                  by Chang Chuntao  # 2022-04-30
 #
 
