@@ -6,7 +6,7 @@
 # Creation Date  : 2022.03.27 - Version 1.0
 
 # 2022-03-27 : * 屏幕打印样式 by Chang Chuntao -> Version : 1.00
-# 2022-04-22 : * 新增nothing
+# 2022-04-30 : * 新增nothing
 def PrintGDD(string, printtype):
     if printtype == "input":
         print("  -  " + string)
