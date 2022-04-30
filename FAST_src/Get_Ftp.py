@@ -2,15 +2,18 @@
 # GET_Ftp        : Reconstruct FTP address
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.00
-# Date           : 2022.03.27
+# Latest Version : 1.12
+# Creation Date  : 2022.03.27 - Version 1.00
+# Date           : 2022.04.30 - Version 1.12
+
 
 from datetime import datetime, timedelta
-
 from FTP_Source import FTP_S
 from MGEX_name import mgex
 
 
+# 2022-03-27 : * 通过数据类型、年、年积日，获取下载列表，并调用ReplaceTimeWildcard生成下载链接list
+#              by Chang Chuntao -> Version : 1.00
 def getftp(t, y, d):
     yeard1 = '%04d' % y + '-01-01 00:00:00'
     yeard1 = datetime.strptime(yeard1, '%Y-%m-%d %H:%M:%S')
@@ -22,7 +25,8 @@ def getftp(t, y, d):
     return ftpsiteout
 
 
-# Replace time wild cards in string with specific date time
+# 2022-03-27 : * Replace time wild cards in string with specific date time
+#              by Jiang Kecai -> Version : 1.00
 def ReplaceTimeWildcard(string, spectime):
     """Replace time wild cards in string with specific date time"""
     import datetime
@@ -70,6 +74,8 @@ def ReplaceTimeWildcard(string, spectime):
     return newstr
 
 
+# 2022-03-27 : * 替换字符串中<MMM>为三位字符月份
+#              by Chang Chuntao -> Version : 1.00
 def ReplaceMMM(url, month):
     newurl = str(url)
     if month == 1:
@@ -100,13 +106,17 @@ def ReplaceMMM(url, month):
     return newurl
 
 
+# 2022-03-27 : * 替换字符串中<MM>为两位数字
+#              by Chang Chuntao -> Version : 1.00
 def ReplaceMM(url, month):
     newurl = str(url)
     month = int(month)
-    newurl = newurl.replace('<MM>', '%02d'%month)
+    newurl = newurl.replace('<MM>', '%02d' % month)
     return newurl
 
 
+# 2022-03-27 : * 读取file中站点名，返回site
+#              by Chang Chuntao -> Version : 1.00
 def getsite(file, datatype):
     site = open(file, "r").readlines()[0].split(" ")
     if datatype == "MGEX_IGS_rnx" or datatype == "MGEX_HK_cors":

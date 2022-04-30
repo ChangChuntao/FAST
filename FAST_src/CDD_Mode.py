@@ -2,8 +2,8 @@
 # CDD_Mode       : Direct run program mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
-# Creation Date  : 2022.03.27 - Version 1.0
+# Latest Version : 1.11
+# Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.04.12 - Version 1.11
 
 from CDD_Sub import *
@@ -22,7 +22,7 @@ def CDD_Mode():
     print("      Author         : Chang Chuntao")
     print("      Copyright(C)   : The GNSS Center, Wuhan University & ")
     print("                       Chinese Academy of Surveying and mapping")
-    print("      Contact        : QQ@1252443496 & WECHET@amst-jazz GITHUB@ChangChuntao")
+    print("      Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("      Git            : https://github.com/ChangChuntao/FAST.git")
     print("      Version        : 1.12 # 2022-04-30")
     obj = top_cdd()  # 一级目录 obj：一级索引

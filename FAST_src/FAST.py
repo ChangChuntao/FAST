@@ -2,7 +2,7 @@
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
+# Latest Version : 1.12
 # Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.04.30 - Version 1.12
 
