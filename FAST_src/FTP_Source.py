@@ -3,8 +3,8 @@
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
-# Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.11
+# Creation Date  : 2022.03.27 - Version 1.00
+# Date           : 2022.04.30 - Version 1.12
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -14,11 +14,14 @@ plate_env = []
 for p in plate:
     plate_env.append("http://geodesy.unr.edu/velocities/midas." + p + ".txt")
 
-# 2022-03-27 : 资源列表 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+# 2022-03-27 : * 资源列表 by Chang Chuntao -> Version : 1.00
+# 2022-04-12 : + 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
 #              by Chang Chuntao  -> Version : 1.10
-# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+# 2022-04-22 : + 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
 #              by Chang Chuntao  -> Version : 1.11
+# 2022-04-30 : > 修正GPS_USA_cors节点
+#              by Chang Chuntao  -> Version : 1.12
+
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
