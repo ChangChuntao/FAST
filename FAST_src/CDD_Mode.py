@@ -8,7 +8,8 @@
 
 
 from FAST_Print import PrintGDD
-from FAST_src.CDD_Sub import top_cdd, sub_cdd, geturl_download_uncompress
+from CDD_Sub import top_cdd, sub_cdd, geturl_download_uncompress
+from help import fastSoftwareInformation
 from GNSS_TYPE import gnss_type
 
 
@@ -18,14 +19,7 @@ from GNSS_TYPE import gnss_type
 # 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
 #              by Chang Chuntao  -> Version : 1.11
 def CDD_Mode():
-    print("==================================================================================")
-    print("      FAST           : Fusion Abundant multi-Source data download Terminal")
-    print("      Author         : Chang Chuntao")
-    print("      Copyright(C)   : The GNSS Center, Wuhan University & ")
-    print("                       Chinese Academy of Surveying and mapping")
-    print("      Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
-    print("      Git            : https://github.com/ChangChuntao/FAST.git")
-    print("      Version        : 1.12 # 2022-04-30")
+    fastSoftwareInformation()
     obj = top_cdd()  # 一级目录 obj：一级索引
     subnum = sub_cdd(obj)  # 二级目录 subnum：二级索引 返回y为返回上级一级菜单，或返回二级菜单
     while True:

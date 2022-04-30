@@ -2,9 +2,9 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.11
+# Latest Version : 1.12
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.12 - Version 1.11
+# Date           : 2022.04.12 - Version 1.12
 
 from FAST_Print import PrintGDD
 
@@ -121,3 +121,15 @@ def arg_options():
     cont = input("     ")
     if cont == "y" or cont == "Y":
         Supported_Data()
+
+
+# 2022-04-30 : 软件信息 by Chang Chuntao -> Version : 1.12
+def fastSoftwareInformation():
+    print("==================================================================================")
+    print("     FAST           : Fusion Abundant multi-Source data download Terminal")
+    print("     Author         : Chang Chuntao")
+    print("     Copyright(C)   : The GNSS Center, Wuhan University & ")
+    print("                      Chinese Academy of Surveying and mapping")
+    print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
+    print("     Git            : https://github.com/ChangChuntao/FAST.git")
+    print("     Version        : 1.12 # 2022-04-30")
