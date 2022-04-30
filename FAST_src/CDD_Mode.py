@@ -6,8 +6,9 @@
 # Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.04.12 - Version 1.11
 
-from CDD_Sub import *
+
 from FAST_Print import PrintGDD
+from FAST_src.CDD_Sub import top_cdd, sub_cdd, geturl_download_uncompress
 from GNSS_TYPE import gnss_type
 
 

@@ -2,8 +2,8 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
-# Creation Date  : 2022.03.27 - Version 1.0
+# Latest Version : 1.11
+# Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.04.12 - Version 1.11
 
 from FAST_Print import PrintGDD

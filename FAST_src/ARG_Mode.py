@@ -3,12 +3,12 @@
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
-# Creation Date  : 2022.03.27 - Version 1.0
-# Date           : 2022.04.12 - Version 1.1
+# Creation Date  : 2022.03.27 - Version 1.00
+# Date           : 2022.04.12 - Version 1.10
 
 
 import os
-from ARG_Sub import GET_ARG, ARG_ifwrong, geturl, uncompress_arg
+from ARG_Sub import GET_ARG, ARG_ifwrong, geturl
 from Dowload import argpooldownload, lftps, wgets
 from FTP_Source import FTP_S
 from Format import unzip_vlbi, unzipfile
