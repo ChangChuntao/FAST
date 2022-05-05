@@ -112,7 +112,7 @@ def arg_options():
     print("  -p   --process                   number of threads (default 12)")
     print("")
     print(r"  Example: FAST -t MGEX_IGS_atx")
-    print(r"           FAST -t GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk -y 2022 -d 22 -p 30")
+    print(r"           FAST -t GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk -y 2022 -o 22 -e 30 -p 30")
     print(r"           FAST -t MGEX_WUH_sp3 -y 2022 -d 22 -u N -l D:\code\CDD\Example")
     print(r"           FAST -t MGEX_IGS_rnx -y 2022 -d 22 -f D:\code\cdd\mgex.txt")
     print(r"           FAST -t IVS_week_snx -y 2022 -m 1")
