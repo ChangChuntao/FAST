@@ -19,7 +19,7 @@ from Format import isinpath
 dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
 if platform.system() == 'Windows':
     PrintGDD('当前为Windows系统', "important")
-    wget = dirname + "\\bin\\wget.exe" + " -T 5 -t 1 "
+    wget = dirname + "\\bin\\wget.exe" + " -T 10 -t 1 "
     lftp = dirname + "\\bin\\lftp.exe" + " "
 else:
     PrintGDD('当前为Linux系统', "important")

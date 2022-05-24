@@ -41,7 +41,7 @@ apt-get install python3
 2.  选择MGEX_WUH_sp3即为输入6并回车，其中MGEX代表多系统，WUH代表武汉大学IGS数据处理中心，SP3代表精密星历；
 ![二级目录](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95.png)  
   
-3.  根据引导输入时间，回车完成输入；
+3.  依据引导输入时间，回车完成输入；
 ![输入时间](Windows/RUN_image/%E8%BE%93%E5%85%A5%E6%97%B6%E9%97%B4.png)
 
 4.  下载完成，根据提示直接回车完成解压或者输入任意字符回车不解压；

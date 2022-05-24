@@ -23,7 +23,11 @@
 #                  > 修正GPS_USA_cors节点
 #                  by Chang Chuntao  # 2022-04-30
 #
-
+# Version 1.13   : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+#                  CARG_ion、ESAG_ion、ESRG_ion
+#                  > 修正MGEX_GFZ_clk节点内 05M -> 30S
+#                  by Chang Chuntao  # 2022-05-24
+#
 
 import sys
 from ARG_Mode import ARG_Mode

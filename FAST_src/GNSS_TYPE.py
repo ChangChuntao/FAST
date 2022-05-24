@@ -26,7 +26,8 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["BIA", ["MGEX_WHU_bia", "GPS_COD_bia", "MGEX_COD_bia", "MGEX_GFZ_bia"]],
 
-             ["ION", ["IGS_ion", "WUH_ion", "COD_ion"]],
+             ["ION", ["IGSG_ion", "IGRG_ion", "WUHG_ion", "WURG_ion", "CODG_ion", "CORG_ion", "UQRG_ion", "UPRG_ion",
+                      "JPLG_ion", "JPRG_ion", "CASG_ion", "CARG_ion", "ESAG_ion", "ESRG_ion"]],
 
              ["SINEX", ["IGS_day_snx", "IGS_week_snx", "IVS_week_snx", "ILS_week_snx", "IDS_week_snx"]],
 

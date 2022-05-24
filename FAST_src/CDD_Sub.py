@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.12
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.30 - Version 1.12
+# Date           : 2022.05.24 - Version 1.13
 
 import os
 from GNSS_Timestran import gnssTimesTran
@@ -23,6 +23,9 @@ from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
 # 2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
 #              调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
 #              by Chang Chuntao  -> Version : 1.12
+# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+#              CARG_ion、ESAG_ion、ESRG_ion
+#              by Chang Chuntao  -> Version : 1.13
 def top_cdd():
     print("")
     print("     ----------------------------------FAST--------------------------------------")
@@ -81,7 +84,7 @@ def sub_cdd(obj):
         print("    |    1 : GPS_IGS_sp3            2 : GPS_IGR_sp3             3 : GPS_IGU_sp3  |")
         print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
         print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHU_sp3           8 : MGEX_GFZ_sp3 |")
-        print("    |    9 : MGEX_COD_sp3           10: MGEX_SHA_sp3            11: MGEX_GRG_sp3 |")
+        print("    |    9 : MGEX_COD_sp3          10 : MGEX_SHA_sp3           11 : MGEX_GRG_sp3 |")
         print("    |   12 : GLO_IGL_sp3                                                         |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
@@ -111,14 +114,19 @@ def sub_cdd(obj):
     elif obj == 6:
         print("     -----------------------------------BIA--------------------------------------")
         print("    |                                                                            |")
-        print("    |    1 : MGEX_WHU_bia           2 : GPS_COD_bia          3 : MGEX_COD_bia    |")
+        print("    |    1 : MGEX_WHU_bia           2 : GPS_COD_bia            3 : MGEX_COD_bia  |")
         print("    |    4 : MGEX_GFZ_bia                                                        |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 7:
         print("     -----------------------------------ION--------------------------------------")
         print("    |                                                                            |")
-        print("    |    1 : IGS_ion                2 : WUH_ion                3 : COD_ion       |")
+        print("    |    1 : IGSG_ion               2 : IGRG_ion               3 : WUHG_ion      |")
+        print("    |    4 : WURG_ion               5 : CODG_ion               6 : CORG_ion      |")
+        print("    |    7 : UQRG_ion               8 : UPRG_ion               9 : JPLG_ion      |")
+        print("    |   10 : JPRG_ion              11 : CASG_ion              12 : CARG_ion      |")
+        print("    |   13 : ESAG_ion              14 : ESRG_ion                                 |")
+
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 8:

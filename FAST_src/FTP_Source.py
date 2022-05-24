@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.10
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.30 - Version 1.12
+# Date           : 2022.05.24 - Version 1.13
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -21,7 +21,10 @@ for p in plate:
 #              by Chang Chuntao  -> Version : 1.11
 # 2022-04-30 : > 修正GPS_USA_cors节点
 #              by Chang Chuntao  -> Version : 1.12
-
+# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+#              CARG_ion、ESAG_ion、ESRG_ion
+#              > 修正MGEX_GFZ_clk节点内 05M -> 30S
+#              by Chang Chuntao  -> Version : 1.13
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -184,8 +187,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "MGEX_COD_clk": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.CLK_M.Z"],
 
          "MGEX_GFZ_clk": [
-             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_CLK.CLK.gz",
-             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_CLK.CLK.gz"],
+             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
          "MGEX_GRG_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "GRG0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
@@ -228,11 +231,93 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "MGEX_GFZ_bia": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
 
-         "IGS_ion": ["ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z"],
+         "IGSG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z"],
 
-         "WUH_ion": ["ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z"],
+         "IGRG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z"],
 
-         "COD_ion": ["ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z"],
+         "WUHG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z"],
+
+         "WURG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z"],
+
+         "CODG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z"],
+
+         "CORG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/corg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/corg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/corg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/corg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/corg<DOY>0.<YY>i.Z"],
+
+         "UQRG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/uqrg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/uqrg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/uqrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/uqrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/uqrg<DOY>0.<YY>i.Z"],
+
+         "UPRG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/uprg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/uprg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/uprg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/uprg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/uprg<DOY>0.<YY>i.Z"],
+
+         "JPLG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/jplg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/jplg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/jplg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/jplg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/jplg<DOY>0.<YY>i.Z"],
+
+         "JPRG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/jprg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/jprg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/jprg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/jprg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/jprg<DOY>0.<YY>i.Z"],
+
+         "CASG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/casg<DOY>0.<YY>i.Z"],
+
+         "CARG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/carg<DOY>0.<YY>i.Z"],
+
+         "ESAG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/esag<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/esag<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/esag<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/esag<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/esag<DOY>0.<YY>i.Z"],
+
+         "ESRG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z",
+                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z",
+                      "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z",
+                      "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z"],
 
          "IGS_day_snx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z",

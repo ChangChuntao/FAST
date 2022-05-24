@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.12
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.12 - Version 1.12
+# Date           : 2022.05.24 - Version 1.13
 
 from FAST_Print import PrintGDD
 
@@ -14,6 +14,9 @@ from FAST_Print import PrintGDD
 #              by Chang Chuntao  -> Version : 1.10
 # 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
 #              by Chang Chuntao  -> Version : 1.11
+# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+#              CARG_ion、ESAG_ion、ESRG_ion
+#              by Chang Chuntao  -> Version : 1.13
 def Supported_Data():
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
     print("")
@@ -33,7 +36,8 @@ def Supported_Data():
     print("")
     print("                       BIA : MGEX_WHU_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
     print("")
-    print("                       ION : IGS_ion / WUH_ion / COD_ion ")
+    print("                       ION : IGSG_ion / IGRG_ion / WUHG_ion / WURG_ion / CODG_ion / CORG_ion / UQRG_ion")
+    print("                             UPRG_ion / JPLG_ion / JPRG_ion / CASG_ion / CARG_ion / ESAG_ion / ESRG_ion")
     print("")
     print("                     SINEX : IGS_day_snx / IGS_week_snx / IVS_week_snx / ILS_week_snx / IDS_week_snx ")
     print("")
@@ -72,8 +76,8 @@ def cddhelp():
           "                                   rough amst-jazz #wechat and 1252443496 #QQ")
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
-    print("     Current version date: 2022.03.27 - Version 1.0")
-    print("     Initial version date: 2022.04.12 - Version 1.1")
+    print("     Current version date: 2022.03.27 - Version 1.00")
+    print("     Initial version date: 2022.05.24 - Version 1.13")
     print("")
 
 
@@ -124,6 +128,7 @@ def arg_options():
 
 
 # 2022-04-30 : 软件信息 by Chang Chuntao -> Version : 1.12
+# 2022-05-24 : 软件信息 by Chang Chuntao -> Version : 1.13
 def fastSoftwareInformation():
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")
@@ -132,4 +137,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.12 # 2022-04-30")
+    print("     Version        : 1.13 # 2022-05-24")
