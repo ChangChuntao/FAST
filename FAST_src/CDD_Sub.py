@@ -2,7 +2,7 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.12
+# Latest Version : 1.13
 # Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.05.24 - Version 1.13
 
