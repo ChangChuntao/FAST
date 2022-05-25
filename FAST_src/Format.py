@@ -24,11 +24,18 @@ def isinpath(file):  # 判断相关文件是否存在
         filelowp = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
         filelown = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "n"
         fileprolow = file.lower()[0:4] + file.lower()[16:20] + ".bia"
+        sp3filelow = file
+    elif orifile.split(".")[-1] == "SP3":
         year = file.lower()[11:15]
         doy = file.lower()[15:18]
         specTime = gnssTime2datetime(year + " " + doy, "YearDoy")
         [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
         sp3filelow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".sp3"
+        filelowo = file
+        filelowd = file
+        filelowp = file
+        filelown = file
+        fileprolow = file
     else:
         filelowo = file.lower()[0:11] + "o"
         filelowd = file.lower()[0:11] + "d"
