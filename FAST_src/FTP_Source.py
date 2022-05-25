@@ -24,6 +24,7 @@ for p in plate:
 # 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
 #              CARG_ion、ESAG_ion、ESRG_ion
 #              > 修正MGEX_GFZ_clk节点内 05M -> 30S
+#              > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
 #              by Chang Chuntao  -> Version : 1.13
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
@@ -31,6 +32,11 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz"],
 
          "MGEX_brdm": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
+                       "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz",
+                       "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                       "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
+                       "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz",
+                       "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
                        "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz",
                        "--ftp-user anonymous --ftp-password cctcasm@163.com "
                        "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"

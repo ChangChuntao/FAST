@@ -97,6 +97,9 @@ def renamebrdm(file):
     if file.split(".")[-1] == "rnx" and file[0:4] == "BRDM":
         filelow = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
         os.rename(file, filelow)
+    if file.split(".")[-1] == "rnx" and file[0:4] == "BRDC":
+        filelow = "brdm" + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
+        os.rename(file, filelow)
 
 
 #
@@ -154,6 +157,8 @@ def unzipfile(path, ftpsite):
     dirs = os.listdir(path)
     for filename in dirs:
         if filename.split(".")[-1] == "rnx" and filename[0:4] == "BRDM":
+            renamebrdm(filename)
+        if filename.split(".")[-1] == "rnx" and filename[0:4] == "BRDC":
             renamebrdm(filename)
         elif filename.split(".")[-1] == "SP3":
             renamesp3(filename)
