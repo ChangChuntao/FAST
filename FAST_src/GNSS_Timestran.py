@@ -28,12 +28,12 @@ def datetime2GnssTime(specTime):
     sod = specTime.hour * 3600.0 + specTime.minute * 60.0 + specTime.second + specTime.microsecond / 1000000.0
     MjdSod = [int(mjd), sod]
 
-    PrintGDD("Year / Month / Day ".ljust(22) + ": " + str(specTime.year).ljust(5) + " " +
-             str(specTime.month).zfill(2) + " " + str(specTime.day).zfill(2), "nothing")
-    PrintGDD("Year / Doy ".ljust(22) + ": " + str(YearDoy[0]).ljust(5) + " " + str(YearDoy[1]).zfill(3), "nothing")
-    PrintGDD("GPSWeek / DayofWeek ".ljust(22) + ": " + str(GPSWeekDay[0]).ljust(5) + " " + str(GPSWeekDay[1]),
-             "nothing")
-    PrintGDD("MJD / Sod ".ljust(22) + ": " + str(MjdSod[0]).ljust(5) + " " + str(MjdSod[1]), "nothing")
+    # PrintGDD("Year / Month / Day ".ljust(22) + ": " + str(specTime.year).ljust(5) + " " +
+    #          str(specTime.month).zfill(2) + " " + str(specTime.day).zfill(2), "nothing")
+    # PrintGDD("Year / Doy ".ljust(22) + ": " + str(YearDoy[0]).ljust(5) + " " + str(YearDoy[1]).zfill(3), "nothing")
+    # PrintGDD("GPSWeek / DayofWeek ".ljust(22) + ": " + str(GPSWeekDay[0]).ljust(5) + " " + str(GPSWeekDay[1]),
+    #          "nothing")
+    # PrintGDD("MJD / Sod ".ljust(22) + ": " + str(MjdSod[0]).ljust(5) + " " + str(MjdSod[1]), "nothing")
     return YearMonthDay, GPSWeekDay, YearDoy, MjdSod
 
 
@@ -61,12 +61,24 @@ def gnssTime2datetime(gnssTime, gnssTimeType):
     return dateTime
 
 
+# 2022-05-25 : 输出时间
+#              by Chang Chuntao  -> Version : 1.13
+def printTime(specTime, GPSWeekDay, YearDoy, MjdSod):
+    PrintGDD("Year / Month / Day ".ljust(22) + ": " + str(specTime.year).ljust(5) + " " +
+             str(specTime.month).zfill(2) + " " + str(specTime.day).zfill(2), "nothing")
+    PrintGDD("Year / Doy ".ljust(22) + ": " + str(YearDoy[0]).ljust(5) + " " + str(YearDoy[1]).zfill(3), "nothing")
+    PrintGDD("GPSWeek / DayofWeek ".ljust(22) + ": " + str(GPSWeekDay[0]).ljust(5) + " " + str(GPSWeekDay[1]),
+             "nothing")
+    PrintGDD("MJD / Sod ".ljust(22) + ": " + str(MjdSod[0]).ljust(5) + " " + str(MjdSod[1]), "nothing")
+
+
 # 2022-04-30 : GNSS_Timestran引导
 #              by Chang Chuntao  -> Version : 1.12
 def gnssTimesTran():
     nowdatetime = datetime.datetime.utcnow()  # 获取当前utc时间
     PrintGDD("当前系统UTC时间为" + str(nowdatetime)[:-7], "normal")
-    datetime2GnssTime(nowdatetime)
+    [YearMonthDaynow, GPSWeekDaynow, YearDoynow, MjdSodnow] = datetime2GnssTime(nowdatetime)
+    printTime(nowdatetime, GPSWeekDaynow, YearDoynow, MjdSodnow)
     print("")
     PrintGDD("1. Year Month Day  2. Year Doy  3. GPSWeek DayofWeek  4. MJD SOD", "input")
     PrintGDD("请输入所需转换的时间格式编号 (eg. 2)", "input")
@@ -121,6 +133,7 @@ def gnssTimesTran():
         else:
             PrintGDD("请输入正确的编号 (eg. 2)", "input")
             inputTime = input("     ")
-    datetime2GnssTime(specTime)
+    [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
+    printTime(specTime, GPSWeekDay, YearDoy, MjdSod)
     print("")
     return 0
