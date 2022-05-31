@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.13
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.05.24 - Version 1.13
+# Date           : 2022.05.31 - Version 1.14
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -26,6 +26,9 @@ for p in plate:
 #              > 修正MGEX_GFZ_clk节点内 05M -> 30S
 #              > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
 #              by Chang Chuntao  -> Version : 1.13
+# 2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
+#              > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+#              by Chang Chuntao  -> Version : 1.14
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -110,9 +113,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "MGEX_COD_sp3": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"
-
-                          ],
+                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"],
 
          "MGEX_SHA_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
@@ -225,8 +226,11 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                                  "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/osb/"
                                  "<GPSW>/SGG<GPSWD>.BIA.tar.gz"],
 
-         "MGEX_WHU_bia": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/bias/"
-                          "WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_ABS.BIA.Z"],
+         "MGEX_WHU_ABS_bia": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/bias/"
+                              "WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_ABS.BIA.gz"],
+
+         "MGEX_WHU_OSB_bia": ["ftp://igs.gnsswhu.cn/pub/whu/MGEX/DCB/<YYYY>"
+                              "/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
 
          "GPS_COD_bia": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/COD<GPSWD>.BIA.Z",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "

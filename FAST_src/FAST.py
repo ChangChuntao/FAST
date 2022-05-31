@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.13
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.30 - Version 1.12
+# Date           : 2022.05.31 - Version 1.14
 
 # Version 1.00   : * Fusion Abundant multi-Source data download Terminal
 #                  by Chang Chuntao  # 2022-03-27
@@ -29,6 +29,9 @@
 #                  > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
 #                  by Chang Chuntao  # 2022-05-24
 #
+# Version 1.14   : + 新增BIA内资源MGEX_WHU_OSB_bia
+#                  > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+#                  by Chang Chuntao  -> Version : 1.14
 
 import sys
 from ARG_Mode import ARG_Mode

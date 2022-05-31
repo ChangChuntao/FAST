@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.13
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.22 - Version 1.13
+# Date           : 2022.05.31 - Version 1.14
 
 # 2022-03-27 : 所有支持的数据类型 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
@@ -14,6 +14,10 @@
 # 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
 #              CARG_ion、ESAG_ion、ESRG_ion
 #              by Chang Chuntao  -> Version : 1.13
+# 2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
+#              > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+#              by Chang Chuntao  -> Version : 1.14
+
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["SP3", ["GPS_IGS_sp3", "GPS_IGR_sp3", "GPS_IGU_sp3", "GPS_GFZ_sp3", "GPS_GRG_sp3",
@@ -27,7 +31,7 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["ERP", ["IGS_erp", "WUH_erp", "COD_erp", "GFZ_erp", "IGR_erp"]],
 
-             ["BIA", ["MGEX_WHU_bia", "GPS_COD_bia", "MGEX_COD_bia", "MGEX_GFZ_bia"]],
+             ["BIA", ["MGEX_WHU_ABS_bia", "MGEX_WHU_OSB_bia", "GPS_COD_bia", "MGEX_COD_bia", "MGEX_GFZ_bia"]],
 
              ["ION", ["IGSG_ion", "IGRG_ion", "WUHG_ion", "WURG_ion", "CODG_ion", "CORG_ion", "UQRG_ion", "UPRG_ion",
                       "JPLG_ion", "JPRG_ion", "CASG_ion", "CARG_ion", "ESAG_ion", "ESRG_ion"]],

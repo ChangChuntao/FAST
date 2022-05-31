@@ -20,7 +20,7 @@ from Get_Ftp import ReplaceMMM
 #              by Chang Chuntao  -> Version : 1.10
 def ARG_Mode(argument):
     # PrintGDD("GDD 下载程序启动!", "important")
-    cddarg = {"datatype": "", "year": 0, "loc": "", "day1": 0, "day2": 0, "month": 0, "file": "", "process": 12,
+    cddarg = {"datatype": "", "year": 0, "loc": "", "day1": 0, "day2": 0, "month": 0, "file": "", "process": 8,
               "site": "", "uncompress": "y"}
     cddarg = GET_ARG(argument, cddarg)  # 获取参数内容
     ARG_ifwrong(cddarg)  # 判断输入参数正确性

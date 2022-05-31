@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.13
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.05.24 - Version 1.13
+# Date           : 2022.05.31 - Version 1.14
 
 import os
 from GNSS_Timestran import gnssTimesTran
@@ -70,6 +70,13 @@ def top_cdd():
 # 2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
 #              gnssTimesTran调用
 #              by Chang Chuntao  -> Version : 1.12
+# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+#              CARG_ion、ESAG_ion、ESRG_ion
+#              by Chang Chuntao  -> Version : 1.13
+# 2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
+#              > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+#              by Chang Chuntao  -> Version : 1.14
+
 def sub_cdd(obj):
     print("")
     if obj == 1:
@@ -114,8 +121,8 @@ def sub_cdd(obj):
     elif obj == 6:
         print("     -----------------------------------BIA--------------------------------------")
         print("    |                                                                            |")
-        print("    |    1 : MGEX_WHU_bia           2 : GPS_COD_bia            3 : MGEX_COD_bia  |")
-        print("    |    4 : MGEX_GFZ_bia                                                        |")
+        print("    |    1 : MGEX_WHU_ABS_bia       2 : MGEX_WHU_OSB_bia       3 : GPS_COD_bia   |")
+        print("    |    4 : MGEX_COD_bia           5 : MGEX_GFZ_bia                             |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 7:
