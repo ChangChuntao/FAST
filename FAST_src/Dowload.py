@@ -16,8 +16,8 @@ from FAST_Print import PrintGDD
 from Format import isinpath
 
 # 2022-03-27 : 判断操作平台，获取bin下下载程序 by Chang Chuntao -> Version : 1.00
-dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
 if platform.system() == 'Windows':
+    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
     PrintGDD('当前为Windows系统', "important")
     wget = dirname + "\\bin\\wget.exe" + " -T 10 -t 1 "
     lftp = dirname + "\\bin\\lftp.exe" + " "
