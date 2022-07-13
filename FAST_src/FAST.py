@@ -2,9 +2,9 @@
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.13
+# Latest Version : 1.15
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.05.31 - Version 1.14
+# Date           : 2022.07.13 - Version 1.16
 
 # Version 1.00   : * Fusion Abundant multi-Source data download Terminal
 #                  by Chang Chuntao  # 2022-03-27
@@ -23,16 +23,25 @@
 #                  > 修正GPS_USA_cors节点
 #                  by Chang Chuntao  # 2022-04-30
 #
-# Version 1.13   : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-#                  CARG_ion、ESAG_ion、ESRG_ion
+# Version 1.13   : + 新增ION内资源WURG_ion/CODG_ion/CORG_ion/UQRG_ion/UPRG_ion/JPLG_ion/JPRG_ion/CASG_ion/
+#                  CARG_ion/ESAG_ion/ESRG_ion
 #                  > 修正MGEX_GFZ_clk节点内 05M -> 30S
 #                  > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
 #                  by Chang Chuntao  # 2022-05-24
 #
 # Version 1.14   : + 新增BIA内资源MGEX_WHU_OSB_bia
 #                  > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
-#                  by Chang Chuntao  -> Version : 1.14
-
+#                  by Chang Chuntao  # 2022-05-31
+#
+# Version 1.15   : + 新增CLK内资源MGEX_WUHU_clk
+#                  + 新增ERP内资源WUHU_erp
+#                  + 新增OBX内资源MGEX_WUHU_obx
+#                  by Chang Chuntao  # 2022-07-03
+#
+# Version 1.16   : + 新增SpaceData一级类
+#                  + 新增SpaceData内资源SW_EOP
+#                  by Chang Chuntao  # 2022-07-13
+#
 import sys
 from ARG_Mode import ARG_Mode
 from CDD_Mode import CDD_Mode

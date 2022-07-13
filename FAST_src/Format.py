@@ -110,12 +110,15 @@ def renamebrdm(file):
 #
 def renamesp3(file):
     if file.split(".")[-1] == "SP3":
-        year = file.lower()[11:15]
-        doy = file.lower()[15:18]
-        specTime = gnssTime2datetime(year + " " + doy, "YearDoy")
-        [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
-        filelow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".sp3"
-        os.rename(file, filelow)
+        if file.split("_")[0] == "WUM0MGXULA":
+            pass
+        else:
+            year = file.lower()[11:15]
+            doy = file.lower()[15:18]
+            specTime = gnssTime2datetime(year + " " + doy, "YearDoy")
+            [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
+            filelow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".sp3"
+            os.rename(file, filelow)
 
 
 # 2022-03-27 : 解压vlbi文件 by Chang Chuntao -> Version : 1.00

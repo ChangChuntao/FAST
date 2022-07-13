@@ -4,7 +4,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 1.13
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.05.31 - Version 1.14
+# Date           : 2022.07.13 - Version 1.16
 
 import os
 from GNSS_Timestran import gnssTimesTran
@@ -26,6 +26,9 @@ from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
 # 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
 #              CARG_ion、ESAG_ion、ESRG_ion
 #              by Chang Chuntao  -> Version : 1.13
+# 2022-07-13 : + 新增SpaceData一级类
+#              + 新增SpaceData内资源SW_EOP
+#              by Chang Chuntao  -> Version : 1.16
 def top_cdd():
     print("")
     print("     ----------------------------------FAST--------------------------------------")
@@ -35,7 +38,7 @@ def top_cdd():
     print("    |    7 : ION                    8 : SINEX                 9 : CNES_AR        |")
     print("    |   10 : ATX                   11 : DCB                  12 : Time_Series    |")
     print("    |   13 : Velocity_Fields       14 : SLR                  15 : OBX            |")
-    print("    |   16 : TRO                                                                 |")
+    print("    |   16 : TRO                   17 : SpaceData                                |")
     print("    |                                                                            |")
     print("     ----------------------------------------------------------------------------")
     print("    |                                                                            |")
@@ -76,6 +79,13 @@ def top_cdd():
 # 2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
 #              > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
 #              by Chang Chuntao  -> Version : 1.14
+# 2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
+#              + 新增ERP内资源WUHU_erp
+#              + 新增OBX内资源MGEX_WUHU_obx
+#              by Chang Chuntao  -> Version : 1.15
+# 2022-07-13 : + 新增SpaceData一级类
+#              + 新增SpaceData内资源SW_EOP
+#              by Chang Chuntao  -> Version : 1.16
 
 def sub_cdd(obj):
     print("")
@@ -108,14 +118,14 @@ def sub_cdd(obj):
         print("    |    1 : GPS_IGS_clk            2 : GPS_IGR_clk            3 : GPS_GFZ_clk   |")
         print("    |    4 : GPS_GRG_clk            5 : GPS_IGS_clk_30s                          |")
         print("    |    6 : MGEX_WUH_clk           7 : MGEX_COD_clk           8 : MGEX_GFZ_clk  |")
-        print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk                            |")
+        print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk         11 : MGEX_WUHU_clk |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 5:
         print("     -----------------------------------ERP--------------------------------------")
         print("    |                                                                            |")
         print("    |    1 : IGS_erp                2 : WUH_erp                3 : COD_erp       |")
-        print("    |    4 : GFZ_erp                5 : IGR_erp                                  |")
+        print("    |    4 : GFZ_erp                5 : IGR_erp                6 : WUHU_erp      |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 6:
@@ -185,6 +195,7 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : GPS_COD_obx            2 : GPS_GRG_obx                              |")
         print("    |    3 : MGEX_WUH_obx           4 : MGEX_COD_obx           5 : MGEX_GFZ_obx  |")
+        print("    |    6 : MGEX_WUHU_obx                                                       |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 16:
@@ -192,6 +203,12 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : IGS_zpd                2 : COD_tro                3 : JPL_tro       |")
         print("    |    4 : GRID_1x1_VMF3          5 : GRID_2.5x2_VMF1        6 : GRID_5x5_VMF3 |")
+        print("    |                                                                            |")
+        print("     ----------------------------------------------------------------------------")
+    elif obj == 17:
+        print("     --------------------------------SpaceData-----------------------------------")
+        print("    |                                                                            |")
+        print("    |    1 : SW_EOP                                                              |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == "a":
