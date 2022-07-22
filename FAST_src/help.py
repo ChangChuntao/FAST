@@ -2,9 +2,9 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.13
+# Latest Version : 1.17
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.13 - Version 1.16
+# Date           : 2022.07.22 - Version 1.17
 
 from FAST_Print import PrintGDD
 
@@ -28,13 +28,18 @@ from FAST_Print import PrintGDD
 #              + 新增SpaceData内资源SW_EOP
 #              by Chang Chuntao  -> Version : 1.16
 #
+# 2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
+#              + 新增CLK内资源MGEX_WUH_Hour_clk
+#              + 新增ERP内资源WUH_Hour_erp
+#              by Chang Chuntao  -> Version : 1.17
+#
 def Supported_Data():
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
     print("")
     print("                       SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3 / ")
     print("                             MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZ_sp3 / MGEX_COD_sp3 / ")
     print("                             MGEX_SHA_sp3 / MGEX_GRG_sp3 ")
-    print("                             GLO_IGL_sp3 ")
+    print("                             GLO_IGL_sp3 / MGEX_WUH_Hour_sp3")
     print("")
     print("                     RINEX : GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors / ")
     print("                             GPS_AU_cors")
@@ -42,9 +47,9 @@ def Supported_Data():
     print("                       CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / GPS_GFZ_clk / GPS_GRG_clk /  ")
     print("                             GPS_IGS_clk_30s  ")
     print("                             MGEX_WUH_clk / MGEX_COD_clk / MGEX_GFZ_clk / MGEX_GRG_clk / WUH_PRIDE_clk ")
-    print("                             MGEX_WUHU_clk ")
+    print("                             MGEX_WUHU_clk / MGEX_WUH_Hour_clk")
     print("")
-    print("                       ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp/ IGR_erp/ WUHU_erp")
+    print("                       ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp/ IGR_erp/ WUHU_erp / WUH_Hour_erp")
     print("")
     print("                       BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
     print("")
@@ -81,6 +86,7 @@ def Supported_Data():
 # 2022-05-31 : Version update by Chang Chuntao -> Version : 1.14
 # 2022-07-03 : Version update by Chang Chuntao -> Version : 1.15
 # 2022-07-13 : Version update by Chang Chuntao -> Version : 1.16
+# 2022-07-22 : Version update by Chang Chuntao -> Version : 1.17
 
 def cddhelp():
     print("==================================================================================")
@@ -100,7 +106,7 @@ def cddhelp():
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
     print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.07-13 - Version 1.16")
+    print("     Initial version date: 2022.07-22 - Version 1.17")
     print("")
 
 
@@ -155,6 +161,8 @@ def arg_options():
 # 2022-05-31 : Version update       by Chang Chuntao -> Version : 1.14
 # 2022-07-03 : Version update       by Chang Chuntao -> Version : 1.15
 # 2022-07-13 : Version update       by Chang Chuntao -> Version : 1.16
+# 2022-07-22 : Version update       by Chang Chuntao -> Version : 1.17
+
 
 def fastSoftwareInformation():
     print("==================================================================================")
@@ -164,4 +172,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.16 # 2022-07-13")
+    print("     Version        : 1.17 # 2022-07-22")

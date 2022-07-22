@@ -2,9 +2,9 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.13
+# Latest Version : 1.17
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.13 - Version 1.16
+# Date           : 2022.07.22 - Version 1.17
 
 # 2022-03-27 : 所有支持的数据类型 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
@@ -24,18 +24,23 @@
 # 2022-07-13 : + 新增SpaceData一级类
 #              + 新增SpaceData内资源SW_EOP
 #              by Chang Chuntao  -> Version : 1.16
+# 2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
+#              + 新增CLK内资源MGEX_WUH_Hour_clk
+#              + 新增ERP内资源WUH_Hour_erp
+#              by Chang Chuntao  -> Version : 1.17
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["SP3", ["GPS_IGS_sp3", "GPS_IGR_sp3", "GPS_IGU_sp3", "GPS_GFZ_sp3", "GPS_GRG_sp3",
                       "MGEX_WUH_sp3", "MGEX_WUHU_sp3", "MGEX_GFZ_sp3", "MGEX_COD_sp3", "MGEX_SHA_sp3", "MGEX_GRG_sp3",
-                      "GLO_IGL_sp3"]],
+                      "GLO_IGL_sp3", "MGEX_WUH_Hour_sp3"]],
 
              ["RINEX", ["GPS_IGS_rnx", "MGEX_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_EU_cors", "GPS_AU_cors"]],
 
              ["CLK", ["GPS_IGS_clk", "GPS_IGR_clk", "GPS_GFZ_clk", "GPS_GRG_clk", "GPS_IGS_clk_30s",
-                      "MGEX_WUH_clk", "MGEX_COD_clk", "MGEX_GFZ_clk", "MGEX_GRG_clk", "WUH_PRIDE_clk", 'MGEX_WUHU_clk']],
+                      "MGEX_WUH_clk", "MGEX_COD_clk", "MGEX_GFZ_clk", "MGEX_GRG_clk", "WUH_PRIDE_clk", 'MGEX_WUHU_clk',
+                      "MGEX_WUH_Hour_clk"]],
 
-             ["ERP", ["IGS_erp", "WUH_erp", "COD_erp", "GFZ_erp", "IGR_erp", 'WUHU_erp']],
+             ["ERP", ["IGS_erp", "WUH_erp", "COD_erp", "GFZ_erp", "IGR_erp", 'WUHU_erp', "WUH_Hour_erp"]],
 
              ["BIA", ["MGEX_WHU_ABS_bia", "MGEX_WHU_OSB_bia", "GPS_COD_bia", "MGEX_COD_bia", "MGEX_GFZ_bia"]],
 

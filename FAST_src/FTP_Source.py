@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.13
+# Latest Version : 1.17
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.13 - Version 1.16
+# Date           : 2022.07.22 - Version 1.17
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -35,6 +35,10 @@ for p in plate:
 #              by Chang Chuntao  -> Version : 1.15
 # 2022-07-13 : + 新增SpaceData内资源SW&EOP
 #              by Chang Chuntao  -> Version : 1.16
+# 2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
+#              + 新增CLK内资源MGEX_WUH_Hour_clk
+#              + 新增ERP内资源WUH_Hour_erp
+#              by Chang Chuntao  -> Version : 1.17
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
@@ -135,6 +139,33 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
          "GLO_IGL_sp3": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.sp3.Z"],
+
+         "MGEX_WUH_Hour_sp3": [
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_00.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_01.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_02.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_03.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_04.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_05.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_06.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_07.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_08.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_09.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_10.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_11.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_12.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_13.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_14.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_15.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_16.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_17.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_18.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_19.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_20.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_21.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_22.sp3.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.sp3.Z"
+         ],
 
          "GPS_IGS_rnx": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.Z",
                          "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.gz",
@@ -240,6 +271,33 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2300_01D_05M_CLK.CLK.gz"
          ],
 
+         "MGEX_WUH_Hour_clk": [
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_00.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_01.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_02.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_03.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_04.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_05.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_06.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_07.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_08.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_09.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_10.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_11.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_12.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_13.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_14.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_15.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_16.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_17.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_18.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_19.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_20.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_21.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_22.clk.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.clk.Z"
+         ],
+
          "IGS_erp": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSW>7.erp.Z"],
 
          "WUH_erp": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
@@ -279,6 +337,33 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2100_01D_01D_ERP.ERP.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2200_01D_01D_ERP.ERP.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2300_01D_01D_ERP.ERP.gz"
+         ],
+
+         "WUH_Hour_erp": [
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_00.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_01.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_02.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_03.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_04.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_05.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_06.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_07.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_08.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_09.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_10.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_11.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_12.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_13.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_14.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_15.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_16.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_17.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_18.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_19.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_20.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_21.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_22.erp.Z",
+             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.erp.Z"
          ],
 
          "MGEX_WUHN_IGMAS_bia": ["--ftp-user casm_cct --ftp-password wangji531! "

@@ -2,9 +2,9 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.13
+# Latest Version : 1.17
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.13 - Version 1.16
+# Date           : 2022.07.13 - Version 1.17
 
 import os
 from GNSS_Timestran import gnssTimesTran
@@ -29,6 +29,10 @@ from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
 # 2022-07-13 : + 新增SpaceData一级类
 #              + 新增SpaceData内资源SW_EOP
 #              by Chang Chuntao  -> Version : 1.16
+# 2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
+#              + 新增CLK内资源MGEX_WUH_Hour_clk
+#              + 新增ERP内资源WUH_Hour_erp
+#              by Chang Chuntao  -> Version : 1.17
 def top_cdd():
     print("")
     print("     ----------------------------------FAST--------------------------------------")
@@ -102,7 +106,7 @@ def sub_cdd(obj):
         print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
         print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHU_sp3           8 : MGEX_GFZ_sp3 |")
         print("    |    9 : MGEX_COD_sp3          10 : MGEX_SHA_sp3           11 : MGEX_GRG_sp3 |")
-        print("    |   12 : GLO_IGL_sp3                                                         |")
+        print("    |   12 : GLO_IGL_sp3           13 : MGEX_WUH_Hour_sp3                        |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 3:
@@ -119,6 +123,7 @@ def sub_cdd(obj):
         print("    |    4 : GPS_GRG_clk            5 : GPS_IGS_clk_30s                          |")
         print("    |    6 : MGEX_WUH_clk           7 : MGEX_COD_clk           8 : MGEX_GFZ_clk  |")
         print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk         11 : MGEX_WUHU_clk |")
+        print("    |   12 : MGEX_WUH_Hour_clk                                                   |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 5:
@@ -126,6 +131,7 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : IGS_erp                2 : WUH_erp                3 : COD_erp       |")
         print("    |    4 : GFZ_erp                5 : IGR_erp                6 : WUHU_erp      |")
+        print("    |    7 : WUH_Hour_erp                                                        |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 6:
