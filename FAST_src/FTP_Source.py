@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.17
+# Latest Version : 1.18
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.22 - Version 1.17
+# Date           : 2022.07.27 - Version 1.18
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -39,6 +39,11 @@ for p in plate:
 #              + 新增CLK内资源MGEX_WUH_Hour_clk
 #              + 新增ERP内资源WUH_Hour_erp
 #              by Chang Chuntao  -> Version : 1.17
+# 2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+#              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+#              > 修正MGEX_COD_clk资源
+#              by Chang Chuntao  -> Version : 1.18
+
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
@@ -84,9 +89,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "MGEX_WUH_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
-                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.Z",
-                          "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/wum<GPSWD>.sp3.Z"],
+                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/<GPSW>/"
+                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
          "MGEX_WUHU_sp3": [
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
@@ -114,13 +118,11 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2300_01D_05M_ORB.SP3.gz"
          ],
 
-         "MGEX_GFZ_sp3": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
-                          "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/"
-                          "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
-                          "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/"
-                          "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"
-                          ],
+         "MGEX_GFZR_sp3": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/"
+                           "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
+                           "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/"
+                           "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"
+                           ],
 
          "MGEX_COD_sp3": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
@@ -227,11 +229,16 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "MGEX_WUH_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
-                          "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/wum<GPSWD>.clk.Z"],
+                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/<GPSW>/"
+                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "MGEX_COD_clk": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.CLK_M.Z"],
+         "MGEX_COD_clk": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
+                          "COD0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/"
+                          "COD0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "MGEX_GFZ_clk": [
+         "MGEX_GFZR_clk": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 

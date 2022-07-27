@@ -46,6 +46,13 @@
 #                   + 新增CLK内资源MGEX_WUH_Hour_clk
 #                   + 新增ERP内资源WUH_Hour_erp
 #                   by Chang Chuntao  # 2022-07-22
+#
+# Version 1.18  :   > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+#                   > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+#                   > 修正MGEX_COD_clk资源
+#                   by Chang Chuntao  # 2022-07-27
+
+
 import sys
 from ARG_Mode import ARG_Mode
 from CDD_Mode import CDD_Mode
