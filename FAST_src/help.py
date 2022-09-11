@@ -2,9 +2,9 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.18
+# Latest Version : 1.20
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.27 - Version 1.18
+# Date           : 2022.09.11 - Version 1.20
 
 from FAST_Print import PrintGDD
 
@@ -91,7 +91,8 @@ def Supported_Data():
 # 2022-07-13 : Version update by Chang Chuntao -> Version : 1.16
 # 2022-07-22 : Version update by Chang Chuntao -> Version : 1.17
 # 2022-07-28 : Version update by Chang Chuntao -> Version : 1.18
-
+# 2022-08-04 : Version update by Chang Chuntao -> Version : 1.19
+# 2022-09-11 : Version update by Chang Chuntao -> Version : 1.20
 
 def cddhelp():
     print("==================================================================================")
@@ -111,7 +112,7 @@ def cddhelp():
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
     print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.07-28 - Version 1.18")
+    print("     Initial version date: 2022.09.11 - Version 1.20")
     print("")
 
 
@@ -168,6 +169,7 @@ def arg_options():
 # 2022-07-13 : Version update       by Chang Chuntao -> Version : 1.16
 # 2022-07-22 : Version update       by Chang Chuntao -> Version : 1.17
 # 2022-07-28 : Version update       by Chang Chuntao -> Version : 1.18
+# 2022-08-04 : Version update       by Chang Chuntao -> Version : 1.19
 
 def fastSoftwareInformation():
     print("==================================================================================")
@@ -177,4 +179,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.18 # 2022-07-28")
+    print("     Version        : 1.19 # 2022-08-04")

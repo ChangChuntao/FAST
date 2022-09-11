@@ -2,19 +2,19 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.18
+# Latest Version : 1.19
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.27 - Version 1.18
+# Date           : 2022.08.04 - Version 1.19
 
 import os
 from GNSS_Timestran import gnssTimesTran
-from Format import unzip_vlbi, unzipfile
-from help import cddhelp
-from Dowload import cddpooldownload, wgets, lftps
+from Format import *
+from help import *
+from Dowload import *
 from FTP_Source import FTP_S
-from FAST_Print import PrintGDD
-from GNSS_TYPE import gnss_type, objneedyd1d2loc, objneedn, objneedydqd2, objnum
-from Get_Ftp import ReplaceMMM, getftp, ReplaceMM, getsite
+from FAST_Print import *
+from GNSS_TYPE import *
+from Get_Ftp import *
 
 
 # 2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
@@ -309,12 +309,12 @@ def ym_cdd():
 
 
 # 2022-03-27 : 输入站点文件 by Chang Chuntao -> Version : 1.00
-def getfile(datatype):
+def getFile(datatype):
     print()
-    PrintGDD("请输入站点文件所在位置 / Please enter the location of the site file", "input")
-    PrintGDD("文件内站点名以空格分割，eg. <bjfs irkj urum>", "input")
+    PrintGDD("请输入文件所在位置 / Please enter the location of the site file", "input")
+    PrintGDD("文件内站点名以空格分割,可含有多行，eg. <bjfs irkj urum>", "input")
     sitefile = input("     ")
-    return getsite(sitefile, datatype)
+    return getSite(sitefile, datatype)
 
 
 # def getuncompress():
@@ -369,6 +369,9 @@ def uncompress_ym(url):
 # 2022-04-12 : 通过输入引导的参数获取下载列表，下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
 # 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
 #              by Chang Chuntao  -> Version : 1.11
+# 2022-08-04 : 修正时序文件下载需求
+#              by Chang Chuntao  -> Version : 1.19
+
 def geturl_download_uncompress(cddarg, obj):
     urllist = []  # 下载列表
 
@@ -421,7 +424,7 @@ def geturl_download_uncompress(cddarg, obj):
                 for day in range(cddarg['day1'], cddarg['day2'] + 1):
                     ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
                     urllist.append(ftpsitelist)  # 按天下载
-                cddpooldownload(urllist, 6)  # 多线程下载
+                cddpooldownload(urllist, 3)  # 多线程下载
                 uncompress(urllist)
                 return "n"
 
@@ -437,7 +440,7 @@ def geturl_download_uncompress(cddarg, obj):
                 cddarg['day2'] = day2
                 PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
                          "normal")
-                cddarg['site'] = getfile(cddarg['datatype'])
+                cddarg['site'] = getFile(cddarg['datatype'])
                 for day in range(cddarg['day1'], cddarg['day2'] + 1):
                     ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
                     for s in cddarg['site']:
@@ -446,15 +449,29 @@ def geturl_download_uncompress(cddarg, obj):
                             f = f.replace('<SITE>', s)
                             siteftp.append(f)
                         urllist.append(siteftp)  # 按天下载
-                cddpooldownload(urllist, 6)  # 多线程下载
+                cddpooldownload(urllist, 3)  # 多线程下载
                 uncompress(urllist)
                 return "n"
+
+                # 数据类型为输入年日站点文件
+        elif obj in objneedloc:  # 输入为站点文件 的数据类型
+            cddarg['site'] = getFile(cddarg['datatype'])
+            ftpsite = FTP_S[cddarg['datatype']]
+            for s in cddarg['site']:
+                siteftp = []
+                for ftp in ftpsite:
+                    f = ftp.replace('<SITE>', s)
+                    siteftp.append(f)
+                urllist.append(siteftp)  # 按天下载
+            cddpooldownload(urllist, 3)  # 多线程下载
+            uncompress(urllist)
+            return "n"
 
         # 无需输入时间的数据类型
         elif obj in objneedn:
             ftpsite = FTP_S[cddarg['datatype']]
             for ftp in ftpsite:
                 wgets(ftp)
-            cddpooldownload(urllist, 6)  # 多线程下载
+            cddpooldownload(urllist, 3)  # 多线程下载
             uncompress(urllist)
             return "n"

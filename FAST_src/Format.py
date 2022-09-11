@@ -2,9 +2,9 @@
 # CDD_Sub        : Format conversion subroutine
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
+# Latest Version : 1.20
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.12 - Version 1.10
+# Date           : 2022.09.09 - Version 1.20
 
 import os
 import platform
@@ -12,19 +12,21 @@ import sys
 import time
 from FAST_Print import PrintGDD
 
-# 2022-03-27 : 判断文件在本地是否存在 by Chang Chuntao -> Version : 1.00
 from GNSS_Timestran import gnssTime2datetime, datetime2GnssTime
 
 
+# 2022-03-27 : 判断文件在本地是否存在 by Chang Chuntao -> Version : 1.00
+# 2022-09-09 : > 修正广播星历文件判定
+#              by Chang Chuntao  -> Version : 1.20
 def isinpath(file):  # 判断相关文件是否存在
     orifile = str(file).split(".")[0]
     if len(orifile) > 9:
         filelowo = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "o"
         filelowd = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "d"
         filelowp = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
-        filelown = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "n"
         fileprolow = file.lower()[0:4] + file.lower()[16:20] + ".bia"
         sp3filelow = file
+        filelown = file
     elif orifile.split(".")[-1] == "SP3":
         year = file.lower()[11:15]
         doy = file.lower()[15:18]
@@ -54,7 +56,7 @@ def isinpath(file):  # 判断相关文件是否存在
             or os.path.exists(gzdfile) or os.path.exists(zdfile) \
             or os.path.exists(gzofile) or os.path.exists(zofile) \
             or os.path.exists(filelowp) or os.path.exists(filelown) \
-            or os.path.exists(filebialowgz) or os.path.exists(filebialowZ)\
+            or os.path.exists(filebialowgz) or os.path.exists(filebialowZ) \
             or os.path.exists(sp3filelow):
         return True
     else:
@@ -62,13 +64,12 @@ def isinpath(file):  # 判断相关文件是否存在
 
 
 # 2022-03-27 : 判断操作平台，获取bin下格式转换程序 by Chang Chuntao -> Version : 1.00
-
 if platform.system() == 'Windows':
     dirname = os.path.split(sys.argv[0])[0]
     unzip = dirname + "\\bin\\gzip.exe" + " -d "
     crx2rnx = dirname + "\\bin\\crx2rnx.exe" + " "
 else:
-    dirname = os.path.split(os.path.realpath('FAST'))[0]
+    dirname = os.path.split(sys.argv[0])[0]
     if sys.argv[0] == 'FAST':
         crx2rnx = 'crx2rnx' + " "
     else:
@@ -168,6 +169,4 @@ def unzipfile(path, ftpsite):
             renamebrdm(filename)
         if filename.split(".")[-1] == "rnx" and filename[0:4] == "BRDC":
             renamebrdm(filename)
-        elif filename.split(".")[-1] == "SP3":
-            renamesp3(filename)
     os.chdir(nowdir)

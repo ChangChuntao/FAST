@@ -2,9 +2,9 @@
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.17
+# Latest Version : 1.20
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.22 - Version 1.17
+# Date           : 2022.09.11 - Version 1.20
 
 # Version 1.00  :   * Fusion Abundant multi-Source data download Terminal
 #                   by Chang Chuntao  # 2022-03-27
@@ -51,7 +51,13 @@
 #                   > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
 #                   > 修正MGEX_COD_clk资源
 #                   by Chang Chuntao  # 2022-07-27
-
+#
+# Version 1.19  :   > 修正时序文件下载需求
+#                   by Chang Chuntao  # 2022-08-04
+#
+# Version 1.20  :   > 修正广播星历文件判定
+#                   + 站点文件可支持行列两种格式，或混合模式
+#                   by Chang Chuntao  # 2022-09-09
 
 import sys
 from ARG_Mode import ARG_Mode

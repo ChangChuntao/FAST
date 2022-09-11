@@ -14,7 +14,7 @@ from FAST_Print import PrintGDD
 from Format import unzipfile
 from GNSS_TYPE import isinGNSStype, getobj, objneedydqd2, objneedyd1d2loc
 import getopt
-from Get_Ftp import getftp, getsite
+from Get_Ftp import getftp, getSite
 from help import Supported_Data, arg_options, arg_help
 
 
@@ -122,7 +122,7 @@ def geturl(cddarg):
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']) + "\n",
                      "normal")
             print("")
-            cddarg['site'] = getsite(cddarg['file'], dt)
+            cddarg['site'] = getSite(cddarg['file'], dt)
             for day in range(cddarg['day1'], cddarg['day2'] + 1):
                 ftpsitelist = getftp(dt, cddarg['year'], day)
                 for s in cddarg['site']:

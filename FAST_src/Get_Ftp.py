@@ -2,9 +2,9 @@
 # GET_Ftp        : Reconstruct FTP address
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.12
+# Latest Version : 1.19
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.30 - Version 1.12
+# Date           : 2022.08.04 - Version 1.19
 
 
 from datetime import datetime, timedelta
@@ -117,8 +117,18 @@ def ReplaceMM(url, month):
 
 # 2022-03-27 : * 读取file中站点名，返回site
 #              by Chang Chuntao -> Version : 1.00
-def getsite(file, datatype):
-    site = open(file, "r").readlines()[0].split(" ")
+# 2022-08-04 : 修正时序文件下载需求
+#              by Chang Chuntao -> Version : 1.19
+# 2022-09-11 : 站点文件可支持行列两种格式，或混合模式
+#              by Chang Chuntao -> Version : 1.20
+def getSite(file, datatype):
+    fileLine = open(file, "r").readlines()
+    site = []
+    for line in fileLine:
+        print(line)
+        lineSplit = line.split()
+        for siteInLine in lineSplit:
+            site.append(siteInLine)
     if datatype == "MGEX_IGS_rnx" or datatype == "MGEX_HK_cors":
         for s in range(0, len(site)):
             if len(site[s]) == 9:
@@ -127,6 +137,9 @@ def getsite(file, datatype):
                 for m in mgex:
                     if site[s] == m[0]:
                         site[s] = m[1]
+    elif datatype == "IGS14_TS_ENU" or datatype == "IGS14_TS_XYZ" or datatype == "Series_TS_Plot":
+        for s in range(0, len(site)):
+            site[s] = site[s].upper()[0:4]
     else:
         for s in range(0, len(site)):
             site[s] = site[s].lower()[0:4]

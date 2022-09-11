@@ -2,9 +2,9 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.18
+# Latest Version : 1.19
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.27 - Version 1.18
+# Date           : 2022.08.04 - Version 1.19
 
 # 2022-03-27 : 所有支持的数据类型 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
@@ -32,6 +32,8 @@
 #              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
 #              > 修正MGEX_COD_clk资源
 #              by Chang Chuntao  -> Version : 1.18
+# 2022-08-04 : 修正时序文件下载需求
+#              by Chang Chuntao  -> Version : 1.19
 
 
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
@@ -73,7 +75,6 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["SpaceData", ["SW_EOP"]]]
 
-
 # 2022-03-27 : 每个二级目录的个数 by Chang Chuntao -> Version : 1.00
 objnum = []
 for sub_type in gnss_type:
@@ -83,7 +84,10 @@ for sub_type in gnss_type:
 objneedydqd2 = [1, 2, 4, 5, 6, 7, 8, 9, 11, 14, 15, 16]
 
 # 2022-03-27 : 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型 by Chang Chuntao -> Version : 1.00
-objneedyd1d2loc = [3, 12]
+objneedyd1d2loc = [3]
+
+# 2022--8-04 : 输入为站点文件的数据类型 by Chang Chuntao -> Version : 1.19
+objneedloc = [12]
 
 # 2022-07-13 : 无需输入 的数据类型 by Chang Chuntao -> Version : 1.16
 objneedn = [10, 13, 17]

@@ -89,7 +89,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "MGEX_WUH_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/<GPSW>/"
+                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
          "MGEX_WUHU_sp3": [
@@ -229,7 +229,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "MGEX_WUH_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/<GPSW>/"
+                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
                           "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
          "MGEX_COD_clk": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
