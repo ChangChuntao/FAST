@@ -13,6 +13,11 @@ import datetime
 # 2022-04-30 : datetime转GNSS TIME并输出
 #              by Chang Chuntao  -> Version : 1.12
 def datetime2GnssTime(specTime):
+    """
+    2022-04-30 : datetime转GNSS TIME并输出
+                 by Chang Chuntao  -> Version : 1.12
+    """
+
     YearMonthDay = [specTime.year, specTime.month, specTime.day]
     gpsWeekdDelTime = specTime - datetime.datetime(year=1980, month=1, day=6)
     gpsWeek = gpsWeekdDelTime.days // 7
