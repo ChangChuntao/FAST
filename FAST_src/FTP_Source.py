@@ -185,10 +185,10 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                          "<SITE><DOY>0.<YY>o.Z"],
 
          "MGEX_IGS_rnx": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/"
-                          "<SITE>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz",
+                          "<SITE_LONG>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz",
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/data/daily/<YYYY>/<DOY>/<YY>d/"
-                          "<SITE>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
+                          "<SITE_LONG>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
 
          "GPS_USA_cors": ["https://geodesy.noaa.gov/corsdata/rinex/<YYYY>/<DOY>/<SITE>/<SITE><DOY>0.<YY>d.gz",
                           "--http-user=anonymous --http-passwd=1252443496@qq.com "

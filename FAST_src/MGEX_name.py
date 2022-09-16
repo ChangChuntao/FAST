@@ -2,11 +2,14 @@
 # MGEX_name      : MGEX site Long and short name comparison information
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.12 - Version 1.10
+# Date           : 2022.09.16 - Version 1.21
 
-# 2022-03-27 : MGEX长短名索引表 by Chang Chuntao -> Version : 1.00
+"""
+2022-03-27 : MGEX长短名索引表                 by Chang Chuntao -> Version : 1.00
+2022-09-16 : MGEX_HK_cors长短名索引表         by Chang Chuntao -> Version : 1.21
+"""
 mgex = [["abmf", "ABMF00GLP"],
         ["abpo", "ABPO00MDG"],
         ["acrg", "ACRG00GHA"],
@@ -510,4 +513,23 @@ mgex = [["abmf", "ABMF00GLP"],
         ["zeck", "ZECK00RUS"],
         ["zim2", "ZIM200CHE"],
         ["zim3", "ZIM300CHE"],
-        ["zimm", "ZIMM00CHE"]]
+        ["zimm", "ZIMM00CHE"],
+        ["hkcl", "HKCL00HKG"],
+        ["hkfn", "HKFN00HKG"],
+        ["hkks", "HKKS00HKG"],
+        ["hkkt", "HKKT00HKG"],
+        ["hklm", "HKLM00HKG"],
+        ["hklt", "HKLT00HKG"],
+        ["hkmw", "HKMW00HKG"],
+        ["hknp", "HKNP00HKG"],
+        ["hkoh", "HKOH00HKG"],
+        ["hkpc", "HKPC00HKG"],
+        ["hkqt", "HKQT00HKG"],
+        ["hksc", "HKSC00HKG"],
+        ["hksl", "HKSL00HKG"],
+        ["hkss", "HKSS00HKG"],
+        ["hkst", "HKST00HKG"],
+        ["hktk", "HKTK00HKG"],
+        ["hkws", "HKWS00HKG"],
+        ["kyc1", "KYC100HKG"],
+        ["t430", "T43000HKG"]]

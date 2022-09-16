@@ -55,7 +55,7 @@ def ReplaceTimeWildcard(string, spectime):
         newstr = newstr.replace('<DOY>', '%03d' % (deltime.days + 1))
     if newstr.find('<DDD>') >= 0:
         newstr = newstr.replace('<DDD>', spectime.strftime('%j'))
-    # replace two digit month in year
+    # replace two_digit month in year
     if newstr.find('<MONTH>') >= 0:
         newstr = newstr.replace('<MONTH>', '%02d' % spectime.month)
     # replace two digit day in month
@@ -144,3 +144,21 @@ def getSite(file, datatype):
         for s in range(0, len(site)):
             site[s] = site[s].lower()[0:4]
     return site
+
+
+def replaceSiteStr(ftpInList, siteInList):
+    """
+    2022-09-16 : 替换站点字符串 by Chang Chuntao  -> Version : 1.21
+    """
+    if len(siteInList) == 4:
+        lowSite = siteInList
+        for mgexSite in mgex:
+            if mgexSite[0] == lowSite:
+                upperSite = mgexSite[1]
+    else:
+        lowSite = str(siteInList[0:4])
+        upperSite = str(siteInList)
+
+    ftpInList = str(ftpInList).replace('<SITE>', lowSite)
+    ftpInList = str(ftpInList).replace('<SITE_LONG>', upperSite)
+    return ftpInList

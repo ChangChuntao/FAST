@@ -15,16 +15,22 @@ from ARG_Sub import uncompress_arg
 from FAST_Print import PrintGDD
 from Format import isinpath
 
-# 2022-03-27 : 判断操作平台，获取bin下下载程序 by Chang Chuntao -> Version : 1.00
+# 2022-03-27 : 判断操作平台，获取bin下下载程序    by Chang Chuntao -> Version : 1.00
+# 2022-09-16 : 更新索引位置                    by Chang Chuntao -> Version : 1.21
 if platform.system() == 'Windows':
     dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
     PrintGDD('当前为Windows系统', "important")
-    wget = dirname + "\\bin\\wget.exe" + " -T 10 -t 1 "
-    lftp = dirname + "\\bin\\lftp.exe" + " "
+    wget = os.path.join(dirname, 'bin', 'wget.exe')
+    lftp = os.path.join(dirname, 'bin', 'lftp')
+    wget += dirname + " -T 3 -t 1 "
+    lftp += ' '
 else:
     PrintGDD('当前为Linux系统', "important")
-    wget = "wget -T 3 -t 1 "
-    lftp = "lftp "
+    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
+    wget = os.path.join(dirname, 'bin', 'wget')
+    lftp = os.path.join(dirname, 'bin', 'lftp')
+    wget += " -T 3 -t 1 "
+    lftp += ' '
 
 
 # 2022-03-27 : 调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
@@ -33,6 +39,7 @@ def wgets(fn):  # 下载单个文件
         return 0
     else:
         cmd = wget + fn
+        print(cmd)
         os.system(cmd)
 
 
@@ -57,7 +64,6 @@ def wgetm(url):  # 下载列表内文件
 # 2022-03-27 : 通过下载列表调取lftp下载文件 by Chang Chuntao -> Version : 1.00
 def lftps(url):  # lftp批量下载
     PrintGDD("正在开始下载!", "important")
-    print("")
     start_time = timeit.default_timer()
     cmd = lftp + url
     os.system(cmd)

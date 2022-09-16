@@ -42,7 +42,8 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
                       "MGEX_WUH_sp3", "MGEX_WUHU_sp3", "MGEX_GFZR_sp3", "MGEX_COD_sp3", "MGEX_SHA_sp3", "MGEX_GRG_sp3",
                       "GLO_IGL_sp3", "MGEX_WUH_Hour_sp3"]],
 
-             ["RINEX", ["GPS_IGS_rnx", "MGEX_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_EU_cors", "GPS_AU_cors"]],
+             ["RINEX", ["GPS_IGS_rnx", "MGEX_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_EU_cors", "GPS_AU_cors",
+                        "MGEX_HK_cors"]],
 
              ["CLK", ["GPS_IGS_clk", "GPS_IGR_clk", "GPS_GFZ_clk", "GPS_GRG_clk", "GPS_IGS_clk_30s",
                       "MGEX_WUH_clk", "MGEX_COD_clk", "MGEX_GFZR_clk", "MGEX_GRG_clk", "WUH_PRIDE_clk", 'MGEX_WUHU_clk',

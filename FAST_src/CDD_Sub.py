@@ -119,6 +119,7 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_rnx            2 : MGEX_IGS_rnx           3 : GPS_USA_cors  |")
         print("    |    4 : GPS_HK_cors            5 : GPS_EU_cors            6 : GPS_AU_cors   |")
+        print("    |    7 : MGEX_HK_cors                                                        |")
         print("    |                                                                            |")
         print("     ----------------------------------------------------------------------------")
     elif obj == 4:
@@ -317,14 +318,6 @@ def getFile(datatype):
     return getSite(sitefile, datatype)
 
 
-# def getuncompress():
-#     print()
-#     PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
-#     isuncpmress = input("     ")
-#     if isuncpmress == "":
-#         unzip_format(os.getcwd())
-
-
 # 2022-04-12 : vlbi文件解压 by Chang Chuntao  -> Version : 1.10
 def getvlbicompress(ftpsite):
     print()
@@ -418,8 +411,9 @@ def geturl_download_uncompress(cddarg, obj):
                 cddarg['year'] = year
                 cddarg['day1'] = day1
                 cddarg['day2'] = day2
-                PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
-                         "normal")
+                PrintGDD(
+                    "下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
+                    "normal")
                 print("")
                 for day in range(cddarg['day1'], cddarg['day2'] + 1):
                     ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
@@ -438,16 +432,18 @@ def geturl_download_uncompress(cddarg, obj):
                 cddarg['year'] = year
                 cddarg['day1'] = day1
                 cddarg['day2'] = day2
-                PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
-                         "normal")
+                PrintGDD(
+                    "下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(cddarg['day2']),
+                    "normal")
                 cddarg['site'] = getFile(cddarg['datatype'])
                 for day in range(cddarg['day1'], cddarg['day2'] + 1):
                     ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
-                    for s in cddarg['site']:
+                    for siteInList in cddarg['site']:
                         siteftp = []
-                        for f in ftpsitelist:
-                            f = f.replace('<SITE>', s)
-                            siteftp.append(f)
+                        for ftpInList in ftpsitelist:
+                            ftpInList = replaceSiteStr(ftpInList, siteInList)
+                            # f = f.replace('<SITE>', s)
+                            siteftp.append(ftpInList)
                         urllist.append(siteftp)  # 按天下载
                 cddpooldownload(urllist, 3)  # 多线程下载
                 uncompress(urllist)

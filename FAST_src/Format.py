@@ -63,17 +63,18 @@ def isinpath(file):  # 判断相关文件是否存在
         return False
 
 
-# 2022-03-27 : 判断操作平台，获取bin下格式转换程序 by Chang Chuntao -> Version : 1.00
+# 2022-03-27 : 判断操作平台，获取bin下格式转换程序      by Chang Chuntao -> Version : 1.00
+# 2022-09-16 : 更新索引                            by Chang Chuntao -> Version : 1.21
 if platform.system() == 'Windows':
-    dirname = os.path.split(sys.argv[0])[0]
-    unzip = dirname + "\\bin\\gzip.exe" + " -d "
-    crx2rnx = dirname + "\\bin\\crx2rnx.exe" + " "
+    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
+    unzip = os.path.join(dirname, 'bin', 'gzip.exe')
+    unzip += " -d "
+    crx2rnx = os.path.join(dirname, 'bin', 'crx2rnx.exe')
+    crx2rnx += " "
 else:
-    dirname = os.path.split(sys.argv[0])[0]
-    if sys.argv[0] == 'FAST':
-        crx2rnx = 'crx2rnx' + " "
-    else:
-        crx2rnx = dirname + '/bin/crx2rnx' + " "
+    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
+    crx2rnx = os.path.join(dirname, 'bin', 'crx2rnx')
+    crx2rnx += ' '
     unzip = 'uncompress '
 
 
