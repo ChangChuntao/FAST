@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.18
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.07.27 - Version 1.18
+# Date           : 2022.09.16 - Version 1.21
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -43,6 +43,9 @@ for p in plate:
 #              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
 #              > 修正MGEX_COD_clk资源
 #              by Chang Chuntao  -> Version : 1.18
+# 2022-09-16 : > 修正<SITE> <SITE_LONG>
+#              + 新增MGEX_HK_cors资源
+#              by Chang Chuntao  -> Version : 1.21
 
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -126,18 +129,21 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "MGEX_COD_sp3": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"],
+                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY"
+                          ">0000_01D_05M_ORB.SP3.gz"],
 
          "MGEX_SHA_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
                           "SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
                           "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/sha<GPSWD>.sp3.Z",
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
+                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY"
+                          ">0000_01D_15M_ORB.SP3.gz",
                           "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
                           "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/sha<GPSWD>.sp3.Z"],
 
          "MGEX_GRG_sp3": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
+                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY"
+                          ">0000_01D_15M_ORB.SP3.gz",
                           "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
          "GLO_IGL_sp3": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.sp3.Z"],

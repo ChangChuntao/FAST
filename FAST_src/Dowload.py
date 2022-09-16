@@ -22,7 +22,7 @@ if platform.system() == 'Windows':
     PrintGDD('当前为Windows系统', "important")
     wget = os.path.join(dirname, 'bin', 'wget.exe')
     lftp = os.path.join(dirname, 'bin', 'lftp')
-    wget += dirname + " -T 3 -t 1 "
+    wget += " -T 3 -t 1 "
     lftp += ' '
 else:
     PrintGDD('当前为Linux系统', "important")
@@ -33,8 +33,10 @@ else:
     lftp += ' '
 
 
-# 2022-03-27 : 调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
 def wgets(fn):  # 下载单个文件
+    """
+    2022-03-27 : 调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
+    """
     if isinpath(fn.split("/")[-1]):
         return 0
     else:
@@ -43,8 +45,10 @@ def wgets(fn):  # 下载单个文件
         os.system(cmd)
 
 
-# 2022-03-27 : 通过下载列表调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
 def wgetm(url):  # 下载列表内文件
+    """
+    2022-03-27 : 通过下载列表调取wget下载单个文件 by Chang Chuntao -> Version : 1.00
+    """
     for fn in url:
         file = fn.split("/")[-1]
         if isinpath(file):
@@ -61,8 +65,10 @@ def wgetm(url):  # 下载列表内文件
                 continue
 
 
-# 2022-03-27 : 通过下载列表调取lftp下载文件 by Chang Chuntao -> Version : 1.00
-def lftps(url):  # lftp批量下载
+def lftps(url):
+    """
+    2022-03-27 : 通过下载列表调取lftp下载文件 by Chang Chuntao -> Version : 1.00
+    """
     PrintGDD("正在开始下载!", "important")
     start_time = timeit.default_timer()
     cmd = lftp + url
@@ -73,8 +79,10 @@ def lftps(url):  # lftp批量下载
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
 
 
-# 2022-03-27 : 引导模式并发下载子程序 by Chang Chuntao -> Version : 1.00
 def cddpooldownload(urllist, process):
+    """
+    2022-03-27 : 引导模式并发下载子程序 by Chang Chuntao -> Version : 1.00
+    """
     PrintGDD("正在开始下载!", "important")
     print("")
     start_time = timeit.default_timer()
@@ -87,8 +95,10 @@ def cddpooldownload(urllist, process):
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
 
 
-# 2022-03-27 : 参数输入模式并发下载子程序 by Chang Chuntao -> Version : 1.00
 def argpooldownload(urllist, process, loc, compress):
+    """
+    2022-03-27 : 参数输入模式并发下载子程序 by Chang Chuntao -> Version : 1.00
+    """
     nowdir = os.getcwd()
     if len(loc) == 0:
         os.chdir(nowdir)

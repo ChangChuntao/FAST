@@ -1,5 +1,5 @@
-pyinstaller -F -i FAST.ico FAST.py ARG_Mode.py ARG_Sub.py CDD_Mode.py CDD_Sub.py Dowload.py FTP_Source.py FAST_Print.py GET_Ftp.py GNSS_TYPE.py Help.py MGEX_name.py Format.py GNSS_Timestran.py --distpath /mnt/d/Code/FAST/Linux
+pyinstaller3 -F -i FAST.ico FAST.py ARG_Mode.py ARG_Sub.py CDD_Mode.py CDD_Sub.py Dowload.py FTP_Source.py FAST_Print.py GET_Ftp.py GNSS_TYPE.py Help.py MGEX_name.py Format.py GNSS_Timestran.py --distpath /mnt/d/Code/FAST/Linux
 pyinstaller -F -i .\FAST.ico .\FAST.py .\ARG_Mode.py .\ARG_Sub.py .\CDD_Mode.py .\CDD_Sub.py .\Dowload.py .\FTP_Source.py .\FAST_Print.py .\GET_Ftp.py .\GNSS_TYPE.py .\Help.py .\MGEX_name.py .\Format.py .\GNSS_Timestran.py --distpath D:\Code\FAST\Windows
 
-pyinstaller -F -i FAST.ico FAST_Time.py help.py FAST_Print.py GNSS_Timestran.py --distpath /mnt/d/Code/FAST/Linux
+pyinstaller3 -F -i FAST.ico FAST_Time.py help.py FAST_Print.py GNSS_Timestran.py --distpath /mnt/d/Code/FAST/Linux
 pyinstaller -F -i .\FAST.ico .\FAST_Time.py .\help.py .\FAST_Print.py .\GNSS_Timestran.py --distpath D:\Code\FAST\Windows

@@ -2,9 +2,9 @@
 # CDD_Sub        : Format conversion subroutine
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.20
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.09 - Version 1.20
+# Date           : 2022.09.16 - Version 1.21
 
 import os
 import platform
@@ -63,8 +63,10 @@ def isinpath(file):  # 判断相关文件是否存在
         return False
 
 
-# 2022-03-27 : 判断操作平台，获取bin下格式转换程序      by Chang Chuntao -> Version : 1.00
-# 2022-09-16 : 更新索引                            by Chang Chuntao -> Version : 1.21
+"""
+2022-03-27 : 判断操作平台，获取bin下格式转换程序      by Chang Chuntao -> Version : 1.00
+2022-09-16 : 更新索引                            by Chang Chuntao -> Version : 1.21
+"""
 if platform.system() == 'Windows':
     dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
     unzip = os.path.join(dirname, 'bin', 'gzip.exe')

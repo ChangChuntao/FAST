@@ -2,9 +2,9 @@
 # GET_Ftp        : Reconstruct FTP address
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.19
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.08.04 - Version 1.19
+# Date           : 2022.09.16 - Version 1.21
 
 
 from datetime import datetime, timedelta
@@ -12,9 +12,11 @@ from FTP_Source import FTP_S
 from MGEX_name import mgex
 
 
-# 2022-03-27 : * 通过数据类型、年、年积日，获取下载列表，并调用ReplaceTimeWildcard生成下载链接list
-#              by Chang Chuntao -> Version : 1.00
 def getftp(t, y, d):
+    """
+    2022-03-27 : * 通过数据类型、年、年积日，获取下载列表，并调用ReplaceTimeWildcard生成下载链接list
+             by Chang Chuntao -> Version : 1.00
+    """
     yeard1 = '%04d' % y + '-01-01 00:00:00'
     yeard1 = datetime.strptime(yeard1, '%Y-%m-%d %H:%M:%S')
     spectime = yeard1 + timedelta(days=d - 1)
@@ -25,10 +27,11 @@ def getftp(t, y, d):
     return ftpsiteout
 
 
-# 2022-03-27 : * Replace time wild cards in string with specific date time
-#              by Jiang Kecai -> Version : 1.00
 def ReplaceTimeWildcard(string, spectime):
-    """Replace time wild cards in string with specific date time"""
+    """
+    2022-03-27 : * Replace time wild cards in string with specific date time
+                 by Jiang Kecai -> Version : 1.00
+    """
     import datetime
     newstr = str(string)
     # replace four digit GPS week
@@ -74,9 +77,11 @@ def ReplaceTimeWildcard(string, spectime):
     return newstr
 
 
-# 2022-03-27 : * 替换字符串中<MMM>为三位字符月份
-#              by Chang Chuntao -> Version : 1.00
 def ReplaceMMM(url, month):
+    """
+    2022-03-27 : * 替换字符串中<MMM>为三位字符月份
+             by Chang Chuntao -> Version : 1.00
+    """
     newurl = str(url)
     if month == 1:
         month = "JAN"
@@ -106,22 +111,26 @@ def ReplaceMMM(url, month):
     return newurl
 
 
-# 2022-03-27 : * 替换字符串中<MM>为两位数字
-#              by Chang Chuntao -> Version : 1.00
 def ReplaceMM(url, month):
+    """
+    2022-03-27 : * 替换字符串中<MM>为两位数字
+                 by Chang Chuntao -> Version : 1.00
+    """
     newurl = str(url)
     month = int(month)
     newurl = newurl.replace('<MM>', '%02d' % month)
     return newurl
 
 
-# 2022-03-27 : * 读取file中站点名，返回site
-#              by Chang Chuntao -> Version : 1.00
-# 2022-08-04 : 修正时序文件下载需求
-#              by Chang Chuntao -> Version : 1.19
-# 2022-09-11 : 站点文件可支持行列两种格式，或混合模式
-#              by Chang Chuntao -> Version : 1.20
 def getSite(file, datatype):
+    """
+    2022-03-27 : * 读取file中站点名，返回site
+                 by Chang Chuntao -> Version : 1.00
+    2022-08-04 : 修正时序文件下载需求
+                 by Chang Chuntao -> Version : 1.19
+    2022-09-11 : 站点文件可支持行列两种格式，或混合模式
+                 by Chang Chuntao -> Version : 1.20
+    """
     fileLine = open(file, "r").readlines()
     site = []
     for line in fileLine:

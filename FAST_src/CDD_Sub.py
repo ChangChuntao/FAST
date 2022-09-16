@@ -65,38 +65,41 @@ def top_cdd():
             obj = input("     ")
 
 
-# 2022-03-27 : 二级菜单 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-#              * 新增返回上级菜单操作，输入y回到上级菜单
-#              by Chang Chuntao  -> Version : 1.10
-# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-#              by Chang Chuntao  -> Version : 1.11
-# 2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
-#              gnssTimesTran调用
-#              by Chang Chuntao  -> Version : 1.12
-# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-#              CARG_ion、ESAG_ion、ESRG_ion
-#              by Chang Chuntao  -> Version : 1.13
-# 2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
-#              > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
-#              by Chang Chuntao  -> Version : 1.14
-# 2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
-#              + 新增ERP内资源WUHU_erp
-#              + 新增OBX内资源MGEX_WUHU_obx
-#              by Chang Chuntao  -> Version : 1.15
-# 2022-07-13 : + 新增SpaceData一级类
-#              + 新增SpaceData内资源SW_EOP
-#              by Chang Chuntao  -> Version : 1.16
-# 2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
-#              + 新增CLK内资源MGEX_WUH_Hour_clk
-#              + 新增ERP内资源WUH_Hour_erp
-#              by Chang Chuntao  -> Version : 1.17
-# 2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
-#              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
-#              > 修正MGEX_COD_clk资源
-#              by Chang Chuntao  -> Version : 1.18
-
 def sub_cdd(obj):
+    """
+    2022-03-27 : 二级菜单 by Chang Chuntao -> Version : 1.00
+    2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+                 * 新增返回上级菜单操作，输入y回到上级菜单
+                 by Chang Chuntao  -> Version : 1.10
+    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                 by Chang Chuntao  -> Version : 1.11
+    2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
+                 gnssTimesTran调用
+                 by Chang Chuntao  -> Version : 1.12
+    2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+                 CARG_ion、ESAG_ion、ESRG_ion
+                 by Chang Chuntao  -> Version : 1.13
+    2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
+                 > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+                 by Chang Chuntao  -> Version : 1.14
+    2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
+                 + 新增ERP内资源WUHU_erp
+                 + 新增OBX内资源MGEX_WUHU_obx
+                 by Chang Chuntao  -> Version : 1.15
+    2022-07-13 : + 新增SpaceData一级类
+                 + 新增SpaceData内资源SW_EOP
+                 by Chang Chuntao  -> Version : 1.16
+    2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
+                 + 新增CLK内资源MGEX_WUH_Hour_clk
+                 + 新增ERP内资源WUH_Hour_erp
+                 by Chang Chuntao  -> Version : 1.17
+    2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+                 > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+                 > 修正MGEX_COD_clk资源
+                 by Chang Chuntao  -> Version : 1.18
+    2022-09-16 : + 新增RINEX内MGEX_HK_cors
+                 by Chang Chuntao  -> Version : 1.21
+    """
     print("")
     if obj == 1:
         print("     -----------------------------------BRDC-------------------------------------")
@@ -359,13 +362,16 @@ def uncompress_ym(url):
         unzipfile(os.getcwd(), ftpsite)
 
 
-# 2022-04-12 : 通过输入引导的参数获取下载列表，下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
-# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-#              by Chang Chuntao  -> Version : 1.11
-# 2022-08-04 : 修正时序文件下载需求
-#              by Chang Chuntao  -> Version : 1.19
-
 def geturl_download_uncompress(cddarg, obj):
+    """
+    2022-04-12 : 通过输入引导的参数获取下载列表，下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
+    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                 by Chang Chuntao  -> Version : 1.11
+    2022-08-04 : 修正时序文件下载需求
+                 by Chang Chuntao  -> Version : 1.19
+    2022-09-16 : 新增站点字符串替换子程序
+                 by Chang Chuntao  -> Version : 1.21
+    """
     urllist = []  # 下载列表
 
     # 数据类型为IVS_week_snx

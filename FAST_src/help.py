@@ -2,9 +2,9 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.20
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.11 - Version 1.20
+# Date           : 2022.09.16 - Version 1.21
 
 from FAST_Print import PrintGDD
 
@@ -35,6 +35,8 @@ from FAST_Print import PrintGDD
 #              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
 #              > 修正MGEX_COD_clk资源
 #              by Chang Chuntao  -> Version : 1.18
+# 2022-09-16 : + 新增RINEX内MGEX_HK_cors资源
+#              by Chang Chuntao  -> Version : 1.21
 #
 def Supported_Data():
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
@@ -45,7 +47,7 @@ def Supported_Data():
     print("                             GLO_IGL_sp3 / MGEX_WUH_Hour_sp3")
     print("")
     print("                     RINEX : GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors / ")
-    print("                             GPS_AU_cors")
+    print("                             GPS_AU_cors / MGEX_HK_cors")
     print("")
     print("                       CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / MGEX_GFZR_clk / GPS_GRG_clk /  ")
     print("                             GPS_IGS_clk_30s  ")
@@ -54,7 +56,8 @@ def Supported_Data():
     print("")
     print("                       ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp/ IGR_erp/ WUHU_erp / WUH_Hour_erp")
     print("")
-    print("                       BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
+    print(
+        "                       BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
     print("")
     print("                       ION : IGSG_ion / IGRG_ion / WUHG_ion / WURG_ion / CODG_ion / CORG_ion / UQRG_ion")
     print("                             UPRG_ion / JPLG_ion / JPRG_ion / CASG_ion / CARG_ion / ESAG_ion / ESRG_ion")
@@ -81,20 +84,22 @@ def Supported_Data():
     print("                 SpaceData : SW_EOP")
 
 
-# 2022-03-27 : 引导模式输出帮助  by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : Version update by Chang Chuntao -> Version : 1.10
-# 2022-04-22 : Version update by Chang Chuntao -> Version : 1.11
-# 2022-04-30 : Version update by Chang Chuntao -> Version : 1.12
-# 2022-05-24 : Version update by Chang Chuntao -> Version : 1.13
-# 2022-05-31 : Version update by Chang Chuntao -> Version : 1.14
-# 2022-07-03 : Version update by Chang Chuntao -> Version : 1.15
-# 2022-07-13 : Version update by Chang Chuntao -> Version : 1.16
-# 2022-07-22 : Version update by Chang Chuntao -> Version : 1.17
-# 2022-07-28 : Version update by Chang Chuntao -> Version : 1.18
-# 2022-08-04 : Version update by Chang Chuntao -> Version : 1.19
-# 2022-09-11 : Version update by Chang Chuntao -> Version : 1.20
-
 def cddhelp():
+    """
+    2022-03-27 : 引导模式输出帮助  by Chang Chuntao -> Version : 1.00
+    2022-04-12 : Version update by Chang Chuntao -> Version : 1.10
+    2022-04-22 : Version update by Chang Chuntao -> Version : 1.11
+    2022-04-30 : Version update by Chang Chuntao -> Version : 1.12
+    2022-05-24 : Version update by Chang Chuntao -> Version : 1.13
+    2022-05-31 : Version update by Chang Chuntao -> Version : 1.14
+    2022-07-03 : Version update by Chang Chuntao -> Version : 1.15
+    2022-07-13 : Version update by Chang Chuntao -> Version : 1.16
+    2022-07-22 : Version update by Chang Chuntao -> Version : 1.17
+    2022-07-28 : Version update by Chang Chuntao -> Version : 1.18
+    2022-08-04 : Version update by Chang Chuntao -> Version : 1.19
+    2022-09-11 : Version update by Chang Chuntao -> Version : 1.20
+    2022-09-16 : Version update by Chang Chuntao -> Version : 1.21
+    """
     print("==================================================================================")
     print("")
     print("     Python program: FAST(Fusion Abundant multi-Source data download Terminal)")
@@ -112,7 +117,7 @@ def cddhelp():
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
     print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.09.11 - Version 1.20")
+    print("     Initial version date: 2022.09.16 - Version 1.21")
     print("")
 
 
@@ -162,16 +167,19 @@ def arg_options():
         Supported_Data()
 
 
-# 2022-04-30 : Software information by Chang Chuntao -> Version : 1.12
-# 2022-05-24 : Version update       by Chang Chuntao -> Version : 1.13
-# 2022-05-31 : Version update       by Chang Chuntao -> Version : 1.14
-# 2022-07-03 : Version update       by Chang Chuntao -> Version : 1.15
-# 2022-07-13 : Version update       by Chang Chuntao -> Version : 1.16
-# 2022-07-22 : Version update       by Chang Chuntao -> Version : 1.17
-# 2022-07-28 : Version update       by Chang Chuntao -> Version : 1.18
-# 2022-08-04 : Version update       by Chang Chuntao -> Version : 1.19
-
 def fastSoftwareInformation():
+    """
+    2022-04-30 : Software information by Chang Chuntao -> Version : 1.12
+    2022-05-24 : Version update       by Chang Chuntao -> Version : 1.13
+    2022-05-31 : Version update       by Chang Chuntao -> Version : 1.14
+    2022-07-03 : Version update       by Chang Chuntao -> Version : 1.15
+    2022-07-13 : Version update       by Chang Chuntao -> Version : 1.16
+    2022-07-22 : Version update       by Chang Chuntao -> Version : 1.17
+    2022-07-28 : Version update       by Chang Chuntao -> Version : 1.18
+    2022-08-04 : Version update       by Chang Chuntao -> Version : 1.19
+    2022-09-11 : Version update       by Chang Chuntao -> Version : 1.20
+    2022-09-16 : Version update       by Chang Chuntao -> Version : 1.21
+    """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")
     print("     Author         : Chang Chuntao")
@@ -179,4 +187,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.19 # 2022-08-04")
+    print("     Version        : 1.21 # 2022-09-16")

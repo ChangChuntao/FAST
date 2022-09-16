@@ -2,9 +2,9 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.19
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.08.04 - Version 1.19
+# Date           : 2022.09.16 - Version 1.21
 
 # 2022-03-27 : 所有支持的数据类型 by Chang Chuntao -> Version : 1.00
 # 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
@@ -32,8 +32,10 @@
 #              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
 #              > 修正MGEX_COD_clk资源
 #              by Chang Chuntao  -> Version : 1.18
-# 2022-08-04 : 修正时序文件下载需求
+# 2022-08-04 : > 修正时序文件下载需求
 #              by Chang Chuntao  -> Version : 1.19
+# 2022-09-16 : + 新增RINEX内MGEX_HK_cors资源
+#              by Chang Chuntao  -> Version : 1.21
 
 
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
