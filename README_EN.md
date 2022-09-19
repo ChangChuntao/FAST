@@ -13,7 +13,7 @@ The software contains most of the data sources required in the process of GNSS s
 #### Software features
 
 - **Multi platform**: Support both windows and Linux systems;
-- **Abundant Resources**: It basically includes the data sources required in GNSS scientific research and learning. At present, it supports 15 categories and 62 subcategories. See the specific **Data support**;
+- **Abundant Resources**: It basically includes the data sources required in GNSS scientific research and learning. At present, it supports 17 categories and 96 subcategories. See the specific **Data support**;
 - **Fast**: The software adopts parallel download mode, and the number of download threads can be specified in the command line parameter operation mode. After testing, it only takes 48.93s to download the 100 days BRDC+IGS+CLK file!
 - **Easy to expand**: If you need to support more data sources, you can specify the required data and data sources in FTP_Source.py and GNSS_TYPE.py;
 - **Easy to run**: The program can be downloaded in two ways: boot download mode and terminal input mode with parameters. Run the program directly to enter the boot download mode. Run `FAST -h` on the terminal with parameters to view the introduction of operation mode with parameters;
@@ -24,35 +24,25 @@ The software contains most of the data sources required in the process of GNSS s
 #### Installation tutorial
 
 - **Windows**you only need to unzip the package to run directly, enter `FAST.exe -h` can view the introduction of operation mode with parameters;
-- **Linux**The pilot software wget\LFTP\ncompress\python3 needs to be installed. Take Ubuntu system as an example, enter the following code in the terminal：  
-
-```
-apt-get install wget
-apt-get install lftp
-apt-get install ncompress
-apt-get install python3
-```
-
-After installation, as under Windows system, you can directly run the program or configure the program to environment variables.
+- **Linux**you only need to unzip the package to run directly：After installation, as under Windows system, you can directly run the program or configure the program to environment variables.
 
 #### Instructions
 
 **Boot Download Mode**: In Windows system, click run fast Exe can enter the boot download. If it is a Linux system, the terminal can enter `FAST` to run;  
 1. Take downloading the multi system precise ephemeris of Wuhan University as an example, select SP3 in the primary selection directory, enter 2 and press enter；  
-![一级目录](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%B8%BB%E7%9B%AE%E5%BD%95.png)
+![一级目录](Support/RUN_image/whuSp3-1.png)  
   
 2. Select MGEX_WUH_SP3 is input 6 and enter, where MGEX represents multi system GNSS, WHU represents Wuhan University, IGS data processing center and SP3 represents precision ephemeris;
-![二级目录](Windows/RUN_image/%E5%BC%95%E5%AF%BC%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95.png)  
+![二级目录](Support/RUN_image/whuSp3-2.png)  
   
 3. Enter the time according to the prompt and press enter to complete the input;
-![输入时间](Windows/RUN_image/%E8%BE%93%E5%85%A5%E6%97%B6%E9%97%B4.png)
+![输入时间](Support/RUN_image/whuSp3-3.png)
 
 4. After the download is completed, press enter directly according to the prompt to complete the decompression, or press enter without decompression;
-![下载完成](Windows/RUN_image/%E8%A7%A3%E5%8E%8B.png)
-![解压完成](Windows/RUN_image/%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90.png)  
+![下载完成](Support/RUN_image/whuSp3-4.png)
 
 5. Enter y or exit again according to the prompt;
-![在此引导](Windows/RUN_image/%E5%86%8D%E6%AC%A1%E5%BC%95%E5%AF%BC.png)
+![在此引导](Support/RUN_image/TYPE1-again.png)
   
 **Terminal input mode**: In Windows system, run `FAST.exe -h` in CMD or power shell software to view the help. If it is a Linux system terminal, enter `FAST -h` to view the help;
 ```
@@ -92,60 +82,66 @@ After installation, as under Windows system, you can directly run the program or
 
 1. BRDC : GPS_brdc / MGEX_brdm  
   
-  
-2. SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3   
-   MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZ_sp3 / MGEX_COD_sp3  
-   MGEX_SHA_sp3 / MGEX_GRG_sp3 / GLO_IGL_sp3
 
-  
-3. RINEX :GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors  
-   GPS_AU_cors
+2. SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3 /   
+   MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZR_sp3 / MGEX_COD_sp3 /   
+   MGEX_SHA_sp3 / MGEX_GRG_sp3 / GLO_IGL_sp3 / MGEX_WUH_Hour_sp3
 
-  
-4. CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / GPS_GFZ_clk / GPS_GRG_clk
-   GPS_IGS_clk_30s
-   MGEX_WUH_clk / MGEX_COD_clk / MGEX_GFZ_clk / MGEX_GRG_clk / WUH_PRIDE_clk
 
-  
-5. ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp
+3. RINEX : GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors /   
+   GPS_AU_cors / MGEX_HK_cors
 
-  
-6. BIA : MGEX_WHU_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia
 
-  
-7. ION : IGS_ion / WUH_ion / COD_ion
+4. CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / MGEX_GFZR_clk / GPS_GRG_clk /   
+   GPS_IGS_clk_30s / MGEX_WUH_clk / MGEX_COD_clk / MGEX_GFZ_clk / MGEX_GRG_clk /  
+   WUH_PRIDE_clk /MGEX_WUHU_clk / MGEX_WUH_Hour_clk
 
-  
+
+5. ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp/ IGR_erp/ WUHU_erp / WUH_Hour_erp
+
+
+6. BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia /   
+   MGEX_GFZ_bia
+
+
+7. ION : IGSG_ion / IGRG_ion / WUHG_ion / WURG_ion / CODG_ion / CORG_ion / UQRG_ion   
+   UPRG_ion / JPLG_ion / JPRG_ion / CASG_ion / CARG_ion / ESAG_ion / ESRG_ion
+
+
 8. SINEX : IGS_day_snx / IGS_week_snx / IVS_week_snx / ILS_week_snx / IDS_week_snx
 
-  
+
 9. CNES_AR : CNES_post / CNES_realtime
 
-  
-10. ATX : MGEX_IGS_atx
 
-  
+10. ATX : MGEX_IGS_atx   
+   
+
 11. DCB : GPS_COD_dcb / MGEX_CAS_dcb / MGEX_WHU_OSB / P1C1 / P1P2 / P2C2  
 
-  
+
 12. Time_Series : IGS14_TS_ENU / IGS14_TS_XYZ / Series_TS_Plot  
 
-  
+
 13. Velocity_Fields : IGS14_Venu / IGS08_Venu / PLATE_Venu  
 
-  
+
 14. SLR : HY_SLR / GRACE_SLR / BEIDOU_SLR  
 
-  
-15. OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx / MGEX_GFZ_obx  
 
-  
-16. TRO : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3
+15. OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx /  
+    MGEX_GFZ_obx / MGEX_WUHU_obx
+
+
+16. TRO : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3   
+
+
+17. SpaceData : SW_EOP
 
 #### Participation and contribution
 
 
-1. **Chang Chuntao** @China Academy of Surveying and mapping  
+1. Dr. **Chang Chuntao** @WuHan University   
     Program design/ Program writing/ Document writing/ Program testing/ Program maintenance     
     
 
