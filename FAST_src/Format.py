@@ -15,10 +15,12 @@ from FAST_Print import PrintGDD
 from GNSS_Timestran import gnssTime2datetime, datetime2GnssTime
 
 
-# 2022-03-27 : 判断文件在本地是否存在 by Chang Chuntao -> Version : 1.00
-# 2022-09-09 : > 修正广播星历文件判定
-#              by Chang Chuntao  -> Version : 1.20
 def isinpath(file):  # 判断相关文件是否存在
+    """
+    2022-03-27 : 判断文件在本地是否存在 by Chang Chuntao -> Version : 1.00
+    2022-09-09 : > 修正广播星历文件判定
+                 by Chang Chuntao  -> Version : 1.20
+    """
     orifile = str(file).split(".")[0]
     if len(orifile) > 9:
         filelowo = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "o"
@@ -80,29 +82,37 @@ else:
     unzip = 'uncompress '
 
 
-# 2022-03-27 : 解压单个文件 by Chang Chuntao -> Version : 1.00
 def uncompresss(file):
+    """
+    2022-03-27 : 解压单个文件 by Chang Chuntao -> Version : 1.00
+    """
     if file.split(".")[-1] == "Z" or file.split(".")[-1] == "gz":
         cmd = unzip + file
         os.system(cmd)
 
 
-# 2022-03-27 : crx2rnx by Chang Chuntao -> Version : 1.00
 def crx2rnxs(file):
+    """
+    2022-03-27 : crx2rnx by Chang Chuntao -> Version : 1.00
+    """
     if file[-3:-1].isdigit() and file[-1] == "d":
         cmd = crx2rnx + file
         os.system(cmd)
 
 
-# 2022-03-27 : crx更名为d by Chang Chuntao -> Version : 1.00
 def crx2d(file):
+    """
+    2022-03-27 : crx更名为d by Chang Chuntao -> Version : 1.00
+    """
     if file.split(".")[-1] == "crx":
         filelow = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "d"
         os.rename(file, filelow)
 
 
-# 2022-03-27 : BRDM长名更名为brdm短名 by Chang Chuntao -> Version : 1.00
 def renamebrdm(file):
+    """
+    2022-03-27 : BRDM长名更名为brdm短名 by Chang Chuntao -> Version : 1.00
+    """
     if file.split(".")[-1] == "rnx" and file[0:4] == "BRDM":
         filelow = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
         os.rename(file, filelow)
@@ -111,22 +121,10 @@ def renamebrdm(file):
         os.rename(file, filelow)
 
 
-#
-def renamesp3(file):
-    if file.split(".")[-1] == "SP3":
-        if file.split("_")[0] == "WUM0MGXULA":
-            pass
-        else:
-            year = file.lower()[11:15]
-            doy = file.lower()[15:18]
-            specTime = gnssTime2datetime(year + " " + doy, "YearDoy")
-            [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
-            filelow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".sp3"
-            os.rename(file, filelow)
-
-
-# 2022-03-27 : 解压vlbi文件 by Chang Chuntao -> Version : 1.00
 def unzip_vlbi(path, ftpsite):
+    """
+    2022-03-27 : 解压vlbi文件 by Chang Chuntao -> Version : 1.00
+    """
     nowdir = os.getcwd()
     if len(path) == 0:
         path = os.getcwd()
@@ -138,8 +136,10 @@ def unzip_vlbi(path, ftpsite):
             uncompresss(filename)
 
 
-#  2022.04.12 : 通过下载列表解压相应文件 by Chang Chuntao -> Version : 1.10
 def unzipfile(path, ftpsite):
+    """
+    2022.04.12 : 通过下载列表解压相应文件 by Chang Chuntao -> Version : 1.10
+    """
     nowdir = os.getcwd()
     if len(path) == 0:
         path = os.getcwd()

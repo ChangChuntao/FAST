@@ -2,35 +2,35 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.19
+# Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.08.04 - Version 1.19
+# Date           : 2022.09.16 - Version 1.21
 
 import os
 from GNSS_Timestran import gnssTimesTran
 from Format import *
 from help import *
 from Dowload import *
-from FTP_Source import FTP_S
 from FAST_Print import *
 from GNSS_TYPE import *
 from Get_Ftp import *
 
 
-# 2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
-# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-#              by Chang Chuntao  -> Version : 1.11
-# 2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
-#              调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
-#              by Chang Chuntao  -> Version : 1.12
-# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-#              CARG_ion、ESAG_ion、ESRG_ion
-#              by Chang Chuntao  -> Version : 1.13
-# 2022-07-13 : + 新增SpaceData一级类
-#              + 新增SpaceData内资源SW_EOP
-#              by Chang Chuntao  -> Version : 1.16
-
 def top_cdd():
+    """
+    2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
+    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                 by Chang Chuntao  -> Version : 1.11
+    2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
+                 调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
+                 by Chang Chuntao  -> Version : 1.12
+    2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+                 CARG_ion、ESAG_ion、ESRG_ion
+                 by Chang Chuntao  -> Version : 1.13
+    2022-07-13 : + 新增SpaceData一级类
+                 + 新增SpaceData内资源SW_EOP
+                 by Chang Chuntao  -> Version : 1.16
+    """
     print("")
     print("     ----------------------------------FAST--------------------------------------")
     print("    |                                                                            |")
@@ -459,11 +459,12 @@ def geturl_download_uncompress(cddarg, obj):
         elif obj in objneedloc:  # 输入为站点文件 的数据类型
             cddarg['site'] = getFile(cddarg['datatype'])
             ftpsite = FTP_S[cddarg['datatype']]
-            for s in cddarg['site']:
+            for siteInList in cddarg['site']:
                 siteftp = []
-                for ftp in ftpsite:
-                    f = ftp.replace('<SITE>', s)
-                    siteftp.append(f)
+                for ftpInList in ftpsite:
+                    ftpInList = replaceSiteStr(ftpInList, siteInList)
+                    # ftpInList = ftpInList.replace('<SITE>', siteInList)
+                    siteftp.append(ftpInList)
                 urllist.append(siteftp)  # 按天下载
             cddpooldownload(urllist, 3)  # 多线程下载
             uncompress(urllist)

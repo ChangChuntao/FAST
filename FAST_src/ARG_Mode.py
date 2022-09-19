@@ -15,12 +15,14 @@ from Format import unzip_vlbi, unzipfile
 from Get_Ftp import ReplaceMMM
 
 
-# 2022-03-27 : 输入参数模式主函数 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-#              by Chang Chuntao  -> Version : 1.10
 def ARG_Mode(argument):
+    """
+    2022-03-27 : 输入参数模式主函数 by Chang Chuntao -> Version : 1.00
+    2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+                 by Chang Chuntao  -> Version : 1.10
+    """
     # PrintGDD("GDD 下载程序启动!", "important")
-    cddarg = {"datatype": "", "year": 0, "loc": "", "day1": 0, "day2": 0, "month": 0, "file": "", "process": 8,
+    cddarg = {"datatype": "", "year": 0, "loc": "", "day1": 0, "day2": 0, "month": 0, "file": "", "process": 4,
               "site": "", "uncompress": "y"}
     cddarg = GET_ARG(argument, cddarg)  # 获取参数内容
     ARG_ifwrong(cddarg)  # 判断输入参数正确性

@@ -13,12 +13,14 @@ from help import fastSoftwareInformation
 from GNSS_TYPE import gnss_type
 
 
-# 2022-03-27 : 引导模式主函数 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
-#              by Chang Chuntao  -> Version : 1.10
-# 2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
-#              by Chang Chuntao  -> Version : 1.11
 def CDD_Mode():
+    """
+    2022-03-27 : 引导模式主函数 by Chang Chuntao -> Version : 1.00
+    2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
+                 by Chang Chuntao  -> Version : 1.10
+    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
+                 by Chang Chuntao  -> Version : 1.11
+    """
     fastSoftwareInformation()
     obj = top_cdd()  # 一级目录 obj：一级索引
     subnum = sub_cdd(obj)  # 二级目录 subnum：二级索引 返回y为返回上级一级菜单，或返回二级菜单

@@ -15,21 +15,24 @@ from ARG_Sub import uncompress_arg
 from FAST_Print import PrintGDD
 from Format import isinpath
 
-# 2022-03-27 : 判断操作平台，获取bin下下载程序    by Chang Chuntao -> Version : 1.00
-# 2022-09-16 : 更新索引位置                    by Chang Chuntao -> Version : 1.21
+
 if platform.system() == 'Windows':
+    """
+    2022-03-27 : 判断操作平台，获取bin下下载程序    by Chang Chuntao -> Version : 1.00
+    2022-09-16 : 更新索引位置                    by Chang Chuntao -> Version : 1.21
+    """
     dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
     PrintGDD('当前为Windows系统', "important")
     wget = os.path.join(dirname, 'bin', 'wget.exe')
     lftp = os.path.join(dirname, 'bin', 'lftp')
-    wget += " -T 3 -t 1 "
+    wget += " -T 3 -t 10 "
     lftp += ' '
 else:
     PrintGDD('当前为Linux系统', "important")
     dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
     wget = os.path.join(dirname, 'bin', 'wget')
     lftp = os.path.join(dirname, 'bin', 'lftp')
-    wget += " -T 3 -t 1 "
+    wget += " -T 3 -t 10 "
     lftp += ' '
 
 

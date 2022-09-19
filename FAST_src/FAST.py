@@ -60,9 +60,10 @@ def FAST():
     Version 1.20  : > 修正广播星历文件判定
                     + 站点文件可支持行列两种格式，或混合模式
                     by Chang Chuntao  # 2022-09-09
+
     Version 1.21  : + 新增RINEX内MGEX_HK_cors
                     新增替换站点字符串子函数Get_Ftp -> replaceSiteStr
-                    by Chang Chuntao  -> Version : 1.21
+                    by Chang Chuntao  # 2022-09-16
     """
     import sys
     from ARG_Mode import ARG_Mode

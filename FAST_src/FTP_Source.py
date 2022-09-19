@@ -493,7 +493,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "IGS_week_snx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
                           "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSW>.snx.Z",
-                          "--ftp-user anonymous --ftp-password cctcasm@163.com"
+                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/igs<YY>P<GPSW>.snx.Z"],
 
          "IVS_week_snx": ['-d -e "set ftp:ssl-force true" -e "mget /pub/vlbi/ivsproducts/daily_sinex/ivs2020a/'
