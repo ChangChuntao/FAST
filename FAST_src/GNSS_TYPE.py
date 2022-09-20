@@ -2,9 +2,9 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.21
+# Latest Version : 1.22
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.16 - Version 1.21
+# Date           : 2022.09.20 - Version 1.22
 
 
 """
@@ -38,6 +38,9 @@
              by Chang Chuntao  -> Version : 1.19
 2022-09-16 : + 新增RINEX内MGEX_HK_cors资源
              by Chang Chuntao  -> Version : 1.21
+2022-09-20 : > 修正TRO -> TROP
+             + 新增TROP内资源Meteorological
+             by Chang Chuntao  -> Version : 1.22
 """
 
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
@@ -76,7 +79,8 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
 
              ["OBX", ["GPS_COD_obx", "GPS_GRG_obx", "MGEX_WUH_obx", "MGEX_COD_obx", "MGEX_GFZ_obx", 'MGEX_WUHU_obx']],
 
-             ["TRO", ["IGS_zpd", "COD_tro", "JPL_tro", "GRID_1x1_VMF3", "GRID_2.5x2_VMF1", "GRID_5x5_VMF3"]],
+             ["TROP", ["IGS_zpd", "COD_tro", "JPL_tro", "GRID_1x1_VMF3", "GRID_2.5x2_VMF1", "GRID_5x5_VMF3",
+                       "Meteorological"]],
 
              ["SpaceData", ["SW_EOP"]]]
 

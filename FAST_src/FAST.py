@@ -2,9 +2,9 @@
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.21
+# Latest Version : 1.22
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.16 - Version 1.21
+# Date           : 2022.09.20 - Version 1.22
 
 def FAST():
     """
@@ -64,6 +64,10 @@ def FAST():
     Version 1.21  : + 新增RINEX内MGEX_HK_cors
                     新增替换站点字符串子函数Get_Ftp -> replaceSiteStr
                     by Chang Chuntao  # 2022-09-16
+
+    Version 1.21  : > 修正TRO -> TROP
+                    + 新增TROP内资源Meteorological
+                    by Chang Chuntao  # 2022-09-20
     """
     import sys
     from ARG_Mode import ARG_Mode

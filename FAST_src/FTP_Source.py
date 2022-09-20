@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.21
+# Latest Version : 1.22
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.16 - Version 1.21
+# Date           : 2022.09.20 - Version 1.22
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -631,7 +631,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "IGS_zpd": ["ftp://igs.gnsswhu.cn/pub/gps/products/troposphere/new/<YYYY>/<DOY>/<SITE><DOY>0.<YY>zpd.gz",
                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                     "ftps://gdc.cddis.eosdis.nasa.gov/gnss/products/troposphere/zpd/<YYYY>/<DOY>/<SITE><DOY>0.<YY>zpd.gz"],
+                     "ftps://gdc.cddis.eosdis.nasa.gov/gnss/products/troposphere/zpd/<YYYY>/<DOY>/<SITE><DOY>0.<YY"
+                     ">zpd.gz"],
 
          "COD_tro": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/cod<GPSWD>.tro.Z",
                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
@@ -658,6 +659,15 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H06",
              "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H12",
              "https://vmf.geo.tuwien.ac.at/trop_products/GRID/5x5/VMF3/VMF3_OP/<YYYY>/VMF3_<YYYY><MONTH><DAY>.H18"],
+
+         "Meteorological": [
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE_LONG>_R_<YYYY><DOY>0000_01D_10S_MM.rnx.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE_LONG>_R_<YYYY><DOY>0000_01D_30S_MM.rnx.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE_LONG>_R_<YYYY><DOY>0000_01D_05M_MM.rnx.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE_LONG>_R_<YYYY><DOY>0000_01D_15M_MM.rnx.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE_LONG>_R_<YYYY><DOY>0000_01D_30M_MM.rnx.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE_LONG>_R_<YYYY><DOY>0000_01D_MM.rnx.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE><DOY>0.<YY>m.Z"],
 
          "SW_EOP": ["http://celestrak.com//SpaceData/SW-All.txt",
                     "http://celestrak.com//SpaceData/EOP-All.txt"]

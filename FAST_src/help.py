@@ -2,9 +2,9 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.21
+# Latest Version : 1.22
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.16 - Version 1.21
+# Date           : 2022.09.20 - Version 1.22
 
 from FAST_Print import PrintGDD
 
@@ -39,6 +39,8 @@ def Supported_Data():
                  by Chang Chuntao  -> Version : 1.18
     2022-09-16 : + 新增RINEX内MGEX_HK_cors资源
                  by Chang Chuntao  -> Version : 1.21
+    2022-09-20 : + 新增TROP内资源Meteorological，为需要站点的气象文件
+                 by Chang Chuntao  -> Version : 1.22
     """
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
     print("")
@@ -80,7 +82,8 @@ def Supported_Data():
     print("                       OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx / MGEX_GFZ_obx")
     print("                             MGEX_WUHU_obx")
     print("")
-    print("                       TRO : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3")
+    print("                      TROP : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3")
+    print("                             Meteorological")
     print("")
     print("                 SpaceData : SW_EOP")
 
@@ -100,6 +103,7 @@ def cddhelp():
     2022-08-04 : Version update by Chang Chuntao -> Version : 1.19
     2022-09-11 : Version update by Chang Chuntao -> Version : 1.20
     2022-09-16 : Version update by Chang Chuntao -> Version : 1.21
+    2022-09-20 : Version update by Chang Chuntao -> Version : 1.22
     """
     print("==================================================================================")
     print("")
@@ -118,7 +122,7 @@ def cddhelp():
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
     print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.09.16 - Version 1.21")
+    print("     Initial version date: 2022.09.20 - Version 1.22")
     print("")
 
 
@@ -184,6 +188,7 @@ def fastSoftwareInformation():
     2022-08-04 : Version update       by Chang Chuntao -> Version : 1.19
     2022-09-11 : Version update       by Chang Chuntao -> Version : 1.20
     2022-09-16 : Version update       by Chang Chuntao -> Version : 1.21
+    2022-09-20 : Version update       by Chang Chuntao -> Version : 1.22
     """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")
@@ -192,4 +197,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.21 # 2022-09-16")
+    print("     Version        : 1.22 # 2022-09-20")

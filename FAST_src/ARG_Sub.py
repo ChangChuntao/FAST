@@ -2,9 +2,9 @@
 # ARG_Sub        : Identify program arguments
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.21
+# Latest Version : 1.22
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.16 - Version 1.21
+# Date           : 2022.09.20 - Version 1.22
 
 
 import sys
@@ -110,13 +110,15 @@ def geturl(cddarg):
                  by Chang Chuntao  -> Version : 1.11
     2022-09-16 : 新增站点字符串替换子程序
                  by Chang Chuntao  -> Version : 1.21
+    2022-09-20 : + 新增TROP内资源Meteorological，为需要站点的气象文件
+                 by Chang Chuntao  -> Version : 1.22
     """
     urllist = []
     for dt in str(cddarg['datatype']).split(","):
         typeurl = []
         [obj, subnum] = getobj(dt)
         PrintGDD("数据类型为:" + dt, "normal")
-        if obj + 1 in objneedydqd2 and dt != "IGS_zpd":
+        if obj + 1 in objneedydqd2 and dt != "IGS_zpd" and dt != "Meteorological":
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(
                 cddarg['day2']) + "\n",
                      "normal")
@@ -127,7 +129,7 @@ def geturl(cddarg):
                     url.append(ftpsite)
                 typeurl.append(url)
 
-        elif obj + 1 in objneedyd1d2loc or dt == "IGS_zpd":
+        elif obj + 1 in objneedyd1d2loc or dt == "IGS_zpd" or dt == "Meteorological":
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(
                 cddarg['day2']) + "\n",
                      "normal")
