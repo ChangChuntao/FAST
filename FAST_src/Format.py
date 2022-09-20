@@ -70,13 +70,19 @@ def isinpath(file):  # 判断相关文件是否存在
 2022-09-16 : 更新索引                            by Chang Chuntao -> Version : 1.21
 """
 if platform.system() == 'Windows':
-    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
+    if getattr(sys, 'frozen', False):
+        dirname = os.path.dirname(sys.executable)
+    else:
+        dirname = os.path.dirname(os.path.abspath(__file__))
     unzip = os.path.join(dirname, 'bin', 'gzip.exe')
     unzip += " -d "
     crx2rnx = os.path.join(dirname, 'bin', 'crx2rnx.exe')
     crx2rnx += " "
 else:
-    dirname = os.path.split(os.path.abspath(sys.argv[0]))[0]
+    if getattr(sys, 'frozen', False):
+        dirname = os.path.dirname(sys.executable)
+    else:
+        dirname = os.path.dirname(os.path.abspath(__file__))
     crx2rnx = os.path.join(dirname, 'bin', 'crx2rnx')
     crx2rnx += ' '
     unzip = 'uncompress '
