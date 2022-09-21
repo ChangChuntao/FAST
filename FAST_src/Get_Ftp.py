@@ -159,6 +159,7 @@ def replaceSiteStr(ftpInList, siteInList):
     """
     2022-09-16 : 替换站点字符串 by Chang Chuntao  -> Version : 1.21
     """
+    upperSite = ''
     if len(siteInList) == 4:
         lowSite = siteInList
         for mgexSite in mgex:
@@ -169,5 +170,6 @@ def replaceSiteStr(ftpInList, siteInList):
         upperSite = str(siteInList)
 
     ftpInList = str(ftpInList).replace('<SITE>', lowSite)
-    ftpInList = str(ftpInList).replace('<SITE_LONG>', upperSite)
+    if '<SITE_LONG>' in ftpInList:
+        ftpInList = str(ftpInList).replace('<SITE_LONG>', upperSite)
     return ftpInList
