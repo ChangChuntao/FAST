@@ -2,45 +2,50 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.22
+# Latest Version : 1.23
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.20 - Version 1.22
+# Date           : 2022.09.28 - Version 1.23
 
 
 """
-2022-03-27 : 所有支持的数据类型 by Chang Chuntao -> Version : 1.00
-2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-             by Chang Chuntao  -> Version : 1.10
-2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
-             by Chang Chuntao  -> Version : 1.11
-2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-             CARG_ion、ESAG_ion、ESRG_ion
-             by Chang Chuntao  -> Version : 1.13
-2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
-             > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
-             by Chang Chuntao  -> Version : 1.14
-2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
-             + 新增ERP内资源WUHU_erp
-             + 新增OBX内资源MGEX_WUHU_obx
-             by Chang Chuntao  -> Version : 1.15
-2022-07-13 : + 新增SpaceData一级类
-             + 新增SpaceData内资源SW_EOP
-             by Chang Chuntao  -> Version : 1.16
-2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
-             + 新增CLK内资源MGEX_WUH_Hour_clk
-             + 新增ERP内资源WUH_Hour_erp
-             by Chang Chuntao  -> Version : 1.17
-2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
-             > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
-             > 修正MGEX_COD_clk资源
-             by Chang Chuntao  -> Version : 1.18
-2022-08-04 : > 修正时序文件下载需求
-             by Chang Chuntao  -> Version : 1.19
-2022-09-16 : + 新增RINEX内MGEX_HK_cors资源
-             by Chang Chuntao  -> Version : 1.21
-2022-09-20 : > 修正TRO -> TROP
-             + 新增TROP内资源Meteorological
-             by Chang Chuntao  -> Version : 1.22
+    2022-03-27 :    所有支持的数据类型 by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+                    by Chang Chuntao  -> Version : 1.10
+    2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF3、 GRID_5x5_VMF3
+                    by Chang Chuntao  -> Version : 1.11
+    2022-05-24 :    + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+                    CARG_ion、ESAG_ion、ESRG_ion
+                    by Chang Chuntao  -> Version : 1.13
+    2022-05-31 :    + 新增BIA内资源MGEX_WHU_OSB_bia
+                    > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+                    by Chang Chuntao  -> Version : 1.14
+    2022-07-03 :    + 新增CLK内资源MGEX_WUHU_clk
+                    + 新增ERP内资源WUHU_erp
+                    + 新增OBX内资源MGEX_WUHU_obx
+                    by Chang Chuntao  -> Version : 1.15
+    2022-07-13 :    + 新增SpaceData一级类
+                    + 新增SpaceData内资源SW_EOP
+                    by Chang Chuntao  -> Version : 1.16
+    2022-07-22 :    + 新增SP3内资源MGEX_WUH_Hour_sp3
+                    + 新增CLK内资源MGEX_WUH_Hour_clk
+                    + 新增ERP内资源WUH_Hour_erp
+                    by Chang Chuntao  -> Version : 1.17
+    2022-07-27 :    > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+                    > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+                    > 修正MGEX_COD_clk资源
+                    by Chang Chuntao  -> Version : 1.18
+    2022-08-04 :    > 修正时序文件下载需求
+                    by Chang Chuntao  -> Version : 1.19
+    2022-09-16 :    + 新增RINEX内MGEX_HK_cors资源
+                    by Chang Chuntao  -> Version : 1.21
+    2022-09-20 :    > 修正TRO -> TROP
+                    + 新增TROP内资源Meteorological
+                    by Chang Chuntao  -> Version : 1.22
+    2022-09-28 :    + 新增COSMIC一级类
+                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
+                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
+                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
+                    by Chang Chuntao  -> Version : 1.23
 """
 
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
@@ -82,15 +87,23 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
              ["TROP", ["IGS_zpd", "COD_tro", "JPL_tro", "GRID_1x1_VMF3", "GRID_2.5x2_VMF1", "GRID_5x5_VMF3",
                        "Meteorological"]],
 
-             ["SpaceData", ["SW_EOP"]]]
+             ["SpaceData", ["SW_EOP"]],
+
+             ["COSMIC", ['C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx',
+                         'C1_L1b_atmPhs', 'C1_L1b_gpsBit', 'C1_L1b_ionPhs',
+                         'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec',
+                         'C1_L1b_scnLv1',
+                         'C2_L1a_leoAtt', 'C2_L1a_opnGps', 'C2_L1a_podCrx',
+                         'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2']]]
+
 
 # 2022-03-27 : 每个二级目录的个数 by Chang Chuntao -> Version : 1.00
 objnum = []
 for sub_type in gnss_type:
     objnum.append(len(sub_type[1]))
 
-# 2022-03-27 : 输入为年， 起始年积日， 终止年积日 的数据类型 by Chang Chuntao -> Version : 1.11
-objneedydqd2 = [1, 2, 4, 5, 6, 7, 8, 9, 11, 14, 15, 16]
+# 2022-03-27 : 输入为年， 起始年积日， 终止年积日 的数据类型 by Chang Chuntao -> Version : 1.23
+objneedydqd2 = [1, 2, 4, 5, 6, 7, 8, 9, 11, 14, 15, 16, 18]
 
 # 2022-03-27 : 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型 by Chang Chuntao -> Version : 1.00
 objneedyd1d2loc = [3]

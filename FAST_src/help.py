@@ -2,45 +2,49 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.22
+# Latest Version : 1.23
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.20 - Version 1.22
+# Date           : 2022.09.28 - Version 1.23
 
 from FAST_Print import PrintGDD
 
 
 def Supported_Data():
     """
-    2022-03-27 : 输出支持的数据类型 by Chang Chuntao -> Version : 1.00
-    2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-                 by Chang Chuntao  -> Version : 1.10
-    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-                 by Chang Chuntao  -> Version : 1.11
-    2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-                 CARG_ion、ESAG_ion、ESRG_ion
-                 by Chang Chuntao  -> Version : 1.13
-    2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
-                 > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
-                 by Chang Chuntao  -> Version : 1.14
-    2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
-                 + 新增ERP内资源WUHU_erp
-                 + 新增OBX内资源MGEX_WUHU_obx
-                 by Chang Chuntao  -> Version : 1.15
-    2022-07-13 : + 新增SpaceData一级类
-                 + 新增SpaceData内资源SW_EOP
-                 by Chang Chuntao  -> Version : 1.16
-    2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
-                 + 新增CLK内资源MGEX_WUH_Hour_clk
-                 + 新增ERP内资源WUH_Hour_erp
-                 by Chang Chuntao  -> Version : 1.17
-    2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
-                 > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
-                 > 修正MGEX_COD_clk资源
-                 by Chang Chuntao  -> Version : 1.18
-    2022-09-16 : + 新增RINEX内MGEX_HK_cors资源
-                 by Chang Chuntao  -> Version : 1.21
-    2022-09-20 : + 新增TROP内资源Meteorological，为需要站点的气象文件
-                 by Chang Chuntao  -> Version : 1.22
+    2022-03-27 :    输出支持的数据类型 by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+                    by Chang Chuntao  -> Version : 1.10
+    2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                    by Chang Chuntao  -> Version : 1.11
+    2022-05-24 :    + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+                    CARG_ion、ESAG_ion、ESRG_ion
+                    by Chang Chuntao  -> Version : 1.13
+    2022-05-31 :    + 新增BIA内资源MGEX_WHU_OSB_bia
+                    > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+                    by Chang Chuntao  -> Version : 1.14
+    2022-07-03 :    + 新增CLK内资源MGEX_WUHU_clk
+                    + 新增ERP内资源WUHU_erp
+                    + 新增OBX内资源MGEX_WUHU_obx
+                    by Chang Chuntao  -> Version : 1.15
+    2022-07-13 :    + 新增SpaceData一级类
+                    + 新增SpaceData内资源SW_EOP
+                    by Chang Chuntao  -> Version : 1.16
+    2022-07-22 :    + 新增SP3内资源MGEX_WUH_Hour_sp3
+                    + 新增CLK内资源MGEX_WUH_Hour_clk
+                    + 新增ERP内资源WUH_Hour_erp
+                    by Chang Chuntao  -> Version : 1.17
+    2022-07-27 :    > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+                    > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+                    > 修正MGEX_COD_clk资源
+                    by Chang Chuntao  -> Version : 1.18
+    2022-09-16 :    + 新增RINEX内MGEX_HK_cors资源
+                    by Chang Chuntao  -> Version : 1.21
+    2022-09-20 :    + 新增TROP内资源Meteorological，为需要站点的气象文件
+                    by Chang Chuntao  -> Version : 1.22
+    2022-09-28 :    + 新增COSMIC一级类
+                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
+                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
+                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
     """
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
     print("")
@@ -59,8 +63,7 @@ def Supported_Data():
     print("")
     print("                       ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp/ IGR_erp/ WUHU_erp / WUH_Hour_erp")
     print("")
-    print(
-        "                       BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
+    print("                       BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
     print("")
     print("                       ION : IGSG_ion / IGRG_ion / WUHG_ion / WURG_ion / CODG_ion / CORG_ion / UQRG_ion")
     print("                             UPRG_ion / JPLG_ion / JPRG_ion / CASG_ion / CARG_ion / ESAG_ion / ESRG_ion")
@@ -86,24 +89,29 @@ def Supported_Data():
     print("                             Meteorological")
     print("")
     print("                 SpaceData : SW_EOP")
+    print("")
+    print("                    COSMIC : C1_L1a_leoAtt / C1_L1a_podCrx / C1_L1b_atmPhs / C1_L1b_gpsBit / C1_L1b_ionPhs")
+    print("                             C1_L1b_leoClk / C1_L1b_leoOrb / C1_L1b_podTec / C1_L1b_scnLv1 / C2_L1a_leoAtt")
+    print("                             C2_L1a_opnGps / C2_L1a_podCrx / C2_L1b_conPhs / C2_L1b_leoOrb / C2_L1b_podTc2")
 
 
 def cddhelp():
     """
-    2022-03-27 : 引导模式输出帮助  by Chang Chuntao -> Version : 1.00
-    2022-04-12 : Version update by Chang Chuntao -> Version : 1.10
-    2022-04-22 : Version update by Chang Chuntao -> Version : 1.11
-    2022-04-30 : Version update by Chang Chuntao -> Version : 1.12
-    2022-05-24 : Version update by Chang Chuntao -> Version : 1.13
-    2022-05-31 : Version update by Chang Chuntao -> Version : 1.14
-    2022-07-03 : Version update by Chang Chuntao -> Version : 1.15
-    2022-07-13 : Version update by Chang Chuntao -> Version : 1.16
-    2022-07-22 : Version update by Chang Chuntao -> Version : 1.17
-    2022-07-28 : Version update by Chang Chuntao -> Version : 1.18
-    2022-08-04 : Version update by Chang Chuntao -> Version : 1.19
-    2022-09-11 : Version update by Chang Chuntao -> Version : 1.20
-    2022-09-16 : Version update by Chang Chuntao -> Version : 1.21
-    2022-09-20 : Version update by Chang Chuntao -> Version : 1.22
+    2022-03-27 :    引导模式输出帮助  by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    Version update by Chang Chuntao -> Version : 1.10
+    2022-04-22 :    Version update by Chang Chuntao -> Version : 1.11
+    2022-04-30 :    Version update by Chang Chuntao -> Version : 1.12
+    2022-05-24 :    Version update by Chang Chuntao -> Version : 1.13
+    2022-05-31 :    Version update by Chang Chuntao -> Version : 1.14
+    2022-07-03 :    Version update by Chang Chuntao -> Version : 1.15
+    2022-07-13 :    Version update by Chang Chuntao -> Version : 1.16
+    2022-07-22 :    Version update by Chang Chuntao -> Version : 1.17
+    2022-07-28 :    Version update by Chang Chuntao -> Version : 1.18
+    2022-08-04 :    Version update by Chang Chuntao -> Version : 1.19
+    2022-09-11 :    Version update by Chang Chuntao -> Version : 1.20
+    2022-09-16 :    Version update by Chang Chuntao -> Version : 1.21
+    2022-09-20 :    Version update by Chang Chuntao -> Version : 1.22
+    2022-09-28 :    Version update by Chang Chuntao -> Version : 1.23
     """
     print("==================================================================================")
     print("")
@@ -122,7 +130,7 @@ def cddhelp():
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
     print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.09.20 - Version 1.22")
+    print("     Initial version date: 2022.09.28 - Version 1.23")
     print("")
 
 
@@ -178,17 +186,18 @@ def arg_options():
 
 def fastSoftwareInformation():
     """
-    2022-04-30 : Software information by Chang Chuntao -> Version : 1.12
-    2022-05-24 : Version update       by Chang Chuntao -> Version : 1.13
-    2022-05-31 : Version update       by Chang Chuntao -> Version : 1.14
-    2022-07-03 : Version update       by Chang Chuntao -> Version : 1.15
-    2022-07-13 : Version update       by Chang Chuntao -> Version : 1.16
-    2022-07-22 : Version update       by Chang Chuntao -> Version : 1.17
-    2022-07-28 : Version update       by Chang Chuntao -> Version : 1.18
-    2022-08-04 : Version update       by Chang Chuntao -> Version : 1.19
-    2022-09-11 : Version update       by Chang Chuntao -> Version : 1.20
-    2022-09-16 : Version update       by Chang Chuntao -> Version : 1.21
-    2022-09-20 : Version update       by Chang Chuntao -> Version : 1.22
+    2022-04-30 :    Software information by Chang Chuntao -> Version : 1.12
+    2022-05-24 :    Version update       by Chang Chuntao -> Version : 1.13
+    2022-05-31 :    Version update       by Chang Chuntao -> Version : 1.14
+    2022-07-03 :    Version update       by Chang Chuntao -> Version : 1.15
+    2022-07-13 :    Version update       by Chang Chuntao -> Version : 1.16
+    2022-07-22 :    Version update       by Chang Chuntao -> Version : 1.17
+    2022-07-28 :    Version update       by Chang Chuntao -> Version : 1.18
+    2022-08-04 :    Version update       by Chang Chuntao -> Version : 1.19
+    2022-09-11 :    Version update       by Chang Chuntao -> Version : 1.20
+    2022-09-16 :    Version update       by Chang Chuntao -> Version : 1.21
+    2022-09-20 :    Version update       by Chang Chuntao -> Version : 1.22
+    2022-09-28 :    Version update       by Chang Chuntao -> Version : 1.23
     """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")
@@ -197,4 +206,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.22 # 2022-09-20")
+    print("     Version        : 1.23 # 2022-09-28")

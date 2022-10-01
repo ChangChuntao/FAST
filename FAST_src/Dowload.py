@@ -28,7 +28,7 @@ if platform.system() == 'Windows':
     PrintGDD('当前为Windows系统', "important")
     wget = os.path.join(dirname, 'bin', 'wget.exe')
     lftp = os.path.join(dirname, 'bin', 'lftp')
-    wget += " -T 3 -t 10 "
+    wget += " -T 3 -t 10 -N -c "
     lftp += ' '
 else:
     PrintGDD('当前为Linux系统', "important")
@@ -38,7 +38,7 @@ else:
         dirname = os.path.dirname(os.path.abspath(__file__))
     wget = os.path.join(dirname, 'bin', 'wget')
     lftp = os.path.join(dirname, 'bin', 'lftp')
-    wget += " -T 3 -t 10 "
+    wget += " -T 3 -t 10 -N -c "
     lftp += ' '
 
 

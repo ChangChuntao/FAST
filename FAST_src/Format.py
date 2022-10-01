@@ -27,33 +27,33 @@ def isinpath(file):  # 判断相关文件是否存在
         filelowd = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "d"
         filelowp = file.lower()[0:4] + file.lower()[16:20] + "." + file.lower()[14:16] + "p"
         fileprolow = file.lower()[0:4] + file.lower()[16:20] + ".bia"
-        sp3filelow = file
-        filelown = file
+        sp3filelow = filelowo
+        filelown = filelowo
     elif orifile.split(".")[-1] == "SP3":
         year = file.lower()[11:15]
         doy = file.lower()[15:18]
         specTime = gnssTime2datetime(year + " " + doy, "YearDoy")
         [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
         sp3filelow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".sp3"
-        filelowo = file
-        filelowd = file
-        filelowp = file
-        filelown = file
-        fileprolow = file
+        filelowo = sp3filelow
+        filelowd = sp3filelow
+        filelowp = sp3filelow
+        filelown = sp3filelow
+        fileprolow = filelown
     else:
         filelowo = file.lower()[0:11] + "o"
         filelowd = file.lower()[0:11] + "d"
         filelowp = file.lower()[0:11] + "p"
         filelown = file.lower()[0:11] + "n"
         fileprolow = file.lower()[0:12]
-        sp3filelow = file
+        sp3filelow = filelown
     gzdfile = filelowd + ".gz"
     zdfile = filelowd + ".Z"
     gzofile = filelowo + ".gz"
     zofile = filelowo + ".Z"
     filebialowZ = fileprolow + ".Z"
     filebialowgz = fileprolow + ".gz"
-    if os.path.exists(file) or os.path.exists(file[0:-2]) or os.path.exists(file[0:-3]) \
+    if os.path.exists(file[0:-2]) or os.path.exists(file[0:-3]) \
             or os.path.exists(filelowo) or os.path.exists(filelowd) \
             or os.path.exists(gzdfile) or os.path.exists(zdfile) \
             or os.path.exists(gzofile) or os.path.exists(zofile) \

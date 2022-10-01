@@ -2,9 +2,9 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.22
+# Latest Version : 1.23
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.20 - Version 1.22
+# Date           : 2022.09.28 - Version 1.23
 
 import os
 from GNSS_Timestran import gnssTimesTran
@@ -18,36 +18,37 @@ from Get_Ftp import *
 
 def top_cdd():
     """
-    2022-03-27 : 一级菜单 by Chang Chuntao -> Version : 1.00
-    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-                 by Chang Chuntao  -> Version : 1.11
-    2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
-                 调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
-                 by Chang Chuntao  -> Version : 1.12
-    2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-                 CARG_ion、ESAG_ion、ESRG_ion
-                 by Chang Chuntao  -> Version : 1.13
-    2022-07-13 : + 新增SpaceData一级类
-                 + 新增SpaceData内资源SW_EOP
-                 by Chang Chuntao  -> Version : 1.16
-    2022-09-20 : > 修正TRO -> TROP
-                 by Chang Chuntao  -> Version : 1.22
+    2022-03-27 :    一级菜单 by Chang Chuntao -> Version : 1.00
+    2022-04-22 :    + 新增TRO一级类
+                    by Chang Chuntao  -> Version : 1.11
+    2022-04-30 :    * 新增GNSS日常使用工具：GNSS_Timestran
+                    调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
+                    by Chang Chuntao  -> Version : 1.12
+    2022-05-24 :    + 新增ION一级类
+                    by Chang Chuntao  -> Version : 1.13
+    2022-07-13 :    + 新增SpaceData一级类
+                    + 新增SpaceData内资源SW_EOP
+                    by Chang Chuntao  -> Version : 1.16
+    2022-09-20 :    > 修正TRO -> TROP
+                    by Chang Chuntao  -> Version : 1.22
+    2022-09-28 :    > 新增COSMIC一级类
+                    by Chang Chuntao  -> Version : 1.23
     """
     print("")
-    print("     ----------------------------------FAST--------------------------------------")
+    print("    +----------------------------------FAST--------------------------------------+")
     print("    |                                                                            |")
     print("    |    1 : BRDC                   2 : SP3                   3 : RINEX          |")
     print("    |    4 : CLK                    5 : ERP                   6 : BIA            |")
     print("    |    7 : ION                    8 : SINEX                 9 : CNES_AR        |")
     print("    |   10 : ATX                   11 : DCB                  12 : Time_Series    |")
     print("    |   13 : Velocity_Fields       14 : SLR                  15 : OBX            |")
-    print("    |   16 : TROP                  17 : SpaceData                                |")
+    print("    |   16 : TROP                  17 : SpaceData            18 : COSMIC         |")
     print("    |                                                                            |")
-    print("     ----------------------------------------------------------------------------")
+    print("    +----------------------------------------------------------------------------+")
     print("    |                                                                            |")
     print("    |    a : HELP                   b : GNSS_Timestran                           |")
     print("    |                                                                            |")
-    print("     ----------------------------------------------------------------------------")
+    print("    +----------------------------------------------------------------------------+")
 
     PrintGDD("Note: 请输入数据编号 (eg. 2 or a)", "input")
     obj = input("     ")
@@ -69,51 +70,56 @@ def top_cdd():
 
 def sub_cdd(obj):
     """
-    2022-03-27 : 二级菜单 by Chang Chuntao -> Version : 1.00
-    2022-04-12 : 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-                 * 新增返回上级菜单操作，输入y回到上级菜单
-                 by Chang Chuntao  -> Version : 1.10
-    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-                 by Chang Chuntao  -> Version : 1.11
-    2022-04-30 : * 新增GNSS日常使用工具：GNSS_Timestran
-                 gnssTimesTran调用
-                 by Chang Chuntao  -> Version : 1.12
-    2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-                 CARG_ion、ESAG_ion、ESRG_ion
-                 by Chang Chuntao  -> Version : 1.13
-    2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
-                 > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
-                 by Chang Chuntao  -> Version : 1.14
-    2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
-                 + 新增ERP内资源WUHU_erp
-                 + 新增OBX内资源MGEX_WUHU_obx
-                 by Chang Chuntao  -> Version : 1.15
-    2022-07-13 : + 新增SpaceData一级类
-                 + 新增SpaceData内资源SW_EOP
-                 by Chang Chuntao  -> Version : 1.16
-    2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
-                 + 新增CLK内资源MGEX_WUH_Hour_clk
-                 + 新增ERP内资源WUH_Hour_erp
-                 by Chang Chuntao  -> Version : 1.17
-    2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
-                 > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
-                 > 修正MGEX_COD_clk资源
-                 by Chang Chuntao  -> Version : 1.18
-    2022-09-16 : + 新增RINEX内MGEX_HK_cors
-                 by Chang Chuntao  -> Version : 1.21
-    2022-09-20 : > 修正TRO -> TROP
-                 + 新增TROP内资源Meteorological
-                 by Chang Chuntao  -> Version : 1.22
+    2022-03-27 :    二级菜单 by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+                    * 新增返回上级菜单操作，输入y回到上级菜单
+                    by Chang Chuntao  -> Version : 1.10
+    2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                    by Chang Chuntao  -> Version : 1.11
+    2022-04-30 :    * 新增GNSS日常使用工具：GNSS_Timestran
+                    gnssTimesTran调用
+                    by Chang Chuntao  -> Version : 1.12
+    2022-05-24 :    + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+                    CARG_ion、ESAG_ion、ESRG_ion
+                    by Chang Chuntao  -> Version : 1.13
+    2022-05-31 :    + 新增BIA内资源MGEX_WHU_OSB_bia
+                    > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+                    by Chang Chuntao  -> Version : 1.14
+    2022-07-03 :    + 新增CLK内资源MGEX_WUHU_clk
+                    + 新增ERP内资源WUHU_erp
+                    + 新增OBX内资源MGEX_WUHU_obx
+                    by Chang Chuntao  -> Version : 1.15
+    2022-07-13 :    + 新增SpaceData一级类
+                    + 新增SpaceData内资源SW_EOP
+                    by Chang Chuntao  -> Version : 1.16
+    2022-07-22 :    + 新增SP3内资源MGEX_WUH_Hour_sp3
+                    + 新增CLK内资源MGEX_WUH_Hour_clk
+                    + 新增ERP内资源WUH_Hour_erp
+                    by Chang Chuntao  -> Version : 1.17
+    2022-07-27 :    > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+                    > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+                    > 修正MGEX_COD_clk资源
+                    by Chang Chuntao  -> Version : 1.18
+    2022-09-16 :    + 新增RINEX内MGEX_HK_cors
+                    by Chang Chuntao  -> Version : 1.21
+    2022-09-20 :    > 修正TRO -> TROP
+                    + 新增TROP内资源Meteorological
+                    by Chang Chuntao  -> Version : 1.22
+    2022-09-28 :    + 新增COSMIC一级类
+                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
+                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
+                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
+                    by Chang Chuntao  -> Version : 1.23
     """
     print("")
     if obj == 1:
-        print("     -----------------------------------BRDC-------------------------------------")
+        print("    +------------------------------------BRDC------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_brdc               2 : MGEX_brdm                                |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 2:
-        print("     -----------------------------------SP3 -------------------------------------")
+        print("    +------------------------------------SP3 ------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_sp3            2 : GPS_IGR_sp3            3 : GPS_IGU_sp3   |")
         print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
@@ -121,17 +127,17 @@ def sub_cdd(obj):
         print("    |    9 : MGEX_COD_sp3          10 : MGEX_SHA_sp3          11 : MGEX_GRG_sp3  |")
         print("    |   12 : GLO_IGL_sp3           13 : MGEX_WUH_Hour_sp3                        |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 3:
-        print("     ----------------------------------RINEX-------------------------------------")
+        print("    +-----------------------------------RINEX------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_rnx            2 : MGEX_IGS_rnx           3 : GPS_USA_cors  |")
         print("    |    4 : GPS_HK_cors            5 : GPS_EU_cors            6 : GPS_AU_cors   |")
         print("    |    7 : MGEX_HK_cors                                                        |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 4:
-        print("     -----------------------------------CLK--------------------------------------")
+        print("    +-------------------------------------CLK------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_clk            2 : GPS_IGR_clk            3 : GPS_GFZ_clk   |")
         print("    |    4 : GPS_GRG_clk            5 : GPS_IGS_clk_30s                          |")
@@ -139,99 +145,109 @@ def sub_cdd(obj):
         print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk         11 : MGEX_WUHU_clk |")
         print("    |   12 : MGEX_WUH_Hour_clk                                                   |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 5:
-        print("     -----------------------------------ERP--------------------------------------")
+        print("    +------------------------------------ERP-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGS_erp                2 : WUH_erp                3 : COD_erp       |")
         print("    |    4 : GFZ_erp                5 : IGR_erp                6 : WUHU_erp      |")
         print("    |    7 : WUH_Hour_erp                                                        |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 6:
-        print("     -----------------------------------BIA--------------------------------------")
+        print("    +------------------------------------BIA-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : MGEX_WHU_ABS_bia       2 : MGEX_WHU_OSB_bia       3 : GPS_COD_bia   |")
         print("    |    4 : MGEX_COD_bia           5 : MGEX_GFZ_bia                             |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 7:
-        print("     -----------------------------------ION--------------------------------------")
+        print("    +------------------------------------ION-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGSG_ion               2 : IGRG_ion               3 : WUHG_ion      |")
         print("    |    4 : WURG_ion               5 : CODG_ion               6 : CORG_ion      |")
         print("    |    7 : UQRG_ion               8 : UPRG_ion               9 : JPLG_ion      |")
         print("    |   10 : JPRG_ion              11 : CASG_ion              12 : CARG_ion      |")
         print("    |   13 : ESAG_ion              14 : ESRG_ion                                 |")
-
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 8:
-        print("     ----------------------------------SINEX-------------------------------------")
+        print("    +-----------------------------------SINEX------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGS_day_snx            2 : IGS_week_snx           3 : IVS_week_snx  |")
         print("    |    4 : ILS_week_snx           5 : IDS_week_snx                             |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 9:
-        print("     --------------------------------CNES_AR-------------------------------------")
+        print("    +----------------------------------CNES_AR-----------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : CNES_post              2 : CNES_realtime                            |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 10:
-        print("     -----------------------------------ATX--------------------------------------")
+        print("    +------------------------------------ATX-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : MGEX_IGS_atx                                                        |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 11:
-        print("     -----------------------------------DCB--------------------------------------")
+        print("    +------------------------------------DCB-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_COD_dcb            2 : MGEX_CAS_dcb           3 : MGEX_WHU_OSB  |")
         print("    |    4 : P1C1                   5 : P1P2                   6 : P2C2          |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 12:
-        print("     --------------------------------Time_Series---------------------------------")
+        print("    +--------------------------------Time_Series---------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGS14_TS_ENU           2 : IGS14_TS_XYZ           3 : Series_TS_Plot|")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 13:
-        print("     ------------------------------Velocity_Fields-------------------------------")
+        print("    +------------------------------Velocity_Fields-------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGS14_Venu             2 : IGS08_Venu             3 : PLATE_Venu    |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 14:
-        print("     -----------------------------------SLR--------------------------------------")
+        print("    +------------------------------------SLR-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : HY_SLR                 2 : GRACE_SLR              3 : BEIDOU_SLR    |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 15:
-        print("     -----------------------------------OBX--------------------------------------")
+        print("    +------------------------------------OBX-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_COD_obx            2 : GPS_GRG_obx                              |")
         print("    |    3 : MGEX_WUH_obx           4 : MGEX_COD_obx           5 : MGEX_GFZ_obx  |")
         print("    |    6 : MGEX_WUHU_obx                                                       |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 16:
-        print("     -----------------------------------TROP-------------------------------------")
+        print("    +-----------------------------------TROP-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGS_zpd                2 : COD_tro                3 : JPL_tro       |")
         print("    |    4 : GRID_1x1_VMF3          5 : GRID_2.5x2_VMF1        6 : GRID_5x5_VMF3 |")
         print("    |    7 : Meteorological                                                      |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == 17:
-        print("     --------------------------------SpaceData-----------------------------------")
+        print("    +---------------------------------SpaceData----------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : SW_EOP                                                              |")
         print("    |                                                                            |")
-        print("     ----------------------------------------------------------------------------")
+        print("    +----------------------------------------------------------------------------+")
+    elif obj == 18:
+        print("    +-----------------------------------COSMIC-----------------------------------+")
+        print("    |                                                                            |")
+        print("    |    1 : C1_L1a_leoAtt          2 : C1_L1a_opnGps          3 : C1_L1a_podCrx |")
+        print("    |    4 : C1_L1b_atmPhs          5 : C1_L1b_gpsBit          6 : C1_L1b_ionPhs |")
+        print("    |    7 : C1_L1b_leoClk          8 : C1_L1b_leoOrb          9 : C1_L1b_podTec |")
+        print("    |   10 : C1_L1b_scnLv1                                                       |")
+        print("    |   11 : C2_L1a_leoAtt         12 : C2_L1a_opnGps         13 : C2_L1a_podCrx |")
+        print("    |   14 : C2_L1b_conPhs         15 : C2_L1b_leoOrb         16 : C2_L1b_podTc2 |")
+        print("    |                                                                            |")
+        print("    +----------------------------------------------------------------------------+")
     elif obj == "a":
         cddhelp()
         return 0

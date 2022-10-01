@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.22
+# Latest Version : 1.23
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.20 - Version 1.22
+# Date           : 2022.09.28 - Version 1.23
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -14,38 +14,45 @@ plate_env = []
 for p in plate:
     plate_env.append("http://geodesy.unr.edu/velocities/midas." + p + ".txt")
 
-# 2022-03-27 : * 资源列表 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : + 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-#              by Chang Chuntao  -> Version : 1.10
-# 2022-04-22 : + 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-#              by Chang Chuntao  -> Version : 1.11
-# 2022-04-30 : > 修正GPS_USA_cors节点
-#              by Chang Chuntao  -> Version : 1.12
-# 2022-05-24 : + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
-#              CARG_ion、ESAG_ion、ESRG_ion
-#              > 修正MGEX_GFZ_clk节点内 05M -> 30S
-#              > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
-#              by Chang Chuntao  -> Version : 1.13
-# 2022-05-31 : + 新增BIA内资源MGEX_WHU_OSB_bia
-#              > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
-#              by Chang Chuntao  -> Version : 1.14
-# 2022-07-03 : + 新增CLK内资源MGEX_WUHU_clk
-#              + 新增ERP内资源WUHU_erp
-#              + 新增OBX内资源MGEX_WUHU_obx
-#              by Chang Chuntao  -> Version : 1.15
-# 2022-07-13 : + 新增SpaceData内资源SW&EOP
-#              by Chang Chuntao  -> Version : 1.16
-# 2022-07-22 : + 新增SP3内资源MGEX_WUH_Hour_sp3
-#              + 新增CLK内资源MGEX_WUH_Hour_clk
-#              + 新增ERP内资源WUH_Hour_erp
-#              by Chang Chuntao  -> Version : 1.17
-# 2022-07-27 : > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
-#              > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
-#              > 修正MGEX_COD_clk资源
-#              by Chang Chuntao  -> Version : 1.18
-# 2022-09-16 : > 修正<SITE> <SITE_LONG>
-#              + 新增MGEX_HK_cors资源
-#              by Chang Chuntao  -> Version : 1.21
+'''
+    2022-03-27 :    * 资源列表 by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    + 新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
+                    by Chang Chuntao  -> Version : 1.10
+    2022-04-22 :    + 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                    by Chang Chuntao  -> Version : 1.11
+    2022-04-30 :    > 修正GPS_USA_cors节点
+                    by Chang Chuntao  -> Version : 1.12
+    2022-05-24 :    + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
+                    CARG_ion、ESAG_ion、ESRG_ion
+                    > 修正MGEX_GFZ_clk节点内 05M -> 30S
+                    > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
+                    by Chang Chuntao  -> Version : 1.13
+    2022-05-31 :    + 新增BIA内资源MGEX_WHU_OSB_bia
+                    > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
+                    by Chang Chuntao  -> Version : 1.14
+    2022-07-03 :    + 新增CLK内资源MGEX_WUHU_clk
+                    + 新增ERP内资源WUHU_erp
+                    + 新增OBX内资源MGEX_WUHU_obx
+                    by Chang Chuntao  -> Version : 1.15
+    2022-07-13 :    + 新增SpaceData内资源SW&EOP
+                    by Chang Chuntao  -> Version : 1.16
+    2022-07-22 :    + 新增SP3内资源MGEX_WUH_Hour_sp3
+                    + 新增CLK内资源MGEX_WUH_Hour_clk
+                    + 新增ERP内资源WUH_Hour_erp
+                    by Chang Chuntao  -> Version : 1.17
+    2022-07-27 :    > 修正MGEX_GFZ_sp3 -> MGEX_GFZR_sp3
+                    > 修正MGEX_GFZ_clk -> MGEX_GFZR_clk
+                    > 修正MGEX_COD_clk资源
+                    by Chang Chuntao  -> Version : 1.18
+    2022-09-16 :    > 修正<SITE> <SITE_LONG>
+                    + 新增MGEX_HK_cors资源
+                    by Chang Chuntao  -> Version : 1.21
+    2022-09-28 :    + 新增COSMIC一级类
+                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
+                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
+                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
+                    by Chang Chuntao  -> Version : 1.23
+'''
 
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -670,5 +677,45 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>m/<SITE><DOY>0.<YY>m.Z"],
 
          "SW_EOP": ["http://celestrak.com//SpaceData/SW-All.txt",
-                    "http://celestrak.com//SpaceData/EOP-All.txt"]
+                    "http://celestrak.com//SpaceData/EOP-All.txt"],
+
+
+         'C1_L1a_leoAtt': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/leoAtt_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1a_opnGps': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/opnGps_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1a_podCrx': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/podCrx_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_atmPhs': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/atmPhs_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_gpsBit': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/gpsBit_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_ionPhs': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/ionPhs_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_leoClk': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/leoClk_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_leoOrb': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/leoOrb_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_podTec': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/podTec_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C1_L1b_scnLv1': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/scnLv1_repro2013_<YYYY>_<DOY>.tar.gz"],
+
+         'C2_L1a_leoAtt': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/leoAtt_nrt_<YYYY>_<DOY>.tar.gz"],
+
+         'C2_L1a_opnGps': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/opnGps_nrt_<YYYY>_<DOY>.tar.gz"],
+
+         'C2_L1a_podCrx': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/podCrx_nrt_<YYYY>_<DOY>.tar.gz"],
+
+         'C2_L1b_conPhs': ['https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/conPhs_nrt_<YYYY>_<DOY>.tar.gz'],
+
+         'C2_L1b_leoOrb': ['https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/leoOrb_nrt_<YYYY>_<DOY>.tar.gz'],
+
+         'C2_L1b_podTc2': ['https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/podTc2_nrt_<YYYY>_<DOY>.tar.gz']
          }
+'''
+    2022-09-28 :    + 新增COSMIC一级类
+                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
+                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
+                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
+                    by Chang Chuntao  -> Version : 1.23
+'''
