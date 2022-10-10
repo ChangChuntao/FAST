@@ -2,9 +2,9 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.23
+# Latest Version : 1.24
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.28 - Version 1.23
+# Date           : 2022.10.10 - Version 1.24
 
 from FAST_Print import PrintGDD
 
@@ -45,6 +45,13 @@ def Supported_Data():
                     + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
                     'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
                     'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
+    2022-10-10 :    + 新增Tables一级类
+                    + 新增Tables内资源'Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM','Panda_oceanload',
+                    'Panda_oceantide', 'Panda_utcdif','Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
+                    'Panda_ut1tid', 'Panda_leap_sec',
+                    'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
+                    'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
+                    by Chang Chuntao  -> Version : 1.24
     """
     print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
     print("")
@@ -93,6 +100,13 @@ def Supported_Data():
     print("                    COSMIC : C1_L1a_leoAtt / C1_L1a_podCrx / C1_L1b_atmPhs / C1_L1b_gpsBit / C1_L1b_ionPhs")
     print("                             C1_L1b_leoClk / C1_L1b_leoOrb / C1_L1b_podTec / C1_L1b_scnLv1 / C2_L1a_leoAtt")
     print("                             C2_L1a_opnGps / C2_L1a_podCrx / C2_L1b_conPhs / C2_L1b_leoOrb / C2_L1b_podTc2")
+    print("")
+    print("                    Tables : Panda_jpleph_de405 / Panda_poleut1 / Panda_EGM / Panda_oceanload / ")
+    print("                             Panda_oceantide / Panda_utcdif / Panda_antnam / Panda_svnav / Panda_nutabl / ")
+    print("                             Panda_ut1tid / Panda_leap_sec")
+    print("                             Gamit_pmu_bull / Gamit_ut1usno / Gamit_poleusno / Gamit_dcb_dat / Gamit_soltab")
+    print("                             Gamit_luntab / Gamit_leap_sec / Gamit_nutabl / Gamit_antmod / Gamit_svnav")
+    print("                             Gamit_rcvant")
 
 
 def cddhelp():
@@ -112,6 +126,7 @@ def cddhelp():
     2022-09-16 :    Version update by Chang Chuntao -> Version : 1.21
     2022-09-20 :    Version update by Chang Chuntao -> Version : 1.22
     2022-09-28 :    Version update by Chang Chuntao -> Version : 1.23
+    2022-10-28 :    Version update by Chang Chuntao -> Version : 1.24
     """
     print("==================================================================================")
     print("")
@@ -130,7 +145,7 @@ def cddhelp():
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
     print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.09.28 - Version 1.23")
+    print("     Initial version date: 2022.10.10 - Version 1.24")
     print("")
 
 
@@ -198,6 +213,7 @@ def fastSoftwareInformation():
     2022-09-16 :    Version update       by Chang Chuntao -> Version : 1.21
     2022-09-20 :    Version update       by Chang Chuntao -> Version : 1.22
     2022-09-28 :    Version update       by Chang Chuntao -> Version : 1.23
+    2022-09-28 :    Version update       by Chang Chuntao -> Version : 1.24
     """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")

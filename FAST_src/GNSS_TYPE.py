@@ -2,9 +2,9 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.23
+# Latest Version : 1.24
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.28 - Version 1.23
+# Date           : 2022.10.10 - Version 1.24
 
 
 """
@@ -46,6 +46,13 @@
                     'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
                     'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
                     by Chang Chuntao  -> Version : 1.23
+    2022-10-10 :    + 新增Tables一级类
+                    + 新增Tables内资源'Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM','Panda_oceanload',
+                    'Panda_oceantide', 'Panda_utcdif','Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
+                    'Panda_ut1tid', 'Panda_leap_sec',
+                    'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
+                    'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
+                    by Chang Chuntao  -> Version : 1.24
 """
 
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
@@ -94,8 +101,17 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],
                          'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec',
                          'C1_L1b_scnLv1',
                          'C2_L1a_leoAtt', 'C2_L1a_opnGps', 'C2_L1a_podCrx',
-                         'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2']]]
+                         'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2']],
 
+             ['Tables', ['Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM',
+                         'Panda_oceanload', 'Panda_oceantide', 'Panda_utcdif',
+                         'Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
+                         'Panda_ut1tid', 'Panda_leap_sec',
+                         'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno',
+                         'Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
+                         'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod',
+                         'Gamit_svnav', 'Gamit_rcvant']]
+             ]
 
 # 2022-03-27 : 每个二级目录的个数 by Chang Chuntao -> Version : 1.00
 objnum = []
@@ -112,7 +128,7 @@ objneedyd1d2loc = [3]
 objneedloc = [12]
 
 # 2022-07-13 : 无需输入 的数据类型 by Chang Chuntao -> Version : 1.16
-objneedn = [10, 13, 17]
+objneedn = [10, 13, 17, 19]
 
 
 def isinGNSStype(datatype):

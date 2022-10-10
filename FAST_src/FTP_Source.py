@@ -2,12 +2,16 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.23
+# Latest Version : 1.24
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.28 - Version 1.23
+# Date           : 2022.10.10 - Version 1.24
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
+import datetime
+
+nowTime = datetime.datetime.utcnow()
+year = str(nowTime.year)
 plate = ["AF", "AN", "AR", "AU", "BU", "CA", "CO", "EU", "IN", "MA", "NA", "NB", "NZ", "OK", "ON", "PA", "PM", "PS",
          "SA", "SB", "SC", "SL", "SO", "SU", "WL"]
 plate_env = []
@@ -52,8 +56,14 @@ for p in plate:
                     'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
                     'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
                     by Chang Chuntao  -> Version : 1.23
+    2022-10-10 :    + 新增Tables一级类
+                    + 新增Tables内资源'Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM','Panda_oceanload',
+                    'Panda_oceantide', 'Panda_utcdif','Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
+                    'Panda_ut1tid', 'Panda_leap_sec',
+                    'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
+                    'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
+                    by Chang Chuntao  -> Version : 1.24
 '''
-
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",
@@ -679,43 +689,115 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "SW_EOP": ["http://celestrak.com//SpaceData/SW-All.txt",
                     "http://celestrak.com//SpaceData/EOP-All.txt"],
 
+         'C1_L1a_leoAtt': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/leoAtt_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1a_leoAtt': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/leoAtt_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1a_opnGps': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/opnGps_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1a_opnGps': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/opnGps_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1a_podCrx': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/podCrx_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1a_podCrx': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1a/<YYYY>/<DOY>/podCrx_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_atmPhs': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/atmPhs_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_atmPhs': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/atmPhs_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_gpsBit': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/gpsBit_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_gpsBit': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/gpsBit_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_ionPhs': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/ionPhs_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_ionPhs': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/ionPhs_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_leoClk': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/leoClk_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_leoClk': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/leoClk_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_leoOrb': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/leoOrb_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_leoOrb': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/leoOrb_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_podTec': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/podTec_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_podTec': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/podTec_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C1_L1b_scnLv1': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/scnLv1_repro2013_<YYYY>_<DOY>.tar.gz"],
 
-         'C1_L1b_scnLv1': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic1/repro2013/level1b/<YYYY>/<DOY>/scnLv1_repro2013_<YYYY>_<DOY>.tar.gz"],
+         'C2_L1a_leoAtt': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/leoAtt_nrt_<YYYY>_<DOY>.tar.gz"],
 
-         'C2_L1a_leoAtt': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/leoAtt_nrt_<YYYY>_<DOY>.tar.gz"],
+         'C2_L1a_opnGps': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/opnGps_nrt_<YYYY>_<DOY>.tar.gz"],
 
-         'C2_L1a_opnGps': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/opnGps_nrt_<YYYY>_<DOY>.tar.gz"],
+         'C2_L1a_podCrx': [
+             "https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/podCrx_nrt_<YYYY>_<DOY>.tar.gz"],
 
-         'C2_L1a_podCrx': ["https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1a/<YYYY>/<DOY>/podCrx_nrt_<YYYY>_<DOY>.tar.gz"],
+         'C2_L1b_conPhs': [
+             'https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/conPhs_nrt_<YYYY>_<DOY>.tar.gz'],
 
-         'C2_L1b_conPhs': ['https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/conPhs_nrt_<YYYY>_<DOY>.tar.gz'],
+         'C2_L1b_leoOrb': [
+             'https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/leoOrb_nrt_<YYYY>_<DOY>.tar.gz'],
 
-         'C2_L1b_leoOrb': ['https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/leoOrb_nrt_<YYYY>_<DOY>.tar.gz'],
+         'C2_L1b_podTc2': [
+             'https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/podTc2_nrt_<YYYY>_<DOY>.tar.gz'],
 
-         'C2_L1b_podTc2': ['https://data.cosmic.ucar.edu/gnss-ro/cosmic2/nrt/level1b/<YYYY>/<DOY>/podTc2_nrt_<YYYY>_<DOY>.tar.gz']
+         'Panda_jpleph_de405': ['ftp://ics.gnsslab.cn/panda_tables/jpleph_de405'],
+
+         'Panda_poleut1': ['ftp://ics.gnsslab.cn/panda_tables/poleut1'],
+
+         'Panda_EGM': ['ftp://igshk.gnsswhu.cn/panda_tables/EGM'],
+
+         'Panda_oceanload': ['ftp://ics.gnsslab.cn/panda_tables/oceanload'],
+
+         'Panda_oceantide': ['ftp://ics.gnsslab.cn/panda_tables/oceantide'],
+
+         'Panda_utcdif': ['ftp://ics.gnsslab.cn/panda_tables/utcdif'],
+
+         'Panda_antnam': ['ftp://ics.gnsslab.cn/panda_tables/antnam'],
+
+         'Panda_svnav': ['ftp://ics.gnsslab.cn/panda_tables/svnav.dat'],
+
+         'Panda_nutabl': ['ftp://ics.gnsslab.cn/panda_tables/nutabl'],
+
+         'Panda_ut1tid': ['ftp://ics.gnsslab.cn/panda_tables/ut1tid'],
+
+         'Panda_leap_sec': ['ftp://ics.gnsslab.cn/panda_tables/leap.sec'],
+
+         'Gamit_pmu_bull': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                            "http://garner.ucsd.edu/pub/gamit/tables/pmu.bull_a",
+                            "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                            "http://garner.ucsd.edu/pub/gamit/tables/pmu.bull_r.last",
+                            "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                            "http://garner.ucsd.edu/pub/gamit/tables/pmu.bull_a.last",
+                            "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                            "http://garner.ucsd.edu/pub/gamit/tables/pmu.bull_a"
+                            ],
+
+         'Gamit_ut1usno': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                           "http://garner.ucsd.edu/pub/gamit/tables/ut1.usno"],
+
+         'Gamit_poleusno': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                            "http://garner.ucsd.edu/pub/gamit/tables/pole.usno"],
+
+         'Gamit_dcb_dat': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                           "http://garner.ucsd.edu/pub/gamit/tables/dcb.dat.allgnss"],
+
+         'Gamit_soltab': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                          "http://garner.ucsd.edu/pub/gamit/tables/soltab.2000.J2000"],
+
+         'Gamit_luntab': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                          "http://garner.ucsd.edu/pub/gamit/tables/luntab.2000.J2000"],
+
+         'Gamit_leap_sec': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                            "http://garner.ucsd.edu/pub/gamit/tables/leap.sec"],
+
+         'Gamit_nutabl': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                          "http://garner.ucsd.edu/pub/gamit/tables/nutabl.2020",
+                          "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                          "http://garner.ucsd.edu/pub/gamit/tables/nutabl.J2000.2020"],
+
+         'Gamit_antmod': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                          "http://garner.ucsd.edu/pub/gamit/tables/antmod.dat"],
+
+         'Gamit_svnav': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                         "http://garner.ucsd.edu/pub/gamit/tables/svnav.dat"],
+
+         'Gamit_rcvant': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                          "http://garner.ucsd.edu/pub/gamit/tables/rcvant.dat"]
          }
-'''
-    2022-09-28 :    + 新增COSMIC一级类
-                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
-                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
-                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
-                    by Chang Chuntao  -> Version : 1.23
-'''

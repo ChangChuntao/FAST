@@ -2,9 +2,9 @@
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.23
+# Latest Version : 1.24
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.28 - Version 1.23
+# Date           : 2022.10.10 - Version 1.24
 
 def FAST():
     """
@@ -69,6 +69,20 @@ def FAST():
                     + 新增TROP内资源Meteorological
                     by Chang Chuntao  # 2022-09-20
 
+    Version 1.23  : + 新增COSMIC一级类
+                    + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
+                    'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
+                    'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
+                    by Chang Chuntao  # 2022-09-28
+
+    Version 1.24  : + 新增Tables一级类
+                    + 新增Tables内资源'Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM','Panda_oceanload',
+                    'Panda_oceantide', 'Panda_utcdif','Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
+                    'Panda_ut1tid', 'Panda_leap_sec',
+                    'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
+                    'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
+                    > 修复无需其他参数输入下载类下载
+                    by Chang Chuntao  # 2022-10-10
     """
     import sys
     from ARG_Mode import ARG_Mode

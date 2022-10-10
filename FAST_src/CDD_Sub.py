@@ -2,9 +2,9 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.23
+# Latest Version : 1.24
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.28 - Version 1.23
+# Date           : 2022.10.10 - Version 1.24
 
 import os
 from GNSS_Timestran import gnssTimesTran
@@ -31,8 +31,10 @@ def top_cdd():
                     by Chang Chuntao  -> Version : 1.16
     2022-09-20 :    > 修正TRO -> TROP
                     by Chang Chuntao  -> Version : 1.22
-    2022-09-28 :    > 新增COSMIC一级类
+    2022-09-28 :    + 新增COSMIC一级类
                     by Chang Chuntao  -> Version : 1.23
+    2022-10-10 :    + 新增Tables一级类
+                    by Chang Chuntao  -> Version : 1.24
     """
     print("")
     print("    +----------------------------------FAST--------------------------------------+")
@@ -43,6 +45,7 @@ def top_cdd():
     print("    |   10 : ATX                   11 : DCB                  12 : Time_Series    |")
     print("    |   13 : Velocity_Fields       14 : SLR                  15 : OBX            |")
     print("    |   16 : TROP                  17 : SpaceData            18 : COSMIC         |")
+    print("    |   19 : Tables                                                              |")
     print("    |                                                                            |")
     print("    +----------------------------------------------------------------------------+")
     print("    |                                                                            |")
@@ -110,6 +113,13 @@ def sub_cdd(obj):
                     'C1_L1b_ionPhs', 'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec', 'C1_L1b_scnLv1', 'C2_L1a_leoAtt',
                     'C2_L1a_opnGps', 'C2_L1a_podCrx', 'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2'
                     by Chang Chuntao  -> Version : 1.23
+    2022-10-10 :    + 新增Tables一级类
+                    + 新增Tables内资源'Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM','Panda_oceanload',
+                    'Panda_oceantide', 'Panda_utcdif','Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
+                    'Panda_ut1tid', 'Panda_leap_sec',
+                    'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
+                    'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
+                    by Chang Chuntao  -> Version : 1.24
     """
     print("")
     if obj == 1:
@@ -123,6 +133,7 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_sp3            2 : GPS_IGR_sp3            3 : GPS_IGU_sp3   |")
         print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
+        print("    +----------------------------------------------------------------------------+")
         print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHU_sp3          8 : MGEX_GFZR_sp3 |")
         print("    |    9 : MGEX_COD_sp3          10 : MGEX_SHA_sp3          11 : MGEX_GRG_sp3  |")
         print("    |   12 : GLO_IGL_sp3           13 : MGEX_WUH_Hour_sp3                        |")
@@ -141,6 +152,7 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_clk            2 : GPS_IGR_clk            3 : GPS_GFZ_clk   |")
         print("    |    4 : GPS_GRG_clk            5 : GPS_IGS_clk_30s                          |")
+        print("    +----------------------------------------------------------------------------+")
         print("    |    6 : MGEX_WUH_clk           7 : MGEX_COD_clk           8 : MGEX_GFZR_clk |")
         print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk         11 : MGEX_WUHU_clk |")
         print("    |   12 : MGEX_WUH_Hour_clk                                                   |")
@@ -246,6 +258,20 @@ def sub_cdd(obj):
         print("    |   10 : C1_L1b_scnLv1                                                       |")
         print("    |   11 : C2_L1a_leoAtt         12 : C2_L1a_opnGps         13 : C2_L1a_podCrx |")
         print("    |   14 : C2_L1b_conPhs         15 : C2_L1b_leoOrb         16 : C2_L1b_podTc2 |")
+        print("    |                                                                            |")
+        print("    +----------------------------------------------------------------------------+")
+    elif obj == 19:
+        print("    +-----------------------------------Tables-----------------------------------+")
+        print("    |                                                                            |")
+        print("    |    1 : Panda_jpleph_de405     2 : Panda_poleut1          3 : Panda_EGM     |")
+        print("    |    4 : Panda_oceanload        5 : Panda_oceantide        6 : Panda_utcdif  |")
+        print("    |    7 : Panda_antnam           8 : Panda_svnav            9 : Panda_nutabl  |")
+        print("    |   10 : Panda_ut1tid          11 : Panda_leap_sec                           |")
+        print("    +----------------------------------------------------------------------------+")
+        print("    |   12 : Gamit_pmu_bull        13 : Gamit_ut1usno         14 : Gamit_poleusno|")
+        print("    |   15 : Gamit_dcb_dat         16 : Gamit_soltab          17 : Gamit_luntab  |")
+        print("    |   18 : Gamit_leap_sec        19 : Gamit_nutabl          20 : Gamit_antmod  |")
+        print("    |   21 : Gamit_svnav           22 : Gamit_rcvant                             |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == "a":

@@ -2,15 +2,15 @@
 # ARG_Sub        : Identify program arguments
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.22
+# Latest Version : 1.24
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.09.20 - Version 1.22
+# Date           : 2022.10.10 - Version 1.24
 
 
 import sys
 from FAST_Print import PrintGDD
 from Format import unzipfile
-from GNSS_TYPE import isinGNSStype, getobj, objneedydqd2, objneedyd1d2loc
+from GNSS_TYPE import isinGNSStype, getobj, objneedydqd2, objneedyd1d2loc, objneedn
 import getopt
 from Get_Ftp import getftp, getSite, replaceSiteStr
 from help import Supported_Data, arg_options, arg_help
@@ -112,12 +112,17 @@ def geturl(cddarg):
                  by Chang Chuntao  -> Version : 1.21
     2022-09-20 : + 新增TROP内资源Meteorological，为需要站点的气象文件
                  by Chang Chuntao  -> Version : 1.22
+    2022-10-10 : > 修复无需其他参数输入下载类下载
+                 by Chang Chuntao  -> Version : 1.24
     """
     urllist = []
     for dt in str(cddarg['datatype']).split(","):
         typeurl = []
         [obj, subnum] = getobj(dt)
         PrintGDD("数据类型为:" + dt, "normal")
+        if obj + 1 in objneedn:
+            ftpsitelist = getftp(dt, 2022, 1)
+            typeurl.append(ftpsitelist)
         if obj + 1 in objneedydqd2 and dt != "IGS_zpd" and dt != "Meteorological":
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(
                 cddarg['day2']) + "\n",
