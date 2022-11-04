@@ -130,9 +130,10 @@ def geturl(cddarg):
             for day in range(cddarg['day1'], cddarg['day2'] + 1):
                 ftpsitelist = getftp(dt, cddarg['year'], day)
                 url = []
-                for ftpsite in ftpsitelist:
-                    url.append(ftpsite)
-                typeurl.append(url)
+                if len(ftpsitelist) != 0:
+                    for ftpsite in ftpsitelist:
+                        url.append(ftpsite)
+                    typeurl.append(url)
 
         elif obj + 1 in objneedyd1d2loc or dt == "IGS_zpd" or dt == "Meteorological":
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(

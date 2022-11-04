@@ -2,9 +2,9 @@
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.24
+# Latest Version : 1.25
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.10.10 - Version 1.24
+# Date           : 2022.11.02 - Version 1.25
 
 def FAST():
     """
@@ -83,6 +83,11 @@ def FAST():
                     'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
                     > 修复无需其他参数输入下载类下载
                     by Chang Chuntao  # 2022-10-10
+
+    Version 1.25    > 添加DORIS判断,每周第0天下载
+                    > IVS_week_snx : 更换网站：ivs.bkg.bund.de -> ivsopar.obspm.fr
+                    > IDS_week_snx : 更换策略：wd12/14         -> wd16/19
+                    by Chang Chuntao  # 2022-11-02
     """
     import sys
     from ARG_Mode import ARG_Mode

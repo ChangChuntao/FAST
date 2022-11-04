@@ -2,9 +2,9 @@
 # GNSS_Timestran : GNSS_Timestran
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.10
+# Latest Version : 1.25
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.04.30 - Version 1.12
+# Date           : 2022.11.02 - Version 1.25
 
 from FAST_Print import PrintGDD
 import datetime
@@ -141,3 +141,271 @@ def gnssTimesTran():
     printTime(specTime, GPSWeekDay, YearDoy, MjdSod)
     print("")
     return 0
+
+
+###########################datetime->other############################
+def datetime2ymd(specTime):
+    """
+    2022.09.30 : datetime -> mjd
+             by ChangChuntao -> Version : 1.00
+    """
+    return specTime.year, specTime.month, specTime.day
+
+
+def datetime2doy(specTime):
+    """
+    2022.09.30 : datetime -> ydoy
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    doy = (specTime - datetime.datetime(year=specTime.year, month=1, day=1)).days + 1
+    return specTime.year, doy
+
+
+def datetime2mjd(specTime):
+    """
+    2022.09.30 : datetime -> mjd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    mjd = (specTime - mjdT0).days
+    sod = specTime.hour * 3600.0 + specTime.minute * 60.0 + specTime.second + specTime.microsecond / 1000000.0
+    return mjd, sod
+
+
+def datetime2gpswd(specTime):
+    """
+    2022.09.30 : datetime -> gpswd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    gpsWeekdDelTime = specTime - datetime.datetime(year=1980, month=1, day=6)
+    gpsWeek = gpsWeekdDelTime.days // 7
+    gpsWeekD = gpsWeekdDelTime.days - gpsWeek * 7
+    return gpsWeek, gpsWeekD
+
+
+###########################datetime->other############################
+
+
+##############################ymd->other##############################
+def ymd2datetime(year, month, day):
+    """
+    2022.09.30 : ymd -> datetime
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    specTime = datetime.datetime(year, month, day)
+    return specTime
+
+
+def ymd2doy(year, month, day):
+    """
+    2022.09.30 : ymd -> doy
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    specTime = datetime.datetime(year, month, day)
+    doy = (specTime - datetime.datetime(year=specTime.year, month=1, day=1)).days + 1
+    return specTime.year, doy
+
+
+def ymd2mjd(year, month, day):
+    """
+    2022.09.30 : ymd -> mjd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    specTime = datetime.datetime(year, month, day)
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    mjd = (specTime - mjdT0).days
+    sod = specTime.hour * 3600.0 + specTime.minute * 60.0 + specTime.second + specTime.microsecond / 1000000.0
+    return mjd, sod
+
+
+def ymd2gpswd(year, month, day):
+    """
+    2022.09.30 : ymd -> gpswd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    specTime = datetime.datetime(year, month, day)
+    gpsWeekdDelTime = specTime - datetime.datetime(year=1980, month=1, day=6)
+    gpsWeek = gpsWeekdDelTime.days // 7
+    gpsWeekD = gpsWeekdDelTime.days - gpsWeek * 7
+    return gpsWeek, gpsWeekD
+
+
+##############################ymd->other##############################
+
+##############################doy->other##############################
+def doy2datetime(year, doy):
+    """
+    2022.09.30 : year doy -> datetime
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    day1Time = datetime.datetime(year, 1, 1)
+    specTime = day1Time + datetime.timedelta(days=int(doy) - 1)
+    return specTime
+
+
+def doy2ymd(year, doy):
+    """
+    2022.09.30 : year doy -> ymd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    day1Time = datetime.datetime(year, 1, 1)
+    specTime = day1Time + datetime.timedelta(days=int(doy) - 1)
+    return specTime.year, specTime.month, specTime.day
+
+
+def doy2gpswd(year, doy):
+    """
+    2022.09.30 : year doy -> gpswd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    day1Time = datetime.datetime(year, 1, 1)
+    specTime = day1Time + datetime.timedelta(days=int(doy) - 1)
+    gpsWeekdDelTime = specTime - datetime.datetime(year=1980, month=1, day=6)
+    gpsWeek = gpsWeekdDelTime.days // 7
+    gpsWeekD = gpsWeekdDelTime.days - gpsWeek * 7
+    return gpsWeek, gpsWeekD
+
+
+def doy2mjd(year, doy):
+    """
+    2022.09.30 : year doy -> mjd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    day1Time = datetime.datetime(year, 1, 1)
+    specTime = day1Time + datetime.timedelta(days=int(doy) - 1)
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    mjd = (specTime - mjdT0).days
+    sod = specTime.hour * 3600.0 + specTime.minute * 60.0 + specTime.second + specTime.microsecond / 1000000.0
+    return mjd, sod
+
+
+##############################doy->other##############################
+
+##############################mjd->other##############################
+def mjd2datetime(mjd, sod=0.0):
+    """
+    2022.09.30 : mjd -> datetime
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    specTime = mjdT0 + datetime.timedelta(days=int(mjd)) + datetime.timedelta(seconds=float(sod))
+    return specTime
+
+
+def mjd2ymd(mjd, sod=0.0):
+    """
+    2022.09.30 : mjd -> ymd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    specTime = mjdT0 + datetime.timedelta(days=int(mjd)) + datetime.timedelta(seconds=float(sod))
+    return specTime.year, specTime.month, specTime.day
+
+
+def mjd2doy(mjd, sod=0.0):
+    """
+    2022.09.30 : mjd -> doy
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    specTime = mjdT0 + datetime.timedelta(days=int(mjd)) + datetime.timedelta(seconds=float(sod))
+    doy = (specTime - datetime.datetime(year=specTime.year, month=1, day=1)).days + 1
+    return specTime.year, doy
+
+
+def mjd2gpswd(mjd, sod=0.0):
+    """
+    2022.09.30 : mjd -> gpswd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    specTime = mjdT0 + datetime.timedelta(days=int(mjd)) + datetime.timedelta(seconds=float(sod))
+    gpsWeekdDelTime = specTime - datetime.datetime(year=1980, month=1, day=6)
+    gpsWeek = gpsWeekdDelTime.days // 7
+    gpsWeekD = gpsWeekdDelTime.days - gpsWeek * 7
+    return gpsWeek, gpsWeekD
+
+
+def sod2hms(sod):
+    """
+    2022.09.30 : Convert integer second in one day to hour minute second
+             by ChangChuntao -> Version : 1.00
+    """
+    sec = sod
+    hour = sec // 3600
+    sec -= hour * 3600
+    if (sec < 0):
+        hour -= 1
+        sec += 3600
+    minu = sec // 60
+    sec -= minu * 60
+    return hour, minu, sec
+
+
+##############################mjd->other##############################
+
+
+#############################gpswd->other#############################
+def gpswd2datetime(gpsWeek, gpsWeekD):
+    """
+    2022.09.30 : gpswd -> datetime
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+
+    wd1Time = datetime.datetime(year=1980, month=1, day=6)
+    specTime = wd1Time + datetime.timedelta(weeks=int(gpsWeek)) + datetime.timedelta(days=int(gpsWeekD))
+    return specTime
+
+
+def gpswd2ymd(gpsWeek, gpsWeekD):
+    """
+    2022.09.30 : gpswd -> ymd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    wd1Time = datetime.datetime(year=1980, month=1, day=6)
+    specTime = wd1Time + datetime.timedelta(weeks=int(gpsWeek)) + datetime.timedelta(days=int(gpsWeekD))
+    return specTime.year, specTime.month, specTime.day
+
+
+def gpswd2doy(gpsWeek, gpsWeekD):
+    """
+    2022.09.30 : gpswd -> year doy
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    wd1Time = datetime.datetime(year=1980, month=1, day=6)
+    specTime = wd1Time + datetime.timedelta(weeks=int(gpsWeek)) + datetime.timedelta(days=int(gpsWeekD))
+    doy = (specTime - datetime.datetime(year=specTime.year, month=1, day=1)).days + 1
+    return specTime.year, doy
+
+
+def gpswd2mjd(gpsWeek, gpsWeekD):
+    """
+    2022.09.30 : gpswd -> mjd
+             by ChangChuntao -> Version : 1.00
+    """
+    import datetime
+    wd1Time = datetime.datetime(year=1980, month=1, day=6)
+    specTime = wd1Time + datetime.timedelta(weeks=int(gpsWeek)) + datetime.timedelta(days=int(gpsWeekD))
+    mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
+    mjd = (specTime - mjdT0).days
+    sod = specTime.hour * 3600.0 + specTime.minute * 60.0 + specTime.second + specTime.microsecond / 1000000.0
+    return mjd, sod
+#############################gpswd->other#############################

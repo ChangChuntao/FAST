@@ -2,12 +2,12 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.24
+# Latest Version : 1.25
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.10.10 - Version 1.24
+# Date           : 2022.11.02 - Version 1.25
 
 import os
-from GNSS_Timestran import gnssTimesTran
+from GNSS_Timestran import *
 from Format import *
 from help import *
 from Dowload import *
@@ -369,7 +369,7 @@ def getFile(datatype):
     return getSite(sitefile, datatype)
 
 
-# 2022-04-12 : vlbi文件解压 by Chang Chuntao  -> Version : 1.10
+# 2022-04-12 : 文件检索解压 by Chang Chuntao  -> Version : 1.10
 def getvlbicompress(ftpsite):
     print()
     PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
@@ -421,11 +421,13 @@ def geturl_download_uncompress(cddarg, obj):
                  by Chang Chuntao  -> Version : 1.21
     2022-09-20 : + 新增TROP内资源Meteorological，为需要站点的气象文件
                  by Chang Chuntao  -> Version : 1.22
+    2022-11-02 : > 添加DORIS判断
+                 by Chang Chuntao -> Version : 1.25
     """
     urllist = []  # 下载列表
 
     # 数据类型为IVS_week_snx
-    if cddarg['datatype'] == "IVS_week_snx":
+    if cddarg['datatype'] == "IVS_week_snx" :
         ftpsite = FTP_S[cddarg['datatype']][0]
         ym = ym_cdd()  # 获取下载时间
         if ym == "y":
@@ -434,10 +436,14 @@ def geturl_download_uncompress(cddarg, obj):
             [year, month] = ym  # 获取下载时间
             ftpsite = ftpsite.replace('<YY>', str(year)[2:4])
             ftpsite = ReplaceMMM(ftpsite, month)
+            PrintGDD("正在开始下载!", "important")
+            start_time = timeit.default_timer()
             lftps(ftpsite)
+            end_time = timeit.default_timer() - start_time
+            PrintGDD("全部下载结束!", "important")
+            PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
             getvlbicompress(ftpsite)
             return "n"
-
     # 数据类型为输入年月
     elif cddarg['datatype'] == "P1C1" or cddarg['datatype'] == "P1P2" or cddarg['datatype'] == "P2C2":
         ftpsite = FTP_S[cddarg['datatype']]
@@ -473,9 +479,21 @@ def geturl_download_uncompress(cddarg, obj):
                     "normal")
                 print("")
                 for day in range(cddarg['day1'], cddarg['day2'] + 1):
-                    ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
-                    urllist.append(ftpsitelist)  # 按天下载
-                cddpooldownload(urllist, 3)  # 多线程下载
+                    gpsweek,dayofweek = doy2gpswd(year, day)
+                    if cddarg['datatype'] == 'IDS_week_snx':
+                        if dayofweek == 0:
+                            ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
+                            urllist.append(ftpsitelist)  # 按天下载
+                    else:
+                        ftpsitelist = getftp(cddarg['datatype'], cddarg['year'], day)  # 通过数据类型与下载时间获取完整下载地址
+                        urllist.append(ftpsitelist)  # 按天下载
+                if len(urllist) == 0:
+                    PrintGDD('此天无数据，请换天下载！', 'fail')
+                    return "n"
+                if cddarg['datatype'] == 'IGS_week_snx' or cddarg['datatype'] == 'IVS_week_snx' or cddarg['datatype'] == 'IDS_week_snx' or cddarg['datatype'] == 'ILS_week_snx':
+                    cddpooldownload(urllist, 1)  # 多线程下载
+                else:
+                    cddpooldownload(urllist, 3)  # 多线程下载
                 uncompress(urllist)
                 return "n"
 

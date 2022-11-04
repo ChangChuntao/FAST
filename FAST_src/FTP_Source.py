@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.24
+# Latest Version : 1.25
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.10.10 - Version 1.24
+# Date           : 2022.11.02 - Version 1.25
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -63,6 +63,8 @@ for p in plate:
                     'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
                     'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
                     by Chang Chuntao  -> Version : 1.24
+    2022-11-02      > IVS_week_snx : 更换网站：ivs.bkg.bund.de -> ivsopar.obspm.fr
+                    > IDS_week_snx : 更换策略：wd12/14         -> wd16/19
 '''
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -192,20 +194,16 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.sp3.Z"
          ],
 
-         "GPS_IGS_rnx": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.Z",
+         "GPS_IGS_rnx": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>o.Z",
+                         "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>o.gz",
+                         "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.Z",
                          "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>d.gz",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/data/daily/<YYYY>/<DOY>/<YY>d/"
                          "<SITE><DOY>0.<YY>d.gz",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/data/daily/<YYYY>/<DOY>/<YY>d/"
-                         "<SITE><DOY>0.<YY>d.Z",
-                         "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                         "ftps://gdc.cddis.eosdis.nasa.gov/gps/data/daily/<YYYY>/<DOY>/<YY>o/"
-                         "<SITE><DOY>0.<YY>o.gz",
-                         "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                         "ftps://gdc.cddis.eosdis.nasa.gov/gps/data/daily/<YYYY>/<DOY>/<YY>o/"
-                         "<SITE><DOY>0.<YY>o.Z"],
+                         "<SITE><DOY>0.<YY>d.Z"],
 
          "MGEX_IGS_rnx": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/"
                           "<SITE_LONG>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz",
@@ -513,21 +511,29 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/igs<YY>P<GPSW>.snx.Z"],
 
-         "IVS_week_snx": ['-d -e "set ftp:ssl-force true" -e "mget /pub/vlbi/ivsproducts/daily_sinex/ivs2020a/'
-                          '<YY><MMM>*;exit" ivs.bkg.bund.de'],
+         "IVS_week_snx": [
+             # '-d -e "set ftp:ssl-force true" -e "mget /pub/vlbi/ivsproducts/daily_sinex/ivs2020a/'
+             #              '<YY><MMM>*;exit" ivs.bkg.bund.de',
+             '-d -e "set ftp:ssl-force true" -e "mget /pub/vlbi/ivsproducts/daily_sinex/ivs2020a/'
+             '<YY><MMM>*;exit" ivsopar.obspm.fr'
+         ],
 
-         "ILS_week_snx": ["ftp://edc.dgfi.tum.de/pub/slr/products/pos+eop/<YYYY>/<YY><MONTH><DAY>/"
-                          "ilrsb.pos+eop.<YY><MONTH><DAY>.v170.snx.gz",
-                          "ftp://edc.dgfi.tum.de/pub/slr/products/pos+eop/<YYYY>/<YY><MONTH><DAY>/"
-                          "ilrsb.pos+eop.<YY><MONTH><DAY>.v135.snx.gz"],
+         "ILS_week_snx": [
+             "ftp://edc.dgfi.tum.de/pub/slr/products/pos+eop/<YYYY>/<YY><MONTH><DAY>/"
+             "ilrsb.pos+eop.<YY><MONTH><DAY>.v170.snx.gz",
+             "ftp://edc.dgfi.tum.de/pub/slr/products/pos+eop/<YYYY>/<YY><MONTH><DAY>/"
+             "ilrsb.pos+eop.<YY><MONTH><DAY>.v135.snx.gz"
+
+         ],
 
          "IDS_week_snx": [
              # "ftp://doris.ensg.eu/pub/doris/products/sinex_series/idswd/ids<YY><DOY>wd12.snx.Z",
-             # "ftp://doris.ensg.eu/pub/doris/products/sinex_series/idswd/ids<YY><DOY>wd14.snx.Z",
+             # "ftp://doris.ensg.eu/pub/doris/products/sinex_series/idswd/ids<YY><DOY>wd14.snx.Z", ftp://doris.ensg.eu/pub/doris/products/sinex_series/idswd/
              "--ftp-user anonymous --ftp-password cctcasm@163.com "
-             "ftps://gdc.cddis.eosdis.nasa.gov/doris/products/sinex_series/idswd/ids<YY><DOY>wd12.snx.Z",
+             "ftps://gdc.cddis.eosdis.nasa.gov/doris/products/sinex_series/idswd/ids<YY><DOY>wd16.snx.Z",
              "--ftp-user anonymous --ftp-password cctcasm@163.com "
-             "ftps://gdc.cddis.eosdis.nasa.gov/doris/products/sinex_series/idswd/ids<YY><DOY>wd14.snx.Z"],
+             "ftps://gdc.cddis.eosdis.nasa.gov/doris/products/sinex_series/idswd/ids<YY><DOY>wd19.snx.Z",
+         ],
 
          "CNES_post": ["http://www.ppp-wizard.net/products/POST_PROCESSED/post_<YYYY><DOY>.tgz"],
 

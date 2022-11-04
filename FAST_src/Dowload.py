@@ -2,8 +2,9 @@
 # Download       : Sub functions required by the download module
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.00
-# Creation Date  : 2022.03.27 - Version 1.0
+# Latest Version : 1.25
+# Creation Date  : 2022.03.27 - Version 1.00
+# Date           : 2022.11.02 - Version 1.25
 
 import os
 import sys
@@ -78,14 +79,10 @@ def lftps(url):
     """
     2022-03-27 : 通过下载列表调取lftp下载文件 by Chang Chuntao -> Version : 1.00
     """
-    PrintGDD("正在开始下载!", "important")
-    start_time = timeit.default_timer()
+
     cmd = lftp + url
     os.system(cmd)
     time.sleep(0.1)
-    end_time = timeit.default_timer() - start_time
-    PrintGDD("全部下载结束!", "important")
-    PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
 
 
 def cddpooldownload(urllist, process):
