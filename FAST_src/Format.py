@@ -59,7 +59,7 @@ def isinpath(file):  # 判断相关文件是否存在
             or os.path.exists(gzofile) or os.path.exists(zofile) \
             or os.path.exists(filelowp) or os.path.exists(filelown) \
             or os.path.exists(filebialowgz) or os.path.exists(filebialowZ) \
-            or os.path.exists(sp3filelow):
+            or os.path.exists(sp3filelow) or os.path.exists(file):
         return True
     else:
         return False
