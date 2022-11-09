@@ -2,9 +2,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.25
+# Latest Version : 2.01
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.02 - Version 1.25
+# Date           : 2022.11.09 - Version 2.01
 
 
 # 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
@@ -65,6 +65,9 @@ for p in plate:
                     by Chang Chuntao  -> Version : 1.24
     2022-11-02      > IVS_week_snx : 更换网站：ivs.bkg.bund.de -> ivsopar.obspm.fr
                     > IDS_week_snx : 更换策略：wd12/14         -> wd16/19
+    2022-11-09      + 新增IGS_hfile
+                    by Chang Chuntao  -> Version : 2.01
+                    
 '''
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -76,12 +79,12 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                        "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz",
                        "--ftp-user anonymous --ftp-password cctcasm@163.com "
                        "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
-                       "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz",
-                       "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
-                       "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz",
-                       "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                       "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
-                       "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz"],
+                       "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz"],
+         # "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
+         # "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz",
+         # "--ftp-user anonymous --ftp-password cctcasm@163.com "
+         # "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
+         # "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz"
 
          "GPS_IGS_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.sp3.Z",
                          "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igs<GPSWD>.sp3.Z"],
@@ -805,5 +808,24 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                          "http://garner.ucsd.edu/pub/gamit/tables/svnav.dat"],
 
          'Gamit_rcvant': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
-                          "http://garner.ucsd.edu/pub/gamit/tables/rcvant.dat"]
+                          "http://garner.ucsd.edu/pub/gamit/tables/rcvant.dat"],
+
+         'IGS_hfile': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs1a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs2a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs3a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs4a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs5a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs6a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs7a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs8a.<YY><DOY>.Z",
+                       "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+                       "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs9a.<YY><DOY>.Z"]
          }

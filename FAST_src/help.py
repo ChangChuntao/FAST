@@ -2,16 +2,39 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.25
+# Latest Version : 2.01
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.02 - Version 1.25
+# Date           : 2022.11.09 - Version 2.01
 
 from FAST_Print import PrintGDD
+from GNSS_TYPE import gnss_type
+
+version = [1.00, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25,
+           2.01]
+
+version_time = ['2022-03-27',
+                '2022-04-12',
+                '2022-04-22',
+                '2022-04-30',
+                '2022-05-24',
+                '2022-05-31',
+                '2022-07-03',
+                '2022-07-13',
+                '2022-07-22',
+                '2022-07-28',
+                '2022-08-04',
+                '2022-09-11',
+                '2022-09-16',
+                '2022-09-20',
+                '2022-09-28',
+                '2022-10-10',
+                '2022-11-02']
 
 
 def Supported_Data():
     """
-    2022-03-27 :    输出支持的数据类型 by Chang Chuntao -> Version : 1.00
+    2022-03-27 :    输出支持的数据类型
+                    by Chang Chuntao  -> Version : 1.00
     2022-04-12 :    新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
                     by Chang Chuntao  -> Version : 1.10
     2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
@@ -52,61 +75,29 @@ def Supported_Data():
                     'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
                     'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
                     by Chang Chuntao  -> Version : 1.24
+    2022-11-09 :    ***自动输出支持的数据类型
+                    by Chang Chuntao  -> Version : 2.01
     """
-    print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm ")
-    print("")
-    print("                       SP3 : GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GPS_GFZ_sp3 / GPS_GRG_sp3 / ")
-    print("                             MGEX_WUH_sp3 / MGEX_WUHU_sp3 / MGEX_GFZR_sp3 / MGEX_COD_sp3 / ")
-    print("                             MGEX_SHA_sp3 / MGEX_GRG_sp3 ")
-    print("                             GLO_IGL_sp3 / MGEX_WUH_Hour_sp3")
-    print("")
-    print("                     RINEX : GPS_IGS_rnx / MGEX_IGS_rnx / GPS_USA_cors / GPS_HK_cors / GPS_EU_cors / ")
-    print("                             GPS_AU_cors / MGEX_HK_cors")
-    print("")
-    print("                       CLK : GPS_IGS_clk / GPS_IGR_clk / GPS_IGU_clk / MGEX_GFZR_clk / GPS_GRG_clk /  ")
-    print("                             GPS_IGS_clk_30s  ")
-    print("                             MGEX_WUH_clk / MGEX_COD_clk / MGEX_GFZ_clk / MGEX_GRG_clk / WUH_PRIDE_clk ")
-    print("                             MGEX_WUHU_clk / MGEX_WUH_Hour_clk")
-    print("")
-    print("                       ERP : IGS_erp / WUH_erp / COD_erp / GFZ_erp/ IGR_erp/ WUHU_erp / WUH_Hour_erp")
-    print("")
-    print("                       BIA : MGEX_WHU_ABS_bia / MGEX_WHU_OSB_bia / GPS_COD_bia / MGEX_COD_bia / MGEX_GFZ_bia")
-    print("")
-    print("                       ION : IGSG_ion / IGRG_ion / WUHG_ion / WURG_ion / CODG_ion / CORG_ion / UQRG_ion")
-    print("                             UPRG_ion / JPLG_ion / JPRG_ion / CASG_ion / CARG_ion / ESAG_ion / ESRG_ion")
-    print("")
-    print("                     SINEX : IGS_day_snx / IGS_week_snx / IVS_week_snx / ILS_week_snx / IDS_week_snx ")
-    print("")
-    print("                    CNES_AR : CNES_post / CNES_realtime ")
-    print("")
-    print("                       ATX : MGEX_IGS_atx")
-    print("")
-    print("                       DCB : GPS_COD_dcb / MGEX_CAS_dcb / MGEX_WHU_OSB / P1C1 / P1P2 / P2C2")
-    print("")
-    print("               Time_Series : IGS14_TS_ENU / IGS14_TS_XYZ / Series_TS_Plot")
-    print("")
-    print("           Velocity_Fields : IGS14_Venu / IGS08_Venu / PLATE_Venu")
-    print("")
-    print("                       SLR : HY_SLR / GRACE_SLR / BEIDOU_SLR")
-    print("")
-    print("                       OBX : GPS_COD_obx / GPS_GRG_obx / MGEX_WUH_obx / MGEX_COD_obx / MGEX_GFZ_obx")
-    print("                             MGEX_WUHU_obx")
-    print("")
-    print("                      TROP : IGS_zpd / COD_tro / JPL_tro / GRID_1x1_VMF3 / GRID_2.5x2_VMF1 / GRID_5x5_VMF3")
-    print("                             Meteorological")
-    print("")
-    print("                 SpaceData : SW_EOP")
-    print("")
-    print("                    COSMIC : C1_L1a_leoAtt / C1_L1a_podCrx / C1_L1b_atmPhs / C1_L1b_gpsBit / C1_L1b_ionPhs")
-    print("                             C1_L1b_leoClk / C1_L1b_leoOrb / C1_L1b_podTec / C1_L1b_scnLv1 / C2_L1a_leoAtt")
-    print("                             C2_L1a_opnGps / C2_L1a_podCrx / C2_L1b_conPhs / C2_L1b_leoOrb / C2_L1b_podTc2")
-    print("")
-    print("                    Tables : Panda_jpleph_de405 / Panda_poleut1 / Panda_EGM / Panda_oceanload / ")
-    print("                             Panda_oceantide / Panda_utcdif / Panda_antnam / Panda_svnav / Panda_nutabl / ")
-    print("                             Panda_ut1tid / Panda_leap_sec")
-    print("                             Gamit_pmu_bull / Gamit_ut1usno / Gamit_poleusno / Gamit_dcb_dat / Gamit_soltab")
-    print("                             Gamit_luntab / Gamit_leap_sec / Gamit_nutabl / Gamit_antmod / Gamit_svnav")
-    print("                             Gamit_rcvant")
+    print("     Supported Data:  BRDC : GPS_brdc / MGEX_brdm \n")
+    max_long = 75
+    for gs_list in gnss_type[1:]:
+        str_len = 27
+        str_print = gs_list[0].rjust(26) + ' : '
+        for gs_type in gs_list[1]:
+            str_print += gs_type
+            str_len += len(gs_type)
+            if gs_type == gs_list[1][-1]:
+                if '\n' in str_print[-29:]:
+                    print(str_print)
+                else:
+                    print(str_print)
+                    print()
+            if str_len > max_long:
+                str_print += '\n                             '
+                str_len = 29
+            else:
+                str_print += ' / '
+                str_len += 3
 
 
 def cddhelp():
@@ -128,6 +119,7 @@ def cddhelp():
     2022-09-28 :    Version update by Chang Chuntao -> Version : 1.23
     2022-10-10 :    Version update by Chang Chuntao -> Version : 1.24
     2022-11-02 :    Version update by Chang Chuntao -> Version : 1.25
+    2022-11-09 :    Version update by Chang Chuntao -> Version : 2.01
     """
     print("==================================================================================")
     print("")
@@ -136,7 +128,6 @@ def cddhelp():
     print("     PLEASE DO NOT SPREAD WITHOUT PERMISSION OF THE AUTHOR !")
     print("")
     Supported_Data()
-    print("")
     print("     Chang Chuntao | January 2020: FAST program is compiled in Python and used for GNSS data download.\n"
           "                                   It supports two modes with parameter input and terminal input, and\n"
           "                                   supports multi-threaded download mode. The user can specify the nu-\n"
@@ -145,8 +136,8 @@ def cddhelp():
           "                                   rough amst-jazz #wechat and 1252443496 #QQ")
     print("     Auther: Chang Chuntao")
     print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
-    print("     Current version date: 2022.03.27 - Version 1.00")
-    print("     Initial version date: 2022.11.02 - Version 1.25")
+    print("     Current version date: " + version_time[0] + " - Version " + '%.2f' % version[0])
+    print("     Initial version date: " + version_time[-1] + " - Version " + '%.2f' % version[-1])
     print("")
 
 
@@ -216,6 +207,7 @@ def fastSoftwareInformation():
     2022-09-28 :    Version update       by Chang Chuntao -> Version : 1.23
     2022-10-10 :    Version update       by Chang Chuntao -> Version : 1.24
     2022-11-02 :    Version update       by Chang Chuntao -> Version : 1.25
+    2022-11-09 :    Version update       by Chang Chuntao -> Version : 2.01
     """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")
@@ -224,4 +216,4 @@ def fastSoftwareInformation():
     print("                      Chinese Academy of Surveying and mapping")
     print("     Contact        : QQ@1252443496 & WECHAT@amst-jazz GITHUB@ChangChuntao")
     print("     Git            : https://github.com/ChangChuntao/FAST.git")
-    print("     Version        : 1.25 # 2022-11-02")
+    print("     Version        : " + version_time[-1] + " # " + '%.2f' % version[-1])

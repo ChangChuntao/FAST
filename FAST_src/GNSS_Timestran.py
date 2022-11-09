@@ -72,7 +72,68 @@ def printTime(specTime, GPSWeekDay, YearDoy, MjdSod):
     PrintGDD("GPSWeek / DayofWeek ".ljust(22) + ": " + str(GPSWeekDay[0]).ljust(5) + " " + str(GPSWeekDay[1]),
              "nothing")
     PrintGDD("MJD / Sod ".ljust(22) + ": " + str(MjdSod[0]).ljust(5) + " " + str(MjdSod[1]), "nothing")
+def datetime2gnssTime(specTime, gnssTimeType):
+    '''
+    2022-04-30 : datetime to GNSS TIME  by Chang Chuntao
+    '''
+    import datetime
+    import sys
+    if gnssTimeType == "YMD":
+        outTime = [specTime.year, specTime.month, specTime.day]
+    elif gnssTimeType == "YDOY":
+        delTime = specTime - datetime.datetime(year=specTime.year, month=1, day=1)
+        doy = delTime.days + 1
+        outTime = [int(specTime.year), doy]
+    elif gnssTimeType == "GPSWEEKD":
+        gpsWeekdDelTime = specTime - datetime.datetime(year=1980, month=1, day=6)
+        gpsWeek = gpsWeekdDelTime.days // 7
+        gpsWeekD = gpsWeekdDelTime.days - gpsWeek * 7
+        outTime = [gpsWeek, gpsWeekD]
+    elif gnssTimeType == "MJDSOD":
+        mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)  # 简化儒略日起始日
+        mjd = (specTime - mjdT0).days
+        sod = specTime.hour * 3600.0 + specTime.minute * 60.0 + specTime.second + specTime.microsecond / 1000000.0
+        outTime = [int(mjd), sod]
+    elif gnssTimeType == 'YmdHMS':
+        outTime = [specTime.year, specTime.month, specTime.day, specTime.hour, specTime.minute,
+                   specTime.second + specTime.microsecond / 1000000.0]
+    else:
+        sys.exit()
+    return outTime
 
+class GNSS_Time:
+    '''
+    2022.06.05 : module of gnss time        by Chang Chuntao
+    '''
+    def __init__(self, datetime):
+        #  year, month, day, hour, minutes, second, doy, gpsweek, dow, sow, gpsweekd, mjd, sod
+        self.datetime = datetime
+        [year, doy] = datetime2gnssTime(datetime, 'YDOY')
+        [year, month, day, hour, minutes, second] = datetime2gnssTime(datetime, 'YmdHMS')
+        [mjd, sod] = datetime2gnssTime(datetime, 'MJDSOD')
+        [gpsweek, gpsdow] = datetime2gnssTime(datetime, 'GPSWEEKD')
+        gpssow = gpsdow * 7 * 86400 + sod
+        gpsweekd = gpsweek * 10 + gpsdow
+        self.year = year
+        self.month = month
+        self.day = day
+        self.hour = hour
+        self.minutes = minutes
+        self.second = second
+        self.doy = doy
+        self.gpsweek = gpsweek
+        self.gpsweekd = gpsweekd
+        self.dow = gpsdow
+        self.mjd = mjd
+        self.sod = sod
+        self.sow = gpssow
+
+def datetime2allgnssTime(datetime):
+    '''
+    2022.06.05 : datetime to all GNSS TIME      by Chang Chuntao
+    '''
+    gnssTime = GNSS_Time(datetime)
+    return gnssTime
 
 def gnssTimesTran():
     """

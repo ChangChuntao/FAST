@@ -83,6 +83,37 @@ def ReplaceTimeWildcard(string, spectime):
     # replace two digit second in minute
     if newstr.find('<SECOND>') >= 0:
         newstr = newstr.replace('<SECOND>', '%02d' % spectime.second)
+    if newstr.find('<MM>') >= 0:
+        newstr = newstr.replace('<MM>', '%02d' % spectime.month)
+    if newstr.find('<MMM>') >= 0:
+        month_num = spectime.month
+        if month_num == 1:
+            month_str = "JAN"
+        elif month_num == 2:
+            month_str = "FEB"
+        elif month_num == 3:
+            month_str = "MAR"
+        elif month_num == 4:
+            month_str = "APR"
+        elif month_num == 5:
+            month_str = "MAY"
+        elif month_num == 6:
+            month_str = "JUN"
+        elif month_num == 7:
+            month_str = "JUL"
+        elif month_num == 8:
+            month_str = "AUG"
+        elif month_num == 9:
+            month_str = "SEP"
+        elif month_num == 10:
+            month_str = "OCT"
+        elif month_num == 11:
+            month_str = "NOV"
+        elif month_num == 12:
+            month_str = "DEC"
+        else:
+            month_str = "JAN"
+        newstr = newstr.replace('<MMM>', month_str)
     # return new string
     return newstr
 

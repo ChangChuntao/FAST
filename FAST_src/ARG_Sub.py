@@ -10,7 +10,7 @@
 import sys
 from FAST_Print import PrintGDD
 from Format import unzipfile
-from GNSS_TYPE import isinGNSStype, getobj, objneedydqd2, objneedyd1d2loc, objneedn
+from GNSS_TYPE import isinGNSStype, yd_type, yds_type, ym_type, s_type, no_type
 import getopt
 from Get_Ftp import getftp, getSite, replaceSiteStr
 from help import Supported_Data, arg_options, arg_help
@@ -70,13 +70,12 @@ def ARG_ifwrong(cddarg):  # 判断输入参数正确性
     datatype = str(cddarg['datatype']).split(",")
     for dt in datatype:
         if isinGNSStype(dt):  # 判断输入数据类型是否正确
-            [obj, subnum] = getobj(dt)
-            if dt == "IVS_week_snx":
+            if dt in ym_type:
                 if cddarg['year'] == 0 or cddarg['month'] == 0:
                     PrintGDD("本数据类型需输入年与月，请指定[-y <year>] [-m <month>]！", "fail")
                     sys.exit(2)
             else:
-                if obj + 1 in objneedydqd2:  # 输入为年， 起始年积日， 终止年积日的数据类型, 判断输入时间是否正确
+                if dt in yd_type:  # 输入为年， 起始年积日， 终止年积日的数据类型, 判断输入时间是否正确
                     if cddarg['year'] == 0:
                         PrintGDD(
                             "本数据类型需输入年与天，请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
@@ -88,7 +87,7 @@ def ARG_ifwrong(cddarg):  # 判断输入参数正确性
                                 "本数据类型需输入年与天，请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
                                 "fail")
                             sys.exit(2)
-                if obj + 1 in objneedyd1d2loc:
+                if dt in yds_type or dt in s_type:
                     if cddarg['file'] == "" and cddarg['site'] == "":
                         PrintGDD("本类型需要输入文件位置参数或站点参数，请指定[-f <file>]或者[-s <site>]！", "fail")
                         sys.exit(2)
@@ -105,25 +104,32 @@ def ARG_ifwrong(cddarg):  # 判断输入参数正确性
 
 def geturl(cddarg):
     """
-    2022.04.12 : 获取下载列表 by Chang Chuntao -> Version : 1.10
-    2022-04-22 : 新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
-                 by Chang Chuntao  -> Version : 1.11
-    2022-09-16 : 新增站点字符串替换子程序
-                 by Chang Chuntao  -> Version : 1.21
-    2022-09-20 : + 新增TROP内资源Meteorological，为需要站点的气象文件
-                 by Chang Chuntao  -> Version : 1.22
-    2022-10-10 : > 修复无需其他参数输入下载类下载
-                 by Chang Chuntao  -> Version : 1.24
+    2022.04.12 :    获取下载列表 by Chang Chuntao -> Version : 1.10
+    2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
+                    by Chang Chuntao  -> Version : 1.11
+    2022-09-16 :    新增站点字符串替换子程序
+                    by Chang Chuntao  -> Version : 1.21
+    2022-09-20 :    + 新增TROP内资源Meteorological，为需要站点的气象文件
+                    by Chang Chuntao  -> Version : 1.22
+    2022-10-10 :    > 修复无需其他参数输入下载类下载
+                    by Chang Chuntao  -> Version : 1.24
+    2022-11-09 :    > 修改索引: yd_type -> year doy / no_type -> none /  yds_type -> year doy site / ym_type -> year month
+                    >         s_type -> site
+                    > 删除旧索引: objneedydqd2 / objneedyd1d2loc / objneedloc / objneedn
+                    by Chang Chuntao  -> Version : 2.01
     """
     urllist = []
     for dt in str(cddarg['datatype']).split(","):
         typeurl = []
-        [obj, subnum] = getobj(dt)
         PrintGDD("数据类型为:" + dt, "normal")
-        if obj + 1 in objneedn:
+
+        # 数据类型为无需输入
+        if dt in no_type:
             ftpsitelist = getftp(dt, 2022, 1)
             typeurl.append(ftpsitelist)
-        if obj + 1 in objneedydqd2 and dt != "IGS_zpd" and dt != "Meteorological":
+
+        # 数据类型为输入年日
+        if dt in yd_type:
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(
                 cddarg['day2']) + "\n",
                      "normal")
@@ -135,7 +141,8 @@ def geturl(cddarg):
                         url.append(ftpsite)
                     typeurl.append(url)
 
-        elif obj + 1 in objneedyd1d2loc or dt == "IGS_zpd" or dt == "Meteorological":
+        # 数据类型为输入年日站点文件
+        elif dt in yds_type:
             PrintGDD("下载时间为" + str(cddarg['year']) + "年，年积日" + str(cddarg['day1']) + "至" + str(
                 cddarg['day2']) + "\n",
                      "normal")
