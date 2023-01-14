@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # FAST_Main      : MAIN of Fusion Abundant multi-Source data download Terminal
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.25
+# Latest Version : 2.05
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.02 - Version 1.25
+# Date           : 2022-12-04 - Version 2.05
 
 def FAST():
     """
@@ -84,10 +85,61 @@ def FAST():
                     > 修复无需其他参数输入下载类下载
                     by Chang Chuntao  # 2022-10-10
 
-    Version 1.25    > 添加DORIS判断,每周第0天下载
+    Version 1.25  : > 添加DORIS判断,每周第0天下载
                     > IVS_week_snx : 更换网站：ivs.bkg.bund.de -> ivsopar.obspm.fr
                     > IDS_week_snx : 更换策略：wd12/14         -> wd16/19
                     by Chang Chuntao  # 2022-11-02
+
+    Version 2.00  : ***新增界面版
+                    by Chang Chuntao  # 2022-11-08
+
+    Version 2.01  : + 新增IGS_hfile
+                    by Chang Chuntao  # 2022-11-09
+
+    Version 2.02    + 新增MGEX_WUHR_sp3、MGEX_WUHR_clk
+                    by Chang Chuntao  # 2022-11-10
+
+    Version 2.03    + 新增GRE_IGS_01S / GCRE_MGEX_01S
+                    by Chang Chuntao  # 2022-11-15
+
+    Version 2.04    > MGEX_brdm -> MGEX_brdc
+                    + MGEX_CNAV_brdm / MGEX_CNAV_brdm
+                    > GPS_IGS_sp3 / GPS_IGS_clk : igs -> IGS0OPSFIN
+                    > GPS_IGR_sp3 / GPS_IGR_clk : igr -> IGS0OPSRAP
+                    > GPS_IGU_sp3               : igu -> IGS0OPSULT
+                    + GRE_CODR_sp3 / GRE_CODR_clk
+                    by Chang Chuntao  # 2022-12-02
+
+    Version 2.05    > MGEX_WUH_sp3 -> MGEX_WHU_F_sp3 / MGEX_WUHR_sp3 -> MGEX_WHU_R_sp3 / MGEX_WUHU_sp3 -> MGEX_WHU_U_sp3
+                    > MGEX_WUH_Hour_sp3 -> MGEX_WHU_Hour_sp3 / MGEX_SHA_sp3 -> MGEX_SHA_F_sp3 / MGEX_COD_sp3 -> MGEX_COD_F_sp3
+                    > MGEX_GRG_sp3 -> MGEX_GRG_F_sp3 / MGEX_GFZ_R_sp3 -> MGEX_GFZR_sp3 / GRE_CODR_sp3 -> GRE_COD_R_sp3
+                    > GLO_IGL_sp3 -> GLO_IGL_F_sp3
+                    + MGEX_GFZ_F_sp3
+                    > MGEX_WUH_clk -> MGEX_WHU_F_clk / MGEX_WUHR_clk -> MGEX_WHU_R_clk / MGEX_WUHU_clk -> MGEX_WHU_U_clk
+                    > MGEX_WUH_Hour_clk -> MGEX_WHU_Hour_clk / MGEX_COD_clk -> MGEX_COD_F_clk / MGEX_GRG_clk -> MGEX_GRG_F_clk
+                    > MGEX_GFZR_clk -> MGEX_GFZ_R_clk
+                    + MGEX_SHA_F_clk / MGEX_GFZ_F_clk / GRE_COD_R_clk / GLO_IGL_F_clk
+                    > WUH_erp -> WHU_F_erp / WUHU_erp -> WHU_U_erp / GFZ_erp -> GFZ_F_erp / COD_erp -> COD_R_erp
+                    > WUH_Hour_erp -> WHU_Hour_erp
+                    > MGEX_COD_bia -> MGEX_COD_R_bia / MGEX_GFZ_bia -> MGEX_GFZ_R_bia / MGEX_WHU_ABS_bia -> MGEX_WHU_R_ABS_bia
+                    > MGEX_WHU_OSB_bia -> MGEX_WHU_R_OSB_bia
+                    x MGEX_WHU_OSB(与MGEX_WHU_R_OSB_bia重复)
+                    > MGEX_CAS_dcb -> MGEX_CAS_R_dcb
+                    > MGEX_WUH_obx -> MGEX_WHU_F_obx / MGEX_COD_obx -> MGEX_COD_F_obx / MGEX_GFZ_obx -> MGEX_GFZ_F_obx
+                    > MGEX_WUHU_obx -> MGEX_WHU_U_obx
+                    > WUHG_ion -> WHUG_ion
+                    + MGEX_COD_F_bia
+                    + 增加tgz解压,支持tgz解压/COD产品更名
+                    by Chang Chuntao  # 2022-12-04
+
+    Version 2.06    > MGEX_IGS_atx -> MGEX_IGS14_atx
+                    + MGEX_IGS20_atx
+                    x 删除GPS_GFZ_sp3 / GPS_GFZ_clk
+                    > MGEX_GFZ_F_sp3 -> GRE_GFZ_F_sp3 / MGEX_GFZ_F_clk -> GRE_GFZ_F_clk
+                    > IGS rename -> GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GRE_COD_R_sp3 / GPS_IGS_clk
+                    >               GPS_IGR_clk / GPS_IGS_clk_30s / GRE_COD_R_clk /
+                    + 支持直接输入站点名
+                    by Chang Chuntao  # 2023-01-14
     """
     import sys
     from ARG_Mode import ARG_Mode

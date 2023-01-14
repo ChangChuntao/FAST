@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # ARG_Sub        : Identify program arguments
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
@@ -9,7 +10,7 @@
 
 import sys
 from FAST_Print import PrintGDD
-from Format import unzipfile
+from Format import unzipfile, unzipfile_highrate_rinex2, unzipfile_highrate_rinex3
 from GNSS_TYPE import isinGNSStype, yd_type, yds_type, ym_type, s_type, no_type
 import getopt
 from Get_Ftp import getftp, getSite, replaceSiteStr
@@ -161,13 +162,23 @@ def geturl(cddarg):
     return urllist
 
 
-def uncompress_arg(path, urllist):
+def uncompress_arg(path, urllist, data_type):
     """
-    2022.04.12 : 传入需解压的文件至unzipfile by Chang Chuntao -> Version : 1.10
+    2022.04.12 :    传入需解压的文件至unzipfile
+                    by Chang Chuntao -> Version : 1.10
+    2022.11.15 :    新增GRE_IGS_01S判断
+                    by Chang Chuntao -> Version : 2.03
     """
     ftpsite = []
     for a1 in urllist:
         for a2 in a1:
             for a3 in a2:
                 ftpsite.append(a3)
-    unzipfile(path, ftpsite)
+    if data_type == "GRE_IGS_01S":
+        unzipfile_highrate_rinex2(path, ftpsite)
+    elif data_type == "GCRE_MGEX_01S":
+        unzipfile_highrate_rinex3(path, ftpsite)
+    else:
+        unzipfile(path, ftpsite)
+
+

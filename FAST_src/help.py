@@ -1,16 +1,17 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 2.01
+# Latest Version : 2.06
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.09 - Version 2.01
+# Date           : 2023-01-14 - Version 2.06
 
 from FAST_Print import PrintGDD
 from GNSS_TYPE import gnss_type
 
 version = [1.00, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25,
-           2.01]
+           2.01, 2.02, 2.03, 2.04, 2.05, 2.06]
 
 version_time = ['2022-03-27',
                 '2022-04-12',
@@ -28,7 +29,13 @@ version_time = ['2022-03-27',
                 '2022-09-20',
                 '2022-09-28',
                 '2022-10-10',
-                '2022-11-02']
+                '2022-11-02',
+                '2022-11-09',
+                '2022-11-10',
+                '2022-11-15',
+                '2022-12-02',
+                '2022-12-04',
+                '2023-01-14']
 
 
 def Supported_Data():
@@ -120,6 +127,11 @@ def cddhelp():
     2022-10-10 :    Version update by Chang Chuntao -> Version : 1.24
     2022-11-02 :    Version update by Chang Chuntao -> Version : 1.25
     2022-11-09 :    Version update by Chang Chuntao -> Version : 2.01
+    2022-11-10 :    Version update by Chang Chuntao -> Version : 2.02
+    2022-11-15 :    Version update by Chang Chuntao -> Version : 2.03
+    2022-12-02 :    Version update by Chang Chuntao -> Version : 2.04
+    2022-12-04 :    Version update by Chang Chuntao -> Version : 2.05
+    2023-01-14 :    Version update by Chang Chuntao -> Version : 2.06
     """
     print("==================================================================================")
     print("")
@@ -208,6 +220,11 @@ def fastSoftwareInformation():
     2022-10-10 :    Version update       by Chang Chuntao -> Version : 1.24
     2022-11-02 :    Version update       by Chang Chuntao -> Version : 1.25
     2022-11-09 :    Version update       by Chang Chuntao -> Version : 2.01
+    2022-11-10 :    Version update       by Chang Chuntao -> Version : 2.02
+    2022-11-15 :    Version update       by Chang Chuntao -> Version : 2.03
+    2022-12-02 :    Version update       by Chang Chuntao -> Version : 2.04
+    2022-12-04 :    Version update       by Chang Chuntao -> Version : 2.05
+    2023-01-14 :    Version update       by Chang Chuntao -> Version : 2.06
     """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")

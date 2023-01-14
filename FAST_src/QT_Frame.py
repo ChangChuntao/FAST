@@ -1,5 +1,5 @@
 import platform
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, QUrl
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt, QEvent, QRect, QPoint
 from PyQt5.QtGui import QIcon, QScreen, QColor, QPalette, QGuiApplication
@@ -7,6 +7,13 @@ from PyQt5.QtWidgets import (QWidget, QApplication, QDesktopWidget, QGraphicsDro
                              QHBoxLayout, QVBoxLayout, QLabel, QToolButton, QSizePolicy, qApp)
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QWidget, QStyleOption, QStyle
+import sys, os
+
+
+if getattr(sys, 'frozen', False):
+    dirname = os.path.dirname(sys.executable)
+else:
+    dirname = os.path.dirname(os.path.abspath(__file__))
 
 
 class WindowDragger(QWidget):
@@ -47,7 +54,6 @@ class WindowDragger(QWidget):
         styleOption.initFrom(self)
         painter = QPainter(self)
         self.style().drawPrimitive(QStyle.PE_Widget, styleOption, painter, self)
-
 
 
 CONST_DRAG_BORDER_SIZE = 15
@@ -92,22 +98,26 @@ class FramelessWindow(QWidget):
         # 关闭按钮
         self.btnClose = QToolButton()
         self.btnClose.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnClose.setIcon(QIcon('./win_bin/close-we.png'))
+        close_png = os.path.join(dirname, 'win_bin', 'close-we.png')
+        self.btnClose.setIcon(QIcon(close_png))
         self.btnClose.clicked.connect(self.close)
         # 最大化按钮
         self.btnMaximize = QToolButton()
         self.btnMaximize.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnMaximize.setIcon(QIcon('./win_bin/max-we.png'))
+        max_png = os.path.join(dirname, 'win_bin', 'max-we.png')
+        self.btnMaximize.setIcon(QIcon(max_png))
         self.btnMaximize.clicked.connect(self.onButtonMaximizeClicked)
         # 最小化按钮
         self.btnMinimize = QToolButton()
         self.btnMinimize.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnMinimize.setIcon(QIcon('./win_bin/min-we.png'))
+        min_png = os.path.join(dirname, 'win_bin', 'min-we.png')
+        self.btnMinimize.setIcon(QIcon(min_png))
         self.btnMinimize.clicked.connect(lambda: self.setWindowState(Qt.WindowMinimized))
         # 恢复按钮
         self.btnRestore = QToolButton()
         self.btnRestore.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnRestore.setIcon(QIcon('./win_bin/restore-we.png'))
+        restore_png = os.path.join(dirname, 'win_bin', 'restore-we.png')
+        self.btnRestore.setIcon(QIcon(restore_png))
         self.btnRestore.clicked.connect(self.onButtonRestoreClicked)
 
         # 做边留空
@@ -185,10 +195,13 @@ class FramelessWindow(QWidget):
         font.setPointSize(9)
         self.titleText.setFont(font)
 
-
     def setWindowIcon(self, ico):
-        self.icon.setPixmap(ico.pixmap(30, 35))
-        self.icon.setMinimumSize(30, 35)
+        # self.icon.setPixmap(ico.pixmap(30, 35))
+        # self.icon.setMinimumSize(30, 35)
+
+        self.icon.setPixmap(ico.pixmap(35, 38))
+        self.icon.setMinimumSize(35, 38)
+        self.icon.setAlignment(Qt.AlignVCenter)
 
     def titlebarDoubleClicked(self):
         if self.isMaximized():

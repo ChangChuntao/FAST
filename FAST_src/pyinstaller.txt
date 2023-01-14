@@ -3,3 +3,5 @@ pyinstaller -F -i .\FAST.ico .\FAST.py .\ARG_Mode.py .\ARG_Sub.py .\CDD_Mode.py 
 
 pyinstaller3 -F -i FAST.ico FAST_Time.py help.py FAST_Print.py GNSS_Timestran.py --distpath /mnt/d/Code/FAST/Linux
 pyinstaller -F -i .\FAST.ico .\FAST_Time.py .\help.py .\FAST_Print.py .\GNSS_Timestran.py --distpath D:\Code\FAST\Windows
+
+pyinstaller -F -w -i ./win_bin/WHU.ico .\FAST-QT.py .\GNSS_Timestran.py .\GNSS_TYPE.py .\QT_Frame.py --distpath D:\Code\FAST\Win_QT

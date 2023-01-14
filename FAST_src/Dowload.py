@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # Download       : Sub functions required by the download module
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
@@ -15,7 +16,6 @@ import platform
 from ARG_Sub import uncompress_arg
 from FAST_Print import PrintGDD
 from Format import isinpath
-
 
 if platform.system() == 'Windows':
     """
@@ -37,6 +37,9 @@ else:
         dirname = os.path.dirname(sys.executable)
     else:
         dirname = os.path.dirname(os.path.abspath(__file__))
+    # if 'CentOS' in linux_distribution:
+    #     wget = 'wget'
+    # else:
     wget = os.path.join(dirname, 'bin', 'wget')
     lftp = os.path.join(dirname, 'bin', 'lftp')
     wget += " -T 3 -t 10 -N -c "
@@ -101,7 +104,7 @@ def cddpooldownload(urllist, process):
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")
 
 
-def argpooldownload(urllist, process, loc, compress):
+def argpooldownload(urllist, process, loc, compress, data_type):
     """
     2022-03-27 : 参数输入模式并发下载子程序 by Chang Chuntao -> Version : 1.00
     """
@@ -120,7 +123,7 @@ def argpooldownload(urllist, process, loc, compress):
         pool.join()
     if compress == "Y" or compress == "y":
         # unzip_format(loc)
-        uncompress_arg(loc, urllist)
+        uncompress_arg(loc, urllist, data_type)
     end_time = timeit.default_timer() - start_time
     PrintGDD("全部下载结束!", "important")
     PrintGDD("程序运行时间 : %.02f seconds" % end_time, "important")

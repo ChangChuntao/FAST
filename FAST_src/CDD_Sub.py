@@ -1,17 +1,14 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.25
+# Latest Version : 2.06
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.02 - Version 1.25
-import datetime
-import os
-from GNSS_Timestran import *
+# Date           : 2023-01-14 - Version 2.06
 from Format import *
 from help import *
 from Dowload import *
-from FAST_Print import *
 from GNSS_TYPE import *
 from Get_Ftp import *
 
@@ -125,6 +122,35 @@ def sub_cdd(obj):
                     > ATX SW_EOP Tables<PANDA> -> PANDA
                     > Tables<GAMIT> -> GAMIT
                     + IGS_hfile -> GAMIT
+    2022-11-10 :    + 新增MGEX_WUHR_sp3、MGEX_WUHR_clk
+                    by Chang Chuntao  -> Version : 2.02
+    2022-11-15 :    + 新增GRE_IGS_01S
+                    by Chang Chuntao  -> Version : 2.03
+    2022-12-04 :    > MGEX_WUH_sp3 -> MGEX_WHU_F_sp3 / MGEX_WUHR_sp3 -> MGEX_WHU_R_sp3 / MGEX_WUHU_sp3 -> MGEX_WHU_U_sp3
+                    > MGEX_WUH_Hour_sp3 -> MGEX_WHU_Hour_sp3 / MGEX_SHA_sp3 -> MGEX_SHA_F_sp3 / MGEX_COD_sp3 -> MGEX_COD_F_sp3
+                    > MGEX_GRG_sp3 -> MGEX_GRG_F_sp3 / MGEX_GFZ_R_sp3 -> MGEX_GFZR_sp3 / GRE_CODR_sp3 -> GRE_COD_R_sp3
+                    > GLO_IGL_sp3 -> GLO_IGL_F_sp3
+                    + MGEX_GFZ_F_sp3
+                    > MGEX_WUH_clk -> MGEX_WHU_F_clk / MGEX_WUHR_clk -> MGEX_WHU_R_clk / MGEX_WUHU_clk -> MGEX_WHU_U_clk
+                    > MGEX_WUH_Hour_clk -> MGEX_WHU_Hour_clk / MGEX_COD_clk -> MGEX_COD_F_clk / MGEX_GRG_clk -> MGEX_GRG_F_clk
+                    > MGEX_GFZR_clk -> MGEX_GFZ_R_clk
+                    + MGEX_SHA_F_clk / MGEX_GFZ_F_clk / GRE_COD_R_clk / GLO_IGL_F_clk
+                    > WUH_erp -> WHU_F_erp / WUHU_erp -> WHU_U_erp / GFZ_erp -> GFZ_F_erp / COD_erp -> COD_R_erp
+                    > WUH_Hour_erp -> WHU_Hour_erp
+                    > MGEX_COD_bia -> MGEX_COD_R_bia / MGEX_GFZ_bia -> MGEX_GFZ_R_bia / MGEX_WHU_ABS_bia -> MGEX_WHU_R_ABS_bia
+                    > MGEX_WHU_OSB_bia -> MGEX_WHU_R_OSB_bia
+                    x MGEX_WHU_OSB(与MGEX_WHU_R_OSB_bia重复)
+                    > MGEX_CAS_dcb -> MGEX_CAS_R_dcb
+                    > MGEX_WUH_obx -> MGEX_WHU_F_obx / MGEX_COD_obx -> MGEX_COD_F_obx / MGEX_GFZ_obx -> MGEX_GFZ_F_obx
+                    > MGEX_WUHU_obx -> MGEX_WHU_U_obx
+                    > WUHG_ion -> WHUG_ion
+                    + MGEX_COD_F_bia
+                    by Chang Chuntao  -> Version : 2.05
+    2023-01-13 :    > MGEX_IGS_atx -> MGEX_IGS14_atx
+                    + MGEX_IGS20_atx
+                    x 删除GPS_GFZ_sp3 / GPS_GFZ_clk
+                    > MGEX_GFZ_F_sp3 -> GRE_GFZ_F_sp3 / MGEX_GFZ_F_clk -> GRE_GFZ_F_clk
+                    by Chang Chuntao  -> Version : 2.06
     """
     print("")
     if obj == 1:
@@ -136,7 +162,7 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    +------------------------------------GCRE------------------------------------+")
         print("    |                                                                            |")
-        print("    |    2 : MGEX_brdm                                                           |")
+        print("    |    2 : MGEX_brdc              3 : MGEX_CNAV_brdm         4 : MGEX_CNAV_brd4|")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 2:
@@ -145,13 +171,14 @@ def sub_cdd(obj):
         print("    +-------------------------------------GPS------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_sp3            2 : GPS_IGR_sp3            3 : GPS_IGU_sp3   |")
-        print("    |    4 : GPS_GFZ_sp3            5 : GPS_GRG_sp3                              |")
+        print("    |    4 : GPS_GRG_sp3                                                         |")
         print("    |                                                                            |")
         print("    +------------------------------------GCRE------------------------------------+")
         print("    |                                                                            |")
-        print("    |    6 : MGEX_WUH_sp3           7 : MGEX_WUHU_sp3          8 : MGEX_GFZR_sp3 |")
-        print("    |    9 : MGEX_COD_sp3          10 : MGEX_SHA_sp3          11 : MGEX_GRG_sp3  |")
-        print("    |   12 : GLO_IGL_sp3           13 : MGEX_WUH_Hour_sp3                        |")
+        print("    |    5 : MGEX_WHU_F_sp3         6 : MGEX_WHU_R_sp3         7 : MGEX_WHU_U_sp3|")
+        print("    |    8 : MGEX_WHU_Hour_sp3      9 : MGEX_SHA_F_sp3        10 : MGEX_COD_F_sp3|")
+        print("    |   11 : MGEX_GRG_F_sp3        12 : MGEX_GFZ_R_sp3        13 : GRE_GFZ_F_sp3 |")
+        print("    |   14 : GRE_COD_R_sp3         15 : GLO_IGL_F_sp3                            |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 3:
@@ -159,14 +186,15 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    +-------------------------------------GPS------------------------------------+")
         print("    |                                                                            |")
-        print("    |    1 : GPS_IGS_clk            2 : GPS_IGR_clk            3 : GPS_GFZ_clk   |")
-        print("    |    4 : GPS_GRG_clk            5 : GPS_IGS_clk_30s                          |")
+        print("    |    1 : GPS_IGS_clk            2 : GPS_IGR_clk           3 : GPS_GRG_clk    |")
+        print("    |    4 : GPS_IGS_clk_30s                                                     |")
         print("    |                                                                            |")
         print("    +------------------------------------GCRE------------------------------------+")
         print("    |                                                                            |")
-        print("    |    6 : MGEX_WUH_clk           7 : MGEX_COD_clk           8 : MGEX_GFZR_clk |")
-        print("    |    9 : MGEX_GRG_clk          10 : WUH_PRIDE_clk         11 : MGEX_WUHU_clk |")
-        print("    |   12 : MGEX_WUH_Hour_clk                                                   |")
+        print("    |    6 : MGEX_WHU_F_clk         7 : MGEX_WHU_R_clk         8 : MGEX_WHU_U_clk|")
+        print("    |    9 : MGEX_WHU_Hour_clk     10 : MGEX_SHA_F_clk        11 : MGEX_COD_F_clk|")
+        print("    |   12 : MGEX_GRG_F_clk        14 : MGEX_GFZ_R_clk        13 : GRE_GFZ_F_clk |")
+        print("    |   14 : GRE_COD_R_clk         15 : GLO_IGL_F_clk                            |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 4:
@@ -179,15 +207,16 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    +------------------------------------GCRE------------------------------------+")
         print("    |                                                                            |")
-        print("    |    6 : MGEX_IGS_rnx           7 : MGEX_HK_cors                             |")
+        print("    |    6 : MGEX_IGS_rnx           7 : MGEX_HK_cors           8 : GRE_IGS_01S   |")
+        print("    |    9 : GCRE_MGEX_01S                                                       |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 5:
         print("    +------------------------------------ERP-------------------------------------+")
         print("    |                                                                            |")
-        print("    |    1 : IGS_erp                2 : WUH_erp                3 : COD_erp       |")
-        print("    |    4 : GFZ_erp                5 : IGR_erp                6 : WUHU_erp      |")
-        print("    |    7 : WUH_Hour_erp                                                        |")
+        print("    |    1 : IGS_erp                2 : IGR_erp                3 : WHU_F_erp     |")
+        print("    |    4 : WHU_U_erp              5 : GFZ_F_erp              6 : COD_R_erp     |")
+        print("    |    7 : WHU_Hour_erp                                                        |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 6:
@@ -195,28 +224,27 @@ def sub_cdd(obj):
         print("    |                                     |                                      |")
         print("    +------------------------------------BIA-------------------------------------+")
         print("    |                                                                            |")
-        print("    |    1 : MGEX_WHU_ABS_bia       2 : MGEX_WHU_OSB_bia       3 : GPS_COD_bia   |")
-        print("    |    4 : MGEX_COD_bia           5 : MGEX_GFZ_bia                             |")
+        print("    |    1 : GPS_COD_bia            2 : MGEX_COD_F_bia         3 : MGEX_COD_R_bia|")
+        print("    |    4 : MGEX_WHU_R_ABS_bia     5 : MGEX_WHU_R_OSB_bia     6 : MGEX_GFZ_R_bia|")
         print("    |                                                                            |")
         print("    +------------------------------------DCB-------------------------------------+")
         print("    |                                                                            |")
-        print("    |    6 : GPS_COD_dcb            7 : MGEX_CAS_dcb           8 : MGEX_WHU_OSB  |")
+        print("    |    7 : GPS_COD_dcb            8 : MGEX_CAS_R_dcb                           |")
         print("    |    9 : P1C1                  10 : P1P2                  11 : P2C2          |")
         print("    |                                                                            |")
         print("    +------------------------------------OBX-------------------------------------+")
         print("    |                                                                            |")
         print("    |   12 : GPS_COD_obx           13 : GPS_GRG_obx                              |")
-        print("    |   14 : MGEX_WUH_obx          15 : MGEX_COD_obx          16 : MGEX_GFZ_obx  |")
-        print("    |   17 : MGEX_WUHU_obx                                                       |")
+        print("    |   14 : MGEX_WHU_F_obx        15 : MGEX_COD_F_obx        16 : MGEX_GFZ_F_obx|")
+        print("    |   17 : MGEX_WHU_U_obx                                                      |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
-
     elif obj == 7:
         print("    +----------------------------------ION_TRO-----------------------------------+")
         print("    |                                     |                                      |")
         print("    +------------------------------------ION-------------------------------------+")
         print("    |                                                                            |")
-        print("    |    1 : IGSG_ion               2 : IGRG_ion               3 : WUHG_ion      |")
+        print("    |    1 : IGSG_ion               2 : IGRG_ion               3 : WHUG_ion      |")
         print("    |    4 : WURG_ion               5 : CODG_ion               6 : CORG_ion      |")
         print("    |    7 : UQRG_ion               8 : UPRG_ion               9 : JPLG_ion      |")
         print("    |   10 : JPRG_ion              11 : CASG_ion              12 : CARG_ion      |")
@@ -277,8 +305,8 @@ def sub_cdd(obj):
         print("    |    1 : Panda_jpleph_de405     2 : Panda_poleut1          3 : Panda_EGM     |")
         print("    |    4 : Panda_oceanload        5 : Panda_oceantide        6 : Panda_utcdif  |")
         print("    |    7 : Panda_antnam           8 : Panda_svnav            9 : Panda_nutabl  |")
-        print("    |   10 : Panda_ut1tid          11 : Panda_leap_sec        12 : MGEX_IGS_atx  |")
-        print("    |   13 : SW_EOP                                                              |")
+        print("    |   10 : Panda_ut1tid          11 : Panda_leap_sec        12 : MGEX_IGS14_atx|")
+        print("    |   13 : MGEX_IGS20_atx        14 : SW_EOP                15 : Panda_gpsrapid|")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 15:
         print("    +-----------------------------------GAMIT------------------------------------+")
@@ -286,11 +314,11 @@ def sub_cdd(obj):
         print("    |    1 : Gamit_pmu_bull         2 : Gamit_ut1usno          3 : Gamit_poleusno|")
         print("    |    4 : Gamit_dcb_dat          5 : Gamit_soltab           6 : Gamit_luntab  |")
         print("    |    7 : Gamit_leap_sec         8 : Gamit_nutabl           9 : Gamit_antmod  |")
-        print("    |   10 : Gamit_svnav           11 : Gamit_rcvant                             |")
+        print("    |   10 : Gamit_svnav           11 : Gamit_rcvant          12 : Gamit_nbody   |")
         print("    |                                                                            |")
         print("    +----------------------------------SOLUTION----------------------------------+")
         print("    |                                                                            |")
-        print("    |   12 : IGS_hfile                                                           |")
+        print("    |   13 : IGS_hfile                                                           |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == "a":
@@ -322,10 +350,13 @@ def sub_cdd(obj):
                 subnum = input("     ")
 
 
-# 2022-03-27 : 输入年日时间 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
-#              by Chang Chuntao  -> Version : 1.10
 def yd_cdd():
+    '''
+    2022-03-27 :    输入年日时间
+                    by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    *新增返回上级菜单操作，输入y回到上级菜单
+                    by Chang Chuntao  -> Version : 1.10
+    '''
     print()
     PrintGDD("若需下载多天数据，请输入 <年 起始年积日 截止年积日> <year start_doy end_doy>", "input")
     PrintGDD("若需下载单天数据，请输入 <年 年积日> <year doy>", "input")
@@ -355,10 +386,13 @@ def yd_cdd():
                 yd = input("     ")
 
 
-# 2022-03-27 : 输入年月时间 by Chang Chuntao -> Version : 1.00
-# 2022-04-12 : *新增返回上级菜单操作，输入y回到上级菜单
-#              by Chang Chuntao  -> Version : 1.10
 def ym_cdd():
+    '''
+    2022-03-27 :    输入年月时间
+                    by Chang Chuntao -> Version : 1.00
+    2022-04-12 :    *新增返回上级菜单操作，输入y回到上级菜单
+                    by Chang Chuntao  -> Version : 1.10
+    '''
     print()
     PrintGDD("Note: 请输入 <年 月> <year month>", "input")
     PrintGDD("Note: 如需返回上级目录，请输入y", "input")
@@ -379,17 +413,26 @@ def ym_cdd():
                 ym = input("     ")
 
 
-# 2022-03-27 : 输入站点文件 by Chang Chuntao -> Version : 1.00
 def getFile(datatype):
+    """
+    2022-03-27 :    * 输入站点文件
+                    by Chang Chuntao  -> Version : 1.00
+    2023-01-14 :    + 支持直接输入站点名
+                    by Chang Chuntao  -> Version : 2.06
+    """
     print()
-    PrintGDD(r"请输入站点文件所在位置(绝对位置/相对位置)！非输入站点名！例如输入 - site.txt 或 D:\site.txt", "input")
-    PrintGDD(r"文件内写入站名, MGEX站长名短名都可, 按行按空格分割都可！文件内容 - BJFS00CHN irkj urum", "input")
+    PrintGDD(r"请输入站点名称或站点文件所在位置(绝对位置/相对位置)", "input")
+    PrintGDD(r'例如直接输入站点名 - BJFS00CHN irkj urum', "input")
+    PrintGDD(r'或输入站点文件(相对目录/绝对目录/当前目录文件) - site.txt 或 D:\site.txt', "input")
+    PrintGDD(r"文件内写入站名, 长名短名都可, 按行按空格分割都可！例如文件内容 - BJFS00CHN irkj urum", "input")
     sitefile = input("     ")
     return getSite(sitefile, datatype)
 
 
-# 2022-04-12 : 文件检索解压 by Chang Chuntao  -> Version : 1.10
 def getvlbicompress(ftpsite):
+    '''
+    2022-04-12 : 文件检索解压 by Chang Chuntao  -> Version : 1.10
+    '''
     print()
     PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
     isuncpmress = input("     ")
@@ -397,8 +440,10 @@ def getvlbicompress(ftpsite):
         unzip_vlbi(os.getcwd(), ftpsite)
 
 
-# 2022-04-12 : 通过下载列表解压文件(年日) by Chang Chuntao  -> Version : 1.10
 def uncompress(urllist):
+    '''
+    2022-04-12 : 通过下载列表解压文件(年日) by Chang Chuntao  -> Version : 1.10
+    '''
     ftpsite = []
     for i in range(len(urllist)):
         for j in range(len(urllist[i])):
@@ -406,7 +451,7 @@ def uncompress(urllist):
     print()
     isuncpmress = "y"
     for f in ftpsite:
-        if str(f).split(".")[-1] == "gz" or str(f).split(".")[-1] == "Z":
+        if str(f).split(".")[-1] == "gz" or str(f).split(".")[-1] == "Z" or str(f).split(".")[-1] == "tgz":
             PrintGDD("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Press enter to unzip!", "input")
             isuncpmress = input("     ")
             break
@@ -414,8 +459,26 @@ def uncompress(urllist):
         unzipfile(os.getcwd(), ftpsite)
 
 
-# 2022-04-12 : 通过下载列表解压文件(年月) by Chang Chuntao  -> Version : 1.10
+def uncompress_highrate_rinex(urllist, type):
+    '''
+    2022-11-15 : 通过下载列表解压GRE_IGS_01S文件 by Chang Chuntao  -> Version : 2.03
+    '''
+    ftpsite = []
+    for i in range(len(urllist)):
+        for j in range(len(urllist[i])):
+            ftpsite.append(urllist[i][j])
+    print()
+    if type == 'GRE_IGS_01S':
+        unzipfile_highrate_rinex2(os.getcwd(), ftpsite)
+    elif type == 'GCRE_MGEX_01S':
+        unzipfile_highrate_rinex3(os.getcwd(), ftpsite)
+
+
+#
 def uncompress_ym(url):
+    '''
+    2022-04-12 : 通过下载列表解压文件(年月) by Chang Chuntao  -> Version : 1.10
+    '''
     isuncpmress = "y"
     ftpsite = []
     for u in url:
@@ -446,6 +509,8 @@ def geturl_download_uncompress(cddarg, obj):
                     >         s_type -> site
                     > 删除旧索引: objneedydqd2 / objneedyd1d2loc / objneedloc / objneedn
                     by Chang Chuntao  -> Version : 2.01
+    2022-11-15 :    > 添加GRE_IGS_01S判断,调用uncompress_highrate_rinex
+                    by Chang Chuntao  -> Version : 2.03
     """
     urllist = []  # 下载列表
 
@@ -545,7 +610,11 @@ def geturl_download_uncompress(cddarg, obj):
                             siteftp.append(ftpInList)
                         urllist.append(siteftp)  # 按天下载
                 cddpooldownload(urllist, 3)  # 多线程下载
-                uncompress(urllist)
+
+                if cddarg['datatype'] == "GRE_IGS_01S" or cddarg['datatype'] == "GCRE_MGEX_01S":
+                    uncompress_highrate_rinex(urllist, cddarg['datatype'])
+                else:
+                    uncompress(urllist)
                 return "n"
 
         elif cddarg['datatype'] in s_type:  # 输入为站点文件 的数据类型

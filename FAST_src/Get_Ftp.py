@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # GET_Ftp        : Reconstruct FTP address
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.25
+# Latest Version : 2.06
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.02 - Version 1.25
+# Date           : 2023-01-14 - Version 2.06
 
 
 from datetime import datetime, timedelta
@@ -114,6 +115,11 @@ def ReplaceTimeWildcard(string, spectime):
         else:
             month_str = "JAN"
         newstr = newstr.replace('<MMM>', month_str)
+    if newstr.find('<WEEK0DOY>') >= 0:
+        find_gpsweek, wd = datetime2gpswd(spectime)
+        year, week_0_doy = gpswd2doy(find_gpsweek, 0)
+        newstr = newstr.replace('<WEEK0DOY>', '%03d' % week_0_doy)
+
     # return new string
     return newstr
 
@@ -171,19 +177,28 @@ def getSite(file, datatype):
                  by Chang Chuntao -> Version : 1.19
     2022-09-11 : 站点文件可支持行列两种格式，或混合模式
                  by Chang Chuntao -> Version : 1.20
+    2023-01-14 : 支持支持输入站点
+                 by Chang Chuntao -> Version : 2.06
     """
-    fileLine = open(file, "r").readlines()
+    import os
     site = []
-    for line in fileLine:
-        print(line)
-        lineSplit = line.split()
-        for siteInLine in lineSplit:
-            site.append(siteInLine)
+    if file == '':
+        site = []
+    else:
+        if os.path.isfile(file):
+            fileLine = open(file, "r").readlines()
+            for line in fileLine:
+                lineSplit = line.split()
+                for siteInLine in lineSplit:
+                    site.append(siteInLine)
+        else:
+            site = str(file).split()
     if datatype == "MGEX_IGS_rnx" or datatype == "MGEX_HK_cors":
         for s in range(0, len(site)):
             if len(site[s]) == 9:
                 continue
             else:
+                site[s] = site[s].lower()
                 for m in mgex:
                     if site[s] == m[0]:
                         site[s] = m[1]
@@ -198,19 +213,25 @@ def getSite(file, datatype):
 
 def replaceSiteStr(ftpInList, siteInList):
     """
-    2022-09-16 : 替换站点字符串 by Chang Chuntao  -> Version : 1.21
+    2022-09-16 :    替换站点字符串
+                    by Chang Chuntao  -> Version : 1.21
+    2023-01-14 :    支持大小长短自由
+                    by Chang Chuntao  -> Version : 2.06
     """
     upperSite = ''
     if len(siteInList) == 4:
-        lowSite = siteInList
+        lowSite = str(siteInList).lower()
         for mgexSite in mgex:
             if mgexSite[0] == lowSite:
                 upperSite = mgexSite[1]
+    elif len(siteInList) == 9:
+        lowSite = str(siteInList[0:4]).lower()
+        upperSite = str(siteInList).upper()
     else:
-        lowSite = str(siteInList[0:4])
-        upperSite = str(siteInList)
-
-    ftpInList = str(ftpInList).replace('<SITE>', lowSite)
+        lowSite = ''
+        upperSite = ''
+    if '<SITE>' in ftpInList:
+        ftpInList = str(ftpInList).replace('<SITE>', lowSite)
     if '<SITE_LONG>' in ftpInList:
         ftpInList = str(ftpInList).replace('<SITE_LONG>', upperSite)
     return ftpInList

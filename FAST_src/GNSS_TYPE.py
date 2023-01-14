@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 1.24
+# Latest Version : 2.05
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.10.10 - Version 1.24
+# Date           : 2022-12-04 - Version 2.05
 
 
 """
@@ -64,29 +65,69 @@
                     >         s_type -> site
                     > 删除旧索引: objneedydqd2 / objneedyd1d2loc / objneedloc / objneedn
                     by Chang Chuntao  -> Version : 2.01
+    2022-11-10 :    + 新增MGEX_WUHR_sp3 / MGEX_WUHR_clk
+                    by Chang Chuntao  -> Version : 2.02
+    2022-11-15 :    + 新增GRE_IGS_01S / GCRE_MGEX_01S
+                    by Chang Chuntao  -> Version : 2.03
+    2022-12-02 :    > MGEX_brdm -> MGEX_brdc
+                    + MGEX_CNAV_brdm / MGEX_CNAV_brdm
+                    by Chang Chuntao  -> Version : 2.04
+    2022-12-04 :    > MGEX_WUH_sp3 -> MGEX_WHU_F_sp3 / MGEX_WUHR_sp3 -> MGEX_WHU_R_sp3 / MGEX_WUHU_sp3 -> MGEX_WHU_U_sp3
+                    > MGEX_WUH_Hour_sp3 -> MGEX_WHU_Hour_sp3 / MGEX_SHA_sp3 -> MGEX_SHA_F_sp3 / MGEX_COD_sp3 -> MGEX_COD_F_sp3
+                    > MGEX_GRG_sp3 -> MGEX_GRG_F_sp3 / MGEX_GFZ_R_sp3 -> MGEX_GFZR_sp3 / GRE_CODR_sp3 -> GRE_COD_R_sp3
+                    > GLO_IGL_sp3 -> GLO_IGL_F_sp3
+                    + MGEX_GFZ_F_sp3
+                    > MGEX_WUH_clk -> MGEX_WHU_F_clk / MGEX_WUHR_clk -> MGEX_WHU_R_clk / MGEX_WUHU_clk -> MGEX_WHU_U_clk
+                    > MGEX_WUH_Hour_clk -> MGEX_WHU_Hour_clk / MGEX_COD_clk -> MGEX_COD_F_clk / MGEX_GRG_clk -> MGEX_GRG_F_clk
+                    > MGEX_GFZR_clk -> MGEX_GFZ_R_clk
+                    + MGEX_SHA_F_clk / MGEX_GFZ_F_clk / GRE_COD_R_clk / GLO_IGL_F_clk
+                    > WUH_erp -> WHU_F_erp / WUHU_erp -> WHU_U_erp / GFZ_erp -> GFZ_F_erp / COD_erp -> COD_R_erp
+                    > WUH_Hour_erp -> WHU_Hour_erp
+                    > MGEX_COD_bia -> MGEX_COD_R_bia / MGEX_GFZ_bia -> MGEX_GFZ_R_bia / MGEX_WHU_ABS_bia -> MGEX_WHU_R_ABS_bia
+                    > MGEX_WHU_OSB_bia -> MGEX_WHU_R_OSB_bia
+                    x MGEX_WHU_OSB(与MGEX_WHU_R_OSB_bia重复)
+                    > MGEX_CAS_dcb -> MGEX_CAS_R_dcb
+                    > MGEX_WUH_obx -> MGEX_WHU_F_obx / MGEX_COD_obx -> MGEX_COD_F_obx / MGEX_GFZ_obx -> MGEX_GFZ_F_obx
+                    > MGEX_WUHU_obx -> MGEX_WHU_U_obx
+                    > WUHG_ion -> WHUG_ion
+                    + MGEX_COD_F_bia
+                    by Chang Chuntao  -> Version : 2.05
 """
 
-gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],                                                                        # 1 BRDC
+gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdc", "MGEX_CNAV_brdm", "MGEX_CNAV_brd4"]],                                   # 1 BRDC
 
-             ["SP3", ["GPS_IGS_sp3", "GPS_IGR_sp3", "GPS_IGU_sp3", "GPS_GFZ_sp3", "GPS_GRG_sp3",                         # 2 SP3
-                      "MGEX_WUH_sp3", "MGEX_WUHU_sp3", "MGEX_GFZR_sp3", "MGEX_COD_sp3", "MGEX_SHA_sp3", "MGEX_GRG_sp3",
-                      "GLO_IGL_sp3", "MGEX_WUH_Hour_sp3"]],
+             ["SP3", ["GPS_IGS_sp3", "GPS_IGR_sp3", "GPS_IGU_sp3", "GPS_GRG_sp3",                                       # 2 SP3
 
-             ["CLK", ["GPS_IGS_clk", "GPS_IGR_clk", "GPS_GFZ_clk", "GPS_GRG_clk", "GPS_IGS_clk_30s",                     # 3 CLK
-                      "MGEX_WUH_clk", "MGEX_COD_clk", "MGEX_GFZR_clk", "MGEX_GRG_clk", "WUH_PRIDE_clk", 'MGEX_WUHU_clk',
-                      "MGEX_WUH_Hour_clk"]],
+                      "MGEX_WHU_F_sp3", "MGEX_WHU_R_sp3", "MGEX_WHU_U_sp3",
+                      "MGEX_WHU_Hour_sp3", "MGEX_SHA_F_sp3", "MGEX_COD_F_sp3",
+                      "MGEX_GRG_F_sp3", 'MGEX_GFZ_R_sp3', "GRE_GFZ_F_sp3",
+                      'GRE_COD_R_sp3', 'GLO_IGL_F_sp3']],
+
+             ["CLK", ["GPS_IGS_clk", "GPS_IGR_clk", "GPS_GRG_clk", "GPS_IGS_clk_30s",                                   # 3 CLK
+
+                      "MGEX_WHU_F_clk", "MGEX_WHU_R_clk", "MGEX_WHU_U_clk",
+                      "MGEX_WHU_Hour_clk", "MGEX_SHA_F_clk", 'MGEX_COD_F_clk',
+                      "MGEX_GRG_F_clk", 'MGEX_GFZ_F_clk', 'GRE_GFZ_F_clk',
+                      'GRE_COD_R_clk', 'GLO_IGL_F_clk']],
 
              ["RINEX", ["GPS_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_EU_cors", "GPS_AU_cors",      # 4 RINEX
-                        "MGEX_IGS_rnx", "MGEX_HK_cors"]],
+                        "MGEX_IGS_rnx", "MGEX_HK_cors", "GRE_IGS_01S", "GCRE_MGEX_01S"]],
 
-             ["ERP", ["IGS_erp", "WUH_erp", "COD_erp", "GFZ_erp", "IGR_erp", 'WUHU_erp', "WUH_Hour_erp"]],               # 5 ERP
+             ["ERP", ["IGS_erp", "IGR_erp", "WHU_F_erp",
+                      "WHU_U_erp", "GFZ_F_erp", 'COD_R_erp',
+                      "WHU_Hour_erp"]],               # 5 ERP
 
-             ["BIA_DCB_OBX", ["MGEX_WHU_ABS_bia", "MGEX_WHU_OSB_bia", "GPS_COD_bia", "MGEX_COD_bia", "MGEX_GFZ_bia",     # 6 BIA_DCB_OBX
-                              "GPS_COD_dcb", "MGEX_CAS_dcb", "MGEX_WHU_OSB", "P1C1", "P1P2", "P2C2",
-                              "GPS_COD_obx", "GPS_GRG_obx", "MGEX_WUH_obx", "MGEX_COD_obx", "MGEX_GFZ_obx",
-                              'MGEX_WUHU_obx']],
+             ["BIA_DCB_OBX", ["GPS_COD_bia", "MGEX_COD_F_bia","MGEX_COD_R_bia",
+                              "MGEX_WHU_R_ABS_bia", "MGEX_WHU_R_OSB_bia", "MGEX_GFZ_R_bia",     # 6 BIA_DCB_OBX
 
-             ["ION_TRO", ["IGSG_ion", "IGRG_ion", "WUHG_ion", "WURG_ion", "CODG_ion", "CORG_ion", "UQRG_ion",            # 7 ION_TRO
+                              "GPS_COD_dcb", "MGEX_CAS_R_dcb",
+                              "P1C1", "P1C1", "P1P2", "P2C2",
+
+                              "GPS_COD_obx", "GPS_GRG_obx",
+                              "MGEX_WHU_F_obx", "MGEX_COD_F_obx", "MGEX_GFZ_F_obx",
+                              'MGEX_WHU_U_obx']],
+
+             ["ION_TRO", ["IGSG_ion", "IGRG_ion", "WHUG_ion", "WURG_ion", "CODG_ion", "CORG_ion", "UQRG_ion",            # 7 ION_TRO
                           "UPRG_ion", "JPLG_ion", "JPRG_ion", "CASG_ion", "CARG_ion", "ESAG_ion", "ESRG_ion",
 
                           "IGS_zpd", "COD_tro", "JPL_tro", "GRID_1x1_VMF3", "GRID_2.5x2_VMF1", "GRID_5x5_VMF3",
@@ -102,7 +143,6 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],                               
 
              ["SLR", ["HY_SLR", "GRACE_SLR", "BEIDOU_SLR"]],                                                             # 12 SLR
 
-
              ["COSMIC", ['C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx',                                              # 13 COSMIC
                          'C1_L1b_atmPhs', 'C1_L1b_gpsBit', 'C1_L1b_ionPhs',
                          'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec',
@@ -113,12 +153,12 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdm"]],                               
              ['PANDA', ['Panda_jpleph_de405', 'Panda_poleut1', 'Panda_EGM',                                              # 14 PANDA
                         'Panda_oceanload', 'Panda_oceantide', 'Panda_utcdif',
                         'Panda_antnam', 'Panda_svnav', 'Panda_nutabl',
-                        'Panda_ut1tid', 'Panda_leap_sec', 'MGEX_IGS_atx', "SW_EOP"]],
+                        'Panda_ut1tid', 'Panda_leap_sec', 'MGEX_IGS14_atx', "MGEX_IGS20_atx", "SW_EOP", 'Panda_gpsrapid']],
 
              ['GAMIT', ['Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno',                                             # 15 GAMIT
                         'Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
                         'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod',
-                        'Gamit_svnav', 'Gamit_rcvant',
+                        'Gamit_svnav', 'Gamit_rcvant', 'Gamit_nbody',
                         'IGS_hfile']]
              ]
 

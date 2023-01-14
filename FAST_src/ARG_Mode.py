@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # ARG_Mode       : Program running with arguments
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
@@ -61,4 +62,4 @@ def ARG_Mode(argument):
             unzipfile(cddarg["loc"], ftpsite)
     else:
         urllist = geturl(cddarg)  # 判断下载列表
-        argpooldownload(urllist, cddarg["process"], cddarg["loc"], cddarg["uncompress"])  # 并行下载
+        argpooldownload(urllist, cddarg["process"], cddarg["loc"], cddarg["uncompress"], cddarg['datatype'])  # 并行下载

@@ -5,15 +5,30 @@ import time
 from os.path import expanduser
 import psutil
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QGridLayout, QComboBox, QFileDialog, QTextEdit, QMessageBox
+from PyQt5.QtWidgets import QGridLayout, QComboBox, QFileDialog, QTextEdit, QProgressBar, QMessageBox, QStyle
 import GNSS_Timestran
 from PyQt5 import QtGui, QtCore
-from PyQt5.QtCore import Qt, QDateTime, QSize, pyqtSlot, QProcess, QThread, pyqtSignal
-from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QApplication, QFrame, QWidget, QSplitter, QLabel, \
+from PyQt5.QtCore import Qt, QDateTime, QSize, pyqtSlot, QProcess, QThread, pyqtSignal, QObject
+from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QApplication, QFrame, QWidget, QSplitter, QLabel, QPlainTextEdit, \
     QPushButton, QLineEdit, QVBoxLayout, QDateTimeEdit
+
 from QT_Frame import FramelessWindow
 from GNSS_TYPE import gnss_type, yd_type, ym_type, no_type, yds_type, s_type
 import qdarkstyle
+
+version = [2.00, 2.01, 2.02, 2.03, 2.04, 2.05, 2.06]
+version_time = ['2022-11-08',
+                '2022-11-09',
+                '2022-11-10',
+                '2022-11-15',
+                '2022-12-02',
+                '2022-12-04',
+                '2023-01-14']
+
+if getattr(sys, 'frozen', False):
+    dirname = os.path.dirname(sys.executable)
+else:
+    dirname = os.path.dirname(os.path.abspath(__file__))
 
 
 class Worker(QThread):
@@ -38,7 +53,8 @@ class Worker(QThread):
                     line = line.decode('gbk')
                     if 'Windows' not in line and 'wget' not in line and 'done' not in line and 'listing' not in line and 'required' not in line \
                             and '正在下载文件' not in line and '正在开始下载' not in line and len(
-                        line.replace(' ', '')) != 0:
+                        line.replace(' ', '')) != 0 and 'gzip' not in line and 'No such file or directory' not in line and\
+                            '! Notice ! splicing RINEX files' not in line:
                         self.sig.emit(line)
                 if PID == 0:
                     self.sig.emit('下载结束')
@@ -93,8 +109,8 @@ class mainWindow(QMainWindow):
         # ------------------标题栏-------------------
         self.resize(self.Window_Width, self.Window_Length)
         self.setWindowOpacity(0.75)
-
-        self.setWindowIcon(QtGui.QIcon("./win_bin/WHU.png"))
+        whu_png = os.path.join(dirname, 'win_bin', 'WHU.png')
+        self.setWindowIcon(QtGui.QIcon(whu_png))
         self.status = self.statusBar()
         self.status.showMessage("武汉大学-GNSS中心")
         self.showName = QLabel("作者：常春涛")
@@ -108,7 +124,6 @@ class mainWindow(QMainWindow):
         # ------------------标题栏-------------------
 
         # ----------------左侧控件布局----------------
-
         datetime_Label_box = QHBoxLayout()
         datetime_Label = QLabel("UTC Datetime")
         datetime_Label.setFont(font)
@@ -360,7 +375,7 @@ class mainWindow(QMainWindow):
 
         self.month_line = QLineEdit(self)
         self.month_line.setFont(font)
-        self.month_line.setPlaceholderText("IVS_week_snx/P1C1/P1P2/P2C2可用")
+        self.month_line.setPlaceholderText("仅IVS_week_snx/P1C1/P1P2/P2C2可填")
         self.month_line.setMinimumSize(QSize(choose_size, choose_h))
         type_choose_lay.addWidget(self.month_line, 2, 4, 1, 2)
 
@@ -383,6 +398,7 @@ class mainWindow(QMainWindow):
 
         self.end_doy_line = QLineEdit(self)
         self.end_doy_line.setFont(font)
+        self.end_doy_line.setPlaceholderText("仅下载单天数据时,无需填写此项")
         self.end_doy_line.setMinimumSize(QSize(choose_size, choose_h))
         type_choose_lay.addWidget(self.end_doy_line, 3, 4, 1, 2)
 
@@ -420,7 +436,7 @@ class mainWindow(QMainWindow):
 
         self.site_file_line = QLineEdit(self)
         self.site_file_line.setFont(font)
-        self.site_file_line.setPlaceholderText("站点名按空格或行分割都可")
+        self.site_file_line.setPlaceholderText("直接输入站点名(空格隔开),或按右侧按钮选择站点文件")
         self.site_file_line.setMinimumSize(QSize(600, choose_h))
         type_choose_lay.addWidget(self.site_file_line, 5, 1, 1, 4)
 
@@ -439,7 +455,7 @@ class mainWindow(QMainWindow):
         self.out_dir_line = QLineEdit(self)
         self.out_dir_line.setFont(font)
         self.out_dir_line.setMinimumSize(QSize(600, choose_h))
-        self.out_dir_line.setPlaceholderText("若为空则下载至当前文件夹")
+        self.out_dir_line.setPlaceholderText("按右侧按钮选择下载文件夹,若为空则下载至当前文件夹")
         type_choose_lay.addWidget(self.out_dir_line, 6, 1, 1, 4)
 
         open_out_dir_btn = QPushButton('  ...  ', self)
@@ -522,25 +538,46 @@ class mainWindow(QMainWindow):
         self.logPrint.append(logStr)
 
     def choose_out_dir(self):
-        sel_out_dir_win = QFileDialog.getExistingDirectory(self, '选择下载路径', expanduser("~"),
+        open_path_file = "./win_bin/open.path"
+        if os.path.isfile(open_path_file):
+            open_path_file_open = open(open_path_file, 'r+')
+            open_path = open_path_file_open.readline()
+            open_path_file_open.close()
+        else:
+            open_path = '~'
+        sel_out_dir_win = QFileDialog.getExistingDirectory(self, '选择下载路径', expanduser(open_path),
                                                            QFileDialog.ShowDirsOnly)
         self.out_dir_line.setText(sel_out_dir_win)
+
         if len(sel_out_dir_win) == 0:
             self.printLog('未选择！')
         else:
             self.printLog('选择下载路径为 -> ' + sel_out_dir_win)
+            open_path_file_open = open(open_path_file, 'w+')
+            open_path_file_open.write(sel_out_dir_win)
+            open_path_file_open.close()
 
     def choose_site_file(self):
-        filename, filetype = QFileDialog.getOpenFileName(self, "选取站点文件", expanduser("~"),
+        open_path_file = "./win_bin/open.path"
+        if os.path.isfile(open_path_file):
+            open_path_file_open = open(open_path_file, 'r+')
+            open_path = open_path_file_open.readline()
+            open_path_file_open.close()
+        else:
+            open_path = '~'
+        filename, filetype = QFileDialog.getOpenFileName(self, "选取站点文件", expanduser(open_path),
                                                          "")
         self.site_file_line.setText(filename)
         if len(filename) == 0:
             self.printLog('未选择！')
         else:
             self.printLog('选择站点文件为 -> ' + filename)
+            out_dir = str(filename).split(os.path.basename(filename))[0][:-1]
+            open_path_file_open = open(open_path_file, 'w+')
+            open_path_file_open.write(out_dir)
+            open_path_file_open.close()
 
     def dd(self):
-
         if getattr(sys, 'frozen', False):
             dirname = os.path.dirname(sys.executable)
         else:
@@ -551,20 +588,25 @@ class mainWindow(QMainWindow):
         type_name = self.name_type_combo.currentText()
         pool_num = self.pool_combo.currentText()
         unzip_str = self.unzip_combo.currentText()
+        self.printLog('选择数据 -> ' + type_name)
+        self.printLog('下载并发 -> ' + pool_num)
+        self.printLog('是否解压 -> ' + unzip_str)
 
-        self.printLog('选择数据为 -> ' + type_name)
-        self.printLog('下载并发数 -> ' + pool_num)
-        if type_name in yd_type:
+        cmd += ' -t ' + type_name
+        if type_name in yd_type or type_name in yds_type or type_name in ym_type:
             year = self.year_line.text()
-            doy1 = self.begin_doy_line.text()
-            doy2 = self.end_doy_line.text()
-            loc = self.out_dir_line.text()
             if year == '':
                 self.printLog('请输入年份！')
                 return
             if not year.isdigit():
                 self.printLog('请输入正确年份！')
                 return
+            self.printLog('下载年份 -> ' + year)
+            cmd += ' -y ' + year
+
+        if type_name in yd_type or type_name in yds_type:
+            doy1 = self.begin_doy_line.text()
+            doy2 = self.end_doy_line.text()
             if doy1 == '':
                 self.printLog('请输入年积日！')
                 return
@@ -576,84 +618,29 @@ class mainWindow(QMainWindow):
             if not doy2.isdigit():
                 self.printLog('请输入正确年积日！')
                 return
-            if loc != '' and not os.path.isdir(loc):
-                self.printLog('请输入正确下载位置！')
-                return
-
-            self.printLog('下载数据类型 -> ' + type_name)
-            cmd += ' -t ' + type_name
-            self.printLog('下载年份 -> ' + year)
-            cmd += ' -y ' + year
             self.printLog('起始年积日 -> ' + doy1)
             cmd += ' -o ' + doy1
             self.printLog('中止年积日 -> ' + doy2)
             cmd += ' -e ' + doy2
-            if loc != '':
-                self.printLog('下载路径 -> ' + loc)
-                cmd += ' -l ' + loc
-        if type_name in yds_type:
-            year = self.year_line.text()
-            doy1 = self.begin_doy_line.text()
-            doy2 = self.end_doy_line.text()
-            loc = self.out_dir_line.text()
+
+        if type_name in yds_type or type_name in s_type:
             site_file = self.site_file_line.text()
-            if year == '':
-                self.printLog('请输入年份！')
-                return
-            if not year.isdigit():
-                self.printLog('请输入正确年份！')
-                return
-            if doy1 == '':
-                self.printLog('请输入年积日！')
-                return
-            if not doy1.isdigit():
-                self.printLog('请输入正确年积日！')
-                return
-            if doy2 == '':
-                doy2 = doy1
-            if not doy2.isdigit():
-                self.printLog('请输入正确年积日！')
-                return
-            if loc != '' and not os.path.isdir(loc):
-                self.printLog('请输入正确下载位置！')
-                return
             if site_file == '':
                 self.printLog('请输入站点位置文件！')
                 return
             if site_file != '' and not os.path.isfile(site_file):
-                self.printLog('请输入正确站点文件！')
-                return
-            self.printLog('下载数据类型 -> ' + type_name)
-            cmd += ' -t ' + type_name
-            self.printLog('下载年份 -> ' + year)
-            cmd += ' -y ' + year
-            self.printLog('起始年积日 -> ' + doy1)
-            cmd += ' -o ' + doy1
-            self.printLog('中止年积日 -> ' + doy2)
-            cmd += ' -e ' + doy2
+                site_temp = "./win_bin/site_temp"
+                site_temp_open = open(site_temp, 'w+')
+                site_list = site_file.split()
+                for site in site_list:
+                    site_temp_open.write(site + ' ')
+                site_temp_open.close()
+                site_file = site_temp
             self.printLog('站点文件 -> ' + site_file)
             cmd += ' -f ' + site_file
-            if loc != '':
-                self.printLog('下载路径 -> ' + loc)
-                cmd += ' -l ' + loc
-        if type_name in no_type:
-            loc = self.out_dir_line.text()
-            if loc != '' and not os.path.isdir(loc):
-                self.printLog('请输入正确下载位置！')
-                return
-            cmd += ' -t ' + type_name
-            if loc != '':
-                cmd += ' -l ' + loc
+
         if type_name in ym_type:
-            year = self.year_line.text()
             month = self.month_line.text()
-            loc = self.out_dir_line.text()
-            if year == '':
-                self.printLog('请输入年份！')
-                return
-            if not year.isdigit():
-                self.printLog('请输入正确年份！')
-                return
             if month == '':
                 self.printLog('请输入月份！')
                 return
@@ -664,35 +651,18 @@ class mainWindow(QMainWindow):
                 self.printLog('请输入正确月份！')
                 return
             self.printLog('下载数据类型 -> ' + type_name)
-            cmd += ' -t ' + type_name
-            self.printLog('下载年份 -> ' + year)
-            cmd += ' -y ' + year
             self.printLog('下载月份 -> ' + month)
             cmd += ' -m ' + month
-            if loc != '':
-                self.printLog('下载路径 -> ' + loc)
-                cmd += ' -l ' + loc
-        if type_name in s_type:
-            loc = self.out_dir_line.text()
-            site_file = self.site_file_line.text()
-            if loc != '' and not os.path.isdir(loc):
-                self.printLog('请输入正确下载位置！')
-                return
-            if site_file == '':
-                self.printLog('请输入站点位置文件！')
-                return
-            if site_file != '' and not os.path.isfile(site_file):
-                self.printLog('请输入正确站点文件！')
-                return
-            self.printLog('下载数据类型 -> ' + type_name)
-            cmd += ' -t ' + type_name
-            self.printLog('站点文件 -> ' + site_file)
-            cmd += ' -f ' + site_file
-            if loc != '':
-                self.printLog('下载路径 -> ' + loc)
-                cmd += ' -l ' + loc
-        self.printLog('下载并发 -> ' + pool_num)
+
+        loc = self.out_dir_line.text()
+        if loc != '' and not os.path.isdir(loc):
+            self.printLog('请输入正确下载位置！')
+            return
+        if loc != '':
+            self.printLog('下载路径 -> ' + loc)
+            cmd += ' -l ' + loc
         cmd += ' -p ' + pool_num
+
         if unzip_str == '否':
             cmd += ' -u N'
         print(cmd)
@@ -829,10 +799,10 @@ def ytAppMain():
     ytApp = QApplication(sys.argv)
     ytApp.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     ytApp.setStyleSheet(qdarkstyle.load_stylesheet())
-
     framelessWnd = FramelessWindow()
-    framelessWnd.setWindowIcon(QtGui.QIcon("./win_bin/WHU.png"))
-    framelessWnd.setWindowTitle('FAST-大地测量数据下载软件 V2.01')
+    whu_ico = os.path.join(dirname, 'win_bin', 'WHU.ico')
+    framelessWnd.setWindowIcon(QtGui.QIcon(whu_ico))
+    framelessWnd.setWindowTitle('FAST-大地测量数据下载软件V' + str(version[-1]))
 
     win = mainWindow()
     framelessWnd.setContent(win)

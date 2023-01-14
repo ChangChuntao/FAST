@@ -1,17 +1,17 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 2.01
+# Latest Version : 2.06
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.09 - Version 2.01
-
-
-# 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
+# Date           : 2023-01-14 - Version 2.06
 import datetime
 
 nowTime = datetime.datetime.utcnow()
 year = str(nowTime.year)
+
+# 2022-03-27 : 板块列表 by Chang Chuntao -> Version : 1.00
 plate = ["AF", "AN", "AR", "AU", "BU", "CA", "CO", "EU", "IN", "MA", "NA", "NB", "NZ", "OK", "ON", "PA", "PM", "PS",
          "SA", "SB", "SC", "SL", "SO", "SU", "WL"]
 plate_env = []
@@ -63,11 +63,46 @@ for p in plate:
                     'Gamit_pmu_bull', 'Gamit_ut1usno', 'Gamit_poleusno','Gamit_dcb_dat', 'Gamit_soltab', 'Gamit_luntab',
                     'Gamit_leap_sec', 'Gamit_nutabl', 'Gamit_antmod','Gamit_svnav', 'Gamit_rcvant'
                     by Chang Chuntao  -> Version : 1.24
-    2022-11-02      > IVS_week_snx : 更换网站：ivs.bkg.bund.de -> ivsopar.obspm.fr
+    2022-11-02 :    > IVS_week_snx : 更换网站：ivs.bkg.bund.de -> ivsopar.obspm.fr
                     > IDS_week_snx : 更换策略：wd12/14         -> wd16/19
-    2022-11-09      + 新增IGS_hfile
+    2022-11-09 :    + 新增IGS_hfile
                     by Chang Chuntao  -> Version : 2.01
-                    
+    2022-11-10 :    + 新增MGEX_WUHR_sp3 / MGEX_WUHR_clk
+                    by Chang Chuntao  -> Version : 2.02
+    2022-11-15 :    + 新增GRE_IGS_01S / GCRE_MGEX_01S
+                    by Chang Chuntao  -> Version : 2.03
+    2022-12-02 :    > MGEX_brdm -> MGEX_brdc
+                    + MGEX_CNAV_brdm / MGEX_CNAV_brdm
+                    > GPS_IGS_sp3 / GPS_IGS_clk : igs -> IGS0OPSFIN
+                    > GPS_IGR_sp3 / GPS_IGR_clk : igr -> IGS0OPSRAP
+                    > GPS_IGU_sp3               : igu -> IGS0OPSULT
+                    by Chang Chuntao  -> Version : 2.04
+    2022-12-04 :    > MGEX_WUH_sp3 -> MGEX_WHU_F_sp3 / MGEX_WUHR_sp3 -> MGEX_WHU_R_sp3 / MGEX_WUHU_sp3 -> MGEX_WHU_U_sp3
+                    > MGEX_WUH_Hour_sp3 -> MGEX_WHU_Hour_sp3 / MGEX_SHA_sp3 -> MGEX_SHA_F_sp3 / MGEX_COD_sp3 -> MGEX_COD_F_sp3
+                    > MGEX_GRG_sp3 -> MGEX_GRG_F_sp3 / MGEX_GFZ_R_sp3 -> MGEX_GFZR_sp3 / GRE_CODR_sp3 -> GRE_COD_R_sp3
+                    > GLO_IGL_sp3 -> GLO_IGL_F_sp3
+                    + MGEX_GFZ_F_sp3
+                    > MGEX_WUH_clk -> MGEX_WHU_F_clk / MGEX_WUHR_clk -> MGEX_WHU_R_clk / MGEX_WUHU_clk -> MGEX_WHU_U_clk
+                    > MGEX_WUH_Hour_clk -> MGEX_WHU_Hour_clk / MGEX_COD_clk -> MGEX_COD_F_clk / MGEX_GRG_clk -> MGEX_GRG_F_clk
+                    > MGEX_GFZR_clk -> MGEX_GFZ_R_clk 
+                    + MGEX_SHA_F_clk / MGEX_GFZ_F_clk / GRE_COD_R_clk / GLO_IGL_F_clk
+                    > WUH_erp -> WHU_F_erp / WUHU_erp -> WHU_U_erp / GFZ_erp -> GFZ_F_erp / COD_erp -> COD_R_erp
+                    > WUH_Hour_erp -> WHU_Hour_erp
+                    > MGEX_COD_bia -> MGEX_COD_R_bia / MGEX_GFZ_bia -> MGEX_GFZ_R_bia / MGEX_WHU_ABS_bia -> MGEX_WHU_R_ABS_bia
+                    > MGEX_WHU_OSB_bia -> MGEX_WHU_R_OSB_bia
+                    x MGEX_WHU_OSB(与MGEX_WHU_R_OSB_bia重复)
+                    > MGEX_CAS_dcb -> MGEX_CAS_R_dcb
+                    > MGEX_WUH_obx -> MGEX_WHU_F_obx / MGEX_COD_obx -> MGEX_COD_F_obx / MGEX_GFZ_obx -> MGEX_GFZ_F_obx
+                    > MGEX_WUHU_obx -> MGEX_WHU_U_obx
+                    > WUHG_ion -> WHUG_ion
+                    by Chang Chuntao  -> Version : 2.05
+    2023-01-13 :    > MGEX_IGS_atx -> MGEX_IGS14_atx
+                    + MGEX_IGS20_atx
+                    x 删除GPS_GFZ_sp3 / GPS_GFZ_clk
+                    > MGEX_GFZ_F_sp3 -> GRE_GFZ_F_sp3 / MGEX_GFZ_F_clk -> GRE_GFZ_F_clk
+                    > IGS rename -> GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GRE_COD_R_sp3 / GPS_IGS_clk
+                    >               GPS_IGR_clk / GPS_IGS_clk_30s / GRE_COD_R_clk / IGS_erp
+                    by Chang Chuntao  -> Version : 2.06
 '''
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -75,49 +110,60 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
                       "ftp://nfs.kasi.re.kr/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz"],
 
-         "MGEX_brdm": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
+         "MGEX_brdc": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
                        "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz",
                        "--ftp-user anonymous --ftp-password cctcasm@163.com "
                        "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
                        "BRDC00IGS_R_<YEAR><DOY>0000_01D_MN.rnx.gz"],
-         # "ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
-         # "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz",
-         # "--ftp-user anonymous --ftp-password cctcasm@163.com "
-         # "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
-         # "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz"
 
-         "GPS_IGS_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.sp3.Z",
+         "MGEX_CNAV_brdm": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
+                            "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz",
+                            "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
+                            "BRDM00DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz"],
+
+         "MGEX_CNAV_brd4": ["ftp://igs.gnsswhu.cn/pub/gps/data/daily/<YEAR>/<DOY>/<YY>p/"
+                            "BRD400DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz",
+                            "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/daily/<YEAR>/<DOY>/<YY>p/"
+                            "BRD400DLR_S_<YEAR><DOY>0000_01D_MN.rnx.gz"],
+
+         "GPS_IGS_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.sp3.Z",
                          "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igs<GPSWD>.sp3.Z"],
 
-         "GPS_IGR_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igr<GPSWD>.sp3.Z",
-                         "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igr<GPSWD>.sp3.Z",
-                         "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
-                         "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.sp3.Z",
-                         "ftp://ftp.gfz-potsdam.de/GNSS/products/mgex/<GPSW>/igr<GPSWD>.sp3.Z"],
+         "GPS_IGR_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igr<GPSWD>.sp3.Z"],
 
-         "GPS_IGU_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igu<GPSWD>_00.sp3.Z",
+         "GPS_IGU_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSULT_<YYYY><DOY>0000_02D_15M_ORB.SP3.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSULT_<YYYY><DOY>0600_02D_15M_ORB.SP3.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSULT_<YYYY><DOY>1200_02D_15M_ORB.SP3.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSULT_<YYYY><DOY>1800_02D_15M_ORB.SP3.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igu<GPSWD>_00.sp3.Z",
                          "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igu<GPSWD>_06.sp3.Z",
                          "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igu<GPSWD>_12.sp3.Z",
                          "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igu<GPSWD>_18.sp3.Z"],
 
-         "GPS_GFZ_sp3": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/final/w<GPSW>/gfz<GPSWD>.sp3.Z",
-                         "ftp://igs.ign.fr/pub/igs/products/<GPSW>/gfz<GPSWD>.sp3.Z",
-                         "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
-                         "http://garner.ucsd.edu/pub/products/<GPSW>/gfz<GPSWD>.sp3.Z"],
+         # "GPS_GFZ_sp3": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/final/w<GPSW>/gfz<GPSWD>.sp3.Z",
+         #                 "ftp://igs.ign.fr/pub/igs/products/<GPSW>/gfz<GPSWD>.sp3.Z",
+         #                 "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+         #                 "http://garner.ucsd.edu/pub/products/<GPSW>/gfz<GPSWD>.sp3.Z"],
 
          "GPS_GRG_sp3": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/grg<GPSWD>.sp3.Z",
-                         "ftp://igs.ign.fr/pub/igs/products/<GPSW>/gfz<GPSWD>.sp3.Z",
                          "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/grg<GPSWD>.sp3.Z",
                          "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
                          "http://garner.ucsd.edu/pub/products/<GPSW>/grg<GPSWD>.sp3.Z",
                          "ftp://ftp.gfz-potsdam.de/GNSS/products/mgex/<GPSW>/grg<GPSWD>.sp3.Z"],
 
-         "MGEX_WUH_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
-                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
-                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
+         "MGEX_WHU_F_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
+                            "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
+                            "WUM0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
-         "MGEX_WUHU_sp3": [
+         "MGEX_WHU_R_sp3": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/orbit/"
+                            "WUM0MGXRAP_<YYYY><DOY>0000_01D_01M_ORB.SP3.gz"],
+
+         "MGEX_WHU_U_sp3": [
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0100_01D_05M_ORB.SP3.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0200_01D_05M_ORB.SP3.gz",
@@ -143,34 +189,36 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2300_01D_05M_ORB.SP3.gz"
          ],
 
-         "MGEX_GFZR_sp3": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/"
-                           "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
-                           "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/"
-                           "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"
-                           ],
+         "GRE_GFZ_F_sp3": ['ftp://ftp.gfz-potsdam.de/pub/GNSS/products/final/w<GPSW>/gfz<GPSWD>.sp3.Z',
+                           'ftp://ftp.gfz-potsdam.de/pub/GNSS/w<GPSW>/GFZ0OPSFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz'],
 
-         "MGEX_COD_sp3": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
-                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY"
-                          ">0000_01D_05M_ORB.SP3.gz"],
+         "MGEX_GFZ_R_sp3": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/"
+                            "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
+                            "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/"
+                            "GBM0MGXRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz"
+                            ],
 
-         "MGEX_SHA_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
-                          "SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/sha<GPSWD>.sp3.Z",
-                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY"
-                          ">0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/sha<GPSWD>.sp3.Z"],
+         "MGEX_COD_F_sp3": [
+             "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_05M_ORB.SP3.gz",
+             "--ftp-user anonymous --ftp-password cctcasm@163.com "
+             "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY"
+             ">0000_01D_05M_ORB.SP3.gz"],
 
-         "MGEX_GRG_sp3": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY"
-                          ">0000_01D_15M_ORB.SP3.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
+         "MGEX_SHA_F_sp3": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
+                            "SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
+                            "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY"
+                            ">0000_01D_15M_ORB.SP3.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
-         "GLO_IGL_sp3": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.sp3.Z"],
+         "MGEX_GRG_F_sp3": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY"
+                            ">0000_01D_15M_ORB.SP3.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
-         "MGEX_WUH_Hour_sp3": [
+         "GLO_IGL_F_sp3": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.sp3.Z"],
+
+         "MGEX_WHU_Hour_sp3": [
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_00.sp3.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_01.sp3.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_02.sp3.Z",
@@ -196,6 +244,9 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_22.sp3.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.sp3.Z"
          ],
+
+         'GRE_COD_R_sp3': ['ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.EPH_M.Z',
+                           'ftp://ftp.aiub.unibe.ch/CODE/COD0OPSRAP_<YYYY><DOY>0000_01D_05M_ORB.SP3'],
 
          "GPS_IGS_rnx": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>o.Z",
                          "ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YYYY>/<DOY>/<YY>d/<SITE><DOY>0.<YY>o.gz",
@@ -226,22 +277,32 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "MGEX_HK_cors": [
              "ftp://ftp.geodetic.gov.hk/rinex3/<YYYY>/<DOY>/<SITE>/30s/<SITE_LONG>_R_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
 
+         "GRE_IGS_01S": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
+                         "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/highrate/<YYYY>/<DOY>/"
+                         "<SITE><DOY>0.<YY>d.tar"],
+
+         "GCRE_MGEX_01S": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
+                           "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/highrate/<YYYY>/<DOY>/"
+                           "<SITE_LONG>_R_<YYYY><DOY>0000_01D_01S_MO.crx.tar"],
+
          "GPS_EU_cors": ["ftp://igs.bkg.bund.de/EUREF/obs/<YYYY>/<DOY>/<SITE><DOY>0.<YY>d.Z"],
 
          "GPS_AU_cors": ["ftp://ftp.ga.gov.au/geodesy-outgoing/gnss/data/daily/<YYYY>/<YY><DOY>/<SITE><DOY>0.<YY>d.Z"],
 
-         "GPS_IGS_clk": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.clk.Z"],
+         "GPS_IGS_clk": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSFIN_<YYYY><DOY>0000_01D_05M_CLK.CLK.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.clk.Z"],
 
-         "GPS_IGR_clk": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igr<GPSWD>.clk.Z",
-                         "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igr<GPSWD>.clk.Z",
-                         "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
-                         "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.clk.Z",
-                         "ftp://ftp.gfz-potsdam.de/GNSS/products/mgex/<GPSW>/igr<GPSWD>.clk.Z"],
+         "GPS_IGR_clk": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSRAP_<YYYY><DOY>0000_01D_05M_CLK.CLK.gz",
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igr<GPSWD>.clk.Z"],
+         # "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igr<GPSWD>.clk.Z",
+         # "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
+         # "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.clk.Z",
+         # "ftp://ftp.gfz-potsdam.de/GNSS/products/mgex/<GPSW>/igr<GPSWD>.clk.Z"],
 
-         "GPS_GFZ_clk": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/final/w<GPSW>/gfz<GPSWD>.clk.Z",
-                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/gbm<GPSWD>.clk.Z",
-                         "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/gfz<GPSWD>.clk.Z",
-                         "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/gbm<GPSWD>.clk.Z"],
+         # "GPS_GFZ_clk": ["ftp://ftp.gfz-potsdam.de//pub/GNSS/products/final/w<GPSW>/gfz<GPSWD>.clk.Z",
+         #                 "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/gbm<GPSWD>.clk.Z",
+         #                 "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/gfz<GPSWD>.clk.Z",
+         #                 "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/gbm<GPSWD>.clk.Z"],
 
          "GPS_GRG_clk": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/grg<GPSWD>.clk.Z",
                          "ftp://nfs.kasi.re.kr/gps/products/<GPSW>/grg<GPSWD>.clk.Z",
@@ -249,34 +310,39 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                          "http://garner.ucsd.edu/pub/products/<GPSW>/grg<GPSWD>.clk.Z",
                          "ftp://ftp.gfz-potsdam.de/GNSS/products/mgex/<GPSW>/grg<GPSWD>.clk.Z"],
 
-         "GPS_IGS_clk_30s": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.clk_30s.Z"],
+         "GPS_IGS_clk_30s": [
+             "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+             "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSWD>.clk_30s.Z"],
 
-         "MGEX_WUH_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
-                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
-                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
+         "MGEX_WHU_F_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
+                            "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
+                            "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "MGEX_COD_clk": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
-                          "COD0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
-                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/"
-                          "COD0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
+         "MGEX_COD_F_clk": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
+                            "COD0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                            "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/"
+                            "COD0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "MGEX_GFZR_clk": [
+         "GRE_GFZ_F_clk": ['ftp://ftp.gfz-potsdam.de/pub/GNSS/products/final/w<GPSW>/gfz<GPSWD>.clk.Z',
+                           'ftp://ftp.gfz-potsdam.de/pub/GNSS/w<GPSW>/GFZ0OPSFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz'],
+
+         "MGEX_GFZ_R_clk": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "MGEX_GRG_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
-                          "GRG0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
-                          "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/grg<GPSWD>.clk.Z",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
-                          "GRG0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/grg<GPSWD>.clk.Z"],
+         "MGEX_GRG_F_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
+                            "GRG0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                            "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/grg<GPSWD>.clk.Z",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
+                            "GRG0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/grg<GPSWD>.clk.Z"],
 
-         "WUH_PRIDE_clk": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/clock/"
-                           "WUM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
+         "MGEX_WHU_R_clk": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/clock/"
+                            "WUM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "MGEX_WUHU_clk": [
+         "MGEX_WHU_U_clk": [
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0000_01D_05M_CLK.CLK.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0100_01D_05M_CLK.CLK.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0200_01D_05M_CLK.CLK.gz",
@@ -302,7 +368,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2300_01D_05M_CLK.CLK.gz"
          ],
 
-         "MGEX_WUH_Hour_clk": [
+         "MGEX_WHU_Hour_clk": [
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_00.clk.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_01.clk.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_02.clk.Z",
@@ -328,23 +394,36 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_22.clk.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.clk.Z"
          ],
+         "MGEX_SHA_F_clk": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
+                            "SHA0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                            "--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/SHA0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
 
-         "IGS_erp": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSW>7.erp.Z"],
+         'GRE_COD_R_clk': ['ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.CLK_M.Z',
+                           'ftp://ftp.aiub.unibe.ch/CODE/COD0OPSRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK'],
 
-         "WUH_erp": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
-                     "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.Z",
-                     "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/wum<GPSWD>.erp.Z"],
+         "GLO_IGL_F_clk": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.clk.Z"],
 
-         "COD_erp": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.ERP_M.Z"],
+         "IGS_erp": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<GPSW>7.erp.Z",
+                     'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSFIN_<YEAR><WEEK0DOY>0000_07D_01D_ERP.ERP.gz'],
 
-         "GFZ_erp": [
+         "WHU_F_erp": [
+             "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
+             "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_ERP.ERP.Z",
+             "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/wum<GPSWD>.erp.Z"],
+
+         "COD_R_erp": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.ERP_M.Z"],
+
+         "GFZ_F_erp": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz"],
 
          "IGR_erp": ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
-                     "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.erp.Z"],
+                     "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.erp.Z",
+                     "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz"],
 
-         "WUHU_erp": [
+         "WHU_U_erp": [
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0100_01D_01D_ERP.ERP.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0200_01D_01D_ERP.ERP.gz",
@@ -370,7 +449,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>2300_01D_01D_ERP.ERP.gz"
          ],
 
-         "WUH_Hour_erp": [
+         "WHU_Hour_erp": [
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_00.erp.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_01.erp.Z",
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_02.erp.Z",
@@ -397,40 +476,40 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/whu/MGEX/<GPSW>/hour<GPSWD>_23.erp.Z"
          ],
 
-         "MGEX_WUHN_IGMAS_bia": ["--ftp-user casm_cct --ftp-password wangji531! "
-                                 "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/osb/"
-                                 "<GPSW>/SGG<GPSWD>.BIA.tar.gz"],
+         # "MGEX_WUHN_IGMAS_bia": ["--ftp-user casm_cct --ftp-password wangji531! "
+         #                         "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/osb/"
+         #                         "<GPSW>/SGG<GPSWD>.BIA.tar.gz"],
 
-         "MGEX_WHU_ABS_bia": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/bias/"
-                              "WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_ABS.BIA.gz"],
+         "MGEX_WHU_R_ABS_bia": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/bias/"
+                                "WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_ABS.BIA.gz"],
 
-         "MGEX_WHU_OSB_bia": ["ftp://igs.gnsswhu.cn/pub/whu/MGEX/DCB/<YYYY>"
-                              "/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
+         "MGEX_WHU_R_OSB_bia": ["ftp://igs.gnsswhu.cn/pub/whu/MGEX/DCB/<YYYY>"
+                                "/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
 
          "GPS_COD_bia": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/COD<GPSWD>.BIA.Z",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/cod<GPSWD>.bia.Z"],
 
-         "MGEX_COD_bia": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.BIA_M.Z"],
+         "MGEX_COD_R_bia": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.BIA_M.Z"],
 
-         "MGEX_GFZ_bia": [
-             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
+         "MGEX_COD_F_bia": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
+                            "COD0MGXFIN_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
+
+         "MGEX_GFZ_R_bia": [
+             "ftp://ftp.gfz-potsdam.de/pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
 
          "IGSG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z",
-                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
                       "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z",
                       "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z",
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/igsg<DOY>0.<YY>i.Z"],
 
          "IGRG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z",
                       "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
                       "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z",
                       "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z",
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/igrg<DOY>0.<YY>i.Z"],
 
-         "WUHG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
+         "WHUG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
                       "--ftp-user anonymous --ftp-password cctcasm@163.com "
                       "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
                       "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
@@ -438,8 +517,6 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z"],
 
          "WURG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
-                      "--ftp-user anonymous --ftp-password cctcasm@163.com "
-                      "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/whug<DOY>0.<YY>i.Z",
                       "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
                       "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z"],
@@ -504,8 +581,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                       "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z",
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z"],
 
-         "IGS_day_snx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z",
+         "IGS_day_snx": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z"],
 
@@ -545,25 +621,25 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                            "http://www.ppp-wizard.net/products/REAL_TIME/cnt<GPSWD>.sp3.gz",
                            "http://www.ppp-wizard.net/products/REAL_TIME/cnt<GPSWD>.obx.gz"],
 
-         "MGEX_WUH_IGMAS_upd": [
-             "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/upd/<YYYY>/<DOY>"
-             "/upd_ewl_<YYYY><DOY>_GEC",
-             "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/upd/<YYYY>/<DOY>"
-             "/upd_nl_<YYYY><DOY>_GEC",
-             "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/upd/<YYYY>/<DOY>"
-             "/upd_wl_<YYYY><DOY>_GEC"],
+         # "MGEX_WUH_IGMAS_upd": [
+         #     "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/upd/<YYYY>/<DOY>"
+         #     "/upd_ewl_<YYYY><DOY>_GEC",
+         #     "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/upd/<YYYY>/<DOY>"
+         #     "/upd_nl_<YYYY><DOY>_GEC",
+         #     "http://igmas.users.sgg.whu.edu.cn/products/download/directory/products/upd/<YYYY>/<DOY>"
+         #     "/upd_wl_<YYYY><DOY>_GEC"],
 
-         "MGEX_IGS_atx": ["http://files.igs.org/pub/station/general/igs14.atx"],
+         "MGEX_IGS14_atx": ["http://files.igs.org/pub/station/general/igs14.atx"],
+
+         "MGEX_IGS20_atx": ["http://files.igs.org/pub/station/general/igs20.atx"],
 
          "GPS_COD_dcb": ["ftp://ftp.aiub.unibe.ch/CODE_MGEX/CODE/<YYYY>/COM<GPSWD>.DCB.Z"],
 
-         "MGEX_CAS_dcb": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/gps/products/mgex/dcb/<YYYY>/"
-                          "CAS0MGXRAP_<YYYY><DOY>0000_01D_01D_DCB.BSX.gz",
-                          "ftp://igs.ign.fr/pub/igs/products/mgex/dcb/<YYYY>/"
-                          "CAS0MGXRAP_<YYYY><DOY>0000_01D_01D_DCB.BSX.gz"],
-
-         "MGEX_WHU_OSB": ["ftp://igs.gnsswhu.cn/pub/whu/MGEX/DCB/<YYYY>/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
+         "MGEX_CAS_R_dcb": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gps/gps/products/mgex/dcb/<YYYY>/"
+                            "CAS0MGXRAP_<YYYY><DOY>0000_01D_01D_DCB.BSX.gz",
+                            "ftp://igs.ign.fr/pub/igs/products/mgex/dcb/<YYYY>/"
+                            "CAS0MGXRAP_<YYYY><DOY>0000_01D_01D_DCB.BSX.gz"],
 
          "P1C1": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P1C1<YY><MM>.DCB.Z",
                   "ftp://ftp.aiub.unibe.ch/CODE/<YYYY>/P1C1<YY><MM>_RINEX.DCB.Z"],
@@ -620,16 +696,16 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
          "GPS_GRG_obx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"],
 
-         "MGEX_WUH_obx": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
-                          "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"],
+         "MGEX_COD_F_obx": ["ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/"
+                            "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"],
 
          "MGEX_COD_obx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_01D_15M_ATT.OBX.gz"],
 
-         "MGEX_GFZ_obx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
-                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GFZ0MGXRAP_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"],
+         "MGEX_GFZ_F_obx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
+                            "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GFZ0MGXRAP_<YYYY><DOY>0000_01D_30S_ATT.OBX.gz"],
 
-         "MGEX_WUHU_obx": [
+         "MGEX_WHU_U_obx": [
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0000_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0100_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>0200_01D_05M_ATT.OBX.gz",
@@ -768,6 +844,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          'Panda_leap_sec': ['ftp://ics.gnsslab.cn/panda_tables/leap.sec'],
 
+         'Panda_gpsrapid': ['https://datacenter.iers.org/data/latestVersion/gpsrapid.out.txt'],
+
          'Gamit_pmu_bull': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
                             "http://garner.ucsd.edu/pub/gamit/tables/pmu.bull_a",
                             "--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
@@ -809,6 +887,9 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          'Gamit_rcvant': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
                           "http://garner.ucsd.edu/pub/gamit/tables/rcvant.dat"],
+
+         'Gamit_nbody': ['--http-user=anonymous --http-passwd=1252443496@qq.com -nd '
+                         'http://garner.ucsd.edu/pub/gamit/tables/nbody'],
 
          'IGS_hfile': ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
                        "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs1a.<YY><DOY>.Z",
