@@ -3,9 +3,9 @@
 # GNSS_TYPE      : ALL TYPE OF GNSS DATA
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 2.05
+# Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022-12-04 - Version 2.05
+# Date           : 2023-01-14 - Version 2.07
 
 
 """
@@ -92,6 +92,9 @@
                     > WUHG_ion -> WHUG_ion
                     + MGEX_COD_F_bia
                     by Chang Chuntao  -> Version : 2.05
+    2023-02-02 :    > P1C1 重复
+                    + COD_F_erp
+                    by Chang Chuntao  -> Version : 2.07
 """
 
 gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdc", "MGEX_CNAV_brdm", "MGEX_CNAV_brd4"]],                                   # 1 BRDC
@@ -110,18 +113,18 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdc", "MGEX_CNAV_brdm", "MGEX_CNAV_brd
                       "MGEX_GRG_F_clk", 'MGEX_GFZ_F_clk', 'GRE_GFZ_F_clk',
                       'GRE_COD_R_clk', 'GLO_IGL_F_clk']],
 
-             ["RINEX", ["GPS_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_EU_cors", "GPS_AU_cors",      # 4 RINEX
-                        "MGEX_IGS_rnx", "MGEX_HK_cors", "GRE_IGS_01S", "GCRE_MGEX_01S"]],
+             ["RINEX", ["GPS_IGS_rnx", "GPS_USA_cors", "GPS_HK_cors", "GPS_AU_cors",      # 4 RINEX
+                        "MGEX_IGS_rnx", "MGEX_HK_cors", "GRE_IGS_01S", "GCRE_MGEX_01S", "MGEX_EU_cors"]],
 
              ["ERP", ["IGS_erp", "IGR_erp", "WHU_F_erp",
-                      "WHU_U_erp", "GFZ_F_erp", 'COD_R_erp',
-                      "WHU_Hour_erp"]],               # 5 ERP
+                      "COD_F_erp", "WHU_U_erp", "GFZ_R_erp",
+                      'COD_R_erp', "WHU_Hour_erp"]],               # 5 ERP
 
              ["BIA_DCB_OBX", ["GPS_COD_bia", "MGEX_COD_F_bia","MGEX_COD_R_bia",
                               "MGEX_WHU_R_ABS_bia", "MGEX_WHU_R_OSB_bia", "MGEX_GFZ_R_bia",     # 6 BIA_DCB_OBX
 
                               "GPS_COD_dcb", "MGEX_CAS_R_dcb",
-                              "P1C1", "P1C1", "P1P2", "P2C2",
+                              "P1C1", "P1P2", "P2C2",
 
                               "GPS_COD_obx", "GPS_GRG_obx",
                               "MGEX_WHU_F_obx", "MGEX_COD_F_obx", "MGEX_GFZ_F_obx",

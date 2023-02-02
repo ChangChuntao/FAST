@@ -3,15 +3,15 @@
 # Help           : Help for all mode
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 2.06
+# Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.06
+# Date           : 2023-01-14 - Version 2.07
 
 from FAST_Print import PrintGDD
 from GNSS_TYPE import gnss_type
 
 version = [1.00, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25,
-           2.01, 2.02, 2.03, 2.04, 2.05, 2.06]
+           2.01, 2.02, 2.03, 2.04, 2.05, 2.06, 2.07]
 
 version_time = ['2022-03-27',
                 '2022-04-12',
@@ -35,7 +35,8 @@ version_time = ['2022-03-27',
                 '2022-11-15',
                 '2022-12-02',
                 '2022-12-04',
-                '2023-01-14']
+                '2023-01-14',
+                '2023-02-02']
 
 
 def Supported_Data():
@@ -111,27 +112,6 @@ def cddhelp():
     """
     2022-03-27 :    引导模式输出帮助  by Chang Chuntao -> Version : 1.00
     2022-04-12 :    Version update by Chang Chuntao -> Version : 1.10
-    2022-04-22 :    Version update by Chang Chuntao -> Version : 1.11
-    2022-04-30 :    Version update by Chang Chuntao -> Version : 1.12
-    2022-05-24 :    Version update by Chang Chuntao -> Version : 1.13
-    2022-05-31 :    Version update by Chang Chuntao -> Version : 1.14
-    2022-07-03 :    Version update by Chang Chuntao -> Version : 1.15
-    2022-07-13 :    Version update by Chang Chuntao -> Version : 1.16
-    2022-07-22 :    Version update by Chang Chuntao -> Version : 1.17
-    2022-07-28 :    Version update by Chang Chuntao -> Version : 1.18
-    2022-08-04 :    Version update by Chang Chuntao -> Version : 1.19
-    2022-09-11 :    Version update by Chang Chuntao -> Version : 1.20
-    2022-09-16 :    Version update by Chang Chuntao -> Version : 1.21
-    2022-09-20 :    Version update by Chang Chuntao -> Version : 1.22
-    2022-09-28 :    Version update by Chang Chuntao -> Version : 1.23
-    2022-10-10 :    Version update by Chang Chuntao -> Version : 1.24
-    2022-11-02 :    Version update by Chang Chuntao -> Version : 1.25
-    2022-11-09 :    Version update by Chang Chuntao -> Version : 2.01
-    2022-11-10 :    Version update by Chang Chuntao -> Version : 2.02
-    2022-11-15 :    Version update by Chang Chuntao -> Version : 2.03
-    2022-12-02 :    Version update by Chang Chuntao -> Version : 2.04
-    2022-12-04 :    Version update by Chang Chuntao -> Version : 2.05
-    2023-01-14 :    Version update by Chang Chuntao -> Version : 2.06
     """
     print("==================================================================================")
     print("")
@@ -174,7 +154,7 @@ def arg_options():
     print("")
     print("  Where the following are some of the options avaiable:")
     print("")
-    print("  -v,  --version                   display the version of GDD and exit")
+    print("  -v,  --version                   display the version of FAST and exit")
     print("  -h,  --help                      print this help")
     print('  -t,  --type                      GNSS type, if you need to download multiple data,')
     print('                                   Please separate characters with " , "')
@@ -191,9 +171,9 @@ def arg_options():
     print("                                   Example : bjfs irkj urum ")
     print("  -p   --process                   number of threads (default 12)")
     print("")
-    print(r"  Example: FAST -t MGEX_IGS_atx")
+    print(r"  Example: FAST -t Panda_svnav")
     print(r"           FAST -t GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk -y 2022 -o 22 -e 30 -p 30")
-    print(r"           FAST -t MGEX_WUH_sp3 -y 2022 -d 22 -u N -l D:\code\CDD\Example")
+    print(r"           FAST -t MGEX_WHU_F_sp3 -y 2022 -d 22 -u N -l D:\code\CDD\Example")
     print(r"           FAST -t MGEX_IGS_rnx -y 2022 -d 22 -f D:\code\cdd\mgex.txt")
     print(r"           FAST -t IVS_week_snx -y 2022 -m 1")
     print("")
@@ -206,25 +186,6 @@ def arg_options():
 def fastSoftwareInformation():
     """
     2022-04-30 :    Software information by Chang Chuntao -> Version : 1.12
-    2022-05-24 :    Version update       by Chang Chuntao -> Version : 1.13
-    2022-05-31 :    Version update       by Chang Chuntao -> Version : 1.14
-    2022-07-03 :    Version update       by Chang Chuntao -> Version : 1.15
-    2022-07-13 :    Version update       by Chang Chuntao -> Version : 1.16
-    2022-07-22 :    Version update       by Chang Chuntao -> Version : 1.17
-    2022-07-28 :    Version update       by Chang Chuntao -> Version : 1.18
-    2022-08-04 :    Version update       by Chang Chuntao -> Version : 1.19
-    2022-09-11 :    Version update       by Chang Chuntao -> Version : 1.20
-    2022-09-16 :    Version update       by Chang Chuntao -> Version : 1.21
-    2022-09-20 :    Version update       by Chang Chuntao -> Version : 1.22
-    2022-09-28 :    Version update       by Chang Chuntao -> Version : 1.23
-    2022-10-10 :    Version update       by Chang Chuntao -> Version : 1.24
-    2022-11-02 :    Version update       by Chang Chuntao -> Version : 1.25
-    2022-11-09 :    Version update       by Chang Chuntao -> Version : 2.01
-    2022-11-10 :    Version update       by Chang Chuntao -> Version : 2.02
-    2022-11-15 :    Version update       by Chang Chuntao -> Version : 2.03
-    2022-12-02 :    Version update       by Chang Chuntao -> Version : 2.04
-    2022-12-04 :    Version update       by Chang Chuntao -> Version : 2.05
-    2023-01-14 :    Version update       by Chang Chuntao -> Version : 2.06
     """
     print("==================================================================================")
     print("     FAST           : Fusion Abundant multi-Source data download Terminal")

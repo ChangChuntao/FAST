@@ -3,9 +3,9 @@
 # CDD_Sub        : Get user input
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 2.06
+# Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.06
+# Date           : 2023-01-14 - Version 2.07
 from Format import *
 from help import *
 from Dowload import *
@@ -151,6 +151,9 @@ def sub_cdd(obj):
                     x 删除GPS_GFZ_sp3 / GPS_GFZ_clk
                     > MGEX_GFZ_F_sp3 -> GRE_GFZ_F_sp3 / MGEX_GFZ_F_clk -> GRE_GFZ_F_clk
                     by Chang Chuntao  -> Version : 2.06
+    2023-02-02 :    > P1C1 重复
+                    + COD_F_erp
+                    by Chang Chuntao  -> Version : 2.07
     """
     print("")
     if obj == 1:
@@ -203,20 +206,20 @@ def sub_cdd(obj):
         print("    +-------------------------------------GPS------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : GPS_IGS_rnx            2 : GPS_USA_cors           3 : GPS_HK_cors   |")
-        print("    |    4 : GPS_EU_cors            5 : GPS_AU_cors                              |")
+        print("    |    4 : GPS_AU_cors                                                         |")
         print("    |                                                                            |")
         print("    +------------------------------------GCRE------------------------------------+")
         print("    |                                                                            |")
-        print("    |    6 : MGEX_IGS_rnx           7 : MGEX_HK_cors           8 : GRE_IGS_01S   |")
-        print("    |    9 : GCRE_MGEX_01S                                                       |")
+        print("    |    5 : MGEX_IGS_rnx           6 : MGEX_HK_cors           7 : GRE_IGS_01S   |")
+        print("    |    8 : GCRE_MGEX_01S          9 : MGEX_EU_cors                             |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 5:
         print("    +------------------------------------ERP-------------------------------------+")
         print("    |                                                                            |")
         print("    |    1 : IGS_erp                2 : IGR_erp                3 : WHU_F_erp     |")
-        print("    |    4 : WHU_U_erp              5 : GFZ_F_erp              6 : COD_R_erp     |")
-        print("    |    7 : WHU_Hour_erp                                                        |")
+        print("    |    4 : COD_F_erp              5 : WHU_U_erp              6 : GFZ_R_erp     |")
+        print("    |    7 : COD_R_erp              8 : WHU_Hour_erp                             |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 6:
@@ -235,7 +238,7 @@ def sub_cdd(obj):
         print("    +------------------------------------OBX-------------------------------------+")
         print("    |                                                                            |")
         print("    |   12 : GPS_COD_obx           13 : GPS_GRG_obx                              |")
-        print("    |   14 : MGEX_WHU_F_obx        15 : MGEX_COD_F_obx        16 : MGEX_GFZ_F_obx|")
+        print("    |   14 : MGEX_WHU_F_obx        15 : MGEX_COD_F_obx        16 : MGEX_GFZ_R_obx|")
         print("    |   17 : MGEX_WHU_U_obx                                                      |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")

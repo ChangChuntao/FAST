@@ -3,9 +3,9 @@
 # FTP_source     : FTP source of each gnss center
 # Author         : Chang Chuntao, CAO Duoming, Li Yongxi
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
-# Latest Version : 2.06
+# Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.06
+# Date           : 2023-01-14 - Version 2.07
 import datetime
 
 nowTime = datetime.datetime.utcnow()
@@ -102,6 +102,9 @@ for p in plate:
                     > MGEX_GFZ_F_sp3 -> GRE_GFZ_F_sp3 / MGEX_GFZ_F_clk -> GRE_GFZ_F_clk
                     > IGS rename -> GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GRE_COD_R_sp3 / GPS_IGS_clk
                     >               GPS_IGR_clk / GPS_IGS_clk_30s / GRE_COD_R_clk / IGS_erp
+                    by Chang Chuntao  -> Version : 2.06
+    2023-01-24 :    > GPS_EU_CORS -> MGEX_EU_cors
+                    + MGEX_EU_cors add source
                     by Chang Chuntao  -> Version : 2.06
 '''
 
@@ -285,7 +288,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                            "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/highrate/<YYYY>/<DOY>/"
                            "<SITE_LONG>_R_<YYYY><DOY>0000_01D_01S_MO.crx.tar"],
 
-         "GPS_EU_cors": ["ftp://igs.bkg.bund.de/EUREF/obs/<YYYY>/<DOY>/<SITE><DOY>0.<YY>d.Z"],
+         "MGEX_EU_cors": ["https://gnss.bev.gv.at/at.gv.bev.dc/data/obs/<YYYY>/<DOY>/<SITE_LONG>_S_<YYYY><DOY>0000_01D_30S_MO.crx.gz",
+                          "https://igs.bkg.bund.de/root_ftp/EUREF//obs/<YYYY>/<DOY>/<SITE_LONG>_S_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
 
          "GPS_AU_cors": ["ftp://ftp.ga.gov.au/geodesy-outgoing/gnss/data/daily/<YYYY>/<YY><DOY>/<SITE><DOY>0.<YY>d.Z"],
 
@@ -415,9 +419,12 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
 
          "COD_R_erp": ["ftp://ftp.aiub.unibe.ch/CODE/<YYYY>_M/COD<GPSWD>.ERP_M.Z"],
 
-         "GFZ_F_erp": [
+         "COD_F_erp": ["ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/COD0MGXFIN_<YYYY><DOY>0000_03D_12H_ERP.ERP.gz"],
+
+         "GFZ_R_erp": [
              "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
-             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz"],
+             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgnss/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.gz",
+             "ftp://ftp.gfz-potsdam.de//pub/GNSS/products/mgex/<GPSW>/GBM0MGXRAP_<YYYY><DOY>0000_01D_01D_ERP.ERP.Z"],
 
          "IGR_erp": ["--http-user=anonymous --http-passwd=1252443496@qq.com -nd "
                      "http://garner.ucsd.edu/pub/products/<GPSW>/igr<GPSWD>.erp.Z",
@@ -719,7 +726,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1000_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1100_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1200_01D_05M_ATT.OBX.gz",
-             "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1300_01D_05M_ATT.OBX.gz",
+             "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/"
+             "<GPSW>/WUM0MGXULA_<YYYY><DOY>1300_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1400_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1500_01D_05M_ATT.OBX.gz",
              "ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXULA_<YYYY><DOY>1600_01D_05M_ATT.OBX.gz",
