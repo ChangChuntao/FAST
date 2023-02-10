@@ -5,7 +5,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.07
+# Date           : 2023-02-10 - Version 2.07
 import datetime
 
 nowTime = datetime.datetime.utcnow()
@@ -103,9 +103,12 @@ for p in plate:
                     > IGS rename -> GPS_IGS_sp3 / GPS_IGR_sp3 / GPS_IGU_sp3 / GRE_COD_R_sp3 / GPS_IGS_clk
                     >               GPS_IGR_clk / GPS_IGS_clk_30s / GRE_COD_R_clk / IGS_erp
                     by Chang Chuntao  -> Version : 2.06
-    2023-01-24 :    > GPS_EU_CORS -> MGEX_EU_cors
-                    + MGEX_EU_cors add source
-                    by Chang Chuntao  -> Version : 2.06
+    2023-02-10 :    > GPS_EU_CORS -> MGEX_EU_cors
+                    > MGEX_EU_cors / CODG_ion  add source
+                    > IGS rename -> IGS_day_snx / IGS_week_snx
+                    + COD_F_erp
+                    + IGS_crd_snx / COD_sol_snx / ESA_sol_snx / GFZ_sol_snx / GRG_sol_snx / NGS_sol_snx / SIO_sol_snx
+                    by Chang Chuntao  -> Version : 2.07
 '''
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.Z",
@@ -288,8 +291,9 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                            "ftps://gdc.cddis.eosdis.nasa.gov/gnss/data/highrate/<YYYY>/<DOY>/"
                            "<SITE_LONG>_R_<YYYY><DOY>0000_01D_01S_MO.crx.tar"],
 
-         "MGEX_EU_cors": ["https://gnss.bev.gv.at/at.gv.bev.dc/data/obs/<YYYY>/<DOY>/<SITE_LONG>_S_<YYYY><DOY>0000_01D_30S_MO.crx.gz",
-                          "https://igs.bkg.bund.de/root_ftp/EUREF//obs/<YYYY>/<DOY>/<SITE_LONG>_S_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
+         "MGEX_EU_cors": [
+             "https://gnss.bev.gv.at/at.gv.bev.dc/data/obs/<YYYY>/<DOY>/<SITE_LONG>_S_<YYYY><DOY>0000_01D_30S_MO.crx.gz",
+             "https://igs.bkg.bund.de/root_ftp/EUREF//obs/<YYYY>/<DOY>/<SITE_LONG>_S_<YYYY><DOY>0000_01D_30S_MO.crx.gz"],
 
          "GPS_AU_cors": ["ftp://ftp.ga.gov.au/geodesy-outgoing/gnss/data/daily/<YYYY>/<YY><DOY>/<SITE><DOY>0.<YY>d.Z"],
 
@@ -528,7 +532,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                       "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z",
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/whrg<DOY>0.<YY>i.Z"],
 
-         "CODG_ion": ["ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
+         "CODG_ion": ['http://ftp.aiub.unibe.ch/CODE/<YYYY>/COD0OPSFIN_<YYYY><DOY>0000_01D_01H_GIM.INX.gz',
+                      "ftp://ftp.gipp.org.cn/product/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
                       "--ftp-user anonymous --ftp-password cctcasm@163.com "
                       "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
                       "ftp://gssc.esa.int/gnss/products/ionex/<YYYY>/<DOY>/codg<DOY>0.<YY>i.Z",
@@ -588,11 +593,12 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                       "ftp://igs.ign.fr/pub/igs/products/ionosphere/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z",
                       "ftp://igs.gnsswhu.cn/pub/gps/products/ionex/<YYYY>/<DOY>/esrg<DOY>0.<YY>i.Z"],
 
-         "IGS_day_snx": ["ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z",
+         "IGS_day_snx": ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSSNX_<YYYY><DOY>0000_01D_01D_SOL.SNX.gz',
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z",
                          "--ftp-user anonymous --ftp-password cctcasm@163.com "
                          "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/igs<YY>P<GPSWD>.snx.Z"],
 
-         "IGS_week_snx": ["--ftp-user anonymous --ftp-password cctcasm@163.com "
+         "IGS_week_snx": ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSSNX_<YYYY><DOY>0000_07D_07D_SOL.SNX.gz',
                           "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSW>.snx.Z",
                           "--ftp-user anonymous --ftp-password cctcasm@163.com "
                           "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/<GPSW>/igs<YY>P<GPSW>.snx.Z"],
@@ -620,6 +626,27 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              "--ftp-user anonymous --ftp-password cctcasm@163.com "
              "ftps://gdc.cddis.eosdis.nasa.gov/doris/products/sinex_series/idswd/ids<YY><DOY>wd19.snx.Z",
          ],
+
+         'IGS_crd_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/IGS0OPSSNX_<YYYY><DOY>0000_01D_01D_CRD.SNX.gz',
+                         "ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/igs<YY>P<GPSW>.ssc.Z"],
+
+         'COD_sol_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/COD0OPSFIN_<YYYY><DOY>0000_01D_01D_SOL.SNX.gz',
+                         'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/cod<GPSWD>.snx.Z'],
+
+         'ESA_sol_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/ESA0OPSFIN_<YYYY><DOY>0000_01D_01D_SOL.SNX.gz',
+                         'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/esa<GPSWD>.snx.Z'],
+
+         'GFZ_sol_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/GFZ0OPSFIN_<YYYY><DOY>0000_01D_01D_SOL.SNX.gz',
+                         'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/gfz<GPSWD>.snx.Z'],
+
+         'GRG_sol_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/GRG0OPSFIN_<YYYY><DOY>0000_01D_000_SOL.SNX.gz',
+                         'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/grg<GPSWD>.snx.Z'],
+
+         'NGS_sol_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/NGS0OPSFIN_<YYYY><DOY>0000_01D_01D_SOL.SNX.gz',
+                         'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/ngs<GPSWD>.snx.Z'],
+
+         'SIO_sol_snx': ['ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/SIO0OPSFIN_<YYYY><DOY>0000_01D_01D_SOL.SNX.gz',
+                         'ftp://igs.gnsswhu.cn/pub/gps/products/<GPSW>/sio<GPSWD>.snx.Z'],
 
          "CNES_post": ["http://www.ppp-wizard.net/products/POST_PROCESSED/post_<YYYY><DOY>.tgz"],
 

@@ -5,7 +5,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.07
+# Date           : 2023-02-10 - Version 2.07
 from Format import *
 from help import *
 from Dowload import *
@@ -152,7 +152,9 @@ def sub_cdd(obj):
                     > MGEX_GFZ_F_sp3 -> GRE_GFZ_F_sp3 / MGEX_GFZ_F_clk -> GRE_GFZ_F_clk
                     by Chang Chuntao  -> Version : 2.06
     2023-02-02 :    > P1C1 重复
+                    > 修正clk数字
                     + COD_F_erp
+                    + IGS_crd_snx / COD_sol_snx / ESA_sol_snx / GFZ_sol_snx / GRG_sol_snx / NGS_sol_snx / SIO_sol_snx
                     by Chang Chuntao  -> Version : 2.07
     """
     print("")
@@ -194,10 +196,10 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    +------------------------------------GCRE------------------------------------+")
         print("    |                                                                            |")
-        print("    |    6 : MGEX_WHU_F_clk         7 : MGEX_WHU_R_clk         8 : MGEX_WHU_U_clk|")
-        print("    |    9 : MGEX_WHU_Hour_clk     10 : MGEX_SHA_F_clk        11 : MGEX_COD_F_clk|")
-        print("    |   12 : MGEX_GRG_F_clk        14 : MGEX_GFZ_R_clk        13 : GRE_GFZ_F_clk |")
-        print("    |   14 : GRE_COD_R_clk         15 : GLO_IGL_F_clk                            |")
+        print("    |    5 : MGEX_WHU_F_clk         6 : MGEX_WHU_R_clk         7 : MGEX_WHU_U_clk|")
+        print("    |    8 : MGEX_WHU_Hour_clk      9 : MGEX_SHA_F_clk        10 : MGEX_COD_F_clk|")
+        print("    |   11 : MGEX_GRG_F_clk        13 : MGEX_GFZ_R_clk        14 : GRE_GFZ_F_clk |")
+        print("    |   15 : GRE_COD_R_clk         16 : GLO_IGL_F_clk                            |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 4:
@@ -265,6 +267,9 @@ def sub_cdd(obj):
         print("    |                                                                            |")
         print("    |    1 : IGS_day_snx            2 : IGS_week_snx           3 : IVS_week_snx  |")
         print("    |    4 : ILS_week_snx           5 : IDS_week_snx                             |")
+        print("    |    6 : IGS_crd_snx            7 : COD_sol_snx            8 : ESA_sol_snx   |")
+        print("    |    9 : GFZ_sol_snx           10 : GRG_sol_snx           11 : NGS_sol_snx   |")
+        print("    |   12 : SIO_sol_snx                                                         |")
         print("    |                                                                            |")
         print("    +----------------------------------------------------------------------------+")
     elif obj == 9:

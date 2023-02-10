@@ -5,7 +5,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.07
+# Date           : 2023-02-10 - Version 2.07
 
 
 """
@@ -94,6 +94,7 @@
                     by Chang Chuntao  -> Version : 2.05
     2023-02-02 :    > P1C1 重复
                     + COD_F_erp
+                    + IGS_crd_snx / COD_sol_snx / ESA_sol_snx / GFZ_sol_snx / GRG_sol_snx / NGS_sol_snx / SIO_sol_snx
                     by Chang Chuntao  -> Version : 2.07
 """
 
@@ -136,7 +137,11 @@ gnss_type = [["BRDC", ["GPS_brdc", "MGEX_brdc", "MGEX_CNAV_brdm", "MGEX_CNAV_brd
                           "IGS_zpd", "COD_tro", "JPL_tro", "GRID_1x1_VMF3", "GRID_2.5x2_VMF1", "GRID_5x5_VMF3",
                           "Meteorological"]],
 
-             ["SINEX", ["IGS_day_snx", "IGS_week_snx", "IVS_week_snx", "ILS_week_snx", "IDS_week_snx"]],                 # 8 SINEX
+             ["SINEX", ["IGS_day_snx", "IGS_week_snx",
+                        "IVS_week_snx", "ILS_week_snx", "IDS_week_snx",
+                        'IGS_crd_snx', 'COD_sol_snx', 'ESA_sol_snx',
+                        'GFZ_sol_snx', 'GRG_sol_snx', 'NGS_sol_snx',
+                        'SIO_sol_snx']],                                                    # 8 SINEX
 
              ["CNES_AR", ["CNES_post", "CNES_realtime"]],                                                                # 9 CNES_AR
 

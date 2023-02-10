@@ -5,7 +5,7 @@
 # Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
 # Latest Version : 2.07
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-01-14 - Version 2.07
+# Date           : 2023-02-10 Version 2.07
 
 from FAST_Print import PrintGDD
 from GNSS_TYPE import gnss_type
@@ -36,7 +36,7 @@ version_time = ['2022-03-27',
                 '2022-12-02',
                 '2022-12-04',
                 '2023-01-14',
-                '2023-02-02']
+                '2023-02-10']
 
 
 def Supported_Data():
