@@ -160,4 +160,3 @@
 
 [![Page Views Count](https://badges.toozhao.com/badges/01GK8CXX2CKT5SVRRE7VY71E49/green.svg)](https://badges.toozhao.com/stats/01GK8CXX2CKT5SVRRE7VY71E49 "Get your own page views count badge on badges.toozhao.com")
 
-<a href="https://info.flagcounter.com/Xcee"><img src="https://s11.flagcounter.com/count2/Xcee/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
