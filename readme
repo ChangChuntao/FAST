@@ -1,0 +1,2 @@
+yum install pcre2 psl 
+venv\Lib\site-packages\cartopy\__init__.py 修改位置dir为当前路径
