@@ -148,7 +148,7 @@ def plotMultipath(mpData, self = None, pngFile = None):
             # axMP.tick_params(axis='x', labelsize=8)
         nowAxNum += 1
 
-    figMP.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.95,hspace=0.1)
+    figMP.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.95,hspace=0.1)
 
     if self is not None:
         # figMP.savefig('D:\Code\FAST\manual\RUN_image\mp.png')

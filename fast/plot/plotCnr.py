@@ -267,7 +267,7 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
         # 添加图例（只显示一次均值标签）
         handles, labels = axcnr.get_legend_handles_labels()
         if handles:
-            axcnr.legend(handles, labels, loc='upper right', fontsize='medium')
+            axcnr.legend(handles, labels, loc='upper right', fontsize=10)
 
         # 调整纵轴范围为10的倍数
         current_min, current_max = axcnr.get_ylim()
@@ -282,8 +282,8 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
         y_max_rounded = ((y_max + 0) // 10) * 10  # 向上取整到最近的 5 的倍数
         axcnr.set_ylim(0, 60)
     # 调整子图间距
-    figcnr.subplots_adjust(left=0.15, right=0.99, bottom=0.04, top=0.95)
-    
+    figcnr.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.95)
+
     if self is not None:
         # figcnr.savefig('D:\Code\FAST\manual\RUN_image\snr.png')
         figcnr.canvas.draw()

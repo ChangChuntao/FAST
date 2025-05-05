@@ -48,7 +48,7 @@ def plotCycleSlip(mwgfData, self = None, pngFile = None):
         axcnr.tick_params(axis='x', labelsize=10,labelrotation= 90)
         nowAxNum += 1
     figCycleSlip.subplots_adjust(hspace=0.35, wspace=0.5)
-    figCycleSlip.subplots_adjust(left=0.12, right=0.99, bottom=0.1, top=0.99)
+    figCycleSlip.subplots_adjust(left=0.08, right=0.99, bottom=0.07, top=0.99)
     plt.tight_layout()
     if self is not None:
         figCycleSlip.canvas.draw()

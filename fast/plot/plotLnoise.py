@@ -61,7 +61,7 @@ def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
         nowAxNum += 1
 
 
-    figPhaseNoise.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.93)
+    figPhaseNoise.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.93)
     if self is not None:
         figPhaseNoise.canvas.draw()
         self.status.showMessage('Plot PhaseNoise completed.')

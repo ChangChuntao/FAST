@@ -26,9 +26,9 @@ def plotCMC(cmcData, self = None, pngFile = None):
         QApplication.processEvents()
     for gnssSys in cmcData:
         axCMC=figCMC.add_subplot(gnssSysNum,1,nowAxNum)
-        axCMC.set_ylabel(gnssSys + '_P [m]', fontsize=16)
+        axCMC.set_ylabel(gnssSys + '_P [m]', fontsize='medium')
         axCMC.grid(zorder=0) 
-        axCMC.tick_params(axis='y', labelsize=13)
+        axCMC.tick_params(axis='y', labelsize='medium')
         cmcall = []
         for prn in cmcData[gnssSys]:
             for band in cmcData[gnssSys][prn]:
@@ -45,12 +45,12 @@ def plotCMC(cmcData, self = None, pngFile = None):
             # xfmt = mdate.DateFormatter('%dD-%H:%M')
             xfmt = mdate.DateFormatter('%dD-%HH')
             axCMC.xaxis.set_major_formatter(xfmt)
-            axCMC.tick_params(axis='x', labelsize=13)
+            axCMC.tick_params(axis='x', labelsize='medium')
             # axCMC.tick_params(axis='x', labelsize=8)
         nowAxNum += 1
 
 
-    figCMC.subplots_adjust(left=0.12, right=0.99, bottom=0.1, top=0.99)
+    figCMC.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.99)
 
     if self is not None:
         figCMC.canvas.draw()

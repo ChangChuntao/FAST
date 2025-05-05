@@ -28,9 +28,9 @@ def plotIOD(iodData, self = None, pngFile = None):
         QApplication.processEvents()
     for gnssSys in iodData:
         axIOD=figIOD.add_subplot(gnssSysNum,1,nowAxNum)
-        axIOD.set_ylabel(gnssSys + '_L [m/s]', fontsize=16)
+        axIOD.set_ylabel(gnssSys + '_L [m/s]', fontsize='medium')
         axIOD.grid(zorder=0) 
-        axIOD.tick_params(axis='y', labelsize=13)
+        axIOD.tick_params(axis='y', labelsize='medium')
 
         for prn in iodData[gnssSys]:
             for band in iodData[gnssSys][prn]:
@@ -43,12 +43,12 @@ def plotIOD(iodData, self = None, pngFile = None):
         else:
             xfmt = mdate.DateFormatter('%dD-%HH')
             axIOD.xaxis.set_major_formatter(xfmt)
-            axIOD.tick_params(axis='x', labelsize=13)
+            axIOD.tick_params(axis='x', labelsize='medium')
             # axIOD.tick_params(axis='x', labelsize=8)
         nowAxNum += 1
 
 
-    figIOD.subplots_adjust(left=0.12, right=0.99, bottom=0.1, top=0.99)
+    figIOD.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.96)
 
     if self is not None:
         figIOD.canvas.draw()
