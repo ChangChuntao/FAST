@@ -2,7 +2,7 @@
 
 #### Introduce
 **FAST** is a GNSS data download and processing software developed in Python 3.12, designed to ensure high flexibility and seamless integration with other scientific computing tools. The software adopts a modular architecture, consisting of four main components: (1) data download, (2) quality analysis, (3) SPP, and (4) station selection. Built on PyQt5, FAST provides both a GUI and command-line support, making it accessible to users ranging from beginners to advanced researchers.
-![intro](manual\fig\intro.png)
+![intro](manual/fig/intro.png)
 
 #### Git
 - [https://github.com/ChangChuntao/FAST](https://github.com/ChangChuntao/FAST)
