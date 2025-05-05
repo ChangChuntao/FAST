@@ -24,20 +24,25 @@ For detailed installation and usage instructions, please refer to the FAST_manua
 #### Participation and contribution
 
 1. Dr. **Chang Chuntao** @GNSS Research Center, Wuhan University
+
     Program design/ Program writing/ Document writing/ Program testing/ Program maintenance     
     
 
 2. Pd. **Jiang Kecai**@GNSS Research Center, Wuhan University
+
     Program idea / parallel computing processing idea
   
 
 3. Dr. **Mu Renhai**@GNSS Research Center, Wuhan University
+
     Program design/ program testing/ Documentation
 
 
 4. Dr. **Li Bo** @Liaoning Technical University
+
     Program testing/ Documentation
 
 
 5. Dr. **Wei Hengda** @GNSS Research Center, Wuhan University
+
     Program testing/ Documentation
