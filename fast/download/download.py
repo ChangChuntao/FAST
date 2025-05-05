@@ -44,8 +44,8 @@ elif platform.system() == 'Darwin':
     else:
         dirname = os.path.dirname(os.path.abspath(__file__))
         dirname = os.path.join(dirname, '..')
-    wget = os.path.join(dirname, 'mac_bin', 'wget')
-    lftp = os.path.join(dirname, 'mac_bin', 'lftp')
+    wget = os.path.join(dirname, 'bin', 'wget')
+    lftp = os.path.join(dirname, 'bin', 'lftp')
     wget += " -T 3 -t 3 -N -c "
     lftp += ' '
 else:

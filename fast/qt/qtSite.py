@@ -38,7 +38,7 @@ class runSiteWorker(QObject):
         if os.path.isdir(os.path.join(self.mainSelf.exeDirName, 'win_bin', 'bin')):
             binDir = os.path.join(self.mainSelf.exeDirName, 'win_bin', 'bin')
         else:
-            binDir = os.path.join(self.mainSelf.exeDirName, 'mac_bin', 'mac_bin')
+            binDir = os.path.join(self.mainSelf.exeDirName, 'mac_bin', 'bin')
 
         igsFileCsv = os.path.join(binDir, 'IGSNetwork.csv')
         megxSiteList = readMegxSiteInf(igsFileCsv)

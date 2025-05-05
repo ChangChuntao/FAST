@@ -219,8 +219,6 @@ if platform.system() == 'Windows':
     unzip_zip = os.path.join(dirname, 'bin', 'unzip.exe') + ' '
     crx2rnx = os.path.join(dirname, 'bin', 'crx2rnx.exe')
     crx2rnx += " "
-    teqc = os.path.join(dirname, 'bin', 'teqc.exe')
-    teqc += ' '
     gfzrnx_exe = os.path.join(dirname, 'bin', 'gfzrnx_win.exe')
     gfzrnx = gfzrnx_exe + ' '
     unzip_tar = 'tar -zxvf'
@@ -230,15 +228,13 @@ elif platform.system() == 'Darwin':
     else:
         dirname = os.path.dirname(os.path.abspath(__file__))
         dirname = os.path.join(dirname, '..')
-    crx2rnx = os.path.join(dirname, 'mac_bin', 'crx2rnx')
+    crx2rnx = os.path.join(dirname, 'bin', 'crx2rnx')
     crx2rnx += ' '
     unzip_tgz = 'tar -xvzf '
-    uncompress = os.path.join(dirname, 'mac_bin', 'gunzip')
-    unzip_zip = os.path.join(dirname, 'mac_bin', 'gunzip') + ' '
+    uncompress = os.path.join(dirname, 'bin', 'gunzip')
+    unzip_zip = os.path.join(dirname, 'bin', 'gunzip') + ' '
     unzip = uncompress + ' '
-    teqc = os.path.join(dirname, 'mac_bin', 'teqc')
-    teqc += ' '
-    gfzrnx_exe = os.path.join(dirname, 'mac_bin', 'gfzrnx')
+    gfzrnx_exe = os.path.join(dirname, 'bin', 'gfzrnx')
     gfzrnx = gfzrnx_exe + ' '
     unzip_tar = 'tar -xvf'
 else:
@@ -262,8 +258,6 @@ else:
     uncompress = os.path.join(binDir, 'uncompress')
     unzip_zip = os.path.join(binDir, 'unzip') + ' '
     unzip = uncompress + ' '
-    teqc = os.path.join(binDir, 'teqc')
-    teqc += ' '
     gfzrnx_exe = os.path.join(binDir, 'gfzrnx_linux')
     gfzrnx = gfzrnx_exe + ' '
     unzip_tar = 'tar -xvf'
