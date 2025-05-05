@@ -45,3 +45,5 @@ For detailed installation and usage instructions, please refer to the FAST_manua
 5. Dr. **Wei Hengda** @GNSS Research Center, Wuhan University
 
     Program testing/ Documentation
+
+[![Page Views Count](https://badges.toozhao.com/badges/01GK8CXX2CKT5SVRRE7VY71E49/green.svg)](https://badges.toozhao.com/stats/01GK8CXX2CKT5SVRRE7VY71E49 "Get your own page views count badge on badges.toozhao.com")

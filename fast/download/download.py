@@ -44,9 +44,6 @@ elif platform.system() == 'Darwin':
     else:
         dirname = os.path.dirname(os.path.abspath(__file__))
         dirname = os.path.join(dirname, '..')
-    # if 'CentOS' in linux_distribution:
-    #     wget = 'wget'
-    # else:
     wget = os.path.join(dirname, 'mac_bin', 'wget')
     lftp = os.path.join(dirname, 'mac_bin', 'lftp')
     wget += " -T 3 -t 3 -N -c "
