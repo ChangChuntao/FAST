@@ -102,13 +102,13 @@ def plotMultipath(mpData, self = None, pngFile = None):
         QApplication.processEvents()
     for gnssSys in mpData:
         axMP=figMP.add_subplot(gnssSysNum,1,nowAxNum)
-        axMP.set_ylabel(gnssSys + ' [m]', fontdict={'size': 10})  
+        axMP.set_ylabel(gnssSys + ' [m]', fontsize='medium')
         axMP.yaxis.labelpad = 0  # 单位为像素
         axMP.grid(zorder=0) 
-        axMP.tick_params(axis='y', labelsize=10)
+        axMP.tick_params(axis='y', labelsize='medium')
         axMP.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
-        if nowAxNum == 1:
-            axMP.set_title('Pseudorange Multipath', fontdict={'size': 10}, pad=1)
+        # if nowAxNum == 1:
+        #     axMP.set_title('Pseudorange Multipath', fontdict={'size': 10}, pad=1)
         bandData = {}
         for prn in mpData[gnssSys]:
             for band in mpData[gnssSys][prn]:
@@ -131,7 +131,7 @@ def plotMultipath(mpData, self = None, pngFile = None):
                 transform=axMP.transAxes, verticalalignment='top',
                 horizontalalignment='left', color='black',
                 bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                zorder=30, fontsize=10)
+                zorder=30, fontsize='medium')
         
         y_min, y_max = axMP.get_ylim()
         y_min_rounded = (y_min // 5) * 5  # 向下取整到最近的 5 的倍数
@@ -143,13 +143,12 @@ def plotMultipath(mpData, self = None, pngFile = None):
         else:
             xfmt = mdate.DateFormatter('%dD-%HH')
             axMP.xaxis.set_major_formatter(xfmt)
-            axMP.tick_params(axis='x', labelsize=10)
-            axMP.xaxis.set_major_formatter(mdate.DateFormatter('%dD-%HH'))
-        axMP.xaxis.set_major_locator(mdate.HourLocator(interval=6))
+            axMP.tick_params(axis='x', labelsize='medium')
+        # axMP.xaxis.set_major_locator(mdate.HourLocator(interval=6))
             # axMP.tick_params(axis='x', labelsize=8)
         nowAxNum += 1
 
-    figMP.subplots_adjust(left=0.18, right=0.99, bottom=0.04, top=0.95,hspace=0.1)
+    figMP.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.95,hspace=0.1)
 
     if self is not None:
         # figMP.savefig('D:\Code\FAST\manual\RUN_image\mp.png')

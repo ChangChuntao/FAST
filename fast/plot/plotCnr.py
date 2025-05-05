@@ -206,19 +206,19 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
         figcnr = plt.figure()
 
     matplotlib.rcParams['font.family'] = 'Arial'  # 使用 Arial 无衬线字体
-    matplotlib.rcParams['font.size'] = 10         # 设置字体大小为 10pt
+    # matplotlib.rcParams['font.size'] = 10         # 设置字体大小为 10pt
     nowAxNum = 1
     prnIndex = 0
     for gnssSys in cnrData:
         axcnr = figcnr.add_subplot(gnssSysNum, 1, nowAxNum)
-        axcnr.set_ylabel(f'{gnssSys} [dBHz]', fontsize=10)
+        axcnr.set_ylabel(f'{gnssSys} [dBHz]', fontsize='medium')
         axcnr.yaxis.labelpad = 0  # 单位为像素
         axcnr.grid(zorder=0)
-        axcnr.tick_params(axis='y', labelsize=10)
+        axcnr.tick_params(axis='y', labelsize='medium')
 
 
-        if nowAxNum == 1:
-            axcnr.set_title('CNR', fontdict={'size': 10}, pad=1)
+        # if nowAxNum == 1:
+        #     axcnr.set_title('CNR', fontdict={'size': 10}, pad=1)
         allCnrDict = {}
         for prn in cnrData[gnssSys]:
             if self is not None:
@@ -262,12 +262,12 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
                       markersize=4)
         # 设置 x 轴刻度标签
         axcnr.set_xticks(range(1, len(labels) + 1))
-        axcnr.set_xticklabels(labels, fontsize=10)
+        axcnr.set_xticklabels(labels, fontsize='medium')
 
         # 添加图例（只显示一次均值标签）
         handles, labels = axcnr.get_legend_handles_labels()
         if handles:
-            axcnr.legend(handles, labels, loc='upper right', fontsize=10)
+            axcnr.legend(handles, labels, loc='upper right', fontsize='medium')
 
         # 调整纵轴范围为10的倍数
         current_min, current_max = axcnr.get_ylim()
@@ -283,7 +283,7 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
         axcnr.set_ylim(0, 60)
     # 调整子图间距
     figcnr.subplots_adjust(left=0.15, right=0.99, bottom=0.04, top=0.95)
-
+    
     if self is not None:
         # figcnr.savefig('D:\Code\FAST\manual\RUN_image\snr.png')
         figcnr.canvas.draw()

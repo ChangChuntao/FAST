@@ -51,7 +51,7 @@ def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
                 transform=axPhaseNoise.transAxes, verticalalignment='top',
                 horizontalalignment='left', color='black',
                 bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                zorder=30, fontsize='small')
+                zorder=30, fontsize='medium')
         if nowAxNum != gnssSysNum:
             axPhaseNoise.set_xticklabels([])
         else:
