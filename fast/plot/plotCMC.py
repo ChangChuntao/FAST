@@ -73,7 +73,7 @@ def plotCMC(cmcData, self = None, pngFile = None):
         nowAxNum += 1
 
 
-    figCMC.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.99)
+    figCMC.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.99)
 
     if self is not None:
         figCMC.canvas.draw()

@@ -67,7 +67,7 @@ def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
         if y_max < 5: y_max = 5
         axPhaseNoise.set_ylim(-y_max, y_max)
     print(y_max)
-    figPhaseNoise.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.93)
+    figPhaseNoise.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.93)
     if self is not None:
         figPhaseNoise.canvas.draw()
         self.status.showMessage('Plot PhaseNoise completed.')

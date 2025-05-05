@@ -7,7 +7,7 @@
 # Date              : 2024.07.01 - Version 3.00.02
 
 import platform
-from PyQt5.QtCore import pyqtSignal, QUrl
+from PyQt5.QtCore import pyqtSignal, QSize
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt, QEvent, QRect, QPoint
 from PyQt5.QtGui import QIcon, QScreen, QColor, QPalette, QGuiApplication
@@ -477,6 +477,7 @@ class ComboCheckBox(QComboBox):
             self.qCheckBox[i].setText(self.items[i])
             self.qListWidget.setItemWidget(qItem, self.qCheckBox[i])
             self.qCheckBox[i].stateChanged.connect(self.show)
+            qItem.setSizeHint(QSize(0, 30))
 
         self.qCheckBox[0].setChecked(False)  # 将第一个复选框设置为未选中状态
 
@@ -499,7 +500,7 @@ class ComboCheckBox(QComboBox):
         self.qLineEdit.setReadOnly(False)
         self.qLineEdit.clearText()
         for i in self.Selectlist():
-            if i != '' and i != '全选':
+            if i != '' and i != 'Select All':
                 show += i + ','
         show = show[:-1]
         self.qLineEdit.setText(show)
@@ -515,7 +516,7 @@ class ComboCheckBox(QComboBox):
         self.qCheckBox.clear()  # 清除之前添加的复选框
         self.row_num = 0
         # 添加“全选/全不选”复选框
-        self.selectAll = QCheckBox("全选")
+        self.selectAll = QCheckBox("Select All")
         self.qListWidget.insertItem(0, QListWidgetItem())
         self.qListWidget.setItemWidget(self.qListWidget.item(0), self.selectAll)
         self.selectAll.stateChanged.connect(self.selectAllOrNone)
