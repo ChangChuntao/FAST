@@ -467,10 +467,10 @@ class ComboCheckBox(QComboBox):
 
         # 添加“全选/全不选”复选框
         self.selectAll = QCheckBox("Select All")
-        self.qListWidget.item(0).setSizeHint(QSize(0, 30))  # 设置行高为 30 像素
         self.qListWidget.insertItem(0, QListWidgetItem())
         self.qListWidget.setItemWidget(self.qListWidget.item(0), self.selectAll)
         self.selectAll.stateChanged.connect(self.selectAllOrNone)
+        self.qListWidget.item(0).setSizeHint(QSize(0, 30))  # 设置行高为 30 像素
 
         for i in range(self.row_num):
             self.qCheckBox.append(QCheckBox())
@@ -518,11 +518,11 @@ class ComboCheckBox(QComboBox):
         self.row_num = 0
         # 添加“全选/全不选”复选框
         self.selectAll = QCheckBox("Select All")
-        self.qListWidget.item(0).setSizeHint(QSize(0, 30))  # 设置行高为 30 像素
         self.qListWidget.insertItem(0, QListWidgetItem())
         self.qListWidget.setItemWidget(self.qListWidget.item(0), self.selectAll)
         self.selectAll.stateChanged.connect(self.selectAllOrNone)
         self.selectAll.setChecked(True)
+        self.qListWidget.item(0).setSizeHint(QSize(0, 30))  # 设置行高为 30 像素
 
     def addItem(self, item):
         self.items.append(item)
