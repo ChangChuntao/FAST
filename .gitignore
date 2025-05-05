@@ -21,3 +21,4 @@ release/FAST/FAST_Win_V3.00_b2.zip
 release/FAST-QT/_fastQt/FastQt_Win_V3.00.03.zip
 release/
 test/
+fast/_test.py
