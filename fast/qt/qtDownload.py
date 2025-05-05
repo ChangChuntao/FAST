@@ -321,6 +321,8 @@ def dd(self):
         else:
             printLog(self,'Download path -> ' + loc)
         cmd += ' -l ' + loc
+    else:
+        cmd += ' -l ' + self.exeDirName
     cmd += ' -p ' + pool_num
 
     if unzip_str == '否':
