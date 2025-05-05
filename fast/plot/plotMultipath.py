@@ -27,9 +27,9 @@ def plotMultipathBack(mpData, self = None, pngFile = None):
         QApplication.processEvents()
     for gnssSys in mpData:
         axMP=figMP.add_subplot(gnssSysNum,1,nowAxNum)
-        axMP.set_ylabel(gnssSys + ' [m]', fontdict={'size': 16})  
+        axMP.set_ylabel(gnssSys + ' [m]', fontsize='medium')
         axMP.grid(zorder=0) 
-        axMP.tick_params(axis='y', labelsize=13)
+        axMP.tick_params(axis='y', labelsize='medium')
         if nowAxNum == 1:
             axMP.set_title('Pseudorange Multipath', fontdict={'size': 16})
         bandData = {}

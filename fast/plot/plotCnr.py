@@ -10,7 +10,7 @@ def plotCnrBack(obsHead, obsData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate
     import numpy as np
-    import seaborn as sns
+    
     cnrData = {}
     satList = obsHead['prn']
     if self is not None:
@@ -113,12 +113,12 @@ def plotCnrBack(obsHead, obsData, self = None, pngFile = None):
             flier.set(marker='o', color='blue', alpha=0.2)
         # 设置 x 轴刻度标签
         axcnr.set_xticks(range(1, len(labels) + 1))
-        axcnr.set_xticklabels(labels, fontsize=12)
+        axcnr.set_xticklabels(labels, fontsize='small')
 
         # 添加图例（只显示一次均值标签）
         handles, labels = axcnr.get_legend_handles_labels()
         if handles:
-            axcnr.legend(handles, labels, loc='upper right', fontsize=12)
+            axcnr.legend(handles, labels, loc='upper right', fontsize='small')
 
         # 调整纵轴范围为10的倍数
         current_min, current_max = axcnr.get_ylim()
@@ -147,7 +147,7 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate
     import numpy as np
-    import seaborn as sns
+    
     import matplotlib
     from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
     cnrData = {}

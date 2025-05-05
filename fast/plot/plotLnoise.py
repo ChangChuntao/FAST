@@ -27,11 +27,11 @@ def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
         QApplication.processEvents()
     for gnssSys in PhaseNoiseData:
         axPhaseNoise=figPhaseNoise.add_subplot(gnssSysNum,1,nowAxNum)
-        if nowAxNum == 1:
-            axPhaseNoise.set_title('Phase Noise', fontdict={'size': 18})
-        axPhaseNoise.set_ylabel(gnssSys + ' [cm]', fontdict={'size': 18})  
+        # if nowAxNum == 1:
+        #     axPhaseNoise.set_title('Phase Noise', fontdict={'size': 18})
+        axPhaseNoise.set_ylabel(gnssSys + ' [cm]', fontsize='medium')
         axPhaseNoise.grid(zorder=0) 
-        axPhaseNoise.tick_params(axis='y', labelsize=13)
+        axPhaseNoise.tick_params(axis='y', labelsize='medium')
         bandData = {}
         for prn in PhaseNoiseData[gnssSys]:
             for band in PhaseNoiseData[gnssSys][prn]:
@@ -51,18 +51,17 @@ def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
                 transform=axPhaseNoise.transAxes, verticalalignment='top',
                 horizontalalignment='left', color='black',
                 bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                zorder=30, fontsize=15)
+                zorder=30, fontsize='small')
         if nowAxNum != gnssSysNum:
             axPhaseNoise.set_xticklabels([])
         else:
             xfmt = mdate.DateFormatter('%dD-%HH')
             axPhaseNoise.xaxis.set_major_formatter(xfmt)
-            axPhaseNoise.tick_params(axis='x', labelsize=13)
+            axPhaseNoise.tick_params(axis='x', labelsize='medium')
         nowAxNum += 1
 
 
     figPhaseNoise.subplots_adjust(left=0.12, right=0.99, bottom=0.04, top=0.93)
-
     if self is not None:
         figPhaseNoise.canvas.draw()
         self.status.showMessage('Plot PhaseNoise completed.')

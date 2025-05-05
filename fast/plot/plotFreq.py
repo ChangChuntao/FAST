@@ -78,15 +78,15 @@ def plotFreq(obsHead, obsData, self = None, pngFile = None):
         axFreq.set_xlim(startdatetime, enddatetime)
 
     
-    if int(len(satBZ)) > 60:
-        axFreq.tick_params(axis='y', labelsize=6)
-    elif 60 >= int(len(satBZ)) > 30:
-        axFreq.tick_params(axis='y', labelsize=8)
-    elif 30 >= int(len(satBZ)) > 10:
-        axFreq.tick_params(axis='y', labelsize=10)
-    else:
-        axFreq.tick_params(axis='y', labelsize=15)
-
+    # if int(len(satBZ)) > 60:
+    #     axFreq.tick_params(axis='y', labelsize=6)
+    # elif 60 >= int(len(satBZ)) > 30:
+    #     axFreq.tick_params(axis='y', labelsize=8)
+    # elif 30 >= int(len(satBZ)) > 10:
+    #     axFreq.tick_params(axis='y', labelsize=10)
+    # else:
+    #     axFreq.tick_params(axis='y', labelsize=15)
+    axFreq.tick_params(axis='y', labelsize='small')
 
     axFreq.grid(zorder=0, alpha=0.1)
 
@@ -139,13 +139,13 @@ def plotFreq(obsHead, obsData, self = None, pngFile = None):
 
         prnIndex += 1
 
-    axFreq.tick_params(axis='x', labelsize=10)
+    axFreq.tick_params(axis='x', labelsize='small')
 
     axFreq.legend(loc='upper right', bbox_to_anchor=(1.16,1),markerscale=3)
     xfmt = mdate.DateFormatter('%dD-%H:%M')
     axFreq.xaxis.set_major_formatter(xfmt)
     figFreq.subplots_adjust(left=0.08, right=0.87, bottom=0.03, top=0.99)
-
+    plt.tight_layout()  # 自动调整布局
     if self is not None:
         figFreq.canvas.draw()
         self.status.showMessage("Plot freq Finished [" + 20*'=' + '] ' + "100% ")

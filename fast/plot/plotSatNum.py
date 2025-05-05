@@ -227,14 +227,14 @@ def plotSatNum(obsData, self = None, pngFile=None, gnssSystem=['G', 'C', 'R', 'E
 
 
     # axsatnum.set_xlabel('Time', fontsize=13)
-    axsatnum.set_ylabel('Number Of Sat', fontsize=18)
+    axsatnum.set_ylabel('Number Of Sat', fontsize='medium')
     axsatnum.legend(loc="best")
     
-    # xfmt = mdate.DateFormatter('%dD-%H:%M')
-    xfmt = mdate.DateFormatter('%dD-%HH')
+    xfmt = mdate.DateFormatter('%dD-%H:%M')
+    # xfmt = mdate.DateFormatter('%dD-%HH')
     axsatnum.xaxis.set_major_formatter(xfmt)
-    axsatnum.tick_params(axis='x', labelsize=15)
-    axsatnum.tick_params(axis='y', labelsize=15)
+    axsatnum.tick_params(axis='x', labelsize='small')
+    axsatnum.tick_params(axis='y', labelsize='medium')
     axsatnum.grid(zorder=10)
 
     figsatnum.subplots_adjust(left=0.08, right=0.99, bottom=0.03, top=0.99)
