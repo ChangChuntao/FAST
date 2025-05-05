@@ -28,7 +28,7 @@ def plotCycleSlip(mwgfData, self = None, pngFile = None):
         axcnr=figCycleSlip.add_subplot(gnssSysNum,1,nowAxNum)
         axcnr.set_ylabel(gnssSys + '_CSR')
         axcnr.grid(zorder=0) 
-        axcnr.tick_params(axis='y', labelsize=10)
+        axcnr.tick_params(axis='y', labelsize='medium')
         prnNum = 1
         X = []
         X_PRN = []
@@ -45,10 +45,10 @@ def plotCycleSlip(mwgfData, self = None, pngFile = None):
 
         axcnr.bar(X, CSR_LIST, width=0.5, color = 'tomato', zorder=10)
         axcnr.set_xticks(X, X_PRN)
-        axcnr.tick_params(axis='x', labelsize=10,labelrotation= 90)
+        axcnr.tick_params(axis='x', labelsize='medium',labelrotation= 90)
         nowAxNum += 1
     figCycleSlip.subplots_adjust(hspace=0.35, wspace=0.5)
-    figCycleSlip.subplots_adjust(left=0.08, right=0.99, bottom=0.07, top=0.99)
+    figCycleSlip.subplots_adjust(left=0.12, right=0.99, bottom=0.07, top=0.99)
     plt.tight_layout()
     if self is not None:
         figCycleSlip.canvas.draw()

@@ -139,8 +139,8 @@ def CMC(obsHead, obsData, self = None):
                 P2 = obsData[epoch][prn][band2C]
                 if L1 is None or L2 is None or P1 is None or P2 is None:
                     continue
-                # if abs(P2 - P1) > 100:
-                #     continue
+                if abs(P2 - P1) > 30:
+                    continue
                 
                 N_MW = L1 - L2 - (freq1 * P1 + freq2 * P2) / (freq1 + freq2) / lamdaW
                 L_GF = lamda1 * L1 - lamda2 * L2
@@ -191,7 +191,9 @@ def CMC(obsHead, obsData, self = None):
 
                 MW_CLIP = False
                 GF_CLIP = False
-                if MW_CLIP or GF_CLIP:
+                deltCMC = (nowCmc - cmcList[-1][-1])/np.sqrt(2)
+
+                if MW_CLIP or GF_CLIP or abs(deltCMC) > 1000:
                     bandEpochList.append(epoch)
                     N_MW_list.append([N_MW])
                     MEAN_MW_list.append([N_MW])
@@ -202,8 +204,6 @@ def CMC(obsHead, obsData, self = None):
                     cmcList.append([nowCmc])
                 else:
                     epochGoodList.append(epoch)
-                    deltCMC = (nowCmc - cmcList[-1][-1])/np.sqrt(2)
-                    if abs(deltCMC) > 1000: deltCMC = 0
                     cmcGoodList.append(deltCMC)
                     bandEpochList.append(epoch)
                     N_MW_list[-1].append(N_MW)
