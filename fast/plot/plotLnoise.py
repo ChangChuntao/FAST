@@ -61,6 +61,12 @@ def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
         nowAxNum += 1
 
 
+    y_min, y_max = axPhaseNoise.get_ylim()
+    y_min_rounded = (y_min // 5) * 5  # 向下取整到最近的 5 的倍数
+    y_max_rounded = ((y_max + 4) // 5) * 5  # 向上取整到最近的 5 的倍数
+    y_max = max(abs(y_max_rounded), abs(y_min_rounded))
+    if y_max < 5: y_max = 5
+    axPhaseNoise.set_ylim(-y_max, y_max)
     figPhaseNoise.subplots_adjust(left=0.08, right=0.99, bottom=0.04, top=0.93)
     if self is not None:
         figPhaseNoise.canvas.draw()
