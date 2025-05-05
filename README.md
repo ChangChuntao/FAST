@@ -1,48 +1,50 @@
 # FAST （Fusion Abundant multi-Source data download Terminal）
 
-#### 介绍
+####Introduce
 **FAST**
-针对目前GNSS数据下载步骤繁琐、下载速度慢等问题，开发了一套较为完备的融合多源数据下载终端软件——FAST。  
-软件目前包含GNSS科研学习过程中绝大部分所需的数据源，采用并行下载的方式极大的提升了下载的效率。
+Aiming at the problems of cumbersome steps and slow download speed of GNSS data, a relatively complete set of integrated multi-source data download terminal software fast is developed.   
+The software contains most of the data sources required in the process of GNSS scientific research and learning. The way of parallel download greatly improves the efficiency of download.
 
-#### Git地址
+#### Git
 - [https://github.com/ChangChuntao/FAST](https://github.com/ChangChuntao/FAST)
 - [https://gitee.com/changchuntao/FAST](https://gitee.com/changchuntao/FAST)
 
 
-#### 软件特点
-- **多平台**：同时支持windows与linux系统；
-- **资源丰富**：基本囊括了GNSS科研学习中所需的数据源，目前支持17个大类、96个小类，具体支持数据见**数据支持**；
-- **快速**：软件采用并行下载方式，在命令行参数运行模式可自行指定下载线程数，经测试下载100天的brdc+igs+clk文件只需要48.93s！
-- **易拓展**：如需支持更多数据源，可在FTP_Source.py、GNSS_TYPE.py中指定所需的数据与数据源；
-- **简单易行**：程序有引导下载模式与命令行带参数运行模式两种方式下载，直接运行程序便可进入引导下载模式，命令行带参数运行`FAST -h`可查看带参数运行模式介绍；
-- **灵活**：在带参数运行模式下，用户可灵活指定下载类型、下载位置、下载时间、是否解压、线程数等，可根据自我需求编写bat、shell、python等脚本运行；
-- **轻便**：windows程序包仅有18.9 MB，Liunx程序包仅有6.63 MB.
+#### Software features
+
+- **Multi platform**: Support both windows and Linux systems;
+- **Abundant Resources**: It basically includes the data sources required in GNSS scientific research and learning. At present, it supports 17 categories and 96 subcategories. See the specific **Data support**;
+- **Fast**: The software adopts parallel download mode, and the number of download threads can be specified in the command line parameter operation mode. After testing, it only takes 48.93s to download the 100 days BRDC+IGS+CLK file!
+- **Easy to expand**: If you need to support more data sources, you can specify the required data and data sources in FTP_Source.py and GNSS_TYPE.py;
+- **Easy to run**: The program can be downloaded in two ways: boot download mode and terminal input mode with parameters. Run the program directly to enter the boot download mode. Run `FAST -h` on the terminal with parameters to view the introduction of operation mode with parameters;
+- **Flexible**: In the operation mode with parameters, users can flexibly specify the download type, download location, download time, whether to decompress, number of threads, etc., and can write scripts such as bat, shell and python to run according to their own needs;
+- **Portable**: the windows package is only 18.9 MB, and the Linux package is only 6.63 MB
 
 
-#### 安装教程
-- **Windows系统**下仅需解压程序包即可直接运行,CMD运行`FAST.exe -h`可查看带参数运行模式介绍；
-- **Linux系统**下仅需解压程序包即可直接运行,安装后如windows系统下相同可直接运行程序，或将程序配置至环境变量中。
+#### Installation tutorial
 
-#### 使用说明
+- **Windows**you only need to unzip the package to run directly, enter `FAST.exe -h` can view the introduction of operation mode with parameters;
+- **Linux**you only need to unzip the package to run directly：After installation, as under Windows system, you can directly run the program or configure the program to environment variables.
 
-**引导下载模式**Windows系统双击运行FAST.exe便可进入引导下载，若为Linux系统终端输入`FAST`运行即可：  
-1.  以下载武汉大学多系统精密星历为例，在一级选择目录中选择SP3，即为输入2后回车；  
-![一级目录](Support/RUN_image/whuSp3-1.png)
+#### Instructions
+
+**Boot Download Mode**: In Windows system, click run fast Exe can enter the boot download. If it is a Linux system, the terminal can enter `FAST` to run;  
+1. Take downloading the multi system precise ephemeris of Wuhan University as an example, select SP3 in the primary selection directory, enter 2 and press enter；  
+![一级目录](Support/RUN_image/whuSp3-1.png)  
   
-2.  选择MGEX_WUH_sp3即为输入6并回车，其中MGEX代表多系统，WUH代表武汉大学IGS数据处理中心，SP3代表精密星历；
+2. Select MGEX_WUH_SP3 is input 6 and enter, where MGEX represents multi system GNSS, WHU represents Wuhan University, IGS data processing center and SP3 represents precision ephemeris;
 ![二级目录](Support/RUN_image/whuSp3-2.png)  
   
-3.  依据引导输入时间，回车完成输入；
+3. Enter the time according to the prompt and press enter to complete the input;
 ![输入时间](Support/RUN_image/whuSp3-3.png)
 
-4.  下载完成，根据提示直接回车完成解压或者输入任意字符回车不解压；
+4. After the download is completed, press enter directly according to the prompt to complete the decompression, or press enter without decompression;
 ![下载完成](Support/RUN_image/whuSp3-4.png)
 
-5.  根据提示输入y再次进入引导或退出；  
+5. Enter y or exit again according to the prompt;
 ![在此引导](Support/RUN_image/TYPE1-again.png)
   
-**命令行带参数运行模式**Windows系统CMD或power shell运行`FAST.exe -h`可查看命令行运行帮助，若为Linux系统终端输入`FAST -h`查看帮助：  
+**Terminal input mode**: In Windows system, run `FAST.exe -h` in CMD or power shell software to view the help. If it is a Linux system terminal, enter `FAST -h` to view the help;
 ```
   FAST : Fusion Abundant multi-Source data download Terminal
   ©Copyright 2022.01 @ Chang Chuntao
@@ -59,7 +61,6 @@
                                    Example : GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk
   -l,  --loc                       which folder is the download in
   -y,  --year                      where year are the data to be download
-  -d,  --day                       where day are the data to be download
   -o,  --day1                      where first day are the data to be download
   -e,  --day2                      where last day are the data to be download
   -m,  --month                     where month are the data to be download
@@ -77,7 +78,7 @@
 ```
 
 
-#### 数据支持
+#### Supported Data
 
 1. BRDC : GPS_brdc / MGEX_brdm  
   
@@ -137,25 +138,28 @@
 
 17. SpaceData : SW_EOP
 
+#### Participation and contribution
 
-#### 参与贡献
 
-1. **常春涛**博士@武汉大学  
-    程序思路、主程序编写、文档编写、程序测试
+1. Dr. **Chang Chuntao** @WuHan University   
+    Program design/ Program writing/ Document writing/ Program testing/ Program maintenance     
+    
 
-2. **蒋科材**博士后@武汉大学   
-    程序思路、并行计算处理思路
+2. Pd. **Jiang Kecai**@WuHan University   
+    Program idea / parallel computing processing idea
+  
 
-3. **慕仁海**博士@武汉大学  
-    程序思路、程序编写、程序测试
+3. Dr. **Mu Renhai**@WuHan University  
+    Program design/ program testing/ Documentation
 
-4. **李博**博士@辽宁工程技术大学&中国测绘科学研究院  
-    程序测试、文档编写、节点汇总
 
-5. **李勇熹**@兰州交通大学&中国测绘科学研究院  
-    程序测试、节点汇总
+4.  Dr. **Li Bo** @Liaoning Technical University&China Academy of Surveying and mapping  
+    Program testing/ Documentation/ Download node summary
 
-6. **曹多明**@山东科技大学&中国测绘科学研究院  
-    程序测试、节点汇总
 
-[![Page Views Count](https://badges.toozhao.com/badges/01GK8CXX2CKT5SVRRE7VY71E49/green.svg)](https://badges.toozhao.com/stats/01GK8CXX2CKT5SVRRE7VY71E49 "Get your own page views count badge on badges.toozhao.com")
+5.  **Li Yongxi** @Lanzhou Jiaotong University&China Academy of Surveying and mapping  
+    Program testing/ Download node summary
+
+
+6.  **Cao Duoming** @Shandong University of Science and Technology&China Academy of Surveying and mapping  
+    Program testing/ Download node summary
