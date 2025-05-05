@@ -42,7 +42,10 @@ class Worker(QThread):
                 line = self.p.stdout.readline()
                 line = line.strip()
                 if line:
-                    line = line.decode('gbk')
+                    try:
+                        line = line.decode('gbk')
+                    except UnicodeDecodeError:
+                        line = line.decode('utf-8', errors='ignore')
                     if 'Windows' not in line and 'wget' not in line and 'done' not in line and 'listing' not in line and 'required' not in line \
                             and '正在下载文件' not in line and '正在开始下载' not in line and len(
                         line.replace(' ',
