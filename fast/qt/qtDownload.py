@@ -29,10 +29,12 @@ class Worker(QThread):
 
     def run(self):
         if run_not:
-            st = subprocess.STARTUPINFO()
-            st.dwFlags = subprocess.STARTF_USESHOWWINDOW
-            st.wShowWindow = subprocess.SW_HIDE
-
+            if sys.platform == 'win32':
+                st = subprocess.STARTUPINFO()
+                st.dwFlags = subprocess.STARTF_USESHOWWINDOW
+                st.wShowWindow = subprocess.SW_HIDE
+            else:
+                st = None
             self.p = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                       startupinfo=st)
             PID = self.p.pid
@@ -325,6 +327,9 @@ def dd(self):
         cmd += ' -r ' + proname
 
     print(cmd)
+    
+    if sys.platform != 'win32':
+        cmd = cmd.split()
     printLog(self,'########################FAST########################')
     if self.chinese:
         printLog(self,'开始下载！')
