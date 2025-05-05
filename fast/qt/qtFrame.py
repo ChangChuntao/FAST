@@ -467,6 +467,7 @@ class ComboCheckBox(QComboBox):
 
         # 添加“全选/全不选”复选框
         self.selectAll = QCheckBox("Select All")
+        self.qListWidget.item(0).setSizeHint(QSize(0, 30))  # 设置行高为 30 像素
         self.qListWidget.insertItem(0, QListWidgetItem())
         self.qListWidget.setItemWidget(self.qListWidget.item(0), self.selectAll)
         self.selectAll.stateChanged.connect(self.selectAllOrNone)
@@ -517,6 +518,7 @@ class ComboCheckBox(QComboBox):
         self.row_num = 0
         # 添加“全选/全不选”复选框
         self.selectAll = QCheckBox("Select All")
+        self.qListWidget.item(0).setSizeHint(QSize(0, 30))  # 设置行高为 30 像素
         self.qListWidget.insertItem(0, QListWidgetItem())
         self.qListWidget.setItemWidget(self.qListWidget.item(0), self.selectAll)
         self.selectAll.stateChanged.connect(self.selectAllOrNone)
@@ -529,6 +531,7 @@ class ComboCheckBox(QComboBox):
         self.qCheckBox[self.row_num].setText(item)
         self.qListWidget.setItemWidget(qItem, self.qCheckBox[self.row_num])
         self.qCheckBox[self.row_num].stateChanged.connect(self.show)
+        qItem.setSizeHint(QSize(0, 30))
         self.row_num += 1
         
     def hidePopup(self):
