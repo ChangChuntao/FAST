@@ -1344,7 +1344,7 @@ def fastAppMain():
     
     # framelessWnd.setWindowOpacity(0.98)
     # framelessWnd.resize(300, 300)
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")
+    # ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")
 
     settingFile = os.path.join(binDir, 'setting')
     fastQtSetting = getSetting(settingFile)
