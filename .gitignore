@@ -1,0 +1,25 @@
+centosvenv/
+.idea
+fast/__pycache__/
+fast/build/
+fast/com/__pycache__/
+fast/download/__pycache__/
+fast/qc/__pycache__/
+fast/spp/__pycache__/
+fast/win_bin/HarmonyOS+Sans/HarmonyOS Sans/HarmonyOS_Sans/HarmonyOS_Sans_Bold.ttf
+venv/
+ubuntuvenv/
+release/FAST-QT/*.zip
+fast/make_ubuntu.py
+fast/make_centos.py
+fast/make.py
+fast/qt/__pycache__/
+fast/site/__pycache__/
+ref/
+fast/plot/__pycache__/
+release/FAST/FAST_Win_V3.00_b2.zip
+release/FAST-QT/_fastQt/FastQt_Win_V3.00.03.zip
+release/
+test/
+fast/_test.py
+fast/*.spec 
