@@ -107,7 +107,11 @@ def printLog(self, logStr):
 def choose_out_dir(self):
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog   # 可选,禁用本地对话框
-    open_path_file = os.path.join(self.exeDirName, 'win_bin', 'open.path')
+    if os.path.isdir(os.path.join(self.exeDirName, 'win_bin')):
+        binDir = os.path.join(self.exeDirName, 'win_bin')
+    else:
+        binDir = os.path.join(self.exeDirName, 'mac_bin')
+    open_path_file = os.path.join(binDir, 'open.path')
     if os.path.isfile(open_path_file):
         open_path_file_open = open(open_path_file, 'r+')
         open_path = open_path_file_open.readline()
@@ -138,7 +142,11 @@ def choose_out_dir(self):
         open_path_file_open.close()
 
 def choose_site_file(self):
-    open_path_file = os.path.join(self.exeDirName, 'win_bin', 'open.path')
+    if os.path.isdir(os.path.join(self.exeDirName, 'win_bin')):
+        binDir = os.path.join(self.exeDirName, 'win_bin')
+    else:
+        binDir = os.path.join(self.exeDirName, 'mac_bin')
+    open_path_file = os.path.join(binDir, 'open.path')
     if os.path.isfile(open_path_file):
         open_path_file_open = open(open_path_file, 'r+')
         open_path = open_path_file_open.readline()
@@ -167,7 +175,11 @@ def choose_site_file(self):
 
 def dd(self):
     global cmd
-    win_bin_fast = os.path.join(self.exeDirName, 'win_bin', 'FAST')
+    if os.path.isdir(os.path.join(self.exeDirName, 'win_bin')):
+        binDir = os.path.join(self.exeDirName, 'win_bin')
+    else:
+        binDir = os.path.join(self.exeDirName, 'mac_bin')
+    win_bin_fast = os.path.join(binDir, 'FAST')
     cmd = win_bin_fast
     type_name = self.name_type_combo.currentText()
     pool_num = self.pool_combo.currentText()

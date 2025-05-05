@@ -24,6 +24,10 @@ else:
     dirname = os.path.dirname(os.path.abspath(__file__))
     dirname = os.path.join(dirname, '..')
 
+if os.path.isdir(os.path.join(dirname, 'win_bin')):
+    binDir = os.path.join(dirname, 'win_bin')
+else:
+    binDir = os.path.join(dirname, 'mac_bin')
 
 class WindowDragger(QWidget):
     doubleClicked = pyqtSignal()
@@ -114,28 +118,28 @@ class FramelessWindow(QWidget):
         self.btnClose = QToolButton()
         self.btnClose.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.btnClose.setFixedSize(int(screenHeight/45), int(screenHeight/45))
-        close_png = os.path.join(dirname, 'win_bin', 'close-we.png')
+        close_png = os.path.join(binDir, 'close-we.png')
         self.btnClose.setIcon(QIcon(close_png))
         self.btnClose.clicked.connect(self.close)
         # 最大化按钮
         self.btnMaximize = QToolButton()
         self.btnMaximize.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.btnMaximize.setFixedSize(int(screenHeight/45), int(screenHeight/45))
-        max_png = os.path.join(dirname, 'win_bin', 'max-we.png')
+        max_png = os.path.join(binDir, 'max-we.png')
         self.btnMaximize.setIcon(QIcon(max_png))
         self.btnMaximize.clicked.connect(self.onButtonMaximizeClicked)
         # 最小化按钮
         self.btnMinimize = QToolButton()
         self.btnMinimize.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.btnMinimize.setFixedSize(int(screenHeight/45), int(screenHeight/45))
-        min_png = os.path.join(dirname, 'win_bin', 'min-we.png')
+        min_png = os.path.join(binDir, 'min-we.png')
         self.btnMinimize.setIcon(QIcon(min_png))
         self.btnMinimize.clicked.connect(lambda: self.setWindowState(Qt.WindowMinimized))
         # 恢复按钮
         self.btnRestore = QToolButton()
         self.btnRestore.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.btnRestore.setFixedSize(int(screenHeight/45), int(screenHeight/45))
-        restore_png = os.path.join(dirname, 'win_bin', 'restore-we.png')
+        restore_png = os.path.join(binDir, 'restore-we.png')
         self.btnRestore.setIcon(QIcon(restore_png))
         self.btnRestore.clicked.connect(self.onButtonRestoreClicked)
 
@@ -462,7 +466,7 @@ class ComboCheckBox(QComboBox):
         self.onItemClicked = False
 
         # 添加“全选/全不选”复选框
-        self.selectAll = QCheckBox("全选")
+        self.selectAll = QCheckBox("Select All")
         self.qListWidget.insertItem(0, QListWidgetItem())
         self.qListWidget.setItemWidget(self.qListWidget.item(0), self.selectAll)
         self.selectAll.stateChanged.connect(self.selectAllOrNone)

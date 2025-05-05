@@ -240,9 +240,13 @@ def choose_obs_file(self):
     import sys
     obsHead = None
     obsData = None
+    
+    if os.path.isdir(os.path.join(self.exeDirName, 'win_bin')):
+        binDir = os.path.join(self.exeDirName, 'win_bin')
+    else:
+        binDir = os.path.join(self.exeDirName, 'mac_bin')
 
-
-    open_path_file = os.path.join(self.exeDirName, 'win_bin', 'open.path')
+    open_path_file = os.path.join(binDir, 'open.path')
     if os.path.isfile(open_path_file):
         open_path_file_open = open(open_path_file, 'r+')
         open_path = open_path_file_open.readline()

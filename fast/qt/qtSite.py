@@ -35,8 +35,12 @@ class runSiteWorker(QObject):
         if not self.isSiteRunning:
             return
         
+        if os.path.isdir(os.path.join(self.mainSelf.exeDirName, 'win_bin', 'bin')):
+            binDir = os.path.join(self.mainSelf.exeDirName, 'win_bin', 'bin')
+        else:
+            binDir = os.path.join(self.mainSelf.exeDirName, 'mac_bin', 'mac_bin')
 
-        igsFileCsv = os.path.join(self.mainSelf.exeDirName, 'win_bin', 'bin', 'IGSNetwork.csv')
+        igsFileCsv = os.path.join(binDir, 'IGSNetwork.csv')
         megxSiteList = readMegxSiteInf(igsFileCsv)
         siteFile = self.mainSelf.siteFileChoose.text()
         
@@ -137,7 +141,11 @@ def siteCombBoxChanged(self):
 
 def siteChooseFileProcess(self):
     
-    open_path_file = os.path.join(self.exeDirName, 'win_bin', 'open.path')
+    if os.path.isdir(os.path.join(self.exeDirName, 'win_bin')):
+        binDir = os.path.join(self.exeDirName, 'win_bin')
+    else:
+        binDir = os.path.join(self.exeDirName, 'mac_bin')
+    open_path_file = os.path.join(binDir, 'open.path')
     if os.path.isfile(open_path_file):
         open_path_file_open = open(open_path_file, 'r+')
         open_path = open_path_file_open.readline()

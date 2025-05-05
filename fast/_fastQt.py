@@ -38,7 +38,12 @@ else:
     dirname = os.path.dirname(os.path.abspath(__file__))
 
 style_path = pkg_resources.resource_filename(__name__, 'qb-common.mplstyle')
-ttf_dir = os.path.join(dirname, 'win_bin', 'ttf')
+if os.path.isdir(os.path.join(dirname, 'win_bin')):
+    binDir = os.path.join(dirname, 'win_bin')
+else:
+    binDir = os.path.join(dirname, 'mac_bin')
+
+ttf_dir = os.path.join(binDir, 'ttf')
 
 
 class mainWindow(QMainWindow):
@@ -1323,7 +1328,7 @@ class mainWindow(QMainWindow):
 def fastAppMain():
 
     fastApp = QApplication(sys.argv)
-    whuLoadPng = os.path.join(dirname, 'win_bin', 'black_2_1.png')
+    whuLoadPng = os.path.join(binDir, 'black_2_1.png')
     splash_pix = QPixmap(whuLoadPng)  
     target_size = QSize(800, 400)  
     splash_pix = splash_pix.scaled(target_size, Qt.AspectRatioMode.KeepAspectRatio)
@@ -1333,7 +1338,7 @@ def fastAppMain():
 
     
     framelessWnd = FramelessWindow()
-    whu_ico = os.path.join(dirname, 'win_bin', 'black_c.ico')
+    whu_ico = os.path.join(binDir, 'black_c.ico')
     framelessWnd.setWindowIcon(QtGui.QIcon(whu_ico))
     framelessWnd.setWindowTitle('FAST V' + lastVersion)
     
@@ -1341,7 +1346,7 @@ def fastAppMain():
     # framelessWnd.resize(300, 300)
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")
 
-    settingFile = os.path.join(dirname, 'win_bin', 'setting')
+    settingFile = os.path.join(binDir, 'setting')
     fastQtSetting = getSetting(settingFile)
     win = mainWindow(fastQtSetting)
     framelessWnd.setContent(win)

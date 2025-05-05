@@ -57,6 +57,8 @@ else:
 igsFileCsv = os.path.join(dirname, 'win_bin', 'bin', 'IGSNetwork.csv')
 if not os.path.isfile(igsFileCsv):
     igsFileCsv = os.path.join(dirname, 'bin', 'IGSNetwork.csv')
+if not os.path.isfile(igsFileCsv):
+    igsFileCsv = os.path.join(dirname, 'mac_bin', 'IGSNetwork.csv')
 megxSiteList = readMegxSiteInf(igsFileCsv)
 
 mgex = []
