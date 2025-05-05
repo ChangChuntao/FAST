@@ -1,5 +1,11 @@
-#!/data/zgj_inner/whu/software/anaconda3/bin/python
-#-*-coding:utf-8-*-
+# -*- coding: utf-8 -*-
+# plotSatNum        : plot SatNum
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2024.07.01 - Version 3.00.02
+
 def plotSatNum(obsData, self = None, pngFile=None, gnssSystem=['G', 'C', 'R', 'E', 'L', 'S', 'J', '0', 'W', 'ALL']):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate

@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# fileOperation     : func for FAST Download module
+# Author            : Chang Chuntao chuntaochang@whu.edu.cn
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Creation Date     : 2022.06.06
+# Latest Version    : 2023.06.30
+
 
 import os
 import sys
@@ -185,7 +192,7 @@ def isFileInPath(file):  # 判断相关文件是否存在
 
 
 """
-    2022-03-27 :    判断操作平台，获取bin下格式转换程序    
+    2022-03-27 :    判断操作平台,获取bin下格式转换程序    
                     by Chang Chuntao    -> Version : 1.00
     2022-09-16 :    更新索引                           
                     by Chang Chuntao    -> Version : 1.21
@@ -395,8 +402,8 @@ def uncompress_ym(successDownFileList):
     #     ftpsite.append(u)
     for f in successDownFileList:
         if str(f).split(".")[-1] == "gz" or str(f).split(".")[-1] == "Z":
-            printFast("如需解压直接回车，若无需解压输入任意字符回车！ / Enter to proceed, otherwise cancel!", "input")
-            isuncpmress = input("     ")
+            printFast("如需解压直接回车,若无需解压输入任意字符回车！ / Enter to proceed, otherwise cancel!", "input")
+            isuncpmress = input("    ")
             break
     if isuncpmress == "":
         unzipfile(os.getcwd(), ftpsite)
@@ -411,8 +418,8 @@ def uncompress_highrate_rinex(successDownFileList):
     #     for j in range(len(urllist[i])):
     #         ftpsite.append(urllist[i][j])
     
-    printFast("如需解压直接回车，若无需解压输入任意字符回车！ / Enter to proceed, otherwise cancel!", "input")
-    isuncpmress = input("     ")
+    printFast("如需解压直接回车,若无需解压输入任意字符回车！ / Enter to proceed, otherwise cancel!", "input")
+    isuncpmress = input("    ")
     if isuncpmress == "":
         try:
             if len(successDownFileList) == 0:

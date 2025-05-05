@@ -1,8 +1,7 @@
-#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # GNSS_Timestran : GNSS_Timestran
 # Author         : Chang Chuntao
-# Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
+# Copyright(C)   : The GNSS Center, Wuhan University 
 # Latest Version : 1.25
 # Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.11.02 - Version 1.25
@@ -149,57 +148,57 @@ def gnssTimesTran():
     print("")
     printFast("1. Year Month Day  2. Year Doy  3. GPSWeek DayofWeek  4. MJD SOD", "input")
     printFast("请输入所需转换的时间格式编号 (eg. 2)", "input")
-    inputTime = input("     ")
+    inputTime = input("    ")
     while True:
         if inputTime.isdigit() and 0 < int(inputTime) < 5:
             inputTime = int(inputTime)
             if inputTime == 1:
                 printFast("请输入 Year Month Day (eg. 2022 04 29)", "input")
-                YearMonthDay = input("     ")
+                YearMonthDay = input("    ")
                 while True:
                     if len(YearMonthDay.split(" ")) == 3:
                         break
                     else:
                         printFast("请输入正确的 Year Month Day (eg. 2022 04 30)", "input")
-                        YearMonthDay = input("     ")
+                        YearMonthDay = input("    ")
                 specTime = gnssTime2datetime(YearMonthDay, "YearMonthDay")
                 break
             elif inputTime == 2:
                 printFast("请输入 Year Doy (eg. 2022 119)", "input")
-                YearDoy = input("     ")
+                YearDoy = input("    ")
                 while True:
                     if len(YearDoy.split(" ")) == 2:
                         break
                     else:
                         printFast("请输入正确的 Year Doy (eg. 2022 119)", "input")
-                        YearDoy = input("     ")
+                        YearDoy = input("    ")
                 specTime = gnssTime2datetime(YearDoy, "YearDoy")
                 break
             elif inputTime == 3:
                 printFast("请输入 GPSWeek DayofWeek (eg. 2207 5)", "input")
-                GPSWeekDay = input("     ")
+                GPSWeekDay = input("    ")
                 while True:
                     if len(GPSWeekDay.split(" ")) == 2:
                         break
                     else:
                         printFast("请输入正确的 GPSWeek DayofWeek (eg. 2207 5)", "input")
-                        GPSWeekDay = input("     ")
+                        GPSWeekDay = input("    ")
                 specTime = gnssTime2datetime(GPSWeekDay, "GPSWeekDay")
                 break
             elif inputTime == 4:
                 printFast("请输入 MJD SOD (eg. 59698 69656.17121)", "input")
-                MjdSod = input("     ")
+                MjdSod = input("    ")
                 while True:
                     if len(MjdSod.split(" ")) == 2:
                         break
                     else:
                         printFast("请输入正确的 MJD SOD (eg. 59698 69656.17121)", "input")
-                        MjdSod = input("     ")
+                        MjdSod = input("    ")
                 specTime = gnssTime2datetime(MjdSod, "MjdSod")
                 break
         else:
             printFast("请输入正确的编号 (eg. 2)", "input")
-            inputTime = input("     ")
+            inputTime = input("    ")
     [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
     printTime(specTime, GPSWeekDay, YearDoy, MjdSod)
     print("")
@@ -685,37 +684,6 @@ def gps2tai(gps_datetime):
 def tai2tt(tai_datetime):
     return(tai_datetime + datetime.timedelta(seconds=OFF_TAI2TT))
 
-# def taiutc(leap_sec_file, need_datetime):
-#     import sys
-#     # need_mjdsod = datetime2allgnssTime(need_datetime).mjdsod
-#     need_mjd,need_sod = datetime2mjd(need_datetime)
-#     need_mjdsod = need_mjd + need_sod / 86400.0
-#     leap_sec_file_open = open(leap_sec_file, 'r+')
-#     leap_sec_file_lines = leap_sec_file_open.readlines()
-#     leap_sec_file_open.close()
-#     leap_data = []
-#     append_if = False
-#     need_leap_sec = None
-#     for line in leap_sec_file_lines:
-#         if '-leap sec' in line:
-#             append_if = False
-#         if append_if:
-#             mjd = int(line.split()[0])
-#             leap = int(line.split()[1])
-#             leap_data.append([mjd, leap])
-#         if '+leap sec' in line:
-#             append_if = True
-#     for ld_index in range(len(leap_data)):
-#         if need_mjdsod < leap_data[ld_index][0]:
-#             need_leap_sec =  leap_data[ld_index-1][1]
-#             break
-#     if need_leap_sec is None:
-#         print('need time not in leap_sec_file!')
-#         print('need time    -> ' + '%12.5f' % need_mjdsod)
-#         print('poleut1 time -> ' + '%12.5f' % leap_data[0][0] + '%12.5f' % leap_data[-1][0])
-#         sys.exit()
-#     else:
-#         return need_leap_sec
 
 def taiutc(gps_datetime):
     leap_sec = {

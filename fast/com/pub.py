@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# FAST           : 
+# pub            : pub for FAST
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University
 # Creation       : 2022.03.27 - Version 1.00
@@ -37,7 +37,7 @@ _version = {    '1.00':     '2022-03-27',
                 '2.11':     '2023-09-20',
                 '3.00.01':  '2024-01-09',
                 '3.00.02':  '2024-05-22',
-                '3.00.03':  '2024-07-15',
+                '3.00.03':  '2025-05-05',
             }
 
 lastVersion = list(_version)[-1]
@@ -251,17 +251,17 @@ def printFast(string, printtype):
     2022-04-30 : * 新增nothing    by Chang Chuntao -> Version : 1.12
     """
     if printtype == "input":
-        print("  -  " + string)
+        print("  - " + string)
     elif printtype == "normal":
-        print("  *  " + string)
+        print("  * " + string)
     elif printtype == "fail":
-        print("  x  " + string)
+        print("  x " + string)
     elif printtype == "warning":
-        print("  #  " + string)
+        print("  # " + string)
     elif printtype == "important":
-        print(" *** " + string)
+        print(" ***" + string)
     elif printtype == "nothing":
-        print("     " + string)
+        print("    " + string)
 
 def printPanda(istring, logFile=None, onlyLog = False):
     import datetime
@@ -381,13 +381,13 @@ def modifyFile(file, lineStr, lineNum = None, lineStrFlag = None):
 
 # 获取文件大小（可直接嵌入工程使用）
 # input:文件路径
-# output：文件大小，单位
+# output：文件大小,单位
 def getFileSize(filePath, unit = 'M'):
     # B K M G
     import os
     fsize = os.path.getsize(filePath)	# 返回的是字节大小
     '''
-    为了更好地显示，应该时刻保持显示一定整数形式，即单位自适应
+    为了更好地显示,应该时刻保持显示一定整数形式,即单位自适应
     '''
     if unit == 'B':
         return fsize

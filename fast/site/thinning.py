@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
+# thinning          : downsampling settings for Station selection
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
+
+
 def thinning(chooseSite, thinningValue, lmin = -180, lmax = 180, bmin = -90, bmax = 90):
     import numpy as np
     grid_ranges = []
 
-    # 输出每个格网的经纬度范围，并将范围添加到列表中
+    # 输出每个格网的经纬度范围,并将范围添加到列表中
     for longitude in np.arange(lmin, lmax, thinningValue):
         for latitude in np.arange(bmin, bmax, thinningValue):
             grid = [longitude, longitude + thinningValue, latitude, latitude + thinningValue]

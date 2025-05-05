@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+# plotCMC           : plot timediff code - phase
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2024.07.01 - Version 3.00.02
+
 def plotCMC(cmcData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate

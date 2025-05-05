@@ -1,6 +1,10 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+# trop              : trop correction for SPP
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
 
 import numpy as np
 

@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+# corr              : error correction for SPP
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
+
+
 def earthRotation(satX_init, satY_init, satZ_init, SignalDeltaTimeInit):
     from fast.com.gnssParameter import coordSystem
     omega = coordSystem['WGS84'].omega
@@ -64,7 +73,7 @@ def remove_zero_columns(matrix):
 
 def insert_zeros(arr, positions):
     import numpy as np
-    # 对位置列表进行逆序，这样才能从后往前插入，避免影响前面的索引位置
+    # 对位置列表进行逆序,这样才能从后往前插入,避免影响前面的索引位置
     # positions = sorted(positions, reverse=True)
     zeros = np.zeros((len(positions), 1))  # 创建与位置数量相匹配的全为0的数组
     

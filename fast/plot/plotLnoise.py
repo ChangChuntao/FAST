@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+# plotLnoise        : plot Phase Noise
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2024.07.01 - Version 3.00.02
+
+
 def plotPhaseNoise(PhaseNoiseData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate
@@ -75,7 +84,7 @@ def plotPhaseNoisePaper(PhaseNoiseData, self = None, pngFile = None):
         self.figPhaseNoise.clf()
         figPhaseNoise = self.figPhaseNoise
         self.figPhaseNoise = plt.figure(figsize=(84 / 25.4, 84 / 25.4 * 1.5), dpi=300)  # 设置新的尺寸和分辨率
-        self.canvas = FigureCanvas(self.figPhaseNoise)  # 如果需要，重新创建画布
+        self.canvas = FigureCanvas(self.figPhaseNoise)  # 如果需要,重新创建画布
     else:
         figPhaseNoise = plt.figure()
     gnssSysNum = len(PhaseNoiseData)

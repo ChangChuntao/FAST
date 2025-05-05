@@ -37,7 +37,7 @@ For detailed installation and usage instructions, please refer to the FAST_manua
     Program design/ program testing/ Documentation
 
 
-4. Dr. **Li Bo** @Liaoning Technical University
+4. Pd. **Li Bo** @Liaoning Technical University
 
     Program testing/ Documentation
 

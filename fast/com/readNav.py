@@ -284,7 +284,7 @@ def readNav3(navFile, navHead = None):
         navData[prn][epoch] = {}
 
         if gSys == 'C':
-            # 当为BDS时，读取8行，按照说明读取。
+            # 当为BDS时,读取8行,按照说明读取。
             # lineNum + 8
             navData[prn][epoch]['SVclockBias'] = float(navLines[lineNum][23:42])
             navData[prn][epoch]['SVclockDrift'] = float(navLines[lineNum][42:61])
@@ -524,7 +524,7 @@ def readNav(navFile):
     else:
         return None
     
-    if 2.0 <= rnxVersion < 3:
+    if 2 <= rnxVersion < 3:
         navData = readNav2(navFile)
     elif 3 <= rnxVersion < 4:
         navData = readNav3(navFile)

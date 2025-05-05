@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+# qtQc              : pyqt5 for QC module
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
+
+
 from PyQt5.QtCore import QThread, QTimer
 import os
 from PyQt5.QtWidgets import QFileDialog, QApplication
@@ -440,7 +449,7 @@ def batch_analyze_plot(self):
         return None
     
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog   # 可选，禁用本地对话框
+    options |= QFileDialog.DontUseNativeDialog   # 可选,禁用本地对话框
 
     savePath, _ = QFileDialog.getSaveFileName(self, "Save File", "", "All Files (*)", options=options)
 
@@ -617,7 +626,6 @@ def qcSaveFinished(self):
     self.is_save_running = False
 
 
-
 def saveQcFile(self):
     if self.is_save_running:
         msg_box = QMessageBox()
@@ -629,7 +637,7 @@ def saveQcFile(self):
         return None
 
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog   # 可选，禁用本地对话框
+    options |= QFileDialog.DontUseNativeDialog   # 可选,禁用本地对话框
 
     savePath, _ = QFileDialog.getSaveFileName(self, "Save File", "", "All Files (*)", options=options)
     

@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+# gnssParameter  : gnss Parameter
+# Author         : Chang Chuntao
+# Copyright(C)   : The GNSS Center, Wuhan University 
+# Latest Version : 3.00.00
+# Creation Date  : 2022.03.27 - Version 1.00.00
+# Date           : 2023.10.02 - Version 3.00.00
+
 # 1. 坐标系统
 # 1.1 椭球参数类
 class coordSystemPara:
@@ -13,7 +21,7 @@ class coordSystemPara:
         self.eprime = math.sqrt(a ** 2 - self.b ** 2) / self.b
 
 
-# 1.1 椭球参数, 对应class coordSystemPara
+# 椭球参数, 对应class coordSystemPara
 coordSystem = {'WGS84': coordSystemPara(6378137.0, 1.0 / 298.257223563, 3.986004415e14, 7.2921151467e-5),
                'CGCS2000': coordSystemPara(6378137.0, 1.0 / 298.257222101, 3.986004418e14, 7.292115e-5),
                'BDS': coordSystemPara(6378137.0, 1.0 / 298.257222101, 3.986004418e14, 7.292115e-5),
@@ -23,12 +31,8 @@ coordSystem = {'WGS84': coordSystemPara(6378137.0, 1.0 / 298.257223563, 3.986004
                'BJ54':coordSystemPara(6378245.0, 1.0 / 298.3, 3.986004418e14, 7.292115e-5),
                'XIAN80':coordSystemPara(6378140.0, 1.0 / 298.257223563, 3.986004418e14, 7.292115e-5),}
 
-# 2. 卫星导航系统信息
-# 2.1 卫星系统
-# satelliteSyetem = ['BDS', 'GLO', 'GPS', 'GAL', 'IRNSS', 'QZSS', 'SBAS']
-# satSys = ['C', 'R', 'G', 'E', 'I', 'J', 'S']
 
-# 2.2 北斗轨道类型 http://www.csno-tarc.cn/system/constellation
+# 北斗轨道类型 http://www.csno-tarc.cn/system/constellation
 BDSoribtType = {"C01": "GEO", 
             "C02": "GEO", 
             "C03": "GEO", 
@@ -84,9 +88,7 @@ bds3MEOList = ['C19', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25',\
                       'C34', 'C35', 'C36', 'C37', 'C41', 'C42',\
                           'C43', 'C44', 'C45', 'C46', 'C57', 'C58']
 
-
 CLIGHT = 299792458.0
-
 
 obsCodes = {}
 obsCodes['G'] = {}

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# FAST           : 
-# Author         : Chang Chuntao 
-# Email          : chuntaochang@whu.edu.cn
-# PGM            : The GNSS Center, Wuhan University
-# Creation       : 2022-03-27
-# Latest Version : 2023-09-26
+# inf               : Inf for FAST Downlad module
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.03
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2025.05.05 - Version 3.00.03
 from fast.com.pub import lastVersion, lastVersionTime
 
 
@@ -40,7 +40,7 @@ def supportData():
                     by Chang Chuntao  -> Version : 1.18
     2022-09-16 :    + 新增RINEX内MGEX_HK_cors资源
                     by Chang Chuntao  -> Version : 1.21
-    2022-09-20 :    + 新增TROP内资源Meteorological，为需要站点的气象文件
+    2022-09-20 :    + 新增TROP内资源Meteorological,为需要站点的气象文件
                     by Chang Chuntao  -> Version : 1.22
     2022-09-28 :    + 新增COSMIC一级类
                     + 新增COSMIC内资源'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx','C1_L1b_atmPhs', 'C1_L1b_gpsBit',
@@ -89,7 +89,7 @@ def fastHelp():
     """
     print("==================================================================================")
     print("")
-    print("     Python program: FAST(Fusion Abundant multi-Source data download Terminal)")
+    print("     Python program: FAST(File Download and Signal Processing Toolkit for GNSS)")
     print("     ©Copyright 2022.01 @ Chang Chuntao")
     print("     PLEASE DO NOT SPREAD WITHOUT PERMISSION OF THE AUTHOR !")
     print("")
@@ -101,7 +101,7 @@ def fastHelp():
           "                                   oads (see above). If you have any questions, you can contact me th-\n"
           "                                   rough amst-jazz #wechat and 1252443496 #QQ")
     print("     Auther: Chang Chuntao")
-    print("     Organization: The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping")
+    print("     Organization: The GNSS Center, Wuhan University ")
     print("     Version date: " + lastVersionTime + " - Version " + lastVersion)
     print("")
 
@@ -112,8 +112,8 @@ def arg_help():
     """
     print("==================================================================================")
     print("")
-    print("  FAST : Flexible And Simple Toolkit for GNSS Data.")
-    print("  ©Copyright 2022.01 @ Chang Chuntao")
+    print("  FAST : File Download and Signal Processing Toolkit for GNSS.")
+    print("  ©Copyright " + lastVersionTime + " - Version " + lastVersion + " @ Chang Chuntao")
     print("  PLEASE DO NOT SPREAD WITHOUT PERMISSION OF THE AUTHOR !")
     print("")
     arg_options()
@@ -121,48 +121,47 @@ def arg_help():
 
 def arg_options():
     """
-    2022-03-27 :    参数输入模式输出帮助，参数类型帮助
+    2022-03-27 :    Displays help information for command-line options and parameter types.
                     by Chang Chuntao -> Version : 1.00
-    2023-06-29 :    + "-i", "-site", 输入站点
-                    + "-h", "-hour", 输入小时
+    2023-06-29 :    Added options for specifying sites and hours.
                     by Chang Chuntao -> Version : 2.09
     """
     from fast.com.pub import printFast
     print("  Usage: FAST <options>")
     print("")
-    print("  Where the following are some of the options avaiable:")
+    print("  Available options include:")
     print("")
-    print("  -v,  -version                   display the version of FAST and exit")
-    print("  -h,  -help                      print this help")
-    print('  -t,  -type                      GNSS type, if you need to download multiple data,')
-    print('                                  Please separate characters with " , "')
-    print("                                  Example : GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk")
-    print("  -l,  -loc                       which folder is the download in [Default pwd]")
-    print("  -y,  -year                      where year are the data to be download")
-    print("  -d,  -day                       where day   is the   day  to be download")
-    print("  -s,  -day1                      where day1  is start day  to be download")
-    print("  -e,  -day2                      where day2  is end   day  to be download")
-    print("       -hour                      where hour to be download [Default <0 - 23>]")
-    print("  -m,  -month                     where month to be download")
-    print("  -r,  -rename                    Rename product, limit to 3 char [Default : no rename]")
-    print("  -u,  -uncomprss                 Y - unzip file [Default Y]")
-    print("                                  N - do not unzip files")
-    print("  -f,  -file                      site file directory,The sites in the file are separated by spaces.")
-    print("                                  Example : bjfs irkj urum ")
-    print("  -i,  -site                      where sites to be download,The site names are separated by comma.")
-    print("                                  Example : bjfs,irkj,urum")
-    print("  -p   -process                   number of threads [Default 12]")
+    print("  -v,  -version                   Display the version of FAST and exit.")
+    print("  -h,  -help                      Print this help message.")
+    print('  -t,  -type                      Specify GNSS data type(s). Use commas to separate multiple types.')
+    print('                                  Example: GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk')
+    print("  -l,  -loc                       Specify the download folder [Default: current working directory].")
+    print("  -y,  -year                      Specify the year for data download.")
+    print("  -d,  -day                       Specify the doy for data download.")
+    print("  -s,  -day1                      Specify the start doy for data download.")
+    print("  -e,  -day2                      Specify the end doy for data download.")
+    print("       -hour                      Specify the hour(s) for data download [Default: 0 - 23].")
+    print("  -m,  -month                     Specify the month for data download.")
+    print("  -r,  -rename                    Rename downloaded products (limit to 3 characters) [Default: no rename].")
+    print("  -u,  -uncompress                Unzip downloaded files [Default: Y].")
+    print("                                  Options: Y (unzip) / N (do not unzip).")
+    print("  -f,  -file                      Specify a file containing site names (separated by spaces).")
+    print("                                  Example: bjfs irkj urum")
+    print("  -i,  -site                      Specify site names for data download (separated by commas).")
+    print("                                  Example: bjfs,irkj,urum")
+    print("  -p,  -process                   Specify the number of threads for parallel processing [Default: 12].")
     print("")
-    print(r"  Example: FAST -t Panda_svnav")
-    print(r"           FAST -t GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk -y 2022 -s 22 -e 30 -p 30")
-    print(r"           FAST -t GCRE_MGEX_obs -y 2022 -d 22 -i bjfs,abpo -l D:\Code\FAST\test")
-    print(r"           FAST -t GCRE_MGEX_obs -y 2022 -d 22 -f D:\Code\FAST\mgex.txt")
-    print(r"           FAST -t GCRE_WHU_F_sp3 -y 2022 -d 22 -r whu")
-    print(r"           FAST -t IVS_week_snx -y 2022 -m 1")
+    print("  Examples:")
+    print(r"    FAST -t Panda_svnav")
+    print(r"    FAST -t GPS_brdc,GPS_IGS_sp3,GPS_IGR_clk -y 2022 -s 22 -e 30 -p 30")
+    print(r"    FAST -t GCRE_MGEX_obs -y 2022 -d 22 -i bjfs,abpo -l D:\Code\FAST\test")
+    print(r"    FAST -t GCRE_MGEX_obs -y 2022 -d 22 -f D:\Code\FAST\mgex.txt")
+    print(r"    FAST -t GCRE_WHU_F_sp3 -y 2022 -d 22 -r whu")
+    print(r"    FAST -t IVS_week_snx -y 2022 -m 1")
     print("")
-    printFast("是否查看支持的数据类型？ / Would you like to see the supported data types?(y)", "input")
-    cont = input("     ")
-    if cont == "y" or cont == "Y":
+    printFast("Would you like to see the supported data types? (y/n)", "input")
+    cont = input("    ")
+    if cont.lower() == "y":
         supportData()
 
 

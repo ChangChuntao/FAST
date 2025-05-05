@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 # gnssbox        : The most complete GNSS Python toolkit ever
 # readsiteinfo   : Read a simple site information file
 # Author         : Chang Chuntao chuntaochang@whu.edu.cn
@@ -8,7 +8,7 @@
 
 
 def readSiteInf(sitefile):
-    # 简易站点信息文件，文件格式：
+    # 简易站点信息文件,文件格式：
     # | L1 B1 SITE_NAME1 |
     # | L2 B2 SITE_NAME2 |
     # | ................ |

@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+# qtQc              : pyqt5 for FAST
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
+
 import platform
 from PyQt5.QtCore import pyqtSignal, QUrl
 from PyQt5 import QtCore, QtGui
@@ -73,7 +81,7 @@ class FramelessWindow(QWidget):
         self.startGeometry = QRect()
         # self.resize(500, 500)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowSystemMenuHint)
-        # 为了在Windows系统下正确处理最小化函数，需要加上最小化标志按钮
+        # 为了在Windows系统下正确处理最小化函数,需要加上最小化标志按钮
         if platform.system() == 'Windows':
             self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
 
@@ -403,10 +411,10 @@ class FramelessWindow(QWidget):
         if self.isMaximized():
             return QWidget.eventFilter(self, watched, event)
 
-        # 当鼠标在对象上移动时，检查鼠标移动事件
+        # 当鼠标在对象上移动时,检查鼠标移动事件
         if event.type() == QEvent.MouseMove and event:
             self.checkBorderDragging(event)
-            # 只有在frame window上时，才触发按下事件
+            # 只有在frame window上时,才触发按下事件
         elif event.type() == QEvent.MouseButtonPress and watched is self:
             if event:
                 self.mousePressEvent(event)

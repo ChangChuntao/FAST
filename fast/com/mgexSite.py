@@ -7,6 +7,15 @@
 # url            : https://files.igs.org/pub/station/general/IGSNetwork.csv
 
 def readMegxSiteInf(mgexInfoFile):
+    """
+    Reads the MGEX site information from a file and parses it into a dictionary format.
+
+    Parameters:
+        mgexInfoFile : The path to the MGEX site information file.
+
+    Returns:
+        mgexSiteInfo: A dictionary containing the MGEX site information, with site short names as keys and detailed information as values.
+    """
     mgexInfoFileData = open(mgexInfoFile, 'r+').readlines()
     mgexSiteInfo = {}
     for line in mgexInfoFileData[1:]:

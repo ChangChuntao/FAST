@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # MGEX_name      : MGEX site Long and short name comparison information
 # Author         : Chang Chuntao
-# Copyright(C)   : The GNSS Center, Wuhan University & Chinese Academy of Surveying and mapping
+# Copyright(C)   : The GNSS Center, Wuhan University 
 # Latest Version : 1.21
 # Creation Date  : 2022.03.27 - Version 1.00
 # Date           : 2022.09.16 - Version 1.21
@@ -53,6 +53,7 @@ else:
     dirname = os.path.join(dirname, '..')
 
 
+# get mgex inf
 igsFileCsv = os.path.join(dirname, 'win_bin', 'bin', 'IGSNetwork.csv')
 if not os.path.isfile(igsFileCsv):
     igsFileCsv = os.path.join(dirname, 'bin', 'IGSNetwork.csv')
@@ -1325,7 +1326,6 @@ supplementSite = [
         ['yula', 'YULA00AUS'],
         ['yung', 'YUNG00AUS'],
         ['yunt', 'YUNT00AUS']
-        
         ]
 
 

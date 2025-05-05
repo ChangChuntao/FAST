@@ -1,5 +1,12 @@
-import datetime
+# -*- coding: utf-8 -*-
+# CNR               : Carrier-to-Noise Ratio
+# Author            : Chang Chuntao chuntaochang@whu.edu.cn
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Creation Date     : 2023.10.16
+# Latest Version    : 2023.10.16
 
+
+import datetime
 def writeCnr(cnrData, cnrFile):
     # cnrData[gnssSys][prn][band][epoch]
     cnrFileWrite = open(cnrFile, 'w+')

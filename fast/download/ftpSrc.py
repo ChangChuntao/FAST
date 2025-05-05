@@ -1,11 +1,10 @@
-#!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# FTP_source     : FTP source of each gnss center
-# Author         : Chang Chuntao, CAO Duoming, Li Yongxi
-# Copyright(C)   : The GNSS Center, Wuhan University
-# Latest Version : 2.11
-# Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2023-09-20 - Version 2.11
+# ftpSrc            : FTP source of each gnss center
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.03
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2025.05.05 - Version 3.00.03
 import datetime
 
 # nowTime = datetime.datetime.utcnow()
@@ -29,7 +28,7 @@ for p in plate:
     2022-05-24 :    + 新增ION内资源WURG_ion、CODG_ion、CORG_ion、UQRG_ion、UPRG_ion、JPLG_ion、JPRG_ion、CASG_ion、
                     CARG_ion、ESAG_ion、ESRG_ion
                     > 修正MGEX_GFZ_clk节点内 05M -> 30S
-                    > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_，但保留BRDM00DLR_S_
+                    > 修正MGEX_brdm节点内 BRDM00DLR_S_ -> BRDC00IGS_R_,但保留BRDM00DLR_S_
                     by Chang Chuntao  -> Version : 1.13
     2022-05-31 :    + 新增BIA内资源MGEX_WHU_OSB_bia
                     > 修正BIA内资源MGEX_WHU_bia -> MGEX_WHU_ABS_bia
@@ -139,6 +138,8 @@ for p in plate:
                     > tro -> trop
                     > GCRE_WHU_U_sp3 : ULT -> NRT
                     by Chang Chuntao  -> Version : 3.00.02
+    2025-05-05 :    > update GCRE_MGEX_obs_01s / LEO
+                    by Chang Chuntao  -> Version : 3.00.03
 '''
 
 FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY>n/brdc<DOY>0.<YY>n.gz",

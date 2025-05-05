@@ -36,12 +36,6 @@ def multipath(obsHead, obsData, self = None):
     ----------
         Modified for Python by Chuntao Chang
 
-    Source
-    ----------
-
-        Blewitt, Geoffrey. "An automatic editing algorithm for GPS data." 
-        Geophysical research letters 17.3 (1990): 199-202.
-        Download at: https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=7e30122e9d5e599cc3b954111e0f19c978a51e35
     """
     obsType = obsHead['OBS TYPES']
     bandChoose = {}

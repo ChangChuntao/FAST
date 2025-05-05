@@ -1,4 +1,9 @@
-
+# -*- coding: utf-8 -*-
+# Download          : func for FAST Download module
+# Author            : Chang Chuntao chuntaochang@whu.edu.cn
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Creation Date     : 2022.06.06
+# Latest Version    : 2023.06.30
 
 
 import datetime
@@ -19,7 +24,7 @@ import platform
 
 if platform.system() == 'Windows':
     """
-    2022-03-27 : 判断操作平台，获取bin下下载程序    by Chang Chuntao -> Version : 1.00
+    2022-03-27 : 判断操作平台,获取bin下下载程序    by Chang Chuntao -> Version : 1.00
     2022-09-16 : 更新索引位置                    by Chang Chuntao -> Version : 1.21
     """
     if getattr(sys, 'frozen', False):
@@ -119,32 +124,6 @@ def lftps(url):
     time.sleep(0.1)
 
 
-# def fastPoolDownload(urllist, process):
-#     """
-#     2022-03-27 : 引导模式并发下载子程序 by Chang Chuntao -> Version : 1.00
-#     """
-#     printFast("Start downloading!", "important")
-#     print("")
-#     start_time = timeit.default_timer()
-#     pool = ThreadPool(process)
-#     results = []
-#     for task in urllist:
-#         result = pool.apply_async(wgetm, (task,))
-#         results.append(result)
-#     pool.close()
-#     pool.join()
-#     successDownFileList = []
-#     for i in results:
-#         successDownFileList += i.get()
-#     end_time = timeit.default_timer() - start_time
-#     if len(successDownFileList) > 0:
-#         printFast("已下载 / Successfully downloaded " + str(len(successDownFileList)) + " files!", "important")
-#         printFast("Running Time : %.02f seconds" % end_time, "important")
-#     # else:
-#     #     printFast("No files were downloaded!", "important")
-#     #     printFast("没有下载任何文件!", "important")
-#     return successDownFileList
-
 def fastPoolDownload(urllist, process):
     """
     2022-03-27 :    引导模式并发下载子程序 by Chang Chuntao -> Version : 1.00
@@ -216,14 +195,14 @@ def argpooldownload(urllist, process, loc, compress, data_type, proname):
 
 def getUrlByRun(fastArgByRun):
     """
-    2022-04-12 :    通过输入引导的参数获取下载列表，下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
+    2022-04-12 :    通过输入引导的参数获取下载列表,下载文件、解压文件 by Chang Chuntao  -> Version : 1.10
     2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
                     by Chang Chuntao  -> Version : 1.11
     2022-08-04 :    修正时序文件下载需求
                     by Chang Chuntao  -> Version : 1.19
     2022-09-16 :    新增站点字符串替换子程序
                     by Chang Chuntao  -> Version : 1.21
-    2022-09-20 :    + 新增TROP内资源Meteorological，为需要站点的气象文件
+    2022-09-20 :    + 新增TROP内资源Meteorological,为需要站点的气象文件
                     by Chang Chuntao  -> Version : 1.22
     2022-11-02 :    > 添加DORIS判断
                     by Chang Chuntao  -> Version : 1.25
@@ -282,7 +261,7 @@ def getUrlByRun(fastArgByRun):
             return "n"
     else:
         # 数据类型为输入年日
-        # 输入为年， 起始年积日， 终止年积日 的数据类型
+        # 输入为年, 起始年积日, 终止年积日 的数据类型
         if fastArgByRun['datatype'] in yd_type:
             yd = runByYearDoy()
             if yd == "y":
@@ -320,7 +299,7 @@ def getUrlByRun(fastArgByRun):
                 return "n"
 
         # 数据类型为输入年日小时
-        # 输入为年， 起始年积日， 终止年积日 小时 的数据类型
+        # 输入为年, 起始年积日, 终止年积日 小时 的数据类型
         if fastArgByRun['datatype'] in ydh_type:
             yd = runByYearDoy()
             if yd == "y":
@@ -346,7 +325,7 @@ def getUrlByRun(fastArgByRun):
                 return "n"
 
         # 数据类型为输入年日站点文件小时数据
-        # 输入为年， 起始年积日， 终止年积日, 站点文件 的小时数据类型
+        # 输入为年, 起始年积日, 终止年积日, 站点文件 的小时数据类型
         elif fastArgByRun['datatype'] in ydsh_type:
             findFtp = []
             yd = runByYearDoy()
@@ -377,7 +356,7 @@ def getUrlByRun(fastArgByRun):
                 return "n"
 
         # 数据类型为输入年日站点文件
-        # 输入为年， 起始年积日， 终止年积日, 站点文件 的数据类型
+        # 输入为年, 起始年积日, 终止年积日, 站点文件 的数据类型
         elif fastArgByRun['datatype'] in yds_type:
             yd = runByYearDoy()
             if yd == "y":
@@ -431,7 +410,7 @@ def geturlByArg(fastArgByArg):
                     by Chang Chuntao  -> Version : 1.11
     2022-09-16 :    新增站点字符串替换子程序
                     by Chang Chuntao  -> Version : 1.21
-    2022-09-20 :    + 新增TROP内资源Meteorological，为需要站点的气象文件
+    2022-09-20 :    + 新增TROP内资源Meteorological,为需要站点的气象文件
                     by Chang Chuntao  -> Version : 1.22
     2022-10-10 :    > 修复无需其他参数输入下载类下载
                     by Chang Chuntao  -> Version : 1.24
@@ -553,7 +532,7 @@ def geturlByArg(fastArgByArg):
 
 def getftp(t, y, d, hour=None):
     """
-    2022-03-27 : * 通过数据类型、年、年积日，获取下载列表，并调用ReplaceTimeWildcard生成下载链接list
+    2022-03-27 : * 通过数据类型、年、年积日,获取下载列表,并调用ReplaceTimeWildcard生成下载链接list
                  by Chang Chuntao -> Version : 1.00
     2022-11-02 : > 添加DORIS判断
                  by Chang Chuntao -> Version : 1.25

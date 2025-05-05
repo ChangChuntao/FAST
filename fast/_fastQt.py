@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# FAST           : MAIN of FAST GUI
+# Author         : Chang Chuntao
+# Copyright(C)   : The GNSS Center, Wuhan University
+# Creation       : 2022.11.09 - Version 2.01.00
+# Latest Version : 2025.05.05 - Version 3.00.03
+
 import os
 import sys
 from PyQt5.QtGui import QFont, QPixmap, QFontDatabase
@@ -506,7 +513,7 @@ class mainWindow(QMainWindow):
         self.site_file_line = QLineEdit(self)
         self.site_file_line.setFont(font)
         if self.chinese:
-            self.site_file_line.setPlaceholderText("按右侧按钮选择站点文件,或输入站点名称，按逗号分开 [bjfs,abpo]")
+            self.site_file_line.setPlaceholderText("按右侧按钮选择站点文件,或输入站点名称,按逗号分开 [bjfs,abpo]")
         else:
             self.site_file_line.setPlaceholderText("Select site files, or input site names separated by ',' [bjfs,abpo].")
 
@@ -866,6 +873,16 @@ class mainWindow(QMainWindow):
         self.canvasIOD = self.figIOD.canvas
         iodTabLayout = QVBoxLayout(iodTab)
         iodTabLayout.addWidget(self.canvasIOD)
+
+        self.qc_plot.setStyleSheet("""
+            QTabBar::tab {
+                min-height: 10px;    /* 更激进的高度 */
+                max-height: 10px;
+                padding: 0px 4px;
+                font-size: 18px;
+                margin: 1;
+            }
+        """)
 
         qcRight_in = QFrame()
         qcRight_in.setFrameShape(QFrame.StyledPanel)
@@ -1237,10 +1254,10 @@ class mainWindow(QMainWindow):
 
         # 创建 QTabWidget
         tab_widget = QTabWidget()
-
+                
         # 将选项卡放在左侧 
-        tab_widget.setStyleSheet("QTabBar::tab { min-width: " + str(int(screenWidth / 13)) + "%; min-height: " + str(int(screenHeight / 40)) + "%; }")  # 设置tab_widget的宽度为100%
-        tab_widget.setTabPosition(QTabWidget.North)
+        # tab_widget.setStyleSheet("QTabBar::tab { min-width: " + str(int(screenWidth / 13)) + "%; min-height: " + str(int(screenHeight / 40)) + "%; }")  # 设置tab_widget的宽度为100%
+        # tab_widget.setTabPosition(QTabWidget.North)
 
         # 声明QWidget
         downloadFrame = QWidget()
@@ -1282,6 +1299,17 @@ class mainWindow(QMainWindow):
         # tab_widget.addTab(toolFrame, "其他工具")
 
 
+        # tab_widget.setStyleSheet("""
+        #     QTabBar::tab {
+        #         border: none;
+        #     }
+        # """)
+        tab_widget.setStyleSheet("""
+            QTabBar::tab {
+                margin: 1;       /* 移除外边距 */
+                padding: 10px 60px; /* 减少内边距 */
+            }
+        """)
         # 将 QTabWidget 添加到主窗口布局
         main_layout.addWidget(tab_widget, stretch=1)
 

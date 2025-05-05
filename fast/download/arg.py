@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# arg               : arg for FAST Download module
+# Author            : Chang Chuntao chuntaochang@whu.edu.cn
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Creation Date     : 2022.06.06
+# Latest Version    : 2023-06-30
 
 import sys
 from fast.download.inf import arg_help, supportData
@@ -8,7 +14,7 @@ def getArg(fastArg):
     """
     2022-03-27 :    * 获取输入参数
                     by Chang Chuntao -> Version : 1.00
-    2023-06-30 :    * 更换参数读取方式， -start 对应为 -s
+    2023-06-30 :    * 更换参数读取方式, -start 对应为 -s
                     + "-i", "-site", 输入站点
                     + "-h", "-hour", 输入小时
                     by Chang Chuntao -> Version : 2.09
@@ -68,14 +74,14 @@ def checkInputArg(fastArg):  # 判断输入参数正确性
         if isSupportedDatatype(dt):  # 判断输入数据类型是否正确
             if dt in ym_type:
                 if fastArg['year'] == 0 or fastArg['month'] == 0:
-                    printFast("本数据类型需输入年与月，请指定[-y <year>] [-m <month>]！", "fail")
+                    printFast("本数据类型需输入年与月,请指定[-y <year>] [-m <month>]！", "fail")
                     printFast("This data type requires input of year and month.[-y <year>] [-m <month>]！", "fail")
                     sys.exit(2)
             else:
-                if dt in yd_type:  # 输入为年， 起始年积日， 终止年积日的数据类型, 判断输入时间是否正确
+                if dt in yd_type:  # 输入为年, 起始年积日, 终止年积日的数据类型, 判断输入时间是否正确
                     if fastArg['year'] == 0:
                         printFast(
-                            "本数据类型需输入年与天，请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
+                            "本数据类型需输入年与天,请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
                             "fail")
                         printFast(
                             "This data type requires input of year and doy.[-y <year>] [-o <day1>] [-e <day2>] or [-y <year>] [-d <day>]！",
@@ -84,7 +90,7 @@ def checkInputArg(fastArg):  # 判断输入参数正确性
                     else:
                         if fastArg['day1'] == 0 and fastArg['day2'] == 0:
                             printFast(
-                                "本数据类型需输入年与天，请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
+                                "本数据类型需输入年与天,请指定[-y <year>] [-o <day1>] [-e <day2>]或[-y <year>] [-d <day>]！",
                                 "fail")
                             printFast(
                                 "This data type requires input of year and doy.[-y <year>] [-o <day1>] [-e <day2>] or [-y <year>] [-d <day>]！",
@@ -92,7 +98,7 @@ def checkInputArg(fastArg):  # 判断输入参数正确性
                             sys.exit(2)
                 if dt in yds_type or dt in s_type:
                     if fastArg['file'] == "" and fastArg['site'] == "":
-                        printFast("本类型需要输入文件位置参数或站点参数，请指定[-f <file>]或者[-i <site>]！", "fail")
+                        printFast("本类型需要输入文件位置参数或站点参数,请指定[-f <file>]或者[-i <site>]！", "fail")
                         printFast("This type requires input of file location parameter or site parameter.[-f <file>] or [-i <site>]！", "fail")
                         sys.exit(2)
         elif dt =='':
@@ -100,7 +106,7 @@ def checkInputArg(fastArg):  # 判断输入参数正确性
         else:
             printFast(dt + " -> 数据类型不存在！ / Data type error!", "fail")
             printFast("是否需要查看支持数据？ / Would you like to see the supported data types? (y)", "input")
-            cont = input("     ")
+            cont = input("    ")
             if cont == "y" or "Y":
                 supportData()
                 sys.exit(2)

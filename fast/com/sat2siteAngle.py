@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-# gnssbox        : The most complete GNSS Python toolkit ever
+# -*- coding: utf-8 -*-
 # sat2siteAngle  : Calculate the Angle between site and satellite
 # Author         : Chang Chuntao chuntaochang@whu.edu.cn
 # Copyright(C)   : The GNSS Center, Wuhan University

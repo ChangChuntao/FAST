@@ -13,35 +13,30 @@ import datetime
 
 def IOD(obsHead, obsData, self = None):
     """
-    This subroutine calculates the multipath for each satellite from GNSS 
-    observation data, using Turboedit method to detect cycle slips.
+    Computes the Ionospheric Delay Rate (IOD) for GNSS observations.
 
-    Parameters:
-    ----------
-    obsHead :
-        Observation File Header in Python Dictionary Format
+    This function processes GNSS observation data to calculate the Ionospheric Delay Rate.
+    It iterates through the observation data, identifies valid observations, and computes the ionospheric delay rate
+    using the Geometry-Free (GF) combination. The function supports multiple GNSS systems (e.g., GPS, BDS)
+    and can be integrated with a graphical user interface (GUI) for real-time updates.
 
-    obsData :
-        Observation File Data in Python Dictionary Format
-
-    self :
-        Python QT object
+    Args:
+        obsHead (dict): Observation header containing metadata (e.g., OBS TYPES, prn).
+        obsData (dict): Observation data dictionary with epochs as keys.
+        self (object, optional): Reference to the parent object (e.g., GUI). Defaults to None.
+            If provided, the function will update the GUI status and process events.
 
     Returns:
-    ----------
-    iodData :
-        mp DATA in Python Dictionary Format
+        dict: IOD data dictionary containing ionospheric delay rates for each satellite and band.
 
-    Notes
-    ----------
-        Modified for Python by Chuntao Chang
+    Note:
+        - This function assumes that the input observation data is valid and formatted correctly.
+        - The function uses the `getBandFreq` function to retrieve band frequencies.
+        - If `self` is provided, the function will use PyQt5 to update the GUI status.
+        - The function supports multiple GNSS systems and bands, as specified in the observation header.
 
-    Source
-    ----------
-
-        Blewitt, Geoffrey. "An automatic editing algorithm for GPS data." 
-        Geophysical research letters 17.3 (1990): 199-202.
-        Download at: http://www.beidou.gov.cn/zt/bdbz/201911/W020191125788479579263.pdf
+    See Also:
+        getBandFreq: Function to retrieve band frequencies.
     """
     obsType = obsHead['OBS TYPES']
     bandChoose = {}

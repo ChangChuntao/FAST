@@ -1,4 +1,10 @@
-
+# -*- coding: utf-8 -*-
+# initObs           : initObs in SPP module
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
 
 
 

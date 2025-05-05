@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# FAST              : Flexible And Swift Toolkit for GNSS Data
-# multipath         : Calculate multipath of GNSS observation data
+# CMC               : Time diff Code minus Phase
 # Author            : Chang Chuntao chuntaochang@whu.edu.cn
 # Copyright(C)      : The GNSS Center, Wuhan University
 # Creation Date     : 2023.10.16
@@ -12,36 +11,6 @@ import numpy as np
 import datetime
 
 def CMC(obsHead, obsData, self = None):
-    """
-    This subroutine calculates the multipath for each satellite from GNSS 
-    observation data, using Turboedit method to detect cycle slips.
-
-    Parameters:
-    ----------
-    obsHead :
-        Observation File Header in Python Dictionary Format
-
-    obsData :
-        Observation File Data in Python Dictionary Format
-
-    self :
-        Python QT object
-
-    Returns:
-    ----------
-    cmcData :
-        cmc DATA in Python Dictionary Format
-
-    Notes
-    ----------
-        Modified for Python by Chuntao Chang
-
-    Source
-    ----------
-        Blewitt, Geoffrey. "An automatic editing algorithm for GPS data." 
-        Geophysical research letters 17.3 (1990): 199-202.
-        Download at: https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=7e30122e9d5e599cc3b954111e0f19c978a51e35
-    """
     obsType = obsHead['OBS TYPES']
     bandChoose = {}
     for gSys in obsType:

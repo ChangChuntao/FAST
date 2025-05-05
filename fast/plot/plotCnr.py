@@ -1,114 +1,10 @@
-
-def plotCnrAll(obsHead, obsData, self = None, pngFile = None):
-    import matplotlib.pyplot as plt
-    import matplotlib.dates as mdate
-    cnrData = {}
-    satList = obsHead['prn']
-    if self is not None:
-        from PyQt5.QtWidgets import QApplication
-        QApplication.processEvents()
-        startdatetime = self.qcStartDateTimeEdit.dateTime().toPyDateTime()
-        enddatetime = self.qcEndDateTimeEdit.dateTime().toPyDateTime()
-        satList = [item for item in self.qcChoosePrnBox.currentText().split(',') if item != '']
-        nowSys = self.qcChooseSysBox.currentText()
-        gnssSystem = []
-        for gnssSys in nowSys.split(','):
-            if '' != gnssSys:
-                gnssSystem.append(gnssSys)
-        bandChoose = {}
-        for sys_band in self.qcChooseBandBox.currentText().split(','):
-            if sys_band == '':
-                continue
-            nowSys = sys_band[0]
-            if nowSys not in bandChoose:
-                bandChoose[nowSys] = []
-            bandChoose[nowSys].append('S'+sys_band[2:])
-
-    for epoch in obsData:
-        if epoch < startdatetime or epoch > enddatetime:
-            continue
-        for prn in obsData[epoch]:
-            gnssSys = prn[0]
-            if self is not None:
-                if gnssSys not in gnssSystem:
-                    continue
-
-            if gnssSys not in cnrData:
-                cnrData[gnssSys] = {}
-
-            if prn not in cnrData[gnssSys]:
-                cnrData[gnssSys][prn] = {}
-            for band in obsData[epoch][prn]:
-                if 'S' != band[0]:
-                    continue
-                if obsData[epoch][prn][band] == None:
-                    continue
-                if band not in cnrData[gnssSys][prn]:
-                    cnrData[gnssSys][prn][band] = {}
-                cnrData[gnssSys][prn][band][epoch] = obsData[epoch][prn][band]
-    
-    gnssSysNum = len(cnrData)
-    
-    if self is not None:
-        self.figcnr.clf()
-        figcnr = self.figcnr
-    else:
-        figcnr = plt.figure()
-
-    nowAxNum = 1
-    prnIndex = 0
-    for gnssSys in cnrData:
-        axcnr=figcnr.add_subplot(gnssSysNum,1,nowAxNum)
-        axcnr.set_ylabel(gnssSys + ' [dBHz]', fontsize=16)
-        axcnr.grid(zorder=0)
-        axcnr.tick_params(axis='y', labelsize=13)
-
-        for prn in cnrData[gnssSys]:
-
-            if self is not None:
-                if prn not in satList:
-                    continue
-            if prnIndex / len(satList) * 100 - int(prnIndex / len(satList) * 100) < 1:
-                completed = int(20 * prnIndex / len(satList)) - 1
-                remaining = 20 - completed
-                barPercent = '=' * completed + '>' + '+' * remaining
-                percentage = f'{(prnIndex / len(satList)) * 100:.2f}%'
-                self.status.showMessage("Plot cnr of " + prn +  "  [" + barPercent + '] ' + percentage)
-                QApplication.processEvents()
-            for band in cnrData[gnssSys][prn]:
-                if self is not None:
-                    if gnssSys not in bandChoose:
-                        continue
-                    if band not in bandChoose[gnssSys]:
-                        continue
-                epoch_list = list(cnrData[gnssSys][prn][band])
-                cnrList = []
-                for epoch in cnrData[gnssSys][prn][band]:cnrList.append(cnrData[gnssSys][prn][band][epoch])
-                axcnr.scatter(epoch_list, cnrList, marker='+', s=1, zorder=10, alpha=0.3)
-            prnIndex += 1
-        if nowAxNum != gnssSysNum:
-            axcnr.set_xticklabels([])
-        else:
-            # xfmt = mdate.DateFormatter('%dD-%H:%M')
-            xfmt = mdate.DateFormatter('%dD-%HH')
-            
-            axcnr.xaxis.set_major_formatter(xfmt)
-            axcnr.tick_params(axis='x', labelsize=13)
-            # axcnr.tick_params(axis='x', labelsize=8)
-        nowAxNum += 1
-    
-    figcnr.subplots_adjust(left=0.08, right=0.99, bottom=0.03, top=0.99)
-
-    if self is not None:
-        figcnr.canvas.draw()
-        self.status.showMessage("Plot cnr Completed [" + 20*'=' + '] ' + "100% ")
-        QApplication.processEvents()
-    else:
-        if pngFile is not None:
-            plt.savefig(pngFile)
-        else:
-            plt.show()
-    return cnrData
+# -*- coding: utf-8 -*-
+# plotCnr           : plot CNR
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2024.07.01 - Version 3.00.02
 
 def plotCnrBack(obsHead, obsData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
@@ -247,8 +143,6 @@ def plotCnrBack(obsHead, obsData, self = None, pngFile = None):
     return cnrData
 
 
-
-
 def plotCnr(obsHead, obsData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate
@@ -307,7 +201,7 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
         self.figcnr.clf()
         figcnr = self.figcnr
         # self.figcnr = plt.figure(figsize=(84 / 25.4, 84 / 25.4 * 1.5), dpi=300)  # 设置新的尺寸和分辨率
-        # self.canvas = FigureCanvas(self.figcnr)  # 如果需要，重新创建画布
+        # self.canvas = FigureCanvas(self.figcnr)  # 如果需要,重新创建画布
     else:
         figcnr = plt.figure()
 

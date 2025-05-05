@@ -1,6 +1,4 @@
-#!/usr/bin/python3
-# gnssbox        : The most complete GNSS Python toolkit ever
-
+# -*- coding: utf-8 -*-
 # xyz2blh        : Conversion of ECEF coordinates to geodetic coordinates
 # Author         : Chang Chuntao chuntaochang@whu.edu.cn
 # Copyright(C)   : The GNSS Center, Wuhan University

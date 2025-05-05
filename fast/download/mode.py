@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# FAST           : 
+# mode           : Mode for FAST Downlad module
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University
 # Creation       : 2022.03.27 - Version 1.00
@@ -96,14 +96,14 @@ def runByYearDoy():
     """
     2022-03-27 :    输入年日时间
                     by Chang Chuntao -> Version : 1.00
-    2022-04-12 :    *新增返回上级菜单操作，输入y回到上级菜单
+    2022-04-12 :    *新增返回上级菜单操作,输入y回到上级菜单
                     by Chang Chuntao  -> Version : 1.10
     """
     print()
-    printFast("若需下载多天数据，请输入 <年 起始年积日 截止年积日> / Enter <year start_doy end_doy>", "input")
-    printFast("若需下载单天数据，请输入 <年 年积日> / Enter <year doy>", "input")
-    printFast("Note: 如需返回上级目录，请输入y / In need of returning parent menu, plear enter <y> ", "input")
-    yd = input("     ")
+    printFast("若需下载多天数据,请输入 <年 起始年积日 截止年积日> / Enter <year start_doy end_doy>", "input")
+    printFast("若需下载单天数据,请输入 <年 年积日> / or enter <year doy>", "input")
+    printFast("Note: 如需返回上级目录,请输入y / In need of returning parent menu, plear enter <y> ", "input")
+    yd = input("    ")
     while True:
         if yd == "y" or yd == "Y":
             return "y"
@@ -122,22 +122,22 @@ def runByYearDoy():
                 return year, day1, day2
             else:
                 printFast("Warning: 请输入正确的时间 / Please enter the time in the correct format!", "warning")
-                printFast("若需下载多天数据，请输入 <年 起始年积日 截止年积日> / Enter <year start_doy end_doy>", "input")
-                printFast("若需下载单天数据，请输入 <年 年积日> / Enter <year doy>", "input")
-                printFast("Note: 如需返回上级目录，请输入y / Enter <y> to return parent menu...", "input")
-                yd = input("     ")
+                printFast("若需下载多天数据,请输入 <年 起始年积日 截止年积日> / Enter <year start_doy end_doy>", "input")
+                printFast("若需下载单天数据,请输入 <年 年积日> / or enter <year doy>", "input")
+                printFast("Note: 如需返回上级目录,请输入y / Enter <y> to return parent menu...", "input")
+                yd = input("    ")
 
 def runByYearMonth():
     '''
     2022-03-27 :    输入年月时间
                     by Chang Chuntao -> Version : 1.00
-    2022-04-12 :    *新增返回上级菜单操作，输入y回到上级菜单
+    2022-04-12 :    *新增返回上级菜单操作,输入y回到上级菜单
                     by Chang Chuntao  -> Version : 1.10
     '''
     print()
     printFast("Note: 请输入 <年 月> / Enter <year month>", "input")
-    printFast("Note: 如需返回上级目录，请输入<y> / Enter <y> to return parent menu...", "input")
-    ym = input("     ")
+    printFast("Note: 如需返回上级目录,请输入<y> / Enter <y> to return parent menu...", "input")
+    ym = input("    ")
     while True:
         if ym == "y" or ym == "Y":
             return "y"
@@ -150,8 +150,8 @@ def runByYearMonth():
             else:
                 printFast("Warning: 请输入正确的时间 / Please enter the time in the correct format!", "warning")
                 printFast("请输入 <年 月> / Enter <year month>", "input")
-                printFast("Note: 如需返回上级目录，请输入y / Enter <y> to return parent menu...", "input")
-                ym = input("     ")
+                printFast("Note: 如需返回上级目录,请输入y / Enter <y> to return parent menu...", "input")
+                ym = input("    ")
 
 
 def getHour():
@@ -161,7 +161,7 @@ def getHour():
     """
     print()
     printFast("Note: 请输入 <小时> / Enter <0-23>", "input")
-    hourStr = input("     ")
+    hourStr = input("    ")
     while True:
         try:
             hour = int(hourStr)
@@ -169,11 +169,11 @@ def getHour():
                 return hour
             else:
                 printFast("Error: 输入错误, 请输入 <小时> / Enter <0-23>", "input")
-                hourStr = input("     ")
+                hourStr = input("    ")
                 continue
         except:
             printFast("Error: 输入错误, 请输入 <小时> / Enter <0-23>", "input")
-            hourStr = input("     ")
+            hourStr = input("    ")
             continue
 
 
@@ -187,17 +187,17 @@ def getFile(datatype):
     print()
     printFast(r"请输入站点名称或站点文件所在位置(绝对位置/相对位置) / Please enter the site name or the location of the site file\n         eg. BJFS00CHN irkj urum / site.txt or D:\site.txt", "input")
     printFast(r"文件内写入站名, 长名短名都可, 按行按空格分割都可！/ Write station names in the file, \n     both long and short names are accepted, separated by lines or spaces.\n         eg. - BJFS00CHN irkj urum", "input")
-    sitefile = input("     ")
+    sitefile = input("    ")
     return getSite(sitefile, datatype)
 
 
 def getSite(file, datatype):
     """
-    2022-03-27 : * 读取file中站点名，返回site
+    2022-03-27 : * 读取file中站点名,返回site
                  by Chang Chuntao -> Version : 1.00
     2022-08-04 : 修正时序文件下载需求
                  by Chang Chuntao -> Version : 1.19
-    2022-09-11 : 站点文件可支持行列两种格式，或混合模式
+    2022-09-11 : 站点文件可支持行列两种格式,或混合模式
                  by Chang Chuntao -> Version : 1.20
     2023-01-14 : 支持支持输入站点
                  by Chang Chuntao -> Version : 2.06
@@ -248,8 +248,8 @@ def getUncompress(successDownFileList):
     for f in successDownFileList:
         if str(f).split(".")[-1] == "gz" or str(f).split(".")[-1] == "Z" or str(f).split(".")[-1] == "tgz" \
                 or str(f).split(".")[-1] == "zip" or str(f).split(".")[-1] == "ZIP":
-            printFast("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Unzip: Enter. Skip unzip: Any+Enter!", "input")
-            isuncpmress = input("     ")
+            printFast("是否解压文件？如需解压直接回车,若无需解压输入任意字符回车！ / Unzip: Enter. Skip unzip: Any+Enter!", "input")
+            isuncpmress = input("    ")
             break
     if isuncpmress == "":
         extractedFileList = unzipfile(os.getcwd(), successDownFileList)
@@ -261,8 +261,8 @@ def getvlbicompress(ftpsite):
     '''
     from fast.download.fileOperation import unzip_vlbi
     print()
-    printFast("是否解压文件？如需解压直接回车，若无需解压输入任意字符回车！ / Unzip: Enter. Skip unzip: Any+Enter!", "input")
-    isuncpmress = input("     ")
+    printFast("是否解压文件？如需解压直接回车,若无需解压输入任意字符回车！ / Unzip: Enter. Skip unzip: Any+Enter!", "input")
+    isuncpmress = input("    ")
     if isuncpmress == "":
         unzip_vlbi(os.getcwd(), ftpsite)
 
@@ -275,14 +275,14 @@ def getRename(successDownFileList):
         if 'ULT' in f or 'ULA' in f:
             continue
         if fileType in ['SP3', 'CLK', 'BIA', 'DCB', 'ERP', 'SNX']:
-            printFast("如无需更名直接回车，若需更名请输入三位字符！/ Rename: <3char> + Enter. Skip: Enter!", "input")
-            rename3char = input("     ")
+            printFast("如无需更名直接回车,若需更名请输入三位字符！/ Rename: <3char> + Enter. Skip: Enter!", "input")
+            rename3char = input("    ")
             break
     
     if rename3char is not None and len(rename3char) > 0:
         while len(rename3char) != 3:
             printFast("请输入正确字符！ / Rename: <3char> + Enter!", "input")
-            rename3char = input("     ")
+            rename3char = input("    ")
         renamePro(successDownFileList, rename3char)
 
 

@@ -1,6 +1,4 @@
-#!/usr/bin/python3
-# gnssbox        : The most complete GNSS Python toolkit ever
-
+# -*- coding: utf-8 -*-
 # writeClk       : Write the clk file
 # Author         : Chang Chuntao chuntaochang@whu.edu.cn
 # Copyright(C)   : The GNSS Center, Wuhan University
@@ -12,8 +10,8 @@
 #              by ChangChuntao -> Version : 1.00
 def writeClk(clkData, clkFile, sortBy = 'epoch', vel = None):
     import sys
-    # clkHead: 钟差文件头，见readClk.py
-    # clkData: 钟差数据类型，见readClk.py
+    # clkHead: 钟差文件头,见readClk.py
+    # clkData: 钟差数据类型,见readClk.py
     # clkFile: 钟差文件位置
     clkHead = {}
     clkHead['RINEX VERSION'] = 3.0
@@ -43,15 +41,15 @@ def writeClk(clkData, clkFile, sortBy = 'epoch', vel = None):
     clkFileWrite = open(clkFile, 'w+')
 
     # 写入头文件
-    # 版本号，类型
+    # 版本号,类型
     clkFileWrite.write('     ' + '%.2f' % clkHead[
         'RINEX VERSION'] + '           C                   M                   RINEX VERSION / TYPE\n')
-    # 内容，组织
+    # 内容,组织
     clkFileWrite.write(
         str(clkHead['PGM']).ljust(20) + str(clkHead['RUN BY']).ljust(20) + '                    PGM / RUN BY / DATE \n')
     # 判断钟差写入类型
     if len(clkHead['TYPES OF DATA']) == 0:
-        # 无卫星数据，则退出
+        # 无卫星数据,则退出
         print('无数据!')
         sys.exit()
     elif len(clkHead['TYPES OF DATA']) == 1:

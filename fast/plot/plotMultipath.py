@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
+# plotMultipath     : plot Multipath
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2024.07.01 - Version 3.00.02
+
 from fast.com.pub import rms
-
-
 def plotMultipathBack(mpData, self = None, pngFile = None):
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdate
@@ -79,7 +85,7 @@ def plotMultipath(mpData, self = None, pngFile = None):
         self.figMP.clf()
         figMP = self.figMP
         # self.figMP = plt.figure(figsize=(84 / 25.4, 84 / 25.4 * 1.5), dpi=300)  # 设置新的尺寸和分辨率
-        # self.canvas = FigureCanvas(self.figMP)  # 如果需要，重新创建画布
+        # self.canvas = FigureCanvas(self.figMP)  # 如果需要,重新创建画布
     else:
         figMP = plt.figure(figsize=(84 / 25.4, 84 / 25.4 * 1.5), dpi=300)
 

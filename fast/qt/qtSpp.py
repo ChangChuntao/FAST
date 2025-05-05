@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+# qtSpp             : pyqt5 for SPP module
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
+
+
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import QThread, QTimer, QDateTime
 import os
@@ -244,7 +253,7 @@ def saveSppPos(self):
         msg_box.exec_()
         return None
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog   # 可选，禁用本地对话框
+    options |= QFileDialog.DontUseNativeDialog   # 可选,禁用本地对话框
     savePath, _ = QFileDialog.getSaveFileName(self, "Save File", "", "All Files (*)", options=options)
 
     self.isSppSaving = True

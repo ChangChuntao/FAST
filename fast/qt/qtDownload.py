@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+# qtDownload        : pyqt5 for download module
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.02
+# Creation Date     : 2023.10.05 - Version 3.00.00
+# Date              : 2024.07.01 - Version 3.00.02
+
+
 from PyQt5.QtCore import Qt, QDateTime, QSize, QThread, pyqtSignal
 import subprocess
 import os
@@ -97,7 +106,7 @@ def printLog(self, logStr):
 
 def choose_out_dir(self):
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog   # 可选，禁用本地对话框
+    options |= QFileDialog.DontUseNativeDialog   # 可选,禁用本地对话框
     open_path_file = os.path.join(self.exeDirName, 'win_bin', 'open.path')
     if os.path.isfile(open_path_file):
         open_path_file_open = open(open_path_file, 'r+')

@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# menu              : Menu for FAST Downlad module
+# Author            : Chang Chuntao
+# Copyright(C)      : The GNSS Center, Wuhan University
+# Latest Version    : 3.00.03
+# Creation Date     : 2022.03.27 - Version 1.00
+# Date              : 2025.05.05 - Version 3.00.03
 
 from fast.download.inf import fastHelp
 from fast.com.pub import printFast, objnum, gnss_type
@@ -9,8 +16,8 @@ def level1menu():
     2022-03-27 :    一级菜单 by Chang Chuntao -> Version : 1.00
     2022-04-22 :    + 新增TRO一级类
                     by Chang Chuntao  -> Version : 1.11
-    2022-04-30 :    * 新增GNSS日常使用工具：GNSS_Timestran
-                    调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran，增加分栏
+    2022-04-30 :    * 新增GNSS日常使用工具: GNSS_Timestran
+                    调整输入模式, 0 -> a -> HELP / b -> GNSS_Timestran,增加分栏
                     by Chang Chuntao  -> Version : 1.12
     2022-05-24 :    + 新增ION一级类
                     by Chang Chuntao  -> Version : 1.13
@@ -51,7 +58,7 @@ def level1menu():
 
     printFast("Note: 请输入数据编号 (eg. 2 or a)", "input")
     printFast("Note: Please enter the corresponding number or letter (eg. 2 or a)", "input")
-    obj = input("  -  ")
+    obj = input("  - ")
     while True:
         # if obj in ['a', 'b', 'c', 'd', 'e', 'f', 'h']:
         if obj in ['a', 'b', 'c', 'd', 'e', 'f', 'h']:
@@ -59,21 +66,21 @@ def level1menu():
         elif obj.isdigit():  # 判断输入是否为数字
             if int(obj) > len(gnss_type) or int(obj) < 0:  # 判断输入是否超出列表范围
                 print("")
-                printFast("Warning: 输入错误，请输入正确编号 / please enter the correct number (eg. 2 or a)", "input")
-                obj = input("     ")
+                printFast("Warning: 输入错误,请输入正确编号 / please enter the correct number (eg. 2 or a)", "input")
+                obj = input("    ")
             else:
                 obj = int(obj)
                 return obj
         else:
-            printFast("Warning: 输入错误，请输入正确编号 / please enter the correct number (eg. 2 or a)", "input")
-            obj = input("     ")
+            printFast("Warning: 输入错误,请输入正确编号 / please enter the correct number (eg. 2 or a)", "input")
+            obj = input("    ")
 
 
 def level2menu(obj):
     """
     2022-03-27 :    二级菜单 by Chang Chuntao -> Version : 1.00
     2022-04-12 :    新增P1C1、P1P2、P2C2、GRACE_SLR、BEIDOU_SLR、MGEX_WHU_OSB、GLO_IGL_sp3、GPS_IGS_clk_30s资源
-                    * 新增返回上级菜单操作，输入y回到上级菜单
+                    * 新增返回上级菜单操作,输入y回到上级菜单
                     by Chang Chuntao  -> Version : 1.10
     2022-04-22 :    新增TRO内资源IGS_zpd、COD_tro、 JPL_tro、 GRID_1x1_VMF3、 GRID_2.5x2_VMF1、 GRID_5x5_VMF3
                     by Chang Chuntao  -> Version : 1.11
@@ -174,6 +181,8 @@ def level2menu(obj):
                     by Chang Chuntao  -> Version : 2.10
     2023-09-20 :    + GRE_JAX_U_sp3 / GRE_JAX_U_clk_30s
                     by Chang Chuntao  -> Version : 2.11
+    2025-05-05 :    + update inf see fast\download\ftpSrc.py
+                    by Chang Chuntao  -> Version : 3.00.03
     """
     print("")
     if obj == 1:
@@ -323,23 +332,6 @@ def level2menu(obj):
         print("    |                                                                          |")
         print("    +--------------------------------------------------------------------------+")
     elif obj == 13:
-        # print("    +-----------------------------------LEO------------------------------------+")
-        # print("    |                                                                          |")
-        # print("    |   1 : GRACE_dat           2 : GRACE_rnxapp          3 : GRACE_fo_dat     |")
-        # print("    |   4 : GRACE_fo1_sp3       5 : GRACE_fo2_sp3         6 : CHAMP_rnx        |")
-        # print("    |   7 : CHAMP_sp3           8 : SWARM_A_rnx           9 : SWARM_B_rnx      |")
-        # print("    |   7 : SWARM_C_rnx         8 : SWARM_sp3             9 : SWARM_sp3        |")
-        # print("    |                                                                          |")
-        # print("    +----------------------------------COSMIC----------------------------------+")
-        # print("    |                                                                          |")
-        # print("    |  10 : C1_L1a_leoAtt      11 : C1_L1a_opnGps        12 : C1_L1a_podCrx    |")
-        # print("    |  13 : C1_L1b_atmPhs      14 : C1_L1b_gpsBit        15 : C1_L1b_ionPhs    |")
-        # print("    |  16 : C1_L1b_leoClk      17 : C1_L1b_leoOrb        18 : C1_L1b_podTec    |")
-        # print("    |  19 : C1_L1b_scnLv1                                                      |")
-        # print("    |  20 : C2_L1a_leoAtt      21 : C2_L1a_opnGps        22 : C2_L1a_podCrx    |")
-        # print("    |  23 : C2_L1b_conPhs      24 : C2_L1b_leoOrb        25 : C2_L1b_podTc2    |")
-        # print("    |                                                                          |")
-        # print("    +--------------------------------------------------------------------------+")
         print("    +-----------------------------------LEO------------------------------------+")
         print("    |                                                                          |")
         print("    |   1 : GRACE_dat           2 : GRACE_rnxapp                               |")
@@ -384,8 +376,8 @@ def level2menu(obj):
         return 0
 
     printFast("Note: 请输入数据编号 / Please enter the data number (eg. 2)", "input")  # 二级索引
-    printFast("Note: 返回上级目录，输入'y' / To go back to the parent directory, enter 'y'", "input")  # 二级索引
-    subnum = input("     ")
+    printFast("Note: 返回上级目录,输入'y' / To go back to the parent directory, enter 'y'", "input")  # 二级索引
+    subnum = input("    ")
     while True:
         if subnum == "y" or subnum == "Y":
             return "y"
@@ -393,13 +385,13 @@ def level2menu(obj):
             if subnum.isdigit():  # 判断是否为数字
                 if int(subnum) > objnum[obj - 1] or int(subnum) < 1:  # 判断输入是否超出列表范围
                     print("")
-                    printFast("Warning: 输入错误，请输入正确编号 / please enter the correct number (eg. 2)", "input")
-                    printFast("Note: 返回上级目录，输入'y' / To go back to the parent directory, enter 'y'", "input")  # 二级索引
-                    subnum = input("     ")  # 二级索引
+                    printFast("Warning: 输入错误,请输入正确编号 / please enter the correct number (eg. 2)", "input")
+                    printFast("Note: 返回上级目录,输入'y' / To go back to the parent directory, enter 'y'", "input")  # 二级索引
+                    subnum = input("    ")  # 二级索引
                 else:
                     subnum = int(subnum)
                     return subnum
             else:
-                printFast("Warning: 输入错误，请输入正确编号 / please enter the correct number (eg. 2)", "input")
-                printFast("Note: 返回上级目录，输入'y' / To go back to the parent directory, enter 'y'", "input")  # 二级索引
-                subnum = input("     ")
+                printFast("Warning: 输入错误,请输入正确编号 / please enter the correct number (eg. 2)", "input")
+                printFast("Note: 返回上级目录,输入'y' / To go back to the parent directory, enter 'y'", "input")  # 二级索引
+                subnum = input("    ")
