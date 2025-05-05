@@ -12,7 +12,6 @@
 #### Software features
 - **Data download module**: This module enables multi-threaded downloading of GNSS data, followed by automated processes such as decompression, format conversion, file concatenation, and renaming. The software efficiently checks for duplicate files locally, ensuring high efficiency and robustness;
 - **Quality analysis module**: This module performs comprehensive quality analysis of GNSS data. By simply inputting RINEX files, users can analyze key metrics such as satellite observation counts, pseudorange and carrier phase noise, cycle slip ratios, and ionospheric delay variation rates;
-- **Fast**: The software adopts parallel download mode, and the number of download threads can be specified in the command line parameter operation mode. After testing, it only takes 48.93s to download the 100 days BRDC+IGS+CLK file!
 - **SPP module**: Supporting dual-frequency ionosphere-free pseudorange positioning for GPS, BDS, and Galileo systems, this module offers a user-friendly interface with straightforward operations, making it ideal for beginners;
 - **Station selection module**: This module allows users to select stations based on satellite system, antenna type, geographic range, and downsampling settings, providing an intuitive interface for efficient station selection.
 
