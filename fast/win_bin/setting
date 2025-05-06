@@ -1,4 +1,0 @@
-plotBackgroundColor     = white      # white / dark 
-language                = ENG       # CHN / ENG
-savePngDPI              = 800       # int
-ttf                     = HarmonyOS_Sans_Medium.ttf # HarmonyOS_Sans_Medium.ttf SourceCodePro-Medium.ttf
