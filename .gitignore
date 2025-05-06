@@ -23,3 +23,4 @@ release/
 test/
 fast/_test.py
 fast/*.spec 
+fast/win_bin

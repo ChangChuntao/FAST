@@ -1,49 +1,86 @@
-# FAST （File Download and Signal Processing Toolkit for GNSS）
+# FAST - File Download and Signal Processing Toolkit for GNSS
 
-#### Introduce
-**FAST** is a GNSS data download and processing software developed in Python 3.12, designed to ensure high flexibility and seamless integration with other scientific computing tools. The software adopts a modular architecture, consisting of four main components: (1) data download, (2) quality analysis, (3) SPP, and (4) station selection. Built on PyQt5, FAST provides both a GUI and command-line support, making it accessible to users ranging from beginners to advanced researchers.
-![intro](manual/fig/intro.png)
+**FAST** is a comprehensive GNSS data processing solution developed in Python 3.12, offering both GUI and CLI interfaces for users of all levels. Built on PyQt5 with modular architecture, it provides seamless integration with scientific computing workflows.The software adopts a modular architecture, consisting of 4 modules: (1) data download, (2) quality analysis, (3) Single Point Positioning, and (4) station selection. 
 
-#### Git
-- [https://github.com/ChangChuntao/FAST](https://github.com/ChangChuntao/FAST)
-- [https://gitee.com/changchuntao/FAST](https://gitee.com/changchuntao/FAST)
+![FAST Banner](manual/fig/intro.png)
 
 
-#### Software features
-- **Data download module**: This module enables multi-threaded downloading of GNSS data, followed by automated processes such as decompression, format conversion, file concatenation, and renaming. The software efficiently checks for duplicate files locally, ensuring high efficiency and robustness;
-- **Quality analysis module**: This module performs comprehensive quality analysis of GNSS data. By simply inputting RINEX files, users can analyze key metrics such as satellite observation counts, pseudorange and carrier phase noise, cycle slip ratios, and ionospheric delay variation rates;
-- **SPP module**: Supporting dual-frequency ionosphere-free pseudorange positioning for GPS, BDS, and Galileo systems, this module offers a user-friendly interface with straightforward operations, making it ideal for beginners;
-- **Station selection module**: This module allows users to select stations based on satellite system, antenna type, geographic range, and downsampling settings, providing an intuitive interface for efficient station selection.
+## 📦 Latest Release
+[![Latest Release](https://img.shields.io/badge/Download-FAST_V3.00.03-blue)](https://github.com/ChangChuntao/FAST/releases/tag/FAST_V3)
 
+## 🚀 Available Binaries
 
-#### Installation tutorial
+| Platform       | 🖥️ GUI Version | ⌨️ CLI Version |
+|----------------|----------------|----------------|
+| **Windows**    | [FastQt_Win_V3.00.03.zip](https://github.com/ChangChuntao/FAST/releases/download/FAST_V3/FastQt_Win_V3.00.03.zip) | [FAST_Win_V3.00.03.zip](https://github.com/ChangChuntao/FAST/releases/download/FAST_V3/FAST_Win_V3.00.03.zip) |
+| **macOS (Intel)** | [FastQt_Mac_V3.00.03.zip](https://github.com/ChangChuntao/FAST/releases/download/FAST_V3/FastQt_Mac_V3.00.03.zip) | [FAST_Mac_V3.00.03.zip](https://github.com/ChangChuntao/FAST/releases/download/FAST_V3/FAST_Mac_V3.00.03.zip) |
+| **Ubuntu**     | - | [FAST_Ubuntu_V3.00.03.zip](https://github.com/ChangChuntao/FAST/releases/download/FAST_V3/FAST_Ubuntu_V3.00.03.zip) |
+| **CentOS**     | - | [FAST_CentOS_V3.00.03.zip](https://github.com/ChangChuntao/FAST/releases/download/FAST_V3/FAST_CentOS_V3.00.03.zip) |
 
-For detailed installation and usage instructions, please refer to the FAST_manual-V3.00.docx document included in the ./manual directory.
+## 🛠️ Installation & Usage
 
-#### Participation and contribution
+### For CLI versions
+```bash
+$ ./FAST
+$ ./FAST [options]
+```
 
-1. Dr. **Chang Chuntao** @GNSS Research Center, Wuhan University
+### For GUI versions
+Simply double-click the application
 
-    Program design/ Program writing/ Document writing/ Program testing/ Program maintenance     
-    
+## ✨ Key Features
 
-2. Pd. **Jiang Kecai**@GNSS Research Center, Wuhan University
+### 📥 **Data Download Module**
+- Multi-threaded GNSS data downloading with automatic queue management  
+- Intelligent local duplicate detection and file validation  
+- Automated post-processing:  
+  • Decompression  
+  • Format conversion  
+  • File concatenation  
+  • Standardized renaming  
 
-    Program idea / parallel computing processing idea
-  
+### 🔍 **Quality Analysis Module**
+- Comprehensive RINEX file diagnostics:  
+  • Satellite observation counts and availability  
+  • Pseudorange & carrier phase noise analysis  
+  • Cycle slip detection and statistics  
+  • Ionospheric delay variation rates  
+- Interactive visualization of quality metrics  
 
-3. Dr. **Mu Renhai**@GNSS Research Center, Wuhan University
+### 📡 **Single Point Positioning Module**
+- Dual-frequency ionosphere-free pseudorange positioning  
+- Multi-GNSS constellation support:  
+  • GPS  
+  • BDS  
+  • Galileo  
+- Beginner-friendly interface with one-click processing  
+- Exportable results in multiple formats  
 
-    Program design/ program testing/ Documentation
+### 📍 **Station Selection Module**
+- Flexible filtering options:  
+  • By satellite system  
+  • By antenna/receiver type  
+  • Geographic bounding box  
+  • Temporal sampling rate  
+- Visual map interface for spatial selection  
+- Downsampling capability for large datasets  
 
+## 📚 Documentation  
+**Complete user manual**:  `./manual/FAST_manual-V3.00.docx`  
 
-4. Pd. **Li Bo** @Liaoning Technical University
+## 👥 Development Team  
 
-    Program testing/ Documentation
+| Role                | Contributor         | Affiliation                          | Contributions                     |
+|---------------------|---------------------|--------------------------------------|-----------------------------------|
+| **Project Lead**    | Dr. Chang Chuntao   | GNSS Research Center, Wuhan University | Architecture, Core Development, Documentation |
+| **Algorithm Expert**| Pd. Jiang Kecai     | GNSS Research Center, Wuhan University | Parallel Computing Optimization |
+| **Core Developer**  | Dr. Mu Renhai       | GNSS Research Center, Wuhan University | Module Development, Testing |
+| **Quality Assurance**| Pd. Li Bo          | Liaoning Technical University        | Testing, User Documentation |
+| **Technical Support**| Dr. Wei Hengda     | GNSS Research Center, Wuhan University | Validation, Tutorial Materials |
 
+## 🌐 Repository & Stats  
 
-5. Dr. **Wei Hengda** @GNSS Research Center, Wuhan University
-
-    Program testing/ Documentation
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/ChangChuntao/FAST)  
+[![Gitee Mirror](https://img.shields.io/badge/Gitee-Mirror-C71D23?logo=gitee)](https://gitee.com/changchuntao/FAST)  
 
 [![Page Views Count](https://badges.toozhao.com/badges/01GK8CXX2CKT5SVRRE7VY71E49/green.svg)](https://badges.toozhao.com/stats/01GK8CXX2CKT5SVRRE7VY71E49 "Get your own page views count badge on badges.toozhao.com")
