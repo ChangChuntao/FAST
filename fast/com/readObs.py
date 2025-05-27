@@ -198,8 +198,11 @@ def readObs3Head(obsFile, needSatList = False, bar = None):
     while line != '':
         if needSatList and readBegin:
             if '>' not in line:
-                # line = line.split()
                 sat = line[:3]
+                gnssSys = line[0]
+                if gnssSys in ['W', '0', 'X', 'L', '5', '1']:
+                    gnssSys = 'W'
+                    sat = gnssSys + sat[1:]
                 if sat not in satList:
                     satList.append(sat)
         if 'RINEX VERSION / TYPE' in line:
@@ -236,6 +239,8 @@ def readObs3Head(obsFile, needSatList = False, bar = None):
         elif 'SYS / # / OBS TYPES' in line:
             if line[0] in gnssSysList:
                 gnssSys = line[0]
+                if gnssSys in ['W', '0', 'X', 'L', '5', '1']:
+                    gnssSys = 'W'
                 if gnssSys in obs:
                     obs[gnssSys] = obs[gnssSys] + line[7:60].split()
                 else:
@@ -416,30 +421,36 @@ def readObs3(obsFile, obsHead = None, bar = None):
                 prnData = dict()
         else:
             prn = line[:3]
-            prnData[prn] = dict()
-            gnssSys = line[:1]
+            gnssSys = line[0]
+            if gnssSys in ['W', '0', 'X', 'L', '5', '1']:
+                gnssSys = 'W'
+                prn = gnssSys + prn[1:]
             nowLineIndex = 3
-            if gnssSys not in obsHead['OBS TYPES'].keys():
+            if gnssSys not in obsHead['OBS TYPES']:
                 continue
-            # for bandIndex in range(len(obsHead['OBS TYPES'][gnssSys])):
-            #     band = obsHead['OBS TYPES'][gnssSys][bandIndex]
+            if prn[1] == ' ':
+                prn = prn[0] + '0' + prn[2]
+            prnData[prn] = dict()
             for band in obsHead['OBS TYPES'][gnssSys]:
-                bandStr = line[nowLineIndex:nowLineIndex+14]
-                nowLineIndex = nowLineIndex + 16
+                bandStr = line[nowLineIndex:nowLineIndex+14].strip()
+                nowLineIndex += 16
                 bandValue = None
-                if '\n' in bandStr:
-                    bandStr = bandStr.replace('\n', '')
-
-                if bandStr.strip() != '':
+                if bandStr:
                     try:
                         bandValue = float(bandStr)
                         if bandValue < -999999999.0 or bandValue == 0.0:
                             bandValue = None
                     except:
-                        bandValue = None
-                    prnData[prn][band] = bandValue
+                        pass
+                    
+                    if band[0] == 'L':
+                        if line[nowLineIndex-2].strip():
+                            prnData[prn][band+'LLI'] = int(line[nowLineIndex-2])
+                        else:
+                            prnData[prn][band+'LLI'] = 0
                 else:
-                    prnData[prn][band] = None
+                    if band[0] == 'L': prnData[prn][band+'LLI'] = 0
+                prnData[prn][band] = bandValue
     obsData[obsDatetime].update(prnData)
     
     end_time = time.time()
@@ -450,7 +461,6 @@ def readObs3(obsFile, obsHead = None, bar = None):
         QApplication.processEvents()
     return obsData
 
-# readObs3(r'D:\Code\FAST\test\urum0010.23o')
 
 def readObs(obsFile, obsHead = None, bar=None):
     '''

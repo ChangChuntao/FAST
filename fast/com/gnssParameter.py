@@ -123,9 +123,9 @@ obsCodes['J']['L2'] = ['L2S', 'L2L', 'L2X', 'L2']
 obsCodes['J']['L5'] = ['L5I', 'L5Q', 'L5X', 'L5D', 'L5P', 'L5Z', 'L5']
 obsCodes['J']['L6'] = ['L6S', 'L6L', 'L6X', 'L6E', 'L6Z', 'L6']
 obsCodes['W'] = {}
-obsCodes['W']['L1'] = ['L1C', 'L1S', 'L1L', 'L1X', 'L1P', 'L1Q', 'L1W', 'L1Y', 'L1M', 'L1N', 'L1']
-obsCodes['W']['L2'] = ['L2C', 'L2D', 'L2S', 'L2L', 'L2X', 'L2P', 'L2W', 'L2Y', 'L2M', 'L2N', 'L2']
-obsCodes['W']['L5'] = ['L5I', 'L5Q', 'L5X', 'L5P', 'L5']
+obsCodes['W']['L1'] = ['L1I', 'L1Q', 'L1X', 'L1']
+obsCodes['W']['L5'] = ['L5I', 'L5Q', 'L5X', 'L5']
+obsCodes['W']['L6'] = ['L6I', 'L6Q', 'L6X', 'L6']
 
 
 obsFreq = {}
@@ -162,8 +162,8 @@ obsFreq['J']['L5'] = 1176.45
 obsFreq['J']['L6'] = 1278.75
 obsFreq['W'] = {}
 obsFreq['W']['L1'] = 1575.42
-obsFreq['W']['L2'] = 1227.60
 obsFreq['W']['L5'] = 1176.45
+obsFreq['W']['L6'] = 1288.98
 
 bandComb = {}
 bandComb['G'] = [[1, 2], [1, 5]]
