@@ -144,7 +144,7 @@ def phaseNoise(obsHead, obsData, self = None):
                 remaining = 20 - completed
                 barPercent = '=' * completed + '>' + '+' * remaining
                 percentage = f'{(prnIndex / len(satList)) * 100:.2f}%'
-                self.status.showMessage("Calc. IOD of " + prn +  " [" + barPercent + '] ' + percentage)
+                self.status.showMessage("Calc. PhaseNoise of " + prn +  " [" + barPercent + '] ' + percentage)
                 QApplication.processEvents()
 
 
@@ -264,7 +264,7 @@ def writePhaseNoise(phaseNoiseData, phaseNoiseFile):
     phaseNoiseFileWrite = open(phaseNoiseFile, 'w+')
     phaseNoiseFileWrite.write('# PGM       : FAST\n')
     phaseNoiseFileWrite.write('# Author    : Chuntao Chang\n')
-    phaseNoiseFileWrite.write('# Inf       : Derivative of the ionospheric delay\n')
+    phaseNoiseFileWrite.write('# Inf       : PhaseNoise\n')
     phaseNoiseFileWrite.write('# Time      : ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
     phaseNoiseFileWrite.write('#             END OF HEADER\n')
     phaseNoiseFileWrite.write('\n')
@@ -287,7 +287,7 @@ def writePhaseNoise(phaseNoiseData, phaseNoiseFile):
                 phaseNoiseFileWrite.write(prnFreqLine)
 
                 ionLines.append('+' + prn + '_' + band + '\n')
-                ionLines.append('               epoch  iod(m/s)\n')
+                ionLines.append('               epoch  PhaseNoise\n')
                 for epoch, ion in zip(phaseNoiseData[gnssSys][prn][band]['epoch'], phaseNoiseData[gnssSys][prn][band]['phaseNoise']):
                     ionLines.append(' ' + epoch.strftime('%Y-%m-%d %H:%M:%S') + '%10.6f' % ion + '\n')
                 ionLines.append('-' + prn + '_' + band + '\n')

@@ -6,6 +6,7 @@
 # Creation Date     : 2022.03.27 - Version 1.00
 # Date              : 2025.05.05 - Version 3.00.03
 
+from fast.com.gnssTime import gnssTimesTran
 from fast.download.inf import fastHelp
 from fast.com.pub import printFast, objnum, gnss_type
 import sys
@@ -52,7 +53,7 @@ def level1menu():
     # print("    |                                                                          |")
     print("    +-----------------------------------HELP-----------------------------------+")
     print("    |                                                                          |")
-    print("    |    h : help                                                              |")
+    print("    |    h : help                t : time_conver                               |")
     print("    |                                                                          |")
     print("    +--------------------------------------------------------------------------+")
 
@@ -60,8 +61,7 @@ def level1menu():
     printFast("Note: Please enter the corresponding number or letter (eg. 2 or a)", "input")
     obj = input("  - ")
     while True:
-        # if obj in ['a', 'b', 'c', 'd', 'e', 'f', 'h']:
-        if obj in ['a', 'b', 'c', 'd', 'e', 'f', 'h']:
+        if obj in ['a', 'b', 'c', 'd', 'e', 'f', 'h', 't']:
             return obj
         elif obj.isdigit():  # 判断输入是否为数字
             if int(obj) > len(gnss_type) or int(obj) < 0:  # 判断输入是否超出列表范围
@@ -371,8 +371,8 @@ def level2menu(obj):
     elif obj == "h":
         fastHelp()
         return 0
-    elif obj == "b":
-        # gnssTimesTran()
+    elif obj == "t":
+        gnssTimesTran()
         return 0
 
     printFast("Note: 请输入数据编号 / Please enter the data number (eg. 2)", "input")  # 二级索引

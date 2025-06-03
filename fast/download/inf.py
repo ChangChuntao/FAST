@@ -171,10 +171,9 @@ def fastSoftwareInformation():
     2023-09.26 :    Software information
     """
     print("==================================================================================")
-    print("     FAST           : Flexible And Swift Toolkit for GNSS Data")
+    print("     FAST           : File Download and Signal Processing Toolkit for GNSS")
     print("     Author         : Chang Chuntao")
     print("     Organization   : The GNSS Center, Wuhan University")
     print("     Contact        : chuntaochang@whu.edu.cn")
-    # print("     Git            : https://github.com/ChangChuntao/FAST")
-    # print("                      https://gitee.com/changchuntao/FAST")
+    print("     Git            : https://github.com/ChangChuntao/FAST")
     print("     Version        : " + lastVersionTime + " # " + lastVersion)

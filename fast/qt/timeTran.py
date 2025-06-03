@@ -80,14 +80,14 @@ def time_tran(self):
         if mjd < 0:
             QMessageBox.information(self, "警告", "请输入正确MJD", QMessageBox.Yes)
             return
-        sod = float(sod)
+        sod = float(int(sod))
         if sod < 0. or sod > 86400.:
             QMessageBox.information(self, "警告", "请输入正确天内秒", QMessageBox.Yes)
             return
         nowdatetime = gnssTime.mjd2datetime(mjd, sod)
     else:
         nowdatetime = self.dateTimeEdit.dateTime().toPyDateTime()
-
+    
     gnss_time = gnssTime.datetime2allgnssTime(nowdatetime)
     self.dateTimeEdit.setDateTime(QDateTime(nowdatetime.year, nowdatetime.month, nowdatetime.day, nowdatetime.hour,
                                             nowdatetime.minute, nowdatetime.second))

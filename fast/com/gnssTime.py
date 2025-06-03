@@ -138,70 +138,69 @@ def datetime2allgnssTime(datetime):
 
 def gnssTimesTran():
     """
-    2022-04-30 : GNSS_Timestran引导
-             by Chang Chuntao  -> Version : 1.12
+    GNSS Time Conversion Tool
+    Version: 1.12 (2022-04-30)
+    Author: Chang Chuntao
     """
-    nowdatetime = datetime.datetime.utcnow()  # 获取当前utc时间
-    printFast("当前系统UTC时间为" + str(nowdatetime)[:-7], "normal")
+    # Header
+    print("    " + "="*50)
+    print("    GNSS TIME CONVERSION TOOL".center(50))
+    print("    " + "="*50)
+    
+    # Current time display
+    nowdatetime = datetime.datetime.utcnow()
+    print(f"\n    Current UTC Time: {str(nowdatetime)[:-7]}")
+    print("    " + "-"*50)
+    
     [YearMonthDaynow, GPSWeekDaynow, YearDoynow, MjdSodnow] = datetime2GnssTime(nowdatetime)
     printTime(nowdatetime, GPSWeekDaynow, YearDoynow, MjdSodnow)
-    print("")
-    printFast("1. Year Month Day  2. Year Doy  3. GPSWeek DayofWeek  4. MJD SOD", "input")
-    printFast("请输入所需转换的时间格式编号 (eg. 2)", "input")
-    inputTime = input("    ")
+    
+    # Conversion menu
+    print("\n" + "    " + "TIME FORMAT OPTIONS".center(50, "-"))
+    print("    " + "1. Year-Month-Day (e.g., 2022 04 29)")
+    print("    " + "2. Year-DOY (e.g., 2022 119)")
+    print("    " + "3. GPSWeek-DayOfWeek (e.g., 2207 5)")
+    print("    " + "4. MJD-SOD (e.g., 59698 69656)")
+    print("    " + "-"*50)
+    
+    # User input
     while True:
-        if inputTime.isdigit() and 0 < int(inputTime) < 5:
-            inputTime = int(inputTime)
-            if inputTime == 1:
-                printFast("请输入 Year Month Day (eg. 2022 04 29)", "input")
-                YearMonthDay = input("    ")
-                while True:
-                    if len(YearMonthDay.split(" ")) == 3:
-                        break
-                    else:
-                        printFast("请输入正确的 Year Month Day (eg. 2022 04 30)", "input")
-                        YearMonthDay = input("    ")
-                specTime = gnssTime2datetime(YearMonthDay, "YearMonthDay")
+        try:
+            inputTime = int(input("    Select format to convert (1-4): ").strip())
+            if 1 <= inputTime <= 4:
                 break
-            elif inputTime == 2:
-                printFast("请输入 Year Doy (eg. 2022 119)", "input")
-                YearDoy = input("    ")
-                while True:
-                    if len(YearDoy.split(" ")) == 2:
-                        break
-                    else:
-                        printFast("请输入正确的 Year Doy (eg. 2022 119)", "input")
-                        YearDoy = input("    ")
-                specTime = gnssTime2datetime(YearDoy, "YearDoy")
-                break
-            elif inputTime == 3:
-                printFast("请输入 GPSWeek DayofWeek (eg. 2207 5)", "input")
-                GPSWeekDay = input("    ")
-                while True:
-                    if len(GPSWeekDay.split(" ")) == 2:
-                        break
-                    else:
-                        printFast("请输入正确的 GPSWeek DayofWeek (eg. 2207 5)", "input")
-                        GPSWeekDay = input("    ")
-                specTime = gnssTime2datetime(GPSWeekDay, "GPSWeekDay")
-                break
-            elif inputTime == 4:
-                printFast("请输入 MJD SOD (eg. 59698 69656.17121)", "input")
-                MjdSod = input("    ")
-                while True:
-                    if len(MjdSod.split(" ")) == 2:
-                        break
-                    else:
-                        printFast("请输入正确的 MJD SOD (eg. 59698 69656.17121)", "input")
-                        MjdSod = input("    ")
-                specTime = gnssTime2datetime(MjdSod, "MjdSod")
-                break
-        else:
-            printFast("请输入正确的编号 (eg. 2)", "input")
-            inputTime = input("    ")
+            print("Invalid input! Please enter a number between 1-4.")
+        except ValueError:
+            print("Invalid input! Please enter a number between 1-4.")
+    
+    # Input processing
+    format_names = {
+        1: ("Year-Month-Day", "2022 04 29"),
+        2: ("Year-DOY", "2022 119"),
+        3: ("GPSWeek-DayOfWeek", "2207 5"),
+        4: ("MJD-SOD", "59698 69656.17121")
+    }
+    
+    print(f"\n    Enter {format_names[inputTime][0]} (e.g., {format_names[inputTime][1]}):")
+    while True:
+        user_input = input("  - ").strip()
+        parts = user_input.split()
+        
+        required_parts = 3 if inputTime == 1 else 2
+        if len(parts) == required_parts:
+            break
+        print(f"  x Invalid format! Please enter {format_names[inputTime][0]} as shown in the example.")
+    
+    # Conversion and output
+    format_types = ["YearMonthDay", "YearDoy", "GPSWeekDay", "MjdSod"]
+    specTime = gnssTime2datetime(user_input, format_types[inputTime-1])
+    
+    # Results display
+    print("\n    " + "CONVERSION RESULTS".center(50, "="))
     [YearMonthDay, GPSWeekDay, YearDoy, MjdSod] = datetime2GnssTime(specTime)
     printTime(specTime, GPSWeekDay, YearDoy, MjdSod)
-    print("")
+    print("    " + "="*50 + "\n")
+    
     return 0
 
 

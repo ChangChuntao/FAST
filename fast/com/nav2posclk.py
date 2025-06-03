@@ -428,9 +428,6 @@ def numbaNav2clk(a0, a1, a2, tk, GME, roota, DeltaN, M0, e):
     Returns:
         float: Satellite clock correction (s).
 
-    Note:
-        This function assumes the input parameters are valid and within the expected range.
-        The function uses an iterative approach to solve Kepler's equation for the eccentric anomaly.
     """
     clk = a0 + a1 * tk + a2 * tk * tk
     ak = roota * roota
