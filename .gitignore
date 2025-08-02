@@ -25,3 +25,4 @@ fast/_test.py
 fast/*.spec 
 fast/win_bin
 manual/FAST_manual-V3.00.docx
+fast/dist
