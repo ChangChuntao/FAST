@@ -2,36 +2,59 @@
 # thinning          : downsampling settings for Station selection
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.00.03
 # Creation Date     : 2023.10.05 - Version 3.00.00
-# Date              : 2024.07.01 - Version 3.00.02
+# Date              : 2025.08.02 - Version 3.00.03
 
+import numpy as np
 
-def thinning(chooseSite, thinningValue, lmin = -180, lmax = 180, bmin = -90, bmax = 90):
-    import numpy as np
-    grid_ranges = []
+def thinning(chooseSite, thinningValue,
+             lmin=-180.0, lmax=180.0, bmin=-90.0, bmax=90.0):
+    """
+    在每个格网内只保留离几何中心最近的站点。 
+        update 20250802 by chang chuntao
 
-    # 输出每个格网的经纬度范围,并将范围添加到列表中
-    for longitude in np.arange(lmin, lmax, thinningValue):
-        for latitude in np.arange(bmin, bmax, thinningValue):
-            grid = [longitude, longitude + thinningValue, latitude, latitude + thinningValue]
-            grid_ranges.append(grid)
-    
-    outSiteAll = {}
-    for s in chooseSite:
-        sL = chooseSite[s]['L']
-        sB = chooseSite[s]['B']
-        for grid_range in grid_ranges:
-            if grid_range[0] <= sL <= grid_range[1] and grid_range[2] <= sB <= grid_range[3]:
-                index = grid_ranges.index(grid_range)
-                if index not in outSiteAll:
-                    outSiteAll[index] = {}
-                outSiteAll[index][s] = chooseSite[s]
+    Parameters
+    ----------
+    chooseSite : dict
+        {sta_name: {'L': lon, 'B': lat, ...}}
+    thinningValue : float
+        格网边长（度）
+    lmin/lmax/bmin/bmax : float
+        研究区域经纬度范围
+
+    Returns
+    -------
+    dict
+        保留后的站点字典
+    """
+
+    # 用字典保存每个格网内的候选站列表
+    grid2stations = {}
+
+    for sta, info in chooseSite.items():
+        lon = info['L']
+        lat = info['B']
+
+        # 计算站点所属格网的行列号
+        col = int(np.floor((lon - lmin) / thinningValue))
+        row = int(np.floor((lat - bmin) / thinningValue))
+
+        key = (row, col)          # 格网唯一索引
+        grid2stations.setdefault(key, []).append((sta, info))
 
     outSite = {}
-    for grid_range in outSiteAll:
-        if len(list(outSiteAll[grid_range])) > 0:
-            outSite[list(outSiteAll[grid_range])[0]] = outSiteAll[grid_range][list(outSiteAll[grid_range])[-1]]
-    
+    for (row, col), stas in grid2stations.items():
+        # 格网几何中心
+        center_lon = lmin + (col + 0.5) * thinningValue
+        center_lat = bmin + (row + 0.5) * thinningValue
+
+        # 找离中心最近的站
+        def dist(item):
+            _, info = item
+            return (info['L'] - center_lon) ** 2 + (info['B'] - center_lat) ** 2
+
+        best_sta, best_info = min(stas, key=dist)
+        outSite[best_sta] = best_info
+
     return outSite
-        

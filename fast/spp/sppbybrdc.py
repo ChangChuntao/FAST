@@ -2,9 +2,9 @@
 # SPP               : Standard point positioning  by nav
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.00.03
 # Creation Date     : 2023.10.05 - Version 3.00.00
-# Date              : 2024.07.01 - Version 3.00.02
+# Date              : 2025.07.13 - Version 3.00.04
 
 from fast.com.sat2siteAngle import getEle, sat2siteAngle
 from fast.com.gnssParameter import CLIGHT, bandDictGetFreq, bandDictGetFreqPos, bds3MEOList
@@ -24,6 +24,11 @@ import numpy as np
 import time
 
 def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self = None, posFile = None):
+    
+    '''
+    广播星历计算伪距单点定位
+        by ChangChuntao -> 2022.09.24
+    '''
     start_time = time.time()
 
     # 内部策略
@@ -47,7 +52,6 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
     gSysNumInEpoch = len(list(bandChoose))
 
     # 初值
-    
     initDict = [1000.0, 1000.0, 1000.0]
     for gSys in bandChoose:
         initDict.append(0)
@@ -73,22 +77,31 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
         QApplication.processEvents()
         self.figSPP.clf()
         figSPP = self.figSPP
-        axsppx=figSPP.add_subplot(3,1,1)
-        axsppy=figSPP.add_subplot(3,1,2)
-        axsppz=figSPP.add_subplot(3,1,3)
+        # 修改为4个子图
+        axsppx = figSPP.add_subplot(4,1,1)
+        axsppy = figSPP.add_subplot(4,1,2)
+        axsppz = figSPP.add_subplot(4,1,3)
+        axsppdop = figSPP.add_subplot(4,1,4)  # 新增DOP子图
+        
         axsppx.grid(zorder=0)
         axsppy.grid(zorder=0)
         axsppz.grid(zorder=0)
+        axsppdop.grid(zorder=0)  # DOP子图添加网格
+        
         axsppx.set_xticklabels([])
         axsppy.set_xticklabels([])
+        axsppz.set_xticklabels([])  # 隐藏Z轴的x轴标签
+        
         xfmt = mdate.DateFormatter('%dD-%HH')
-        axsppz.xaxis.set_major_formatter(xfmt)
-        figSPP.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.90)
-        axsppz.tick_params(axis='x', labelsize=13)
+        axsppdop.xaxis.set_major_formatter(xfmt)  # 只在DOP子图显示x轴标签
+        
+        figSPP.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.90, hspace=0.3)
+        
+        axsppdop.tick_params(axis='x', labelsize=13)
         axsppx.tick_params(axis='y', labelsize=13)
         axsppy.tick_params(axis='y', labelsize=13)
         axsppz.tick_params(axis='y', labelsize=13)
-
+        axsppdop.tick_params(axis='y', labelsize=13)
 
     # 历元循环 最小二乘求解 无电离层组合
     for epoch in obsData:
@@ -212,6 +225,16 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
             # lsq
             try:
                 X_MAT = sppLsq(G,W,y)
+                # 计算DOP值
+                Q = np.linalg.pinv(G.T @ G)
+                HDOP = np.sqrt(Q[0,0] + Q[1,1])
+                VDOP = np.sqrt(Q[2,2])
+                PDOP = np.sqrt(Q[0,0] + Q[1,1] + Q[2,2])
+                GDOP = np.sqrt(Q[0,0] + Q[1,1] + Q[2,2] + Q[3,3])
+                posData[epoch]['HDOP'] = HDOP
+                posData[epoch]['VDOP'] = VDOP
+                posData[epoch]['PDOP'] = PDOP
+                posData[epoch]['GDOP'] = GDOP
             except:
                 continue
         
@@ -254,7 +277,7 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
         X.append(Xi[0][0].item())
         Y.append(Xi[1][0].item())
         Z.append(Xi[2][0].item())
-        # print('%20.3f' % Xi[0][0] + '%20.3f' % Xi[1][0] + '%20.3f' % Xi[2][0] + '%20.3f' % Xi[3][0])
+
     if len(X) == 0:
         return None, None, None, None
     XMEAN = (sum(X)/len(X))
@@ -264,44 +287,85 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
     printPanda('REF. COORD -> ' + '%20.3f' % XMEAN + '%20.3f' % YMEAN + '%20.3f' % ZMEAN)
     end_time = time.time()
     execution_time = end_time - start_time
+    
     if self is not None:
         Elist = []
         NList = []
         UList = []
+        HDOPList = []
+        VDOPList = []
+        PDOPList = []
+        GDOPList = []
+        
         for epoch in posData:
             N,E,U = xyz2neu(XMEAN, YMEAN, ZMEAN, posData[epoch]['x'], posData[epoch]['y'], posData[epoch]['z'], 'WGS84')
             Elist.append(E)
             NList.append(N)
             UList.append(U)
+            HDOPList.append(posData[epoch]['HDOP'])
+            VDOPList.append(posData[epoch]['VDOP'])
+            PDOPList.append(posData[epoch]['PDOP'])
+            GDOPList.append(posData[epoch]['GDOP'])
+            
+        # 绘制位置误差图
         axsppx.set_title('POS: [' + '%.2f' % XMEAN + ', ' + '%.2f' % YMEAN + ', ' + '%.2f' % ZMEAN + ']',fontsize=20)
+        
+        # 东方向误差
         axsppx.scatter(np.array(list(posData)), np.array(Elist), marker='+', s=5, zorder=10)
-        axsppy.scatter(np.array(list(posData)), np.array(NList), marker='+', s=5, zorder=10)
-        axsppz.scatter(np.array(list(posData)), np.array(UList), marker='+', s=5, zorder=10)
         axsppx.plot(np.array(list(posData)), np.array(Elist), color = 'gray', alpha = 0.7, zorder=10)
-        axsppy.plot(np.array(list(posData)), np.array(NList), color = 'gray', alpha = 0.7, zorder=10)
-        axsppz.plot(np.array(list(posData)), np.array(UList), color = 'gray', alpha = 0.7, zorder=10)
         axsppx.text(0.02, 0.92, 'RMS: ' + '%.3f' % rms(Elist) + 'm',
                 transform=axsppx.transAxes, verticalalignment='top',
                 horizontalalignment='left', color='black',
                 bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
                 zorder=30, fontsize=15)
+        axsppx.set_ylabel('E [m]', fontsize=16)
+        
+        # 北方向误差
+        axsppy.scatter(np.array(list(posData)), np.array(NList), marker='+', s=5, zorder=10)
+        axsppy.plot(np.array(list(posData)), np.array(NList), color = 'gray', alpha = 0.7, zorder=10)
         axsppy.text(0.02, 0.92, 'RMS: ' + '%.3f' % rms(NList) + 'm',
                 transform=axsppy.transAxes, verticalalignment='top',
                 horizontalalignment='left', color='black',
                 bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
                 zorder=30, fontsize=15)
+        axsppy.set_ylabel('N [m]', fontsize=16)
+        
+        # 高程方向误差
+        axsppz.scatter(np.array(list(posData)), np.array(UList), marker='+', s=5, zorder=10)
+        axsppz.plot(np.array(list(posData)), np.array(UList), color = 'gray', alpha = 0.7, zorder=10)
         axsppz.text(0.02, 0.92, 'RMS: ' + '%.3f' % rms(UList) + 'm',
                 transform=axsppz.transAxes, verticalalignment='top',
                 horizontalalignment='left', color='black',
                 bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
                 zorder=30, fontsize=15)
-        axsppx.set_ylabel('E [m]', fontsize=16)
-        axsppy.set_ylabel('N [m]', fontsize=16)
         axsppz.set_ylabel('U [m]', fontsize=16)
+        
+        # 绘制DOP值
+        axsppdop.plot(np.array(list(posData)), np.array(HDOPList), label='HDOP', color='blue')
+        axsppdop.plot(np.array(list(posData)), np.array(VDOPList), label='VDOP', color='green')
+        axsppdop.plot(np.array(list(posData)), np.array(PDOPList), label='PDOP', color='red')
+        axsppdop.plot(np.array(list(posData)), np.array(GDOPList), label='GDOP', color='purple')
+        
+        axsppdop.legend(loc='upper right', fontsize=12, ncol=2)
+        axsppdop.set_ylabel('DOP', fontsize=16)
+        
+        # 计算并显示平均DOP值
+        avg_hdop = np.mean(HDOPList)
+        avg_vdop = np.mean(VDOPList)
+        avg_pdop = np.mean(PDOPList)
+        avg_gdop = np.mean(GDOPList)
+        
+        axsppdop.text(0.02, 0.92, f'Avg HDOP: {avg_hdop:.2f} Avg VDOP: {avg_vdop:.2f}\nAvg PDOP: {avg_pdop:.2f} Avg GDOP: {avg_gdop:.2f}',
+                     transform=axsppdop.transAxes, verticalalignment='top',
+                     horizontalalignment='left', color='black',
+                     bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
+                     zorder=30, fontsize=12)
+        
         self.status.showMessage("SPP completed.")
         self.status.showMessage('REF. COORD -> ' + '%20.3f' % XMEAN + '%20.3f' % YMEAN + '%20.3f' % ZMEAN)
         figSPP.canvas.draw()
         QApplication.processEvents()
+    
     if posFile is not None:
         if posCoord == 'ENU':
             for epoch in list(posData):
@@ -312,7 +376,7 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
             for epoch in list(posData):
                 N,E,U = xyz2neu(XMEAN, YMEAN, ZMEAN, posData[epoch]['x'], posData[epoch]['y'], posData[epoch]['z'], 'WGS84')
                 nowGnssTime = datetime2allgnssTime(epoch)
-                posOpen.write(' ' + '%6d' % nowGnssTime.mjd + '%10.2f' % nowGnssTime.sod + ' ' + '%20.8f' % N + '%20.8f' % E + '%20.8f' % U + '%20.3f' % posData[epoch]['x'] + '%20.3f' % posData[epoch]['y'] + '%20.3f' % posData[epoch]['z'] + '%20.3f' % posData[epoch]['clk'] + '\n')
+                posOpen.write(' ' + '%6d' % nowGnssTime.mjd + '%10.2f' % nowGnssTime.sod + ' ' + '%20.8f' % N + '%20.8f' % E + '%20.8f' % U + '%20.3f' % posData[epoch]['x'] + '%20.3f' % posData[epoch]['y'] + '%20.3f' % posData[epoch]['z'] + '%20.3f' % posData[epoch]['clk'] + '%10.3f' % posData[epoch]['HDOP'] + '%10.3f' % posData[epoch]['VDOP'] + '%10.3f' % posData[epoch]['PDOP'] + '%10.3f' % posData[epoch]['GDOP'] + '\n')
     
     print("SPP Time : ", execution_time, "s")
     return posData, XMEAN, YMEAN, ZMEAN
@@ -325,15 +389,17 @@ def writePosData(posData, posFile):
     posOpen.write('# Time      : ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
     posOpen.write('#             END OF HEADER\n')
     posOpen.write('\n')
-    posLines = ['    mjd       sod                 X[m]                Y[m]               Z[m]              CLK[ns]\n']
-    # print(posData)
+    posLines = ['    mjd       sod                 X[m]                Y[m]               Z[m]              CLK[ns]      HDOP      VDOP      PDOP      GDOP\n']
     for epoch in posData:
-        # print(epoch)
         nowGnssTime = datetime2allgnssTime(epoch)
-        posLines.append(' ' + '%6d' % nowGnssTime.mjd + '%10.2f' % nowGnssTime.sod + ' ' + '%20.3f' % posData[epoch]['x'] + '%20.3f' % posData[epoch]['y'] + '%20.3f' % posData[epoch]['z'] + '%20.5f' % (posData[epoch]['clk'] / CLIGHT * 1.e9) + '\n')
+        posLines.append(' ' + '%6d' % nowGnssTime.mjd + '%10.2f' % nowGnssTime.sod + 
+                        ' ' + '%20.3f' % posData[epoch]['x'] + '%20.3f' % posData[epoch]['y'] 
+                        + '%20.3f' % posData[epoch]['z'] + '%20.5f' % (posData[epoch]['clk'] / CLIGHT * 1.e9) 
+                        + '%10.3f' % posData[epoch]['HDOP'] + '%10.3f' % posData[epoch]['VDOP'] 
+                        + '%10.3f' % posData[epoch]['PDOP'] + '%10.3f' % posData[epoch]['GDOP'] 
+                        + '\n')
     posOpen.writelines(posLines)
     posOpen.close()
-
 
 def sppLsq(G_MAT,W_MAT,y_MAT):
     G_MAT = G_MAT.astype(np.float64)
@@ -345,20 +411,23 @@ def sppLsq(G_MAT,W_MAT,y_MAT):
     return X_MAT
 
 if __name__ == '__main__':
+    obsFile = r'D:\Code\FAST\sample_data\abpo0010.25o'
+    brdFile = r'D:\Code\FAST\sample_data\brdc0010.25p'
 
-    obsFile = r'D:\Code\fastpos\test\abpo0910.23o'
-    brdFile = r'D:\Code\fastpos\test\brdc0910.23p'
-
-    bandChoose = {'G': {'C1C': {'freq': 1575420000.0, 'lambda': 0.19029367279836487}, 'C2W': {'freq': 1227600000.0, 'lambda': 0.24421021342456825}}, 'E': {'C1C': {'freq': 1575420000.0, 'lambda': 0.19029367279836487}, 'C5Q': {'freq': 1176450000.0, 'lambda': 0.25482804879085386}}, 'C': {'C2I': {'freq': 1561098000.0, 'lambda': 0.19203948631027648}, 'C6I': {'freq': 1268520000.0, 'lambda': 0.2363324646044209}}}
+    bandChoose = {'G': {'C1C': {'freq': 1575420000.0, 'lambda': 0.19029367279836487}, 
+                        'C2W': {'freq': 1227600000.0, 'lambda': 0.24421021342456825}}, 
+                  'E': {'C1C': {'freq': 1575420000.0, 'lambda': 0.19029367279836487}, 
+                        'C5Q': {'freq': 1176450000.0, 'lambda': 0.25482804879085386}}, 
+                  'C': {'C2I': {'freq': 1561098000.0, 'lambda': 0.19203948631027648}, 
+                        'C6I': {'freq': 1268520000.0, 'lambda': 0.2363324646044209}}}
 
     from fast.com.readObs import readObs, readObsHead
     import datetime
-    startDatetime = datetime.datetime(2023,4,1)
-    endDatetime = datetime.datetime(2023,4,1,2)
+    startDatetime = datetime.datetime(2025,1,1)
+    endDatetime = datetime.datetime(2025,1,2)
     obsData = readObs(obsFile)
     obsHead = readObsHead(obsFile)
     brdData = readNav(brdFile)
     posFile = r'D:\Code\FAST\fast\spp\sppbybrdc.txt'
-    posData, XMEAN, YMEAN, ZMEAN =spp(obsHead, obsData, brdData, bandChoose, startDatetime, endDatetime, self = None, posFile = posFile)
-    # spp(obsFile, sp3File, clkFile, bandChoose,startDatetime, endDatetime, posFile=posFile)
-    ...
+    posData, XMEAN, YMEAN, ZMEAN = spp(obsHead, obsData, brdData, bandChoose, startDatetime, endDatetime, self = None, posFile = posFile)
+    writePosData(posData, posFile)

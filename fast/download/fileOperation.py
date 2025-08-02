@@ -31,7 +31,7 @@ def isFileInPath(file):  # 判断相关文件是否存在
                     + 增加igu文件的判断
                     by Chang Chuntao    -> Version : 2.09
     """
-    from fast.com.gnssTime import gnssTime2datetime, datetime2GnssTime, ReplaceTimeWildcard
+    from fast.com.gnssTime import gnssTime2datetime, datetime2GnssTime, ReplaceTimeWildcard, doy2datetime
     orifile = str(file).split(".")[0]
     ionfile = file
     projectFileLow = file
@@ -89,8 +89,14 @@ def isFileInPath(file):  # 判断相关文件是否存在
                     projectFileLow = file.lower()[0:3] + str(YearMonthDay[0])[:2] + 'P' + str(GPSWeekDay[0]) + ".snx"
                 else:
                     projectFileLow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".snx"
-            else:
-                projectFileLow = file.lower()[0:3] + str(GPSWeekDay[0]) + str(GPSWeekDay[1]) + ".ssc"
+        elif '.crx.gz' in file:
+            try:
+                year = int(file.lower()[12:16])
+                doy = int(file.lower()[16:19])
+                epoch = doy2datetime(year, doy)
+                projectFileLow = ReplaceTimeWildcard(file[:4].lower() + '<DOY>0.<YY>o', epoch)
+            except:
+                projectFileLow = file
         elif 'CH-OG-1-SST' in file:
             projectFileLow = str(file).replace('.zip', '') + '.rnx'
             filelowo = orifile[:27] + '.rnx'
