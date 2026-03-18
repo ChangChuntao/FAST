@@ -64,7 +64,7 @@ def readNav3Head(navFile):
         try:
             line = navOpen.readline()
         except:
-            ...
+            continue
         if 'END OF HEADER' in line:
             break
         lines = line.split()
@@ -512,7 +512,7 @@ def readNav3(navFile, navHead = None):
     return navData
 
 def readNav4(navFile):
-    ...
+    raise NotImplementedError("RINEX 4 navigation file reading is not implemented yet")
 
 def readNav(navFile):
     navOpen = open(navFile, 'r+')
@@ -530,10 +530,10 @@ def readNav(navFile):
         navData = readNav3(navFile)
     # elif 4 <= rnxVersion < 5:
     #     navData = readNav4(navFile)
-    else:
-        print('versions of Rinex are not currently supported!')
-        return None
-
+    # else:
+    #     print('versions of Rinex are not currently supported!')
+    #     return None
+    # print(navData)
     return navData
 
     

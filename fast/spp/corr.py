@@ -2,15 +2,16 @@
 # corr              : error correction for SPP
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2024.07.01 - Version 3.00.02
 
 
+import numpy as np
+
 def earthRotation(satX_init, satY_init, satZ_init, SignalDeltaTimeInit):
     from fast.com.gnssParameter import coordSystem
     omega = coordSystem['WGS84'].omega
-    import numpy as np
     satX =  np.cos(omega * SignalDeltaTimeInit) * satX_init + np.sin(omega * SignalDeltaTimeInit) * satY_init
     satY = -np.sin(omega * SignalDeltaTimeInit) * satX_init + np.cos(omega * SignalDeltaTimeInit) * satY_init
     satZ =  satZ_init
@@ -82,3 +83,21 @@ def insert_zeros(arr, positions):
         arr = np.insert(arr, pos, val, axis=0)
     
     return arr
+
+
+def varerr(ele):
+    
+    
+    err_base = 1.0
+    
+    
+    sigma_0 = 3.0 
+    sigma_0 = sigma_0 * err_base
+    
+    
+    sin_el = np.sin(ele)
+    if sin_el < 1e-3:
+        sin_el = 1e-3
+    weight = 1.0 + 1.0 / (np.sin(ele) ** 2)
+
+    return (sigma_0 ** 2) * weight

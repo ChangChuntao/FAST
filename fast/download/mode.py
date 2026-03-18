@@ -3,11 +3,12 @@
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University
 # Creation       : 2022.03.27 - Version 1.00
-# Latest Version : 2023-09-20 - Version 2.11
+# Latest Version : 2026.03.18 - Version 3.01.00
 
 from fast.com.pub import printFast, gnss_type
 from fast.download.arg import getArg, checkInputArg
-from fast.download.ftpSrc import FTP_S
+# from fast.download.ftpSrc import FTP_S
+from fast.download.loadFtpSrc import FTP_S
 from fast.download.fileOperation import unzip_vlbi
 from fast.com.gnssTime import ReplaceMMM
 from fast.com.mgexInf import mgex
@@ -50,7 +51,6 @@ def runApplication():
             back_sub = getUrlByRun(fastArg)
         else:
             break
-    ...
 
 
 def runApplicationWithArgs():

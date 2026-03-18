@@ -3,7 +3,7 @@
 # Author            : Chang Chuntao chuntaochang@whu.edu.cn
 # Copyright(C)      : The GNSS Center, Wuhan University
 # Creation Date     : 2022.06.06
-# Latest Version    : 2023.06.30
+# Latest Version    : 3.01.00 - 2026.03.18
 
 
 import datetime
@@ -13,13 +13,12 @@ import time
 import timeit
 from multiprocessing.pool import ThreadPool
 from fast.download.fileOperation import isFileInPath, uncompressFileArg, uncompress_ym, uncompress_highrate_rinex
-from fast.com.pub import ym_type, yd_type, ydh_type, yds_type, ydsh_type, s_type, gs_type, no_type, sub_type, gnss_type
+from fast.com.pub import ym_type, yd_type, ydh_type, yds_type, ydsh_type, s_type, no_type, gnss_type
 from fast.com.gnssTime import ReplaceTimeWildcard, ReplaceMMM, doy2gpswd
-from fast.download.ftpSrc import FTP_S
+from fast.download.loadFtpSrc import FTP_S
 from fast.com.pub import printFast, exeCmd
 from fast.com.mgexInf import replaceSiteStr
 import platform
-# import distro
 
 
 if platform.system() == 'Windows':
@@ -59,11 +58,7 @@ else:
     #     binDir = os.path.join(dirname, 'cbin')
     #     binDir = os.path.join(dirname, 'bin')
     # else:
-    #     binDir = os.path.join(dirname, 'ubin')
-    #     binDir = os.path.join(dirname, 'bin')
-
     binDir = os.path.join(dirname, 'bin')
-    # wget = os.path.join(binDir, 'wget')
     wget = 'wget'
     lftp = os.path.join(binDir, 'lftp')
     wget += " -T 3 -t 3 -N -c "
@@ -82,13 +77,7 @@ def wgets(fn):  # 下载单个文件
     else:
         cmd = wget + fn
         os.system(cmd)
-        # exeCmd(cmd, addTime=False)
-        # print(cmd)
-        # os.system(cmd)
-#         subprocess.run(cmd.split(),
-#     # shell=True,
-#     check=True
-# )
+        print(cmd)
 
 
 def wgetm(url):  # 下载列表内文件
@@ -165,7 +154,6 @@ def argpooldownload(urllist, process, loc, compress, data_type, proname):
     results = []
     for typeurl in urllist:
         pool = ThreadPool(process)
-        # pool.map(wgetm, typeurl)
         for task in typeurl:
             result = pool.apply_async(wgetm, (task,))
             results.append(result)

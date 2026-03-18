@@ -2,7 +2,7 @@
 # qtQc              : pyqt5 for FAST
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2024.07.01 - Version 3.00.02
 
@@ -97,8 +97,9 @@ class FramelessWindow(QWidget):
 
         # 窗口阴影
         windowShadow = QGraphicsDropShadowEffect()
-        windowShadow.setBlurRadius(9.0)
-        windowShadow.setColor(self.palette().color(QPalette.Highlight))
+        windowShadow.setBlurRadius(5.0)
+        # windowShadow.setColor(self.palette().color(QPalette.Highlight))
+        windowShadow.setColor(QColor(255, 255, 255, 200))
         windowShadow.setOffset(0.0)
         self.windowFrame.setGraphicsEffect(windowShadow)
 
@@ -109,50 +110,51 @@ class FramelessWindow(QWidget):
 
     def initUi(self):
         
-        screen = QDesktopWidget().screenGeometry()
-        screenWidth = screen.width()
-        screenHeight = screen.height()
+        # 标题栏固定尺寸（不依赖屏幕分辨率）
+        titleBarHeight = 35 + 10 
+        btnSize = 32 + 15
+        iconSize = 25 + 15
 
         # 关闭按钮
         # self.resize(800, 600)
         self.btnClose = QToolButton()
         self.btnClose.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnClose.setFixedSize(int(screenHeight/45), int(screenHeight/45))
+        self.btnClose.setFixedSize(btnSize, btnSize)
         close_png = os.path.join(binDir, 'close-we.png')
         self.btnClose.setIcon(QIcon(close_png))
         self.btnClose.clicked.connect(self.close)
         # 最大化按钮
         self.btnMaximize = QToolButton()
         self.btnMaximize.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnMaximize.setFixedSize(int(screenHeight/45), int(screenHeight/45))
+        self.btnMaximize.setFixedSize(btnSize, btnSize)
         max_png = os.path.join(binDir, 'max-we.png')
         self.btnMaximize.setIcon(QIcon(max_png))
         self.btnMaximize.clicked.connect(self.onButtonMaximizeClicked)
         # 最小化按钮
         self.btnMinimize = QToolButton()
         self.btnMinimize.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnMinimize.setFixedSize(int(screenHeight/45), int(screenHeight/45))
+        self.btnMinimize.setFixedSize(btnSize, btnSize)
         min_png = os.path.join(binDir, 'min-we.png')
         self.btnMinimize.setIcon(QIcon(min_png))
         self.btnMinimize.clicked.connect(lambda: self.setWindowState(Qt.WindowMinimized))
         # 恢复按钮
         self.btnRestore = QToolButton()
         self.btnRestore.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        self.btnRestore.setFixedSize(int(screenHeight/45), int(screenHeight/45))
+        self.btnRestore.setFixedSize(btnSize, btnSize)
         restore_png = os.path.join(binDir, 'restore-we.png')
         self.btnRestore.setIcon(QIcon(restore_png))
         self.btnRestore.clicked.connect(self.onButtonRestoreClicked)
 
         # 做边留空
         spacer = QLabel()
-        spacer.setFixedWidth(int(screenHeight/350))
+        spacer.setFixedWidth(0)
         # 左上角应用图标
         self.icon = QLabel()
-        self.icon.setFixedSize(int(screenHeight/30), int(screenHeight/30))
+        self.icon.setFixedSize(iconSize, iconSize)
         # 中间标题信息
         self.titleText = QLabel()
         self.titleText.setStyleSheet('border: 0px none palette(base);')
-        self.titleText.setFixedHeight(int(screenHeight/30))  # 设置高度为 50 像素
+        self.titleText.setFixedHeight(titleBarHeight)
 
         # 标题条布局
         layoutTitlebar = QHBoxLayout()
@@ -217,19 +219,14 @@ class FramelessWindow(QWidget):
         self.titleText.setText(text)
         font = QtGui.QFont()
         font.setBold(True)
-        # font.setFamily('Microsoft YaHei')
-        font.setPointSize(11)
+        font.setPointSize(10)
         self.titleText.setFont(font)
 
     def center(self):
         self.move(100,100)
         
     def setWindowIcon(self, ico):
-        # self.icon.setPixmap(ico.pixmap(30, 35))
-        # self.icon.setMinimumSize(30, 35)
-
-        self.icon.setPixmap(ico.pixmap(30, 30))
-        # self.icon.setMinimumSize(40, 40)
+        self.icon.setPixmap(ico.pixmap(25, 25))
         self.icon.setAlignment(Qt.AlignVCenter)
         super(FramelessWindow, self).setWindowIcon(ico)
 

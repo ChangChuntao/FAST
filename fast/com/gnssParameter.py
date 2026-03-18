@@ -2,9 +2,9 @@
 # gnssParameter  : gnss Parameter
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University 
-# Latest Version : 3.00.00
+# Latest Version : 3.01.00
 # Creation Date  : 2022.03.27 - Version 1.00.00
-# Date           : 2023.10.02 - Version 3.00.00
+# Date           : 2026.03.18 - Version 3.01.00
 
 # 1. 坐标系统
 # 1.1 椭球参数类
@@ -87,6 +87,12 @@ bds3MEOList = ['C19', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25',\
                 'C26', 'C27', 'C28', 'C29', 'C30', 'C32', 'C33',\
                       'C34', 'C35', 'C36', 'C37', 'C41', 'C42',\
                           'C43', 'C44', 'C45', 'C46', 'C57', 'C58']
+freq_parts = {
+        'C': [('2', '6'), ('1', '5'), ('2', '7'), ('2', '8')],  # 北斗优先选择 2(B1I)和6(B3I)
+        'G': [('1', '2'), ('1', '5'), ('1', '5')],              # GPS优先 1和2，其次1和5
+        'E': [('1', '5'), ('1', '6'), ('1', '7'), ('1', '8')],  # Galileo
+        'R': [('1', '2'), ('1', '3')],                          # GLONASS
+    }
 
 CLIGHT = 299792458.0
 

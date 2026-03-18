@@ -200,8 +200,6 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
     if self is not None:
         self.figcnr.clf()
         figcnr = self.figcnr
-        # self.figcnr = plt.figure(figsize=(84 / 25.4, 84 / 25.4 * 1.5), dpi=300)  # 设置新的尺寸和分辨率
-        # self.canvas = FigureCanvas(self.figcnr)  # 如果需要,重新创建画布
     else:
         figcnr = plt.figure()
 
@@ -217,8 +215,6 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
         axcnr.tick_params(axis='y', labelsize='medium')
 
 
-        # if nowAxNum == 1:
-        #     axcnr.set_title('CNR', fontdict={'size': 10}, pad=1)
         allCnrDict = {}
         for prn in cnrData[gnssSys]:
             if self is not None:
@@ -253,13 +249,25 @@ def plotCnr(obsHead, obsData, self = None, pngFile = None):
             print(band, np.mean(allCnrDict[band]))
 
         # 绘制箱线图
-        bp = axcnr.boxplot(values, positions=range(1, len(values) + 1))
-        for i, flier in enumerate(bp['fliers']):
-            flier.set(marker='o', 
-                        # markerfacecolor='red',  # 填充颜色
-                        markeredgecolor='red',  # 边缘颜色
-                      alpha=0.3,
-                      markersize=4)
+        bp = axcnr.boxplot(values, positions=range(1, len(values) + 1),
+                   patch_artist=True,  # 启用填充
+                   boxprops=dict(facecolor='lightblue',  # 箱子填充颜色
+                               color='blue',              # 箱子边框颜色
+                               linewidth=1.5),           # 边框线宽
+                   whiskerprops=dict(color='gray', linewidth=1.5),
+                   capprops=dict(color='gray', linewidth=1.5),
+                   medianprops=dict(color='red', linewidth=2),
+                   flierprops=dict(marker='o', 
+                                 markerfacecolor='red',
+                                 markeredgecolor='red',
+                                 markersize=4,
+                                 alpha=0.3))
+        # for i, flier in enumerate(bp['fliers']):
+        #     flier.set(marker='o', 
+        #                 # markerfacecolor='lightblue',  # 填充颜色
+        #                 # markeredgecolor='red',  # 边缘颜色
+        #               alpha=0.3,
+        #               markersize=4)
         # 设置 x 轴刻度标签
         axcnr.set_xticks(range(1, len(labels) + 1))
         axcnr.set_xticklabels(labels, fontsize='medium')

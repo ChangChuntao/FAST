@@ -2,9 +2,9 @@
 # menu              : Menu for FAST Downlad module
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.03
+# Latest Version    : 3.01.00
 # Creation Date     : 2022.03.27 - Version 1.00
-# Date              : 2025.05.05 - Version 3.00.03
+# Date              : 2026.03.18 - Version 3.01.00
 
 from fast.com.gnssTime import gnssTimesTran
 from fast.download.inf import fastHelp
@@ -210,9 +210,9 @@ def level2menu(obj):
         print("    |   5 : GCRE_WHU_F_sp3       6 : GCRE_WHU_R_sp3       7 : GCRE_WHU_U_sp3   |")
         print("    |   8 : GCRE_WHU_H_sp3       9 : GCRE_WHU_RTS_sp3    10 : GCRE_SHA_F_sp3   |")
         print("    |  11 : GCRE_COD_F_sp3      12 : GCRE_GRG_F_sp3      13 : GCRE_GFZ_R_sp3   |")
-        print("    |  14 : GCRE_IAC_F_sp3                                                     |")
-        print("    |  15 : GRE_GFZ_F_sp3       16 : GRE_COD_R_sp3       17 : GLO_IGL_F_sp3    |")
-        print("    |  18 : GRE_JAX_U_sp3       19 : CEG_GRG_U_sp3                             |")
+        print("    |  14 : GCRE_IAC_F_sp3      15 : GCRE_WMC_F_sp3                            |")
+        print("    |  16 : GRE_GFZ_F_sp3       17 : GRE_COD_R_sp3       18 : GLO_IGL_F_sp3    |")
+        print("    |  19 : GRE_JAX_U_sp3       20 : CEG_GRG_U_sp3                             |")
         print("    |                                                                          |")
         print("    +--------------------------------------------------------------------------+")
     elif obj == 3:
@@ -228,9 +228,9 @@ def level2menu(obj):
         print("    |   5 : GCRE_WHU_F_clk      6 : GCRE_WHU_R_clk        7 : GCRE_WHU_U_clk   |")
         print("    |   8 : GCRE_WHU_U_clk_30s  9 : GCRE_WHU_RTS_clk     10 : GCRE_SHA_F_clk   |")
         print("    |  11 : GCRE_COD_F_clk     12 : GCRE_GRG_F_clk       13 : GCRE_GFZ_R_clk   |")
-        print("    |  14 : GCRE_IAC_F_clk                                                     |")
-        print("    |  15 : GRE_GFZ_F_clk      16 : GRE_COD_R_clk        17 : GLO_IGL_F_clk    |")
-        print("    |  18 : GRE_COD_F_clk_30s  19 : GRE_JAX_U_clk_30s    20 : CEG_GRG_U_clk    |")
+        print("    |  14 : GCRE_IAC_F_clk     15 : GCRE_WMC_F_clk                             |")
+        print("    |  16 : GRE_GFZ_F_clk      17 : GRE_COD_R_clk        18 : GLO_IGL_F_clk    |")
+        print("    |  19 : GRE_COD_F_clk_30s  20 : GRE_JAX_U_clk_30s    21 : CEG_GRG_U_clk    |")
         print("    |                                                                          |")
         print("    +--------------------------------------------------------------------------+")
     elif obj == 4:
@@ -258,10 +258,10 @@ def level2menu(obj):
         print("    +--------------------------------------------------------------------------+")
     elif obj == 6:
         print("    +-------------------------------BIA_DCB_OBX--------------------------------+")
-        print("    |                                    |                                     |")
+        print("    |                                                                          |")
         print("    +-----------------------------------BIA------------------------------------+")
         print("    |                                                                          |")
-        print("    |   1 : GPS_COD_F_osb       2 : GE_GRG_F_osb          3 : GRE_COD_R_osb    |")
+        print("    |   1 : GPS_COD_F_osb       2 : GCE_GRG_F_osb         3 : GRE_COD_R_osb    |")
         print("    |   4 : GCRE_WHU_F_osb      5 : GCRE_WHU_R_osb        6 : GCRE_WHU_R_abs   |")
         print("    |   7 : GCRE_COD_F_osb      8 : GCRE_GFZ_R_osb        9 : GCRE_CAS_R_osb   |")
         print("    |  10 : GCRE_WHU_U_osb     11 : GCRE_WHU_RTS_osb                           |")
@@ -343,7 +343,6 @@ def level2menu(obj):
         print("    |  17 : COSMIC_2_att       18 : COSMIC_2_crx         19 : COSMIC_2_orb     |")
         print("    |                                                                          |")
         print("    +--------------------------------------------------------------------------+")
-
     elif obj == 14:
         print("    +----------------------------------PANDA-----------------------------------+")
         print("    |                                                                          |")

@@ -2,7 +2,7 @@
 # thinning          : downsampling settings for Station selection
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.03
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2025.08.02 - Version 3.00.03
 
@@ -37,8 +37,15 @@ def thinning(chooseSite, thinningValue,
         lat = info['B']
 
         # 计算站点所属格网的行列号
+        # 边界处理：当 lon/lat 恰好等于最大值时，归入最后一个格网
         col = int(np.floor((lon - lmin) / thinningValue))
         row = int(np.floor((lat - bmin) / thinningValue))
+        
+        # 处理右边界和上边界的情况
+        if lon >= lmax:
+            col = int(np.floor((lmax - lmin - 1e-9) / thinningValue))
+        if lat >= bmax:
+            row = int(np.floor((bmax - bmin - 1e-9) / thinningValue))
 
         key = (row, col)          # 格网唯一索引
         grid2stations.setdefault(key, []).append((sta, info))

@@ -2,7 +2,7 @@
 # qtQc              : pyqt5 for QC module
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2024.07.01 - Version 3.00.02
 
@@ -398,8 +398,6 @@ def qcWorkFinished(self, modeChoose, qcData):
         self.qcCmcData = qcData
     elif modeChoose == 'IOD':
         self.qcIodData = qcData
-    else:
-        ...
     self.is_running = False
 
 def analyze_plot(self):

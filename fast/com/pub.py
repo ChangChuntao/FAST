@@ -3,45 +3,46 @@
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University
 # Creation       : 2022.03.27 - Version 1.00
-# Latest Version : 2023-09-26 - Version 3.00
+# Latest Version : 2026-03-18 - Version 3.01.00
 
+# 版本历史：格式 (版本号, 日期)
+_VERSION_HISTORY = [
+    ('1.00', '2022-03-27'),
+    ('1.10', '2022-04-12'),
+    ('1.11', '2022-04-22'),
+    ('1.12', '2022-04-30'),
+    ('1.13', '2022-05-24'),
+    ('1.14', '2022-05-31'),
+    ('1.15', '2022-07-03'),
+    ('1.16', '2022-07-13'),
+    ('1.17', '2022-07-22'),
+    ('1.18', '2022-07-28'),
+    ('1.19', '2022-08-04'),
+    ('1.20', '2022-09-11'),
+    ('1.21', '2022-09-16'),
+    ('1.22', '2022-09-20'),
+    ('1.23', '2022-09-28'),
+    ('1.24', '2022-10-10'),
+    ('1.25', '2022-11-02'),
+    ('2.01', '2022-11-09'),
+    ('2.02', '2022-11-10'),
+    ('2.03', '2022-11-15'),
+    ('2.04', '2022-12-02'),
+    ('2.05', '2022-12-04'),
+    ('2.06', '2023-01-14'),
+    ('2.07', '2023-02-10'),
+    ('2.08', '2023-03-17'),
+    ('2.09', '2023-06-30'),
+    ('2.10', '2023-08-11'),
+    ('2.11', '2023-09-20'),
+    ('3.00.01', '2024-01-09'),
+    ('3.00.02', '2024-05-22'),
+    ('3.00.03', '2025-08-02'),
+    ('3.01.00', '2026-03-17'),
+]
 
-
-_version = {    '1.00':     '2022-03-27', 
-                '1.10':     '2022-04-12',
-                '1.11':     '2022-04-22', 
-                '1.12':     '2022-04-30', 
-                '1.13':     '2022-05-24', 
-                '1.14':     '2022-05-31', 
-                '1.15':     '2022-07-03', 
-                '1.16':     '2022-07-13', 
-                '1.17':     '2022-07-22', 
-                '1.18':     '2022-07-28', 
-                '1.19':     '2022-08-04', 
-                '1.20':     '2022-09-11', 
-                '1.21':     '2022-09-16', 
-                '1.22':     '2022-09-20', 
-                '1.23':     '2022-09-28', 
-                '1.24':     '2022-10-10', 
-                '1.25':     '2022-11-02',
-                '2.01':     '2022-11-09', 
-                '2.02':     '2022-11-10', 
-                '2.03':     '2022-11-15', 
-                '2.04':     '2022-12-02', 
-                '2.05':     '2022-12-04', 
-                '2.06':     '2023-01-14', 
-                '2.07':     '2023-02-10', 
-                '2.08':     '2023-03-17', 
-                '2.09':     '2023-06-30', 
-                '2.10':     '2023-08-11', 
-                '2.11':     '2023-09-20',
-                '3.00.01':  '2024-01-09',
-                '3.00.02':  '2024-05-22',
-                '3.00.03':  '2025-08-02',
-            }
-
-lastVersion = list(_version)[-1]
-lastVersionTime = _version[lastVersion]
+_version = dict(_VERSION_HISTORY)
+lastVersion, lastVersionTime = _VERSION_HISTORY[-1]
 
 gnss_type = [["BRDC", ["GPS_brdc", "GCRE_brdc", "GCRE_CNAV_brdm", "GCRE_CNAV_brd4"]],  # 1 BRDC
 
@@ -50,7 +51,7 @@ gnss_type = [["BRDC", ["GPS_brdc", "GCRE_brdc", "GCRE_CNAV_brdm", "GCRE_CNAV_brd
                       "GCRE_WHU_F_sp3", "GCRE_WHU_R_sp3", "GCRE_WHU_U_sp3",
                       "GCRE_WHU_H_sp3",  "GCRE_WHU_RTS_sp3", "GCRE_SHA_F_sp3",
                       "GCRE_COD_F_sp3",  "GCRE_GRG_F_sp3", 'GCRE_GFZ_R_sp3',
-                      "GCRE_IAC_F_sp3",
+                      "GCRE_IAC_F_sp3", "GCRE_WMC_F_sp3",
                       "GRE_GFZ_F_sp3",  'GRE_COD_R_sp3', 'GLO_IGL_F_sp3',
                       'GRE_JAX_U_sp3', 'CEG_GRG_U_sp3']],
 
@@ -59,7 +60,7 @@ gnss_type = [["BRDC", ["GPS_brdc", "GCRE_brdc", "GCRE_CNAV_brdm", "GCRE_CNAV_brd
                       "GCRE_WHU_F_clk", "GCRE_WHU_R_clk", "GCRE_WHU_U_clk",
                       "GCRE_WHU_U_clk_30s", "GCRE_WHU_RTS_clk", "GCRE_SHA_F_clk",
                       'GCRE_COD_F_clk', "GCRE_GRG_F_clk", 'GCRE_GFZ_R_clk',
-                      "GCRE_IAC_F_clk",
+                      "GCRE_IAC_F_clk", "GCRE_WMC_F_clk",
                       'GRE_GFZ_F_clk', 'GRE_COD_R_clk', 'GLO_IGL_F_clk',
                       'GRE_COD_F_clk_30s', 'GRE_JAX_U_clk_30s', 'CEG_GRG_U_clk']],
 
@@ -74,7 +75,7 @@ gnss_type = [["BRDC", ["GPS_brdc", "GCRE_brdc", "GCRE_CNAV_brdm", "GCRE_CNAV_brd
                       "COD_F_erp", "WHU_U_erp", "GFZ_R_erp",
                       'COD_R_erp', "WHU_H_erp"]],  # 5 ERP
 
-             ["BIA_DCB_OBX", ["GPS_COD_F_osb",  "GE_GRG_F_osb", "GRE_COD_R_osb",
+             ["BIA_DCB_OBX", ["GPS_COD_F_osb",  "GCE_GRG_F_osb", "GRE_COD_R_osb",
                               'GCRE_WHU_F_osb', "GCRE_WHU_R_osb", "GCRE_WHU_R_abs",
                               "GCRE_COD_F_osb", "GCRE_GFZ_R_osb", "GCRE_CAS_R_osb",   
                               "GCRE_WHU_U_osb", "GCRE_WHU_RTS_osb",  # 6 BIA_DCB_OBX
@@ -109,17 +110,6 @@ gnss_type = [["BRDC", ["GPS_brdc", "GCRE_brdc", "GCRE_CNAV_brdm", "GCRE_CNAV_brd
              ["Velocity_Fields", ["IGS14_Venu", "IGS08_Venu", "PLATE_Venu"]],  # 11 Velocity_Fields
 
              ["SLR", ["HY_SLR", "GRACE_SLR", "BEIDOU_SLR"]],  # 12 SLR
-
-            #  ["LEO", ['GRACE_dat', 'GRACE_rnxapp', 'GRACE_fo_dat',  # 13 LEO
-            #           'GRACE_fo1_sp3', 'GRACE_fo2_sp3', 'CHAMP_rnx',
-            #           'CHAMP_sp3', 'SWARM_rnx', 'SWARM_sp3',
-
-            #           'C1_L1a_leoAtt', 'C1_L1a_opnGps', 'C1_L1a_podCrx',
-            #           'C1_L1b_atmPhs', 'C1_L1b_gpsBit', 'C1_L1b_ionPhs',
-            #           'C1_L1b_leoClk', 'C1_L1b_leoOrb', 'C1_L1b_podTec',
-            #           'C1_L1b_scnLv1',
-            #           'C2_L1a_leoAtt', 'C2_L1a_opnGps', 'C2_L1a_podCrx',
-            #           'C2_L1b_conPhs', 'C2_L1b_leoOrb', 'C2_L1b_podTc2']],
 
              ["LEO", ['GRACE_dat', 'GRACE_rnxapp', 
                       'GRACE_fo_dat',  'GRACE_fo1_sp3', 'GRACE_fo2_sp3', 

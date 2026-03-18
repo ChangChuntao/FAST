@@ -2,9 +2,9 @@
 # GNSS_Timestran : GNSS_Timestran
 # Author         : Chang Chuntao
 # Copyright(C)   : The GNSS Center, Wuhan University 
-# Latest Version : 1.25
+# Latest Version : 3.01.00
 # Creation Date  : 2022.03.27 - Version 1.00
-# Date           : 2022.11.02 - Version 1.25
+# Date           : 2026.03.18 - Version 3.01.00
 
 from fast.com.pub import printFast
 import datetime
@@ -335,7 +335,10 @@ def doy2datetime(year, doy):
              by ChangChuntao -> Version : 1.00
     """
     import datetime
-    day1Time = datetime.datetime(year, 1, 1)
+    try:
+        day1Time = datetime.datetime(year, 1, 1)
+    except:
+        day1Time = datetime.datetime(2026, 1, 1)
     specTime = day1Time + datetime.timedelta(days=int(doy) - 1)
     return specTime
 
@@ -389,7 +392,11 @@ def mjd2datetime(mjd, sod=0.0):
     """
     import datetime
     mjdT0 = datetime.datetime(1858, 11, 17, 0, 0, 0, 0)
-    specTime = mjdT0 + datetime.timedelta(days=int(mjd)) + datetime.timedelta(seconds=float(sod))
+    try:
+        specTime = mjdT0 + datetime.timedelta(days=int(mjd)) + datetime.timedelta(seconds=float(sod))
+    except:
+        specTime = mjdT0 + datetime.timedelta(seconds=float(sod))
+
     return specTime
 
 
@@ -458,7 +465,10 @@ def gpswd2datetime(gpsWeek, gpsWeekD):
     import datetime
 
     wd1Time = datetime.datetime(year=1980, month=1, day=6)
-    specTime = wd1Time + datetime.timedelta(weeks=int(gpsWeek)) + datetime.timedelta(days=int(gpsWeekD))
+    try:
+        specTime = wd1Time + datetime.timedelta(weeks=int(gpsWeek)) + datetime.timedelta(days=int(gpsWeekD))
+    except:
+        specTime = wd1Time + datetime.timedelta(days=int(gpsWeekD))
     return specTime
 
 
@@ -613,6 +623,14 @@ def ReplaceTimeWildcard(string, spectime):
         find_gpsweek, wd = datetime2gpswd(spectime)
         year, week_0_doy = gpswd2doy(find_gpsweek, 0)
         newstr = newstr.replace('<WEEK0DOY>', '%03d' % week_0_doy)
+    if newstr.find('<WEEK0YEAR>') >= 0:
+        find_gpsweek, wd = datetime2gpswd(spectime)
+        year, week_0_doy = gpswd2doy(find_gpsweek, 0)
+        newstr = newstr.replace('<WEEK0YEAR>', '%04d' % year)
+    if newstr.find('<WEEK0YY>') >= 0:
+        find_gpsweek, wd = datetime2gpswd(spectime)
+        year, week_0_doy = gpswd2doy(find_gpsweek, 0)
+        newstr = newstr.replace('<WEEK0YY>', '%02d' % (year - 2000))
 
     # return new string
     return newstr

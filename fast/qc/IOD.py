@@ -4,10 +4,10 @@
 # Author            : Chang Chuntao chuntaochang@whu.edu.cn
 # Copyright(C)      : The GNSS Center, Wuhan University
 # Creation Date     : 2023.10.16
-# Latest Version    : 2023.10.16
+# Latest Version    : 3.01.00 - 2026.03.18
 
 
-from fast.com.gnssParameter import getBandFreq, CLIGHT, obsFreq
+from fast.com.gnssParameter import getBandFreq, CLIGHT, obsFreq, freq_parts
 import numpy as np
 import datetime
 
@@ -69,55 +69,82 @@ def IOD(obsHead, obsData, self = None):
 
 
     for gSys in obsType:
-        if len(bandChoose[gSys]) < 2 or gSys not in obsFreq:
+        # 基本校验：必须有两个频段且在频率表 obsFreq 中
+        if gSys not in bandChoose or len(bandChoose[gSys]) < 2 or gSys not in obsFreq:
             continue
         if self is not None:
             if gSys not in bandChooseInSelf:
                 continue
-        if gSys not in iodBandChoose :
+        
+        # 2. 【核心逻辑】根据优先级确定本次计算要使用的两个频点键 (k1, k2)
+        k1, k2 = None, None
+        if gSys in freq_parts:
+            for p1, p2 in freq_parts[gSys]:
+                # 检查数据中是否同时具备这两个频点数字
+                if p1 in bandChoose[gSys] and p2 in bandChoose[gSys]:
+                    k1, k2 = p1, p2
+                    break
+        
+        # 如果优先级列表里没配上，则取当前系统已有的前两个频点
+        if k1 is None:
+            sorted_keys = sorted(bandChoose[gSys].keys())
+            k1, k2 = sorted_keys[0], sorted_keys[1]
+
+        if gSys not in iodBandChoose:
             iodBandChoose[gSys] = {}
+
+        # 3. 遍历 obsType 匹配观测码
         for band in obsType[gSys]:
-            if 'C' == band[0] or 'P' == band[0]:
+            # 只处理伪距观测值 (C 或 P 开头)
+            if band[0] not in ['C', 'P']:continue
+            if band.startswith('C') or band.startswith('P'):
                 if self is not None:
                     if band[1:] not in bandChooseInSelf[gSys]:
                         continue
-                if band in bandChoose[gSys][list(bandChoose[gSys])[0]]:
-                    band2 = bandChoose[gSys][list(bandChoose[gSys])[1]][0]
+                
+                # --- 沿用并修正你的匹配逻辑 ---
+                # 如果当前观测码属于选定的频点 k1，则配对的 band2 取自频点 k2 的第一个码
+                if band in bandChoose[gSys][k1]:
+                    band2 = bandChoose[gSys][k2][0]
+                # 如果当前观测码属于选定的频点 k2，则配对的 band2 取自频点 k1 的第一个码
+                elif band in bandChoose[gSys][k2]:
+                    band2 = bandChoose[gSys][k1][0]
                 else:
-                    band2 = bandChoose[gSys][list(bandChoose[gSys])[0]][0]
-                
-                bandL = 'L' + band[1:]
-                band2L = 'L' + band2[1:]
-                if bandL not in obsType[gSys] or band2 not in obsType[gSys] or band2L not in obsType[gSys]:
+                    # 如果是该系统其他的频点（如北斗已选 2&6，碰到频点 1），则跳过
                     continue
+            
+            bandL = 'L' + band[1:]
+            band2L = 'L' + band2[1:]
+            if bandL not in obsType[gSys] or band2 not in obsType[gSys] or band2L not in obsType[gSys]:
+                continue
 
-                band1freq = getBandFreq(gSys, band)
-                band2freq = getBandFreq(gSys, band2)
+            band1freq = getBandFreq(gSys, band)
+            band2freq = getBandFreq(gSys, band2)
 
-                if band1freq is None or band2freq is None:
-                    continue
+            if band1freq is None or band2freq is None:
+                continue
 
-                band1freq = band1freq * 1.e6
-                band1lamda = CLIGHT / band1freq
+            band1freq = band1freq * 1.e6
+            band1lamda = CLIGHT / band1freq
 
-                band2freq = band2freq * 1.e6
-                band2lamda = CLIGHT / band2freq
+            band2freq = band2freq * 1.e6
+            band2lamda = CLIGHT / band2freq
 
-                iodBandChoose[gSys][band] = {}
-                iodBandChoose[gSys][band]['band1freq'] = band1freq
-                iodBandChoose[gSys][band]['band1lambda'] = band1lamda
-                iodBandChoose[gSys][band]['band2freq'] = band2freq
-                iodBandChoose[gSys][band]['band2lambda'] = band2lamda
-                iodBandChoose[gSys][band]['band1C'] = band
-                iodBandChoose[gSys][band]['band2C'] = band2
-                iodBandChoose[gSys][band]['band1L'] = bandL
-                iodBandChoose[gSys][band]['band2L'] = band2L
-                
-                iodBandChoose[gSys][band]['COEFL1'] = -(band1freq * band1freq + band2freq*band2freq)/(band1freq*band1freq - band2freq*band2freq)
-                iodBandChoose[gSys][band]['COEFL2'] = 2*band2freq*band2freq/(band1freq*band1freq - band2freq*band2freq)
+            iodBandChoose[gSys][band] = {}
+            iodBandChoose[gSys][band]['band1freq'] = band1freq
+            iodBandChoose[gSys][band]['band1lambda'] = band1lamda
+            iodBandChoose[gSys][band]['band2freq'] = band2freq
+            iodBandChoose[gSys][band]['band2lambda'] = band2lamda
+            iodBandChoose[gSys][band]['band1C'] = band
+            iodBandChoose[gSys][band]['band2C'] = band2
+            iodBandChoose[gSys][band]['band1L'] = bandL
+            iodBandChoose[gSys][band]['band2L'] = band2L
+            
+            iodBandChoose[gSys][band]['COEFL1'] = -(band1freq * band1freq + band2freq*band2freq)/(band1freq*band1freq - band2freq*band2freq)
+            iodBandChoose[gSys][band]['COEFL2'] = 2*band2freq*band2freq/(band1freq*band1freq - band2freq*band2freq)
 
-                lamdaW = CLIGHT / (band1freq - band2freq)
-                iodBandChoose[gSys][band]['lamdaW'] = lamdaW
+            lamdaW = CLIGHT / (band1freq - band2freq)
+            iodBandChoose[gSys][band]['lamdaW'] = lamdaW
 
     iodData = {}
     interval = (list(obsData)[1] - list(obsData)[0]).total_seconds()

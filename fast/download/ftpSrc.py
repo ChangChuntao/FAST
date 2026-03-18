@@ -2,9 +2,9 @@
 # ftpSrc            : FTP source of each gnss center
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.03
+# Latest Version    : 3.01.00
 # Creation Date     : 2022.03.27 - Version 1.00
-# Date              : 2025.05.05 - Version 3.00.03
+# Date              : 2026.03.18 - Version 3.01.00
 import datetime
 
 # nowTime = datetime.datetime.utcnow()
@@ -256,6 +256,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                             "ftps://gdc.cddis.eosdis.nasa.gov/gps/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz",
                             "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/GRG0MGXFIN_<YYYY><DOY>0000_01D_15M_ORB.SP3.gz"],
 
+         "GCRE_WMC_F_sp3": ["ftp://igs.gnsswhu.cn//pub/whu/phasebias/<YEAR>/orbit/WMC0DEMFIN_<YEAR><DOY>0000_01D_05M_ORB.SP3.gz"],
+
          "GLO_IGL_F_sp3": ["ftp://nfs.kasi.re.kr/gps/products/<GPSW>/igl<GPSWD>.sp3.Z"],
 
          "GCRE_WHU_H_sp3": [
@@ -291,6 +293,8 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                             "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz",
                             "ftp://igs.ign.fr/pub/igs/products/mgex/<GPSW>/"
                             "WUM0MGXFIN_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
+
+         "GCRE_WMC_F_clk": ["ftp://igs.gnsswhu.cn//pub/whu/phasebias/<YEAR>/clock/WMC0DEMFIN_<YEAR><DOY>0000_01D_30S_CLK.CLK.gz"],
 
          "GCRE_WHU_R_clk": ["ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/clock/"
                             "WUM0MGXRAP_<YYYY><DOY>0000_01D_30S_CLK.CLK.gz"],
@@ -525,7 +529,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
              'ftp://igs.gnsswhu.cn/pub/gnss/products/mgex/<GPSW>/WUM0MGXFIN_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz'],
 
          "GCRE_WHU_R_osb": [
-             "ftp://igs.gnsswhu.cn/pub/whu/MGEX/DCB/<YYYY>/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
+             "ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/bias/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_OSB.BIA.gz"],
 
          "GCRE_WHU_R_abs": [
              "ftp://igs.gnsswhu.cn/pub/whu/phasebias/<YYYY>/bias/WUM0MGXRAP_<YYYY><DOY>0000_01D_01D_ABS.BIA.gz"],
@@ -1106,3 +1110,7 @@ FTP_S = {"GPS_brdc": ["ftp://igs.gnsswhu.cn//pub/gps/data/daily/<YEAR>/<DOY>/<YY
                        "--http-user=anonymous --http-passwd=fast@whu.wdu.com -nd "
                        "http://garner.ucsd.edu/pub/solutions/global/<YYYY>/<DOY>/higs9a.<YY><DOY>.Z"]
          }
+
+# import json
+# with open("fast_download_src.json", "w", encoding="utf-8") as f:
+#     json.dump(FTP_S, f, indent=4, ensure_ascii=False)

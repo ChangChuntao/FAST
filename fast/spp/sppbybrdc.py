@@ -2,7 +2,7 @@
 # SPP               : Standard point positioning  by nav
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.03
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2025.07.13 - Version 3.00.04
 
@@ -12,7 +12,7 @@ from fast.com.xyz2neu import xyz2neu
 from fast.com.gnssTime import datetime2allgnssTime
 from fast.spp.initObs import initObs
 from fast.spp.satPos import satPos
-from fast.spp.corr import earthRotation, relativistic, satPCO
+from fast.spp.corr import earthRotation, relativistic, satPCO, varerr
 from fast.com.xyz2blh import bl2enuRot, geodist, xyz2blh
 from fast.com.pub import printPanda, rms
 from fast.spp.trop import tropColins
@@ -23,7 +23,7 @@ import datetime
 import numpy as np
 import time
 
-def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self = None, posFile = None):
+def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, cutoff = 7, self = None, posFile = None):
     
     '''
     广播星历计算伪距单点定位
@@ -33,7 +33,7 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
 
     # 内部策略
     posCoord = 'ALL'
-    cutoff = 5
+    # cutoff = 10
     fisrtRun = True
 
     # 初始坐标
@@ -83,10 +83,9 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
         axsppz = figSPP.add_subplot(4,1,3)
         axsppdop = figSPP.add_subplot(4,1,4)  # 新增DOP子图
         
-        axsppx.grid(zorder=0)
-        axsppy.grid(zorder=0)
-        axsppz.grid(zorder=0)
-        axsppdop.grid(zorder=0)  # DOP子图添加网格
+        # 网格样式
+        for ax in [axsppx, axsppy, axsppz, axsppdop]:
+            ax.grid(True, linestyle='-', linewidth=0.5, alpha=0.5, zorder=0)
         
         axsppx.set_xticklabels([])
         axsppy.set_xticklabels([])
@@ -97,11 +96,11 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
         
         figSPP.subplots_adjust(left=0.09, right=0.99, bottom=0.06, top=0.90, hspace=0.3)
         
-        axsppdop.tick_params(axis='x', labelsize=13)
-        axsppx.tick_params(axis='y', labelsize=13)
-        axsppy.tick_params(axis='y', labelsize=13)
-        axsppz.tick_params(axis='y', labelsize=13)
-        axsppdop.tick_params(axis='y', labelsize=13)
+        axsppdop.tick_params(axis='x', labelsize=12)
+        axsppx.tick_params(axis='y', labelsize=12)
+        axsppy.tick_params(axis='y', labelsize=12)
+        axsppz.tick_params(axis='y', labelsize=12)
+        axsppdop.tick_params(axis='y', labelsize=12)
 
     # 历元循环 最小二乘求解 无电离层组合
     for epoch in obsData:
@@ -196,11 +195,13 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
                         continue
                     if h < 200000:
                         tropCorr = tropColins(Elevation, lat, lon, h, doys)
+                        if np.isnan(tropCorr): 
+                            tropCorr = 0
                         
                     # weight
                     weight = 1.0
+                    # weight = varerr(ele=Elevation)
 
-                
                 # power
                 W[prnIndexInC, prnIndexInC] = weight
                 
@@ -248,7 +249,7 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
                 delSat = {}
                 to_remove = None
                 for lIndex, l_value in enumerate(y):
-                    if abs(l_value[0]) > 10000:
+                    if abs(l_value[0]) > 1000:
                         delSat[satUse[lIndex]] = abs(l_value[0])
                         X_MAT[0] = 1
                 if delSat:
@@ -263,10 +264,12 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
         if less4:
             continue
         if self is not None:
-            if  len(list(posData)) % 5 == 0:
-                self.status.showMessage("SPP - " + epoch.strftime('%Y-%m-%d %H:%M:%S'))
-                QApplication.processEvents()
-
+            try:
+                if  len(list(posData)) % 5 == 0:
+                    self.status.showMessage("SPP - " + epoch.strftime('%Y-%m-%d %H:%M:%S'))
+                    QApplication.processEvents()
+            except:
+                pass
         if posFile is not None and len(list(posData)) > 2 and posCoord == 'XYZ':
             posOpen.write(' ' + '%6d' % nowGnssTime.mjd + '%10.2f' % nowGnssTime.sod + ' ' + '%20.3f' % Xi[0][0] + '%20.3f' % Xi[1][0] + '%20.3f' % Xi[2][0] + '%20.3f' % Xi[3][0] + '\n')
             
@@ -307,47 +310,69 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
             PDOPList.append(posData[epoch]['PDOP'])
             GDOPList.append(posData[epoch]['GDOP'])
             
+        # 配色方案 - 根据背景色设置不同配色
+        is_dark = self.fastQtSetting['plotBackgroundColor'] == 'dark'
+        
+        if is_dark:
+            # 暗色模式配色 - Catppuccin Mocha
+            color_enu = '#89b4fa'      # 浅蓝 - ENU统一
+            color_hdop = '#89b4fa'     # 浅蓝
+            color_vdop = '#a6e3a1'     # 浅绿
+            color_pdop = '#f9e2af'     # 浅黄
+            color_gdop = '#cba6f7'     # 浅紫
+            text_bg = '#313244'
+            text_edge = '#45475a'
+        else:
+            # 浅色模式配色 - Tokyo Night Day
+            color_enu = '#b36a6f'      # 豆沙红 (Dusty Rose) - 视觉焦点明确且不刺眼
+            color_hdop = '#a5a58d'     # 浅咖绿 (Khaki Green)
+            color_vdop = '#cb997e'     # 杏瓦色 (Apricot Tile)
+            color_pdop = '#ddb892'     # 奶茶色 (Milk Tea)
+            color_gdop = '#8b8c89'     # 中性灰 (Neutral Gray)
+            text_bg = '#f8f9fa'        # 极浅的灰白背景，比纯白更有质感
+            text_edge = '#dee2e6'      # 极细边框
+        
         # 绘制位置误差图
-        axsppx.set_title('POS: [' + '%.2f' % XMEAN + ', ' + '%.2f' % YMEAN + ', ' + '%.2f' % ZMEAN + ']',fontsize=20)
+        axsppx.set_title('POS: [' + '%.2f' % XMEAN + ', ' + '%.2f' % YMEAN + ', ' + '%.2f' % ZMEAN + ']', fontsize=18, fontweight='bold')
         
         # 东方向误差
-        axsppx.scatter(np.array(list(posData)), np.array(Elist), marker='+', s=5, zorder=10)
-        axsppx.plot(np.array(list(posData)), np.array(Elist), color = 'gray', alpha = 0.7, zorder=10)
-        axsppx.text(0.02, 0.92, 'RMS: ' + '%.3f' % rms(Elist) + 'm',
+        axsppx.scatter(np.array(list(posData)), np.array(Elist), marker='o', s=8, color=color_enu, zorder=10, alpha=0.8)
+        axsppx.plot(np.array(list(posData)), np.array(Elist), color=color_enu, alpha=0.5, linewidth=1, zorder=9)
+        axsppx.text(0.02, 0.90, 'RMS: ' + '%.3f' % rms(Elist) + ' m',
                 transform=axsppx.transAxes, verticalalignment='top',
-                horizontalalignment='left', color='black',
-                bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                zorder=30, fontsize=15)
-        axsppx.set_ylabel('E [m]', fontsize=16)
+                horizontalalignment='left',
+                bbox=dict(facecolor=text_bg, edgecolor=text_edge, boxstyle='round,pad=0.3'),
+                zorder=30, fontsize=12)
+        axsppx.set_ylabel('E [m]', fontsize=14)
         
         # 北方向误差
-        axsppy.scatter(np.array(list(posData)), np.array(NList), marker='+', s=5, zorder=10)
-        axsppy.plot(np.array(list(posData)), np.array(NList), color = 'gray', alpha = 0.7, zorder=10)
-        axsppy.text(0.02, 0.92, 'RMS: ' + '%.3f' % rms(NList) + 'm',
+        axsppy.scatter(np.array(list(posData)), np.array(NList), marker='o', s=8, color=color_enu, zorder=10, alpha=0.8)
+        axsppy.plot(np.array(list(posData)), np.array(NList), color=color_enu, alpha=0.5, linewidth=1, zorder=9)
+        axsppy.text(0.02, 0.90, 'RMS: ' + '%.3f' % rms(NList) + ' m',
                 transform=axsppy.transAxes, verticalalignment='top',
-                horizontalalignment='left', color='black',
-                bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                zorder=30, fontsize=15)
-        axsppy.set_ylabel('N [m]', fontsize=16)
+                horizontalalignment='left',
+                bbox=dict(facecolor=text_bg, edgecolor=text_edge, boxstyle='round,pad=0.3'),
+                zorder=30, fontsize=12)
+        axsppy.set_ylabel('N [m]', fontsize=14)
         
         # 高程方向误差
-        axsppz.scatter(np.array(list(posData)), np.array(UList), marker='+', s=5, zorder=10)
-        axsppz.plot(np.array(list(posData)), np.array(UList), color = 'gray', alpha = 0.7, zorder=10)
-        axsppz.text(0.02, 0.92, 'RMS: ' + '%.3f' % rms(UList) + 'm',
+        axsppz.scatter(np.array(list(posData)), np.array(UList), marker='o', s=8, color=color_enu, zorder=10, alpha=0.8)
+        axsppz.plot(np.array(list(posData)), np.array(UList), color=color_enu, alpha=0.5, linewidth=1, zorder=9)
+        axsppz.text(0.02, 0.90, 'RMS: ' + '%.3f' % rms(UList) + ' m',
                 transform=axsppz.transAxes, verticalalignment='top',
-                horizontalalignment='left', color='black',
-                bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                zorder=30, fontsize=15)
-        axsppz.set_ylabel('U [m]', fontsize=16)
+                horizontalalignment='left',
+                bbox=dict(facecolor=text_bg, edgecolor=text_edge, boxstyle='round,pad=0.3'),
+                zorder=30, fontsize=12)
+        axsppz.set_ylabel('U [m]', fontsize=14)
         
         # 绘制DOP值
-        axsppdop.plot(np.array(list(posData)), np.array(HDOPList), label='HDOP', color='blue')
-        axsppdop.plot(np.array(list(posData)), np.array(VDOPList), label='VDOP', color='green')
-        axsppdop.plot(np.array(list(posData)), np.array(PDOPList), label='PDOP', color='red')
-        axsppdop.plot(np.array(list(posData)), np.array(GDOPList), label='GDOP', color='purple')
+        axsppdop.plot(np.array(list(posData)), np.array(HDOPList), label='HDOP', color=color_hdop, linewidth=1.5)
+        axsppdop.plot(np.array(list(posData)), np.array(VDOPList), label='VDOP', color=color_vdop, linewidth=1.5)
+        axsppdop.plot(np.array(list(posData)), np.array(PDOPList), label='PDOP', color=color_pdop, linewidth=1.5)
+        axsppdop.plot(np.array(list(posData)), np.array(GDOPList), label='GDOP', color=color_gdop, linewidth=1.5)
         
-        axsppdop.legend(loc='upper right', fontsize=12, ncol=2)
-        axsppdop.set_ylabel('DOP', fontsize=16)
+        axsppdop.legend(loc='upper right', fontsize=11, ncol=2)
+        axsppdop.set_ylabel('DOP', fontsize=14)
         
         # 计算并显示平均DOP值
         avg_hdop = np.mean(HDOPList)
@@ -355,11 +380,11 @@ def spp(obsHead, obsData, navData, bandChoose, startDatetime, endDatetime, self 
         avg_pdop = np.mean(PDOPList)
         avg_gdop = np.mean(GDOPList)
         
-        axsppdop.text(0.02, 0.92, f'Avg HDOP: {avg_hdop:.2f} Avg VDOP: {avg_vdop:.2f}\nAvg PDOP: {avg_pdop:.2f} Avg GDOP: {avg_gdop:.2f}',
+        axsppdop.text(0.02, 0.90, f'Avg HDOP: {avg_hdop:.2f}  VDOP: {avg_vdop:.2f}  PDOP: {avg_pdop:.2f}  GDOP: {avg_gdop:.2f}',
                      transform=axsppdop.transAxes, verticalalignment='top',
-                     horizontalalignment='left', color='black',
-                     bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.4'),
-                     zorder=30, fontsize=12)
+                     horizontalalignment='left',
+                     bbox=dict(facecolor=text_bg, edgecolor=text_edge, boxstyle='round,pad=0.3'),
+                     zorder=30, fontsize=11)
         
         self.status.showMessage("SPP completed.")
         self.status.showMessage('REF. COORD -> ' + '%20.3f' % XMEAN + '%20.3f' % YMEAN + '%20.3f' % ZMEAN)
@@ -411,23 +436,4 @@ def sppLsq(G_MAT,W_MAT,y_MAT):
     return X_MAT
 
 if __name__ == '__main__':
-    obsFile = r'D:\Code\FAST\sample_data\abpo0010.25o'
-    brdFile = r'D:\Code\FAST\sample_data\brdc0010.25p'
-
-    bandChoose = {'G': {'C1C': {'freq': 1575420000.0, 'lambda': 0.19029367279836487}, 
-                        'C2W': {'freq': 1227600000.0, 'lambda': 0.24421021342456825}}, 
-                  'E': {'C1C': {'freq': 1575420000.0, 'lambda': 0.19029367279836487}, 
-                        'C5Q': {'freq': 1176450000.0, 'lambda': 0.25482804879085386}}, 
-                  'C': {'C2I': {'freq': 1561098000.0, 'lambda': 0.19203948631027648}, 
-                        'C6I': {'freq': 1268520000.0, 'lambda': 0.2363324646044209}}}
-
-    from fast.com.readObs import readObs, readObsHead
-    import datetime
-    startDatetime = datetime.datetime(2025,1,1)
-    endDatetime = datetime.datetime(2025,1,2)
-    obsData = readObs(obsFile)
-    obsHead = readObsHead(obsFile)
-    brdData = readNav(brdFile)
-    posFile = r'D:\Code\FAST\fast\spp\sppbybrdc.txt'
-    posData, XMEAN, YMEAN, ZMEAN = spp(obsHead, obsData, brdData, bandChoose, startDatetime, endDatetime, self = None, posFile = posFile)
-    writePosData(posData, posFile)
+    pass

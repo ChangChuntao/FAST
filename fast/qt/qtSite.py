@@ -2,7 +2,7 @@
 # qtSite            : pyqt5 for Station selection module
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2024.07.01 - Version 3.00.02
 
@@ -85,8 +85,8 @@ class runSiteWorker(QObject):
             lmax = float(lmax)
             bmin = float(bmin)
             bmax = float(bmax)
-            if -180 <= lmin <= 180 and -180 <= lmax <= 180  and -90 <= bmin <= 90  and -90 <= bmax <= 90 and lmin < lmax and bmin < bmax:
-                pass
+            if -180 <= lmin <= 180 and -180 <= lmax <= 180 and -90 <= bmin <= 90 and -90 <= bmax <= 90 and lmin < lmax and bmin < bmax:
+                pass  # 参数有效，无需处理
             else:
                 lmin = -180
                 lmax = 180
@@ -103,9 +103,7 @@ class runSiteWorker(QObject):
             thinningNum = None
         elif is_number(thinningLine):
             thinningNum = float(thinningLine)
-            if 90 > thinningNum > 0:
-                ...
-            else:
+            if not (90 > thinningNum > 0):
                 thinningNum = None
         else:
             thinningNum = None

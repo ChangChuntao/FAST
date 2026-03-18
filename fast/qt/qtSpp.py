@@ -2,7 +2,7 @@
 # qtSpp             : pyqt5 for SPP module
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2024.07.01 - Version 3.00.02
 
@@ -38,7 +38,7 @@ class runSppWorker(QObject):
     def do_work(self):
         if not self.isSppRunning:
             return
-        posData, XMEAN, YMEAN, ZMEAN = spp(self.obsHead, self.obsData, self.navData, self.bandChoose, self.startDatetime, self.endDatetime, self=self.mainSelf)
+        posData, XMEAN, YMEAN, ZMEAN = spp(self.obsHead, self.obsData, self.navData, self.bandChoose, self.startDatetime, self.endDatetime, cutoff=self.mainSelf.cutoff, self=self.mainSelf)
         self.finished.emit(posData)
 
     def stop(mainSelf):
@@ -213,6 +213,15 @@ def runSpp(self):
         msg_box.setStandardButtons(QMessageBox.Ok)
         msg_box.exec_()
         return None
+    
+    self.cutoff = self.cutoffChoose.text()
+    try:
+        self.cutoff = int(self.cutoff)
+        if self.cutoff < 0:
+            self.cutoff = 5
+    except:
+            self.cutoff = 5
+
 
     self.isSppRunning = True
     self.thread = QThread()

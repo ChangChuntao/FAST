@@ -2,7 +2,7 @@
 # initObs           : initObs in SPP module
 # Author            : Chang Chuntao
 # Copyright(C)      : The GNSS Center, Wuhan University
-# Latest Version    : 3.00.02
+# Latest Version    : 3.01.00 - 2026.03.18
 # Creation Date     : 2023.10.05 - Version 3.00.00
 # Date              : 2024.07.01 - Version 3.00.02
 
@@ -38,7 +38,7 @@ def initObs(bandChoose, obsData, epoch, satPosInEpoch, satClkInEpoch):
             continue
         if None in [P1, P2]:
             continue
-        if abs(P1 - P2) > 30:
+        if abs(P1 - P2) > 50:
             continue
         obsDataInTime['prnIndex'][prn] = prni
         prni += 1
