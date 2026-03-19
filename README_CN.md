@@ -205,7 +205,7 @@ FAST/
 │   ├── spp/                # 单点定位模块
 │   ├── site/               # 站点选择模块
 │   ├── qt/                 # PyQt5 GUI
-│   ├── plot/               # 绑图工具
+│   ├── plot/               # 图工具
 │   └── build/              # 构建输出
 │
 ├── 📖 manual/                  # 文档
@@ -226,10 +226,10 @@ FAST/
 | Python | 核心运行环境 | 3.12+ |
 | PyQt5 | GUI 框架 | — |
 | numpy | 数值计算 | — |
-| matplotlib | 绑图库 | — |
+| matplotlib | 图库 | — |
 | cartopy | 地图可视化 | — |
 | qdarkstyle | 暗色主题 | — |
-| qbstyles | 绑图样式 | — |
+| qbstyles | 图样式 | — |
 
 </div>
 
