@@ -261,21 +261,6 @@ mkdir()         # Directory creation
 rms()           # Root mean square
 ```
 
----
-
-## 📊 Data Type Indexing
-
-| Index | Format | Example |
-|:------|:-------|:--------|
-| `yd_type` | Year + Day of Year | `2025 001` |
-| `yds_type` | Year + DOY + Station | `2025 001 WUH0` |
-| `ym_type` | Year + Month | `2025 01` |
-| `s_type` | Station only | `WUH0` |
-| `no_type` | No time index | — |
-| `ydh_type` | Year + DOY + Hour | `2025 001 12` |
-| `ydsh_type` | Year + DOY + Station + Hour | `2025 001 WUH0 12` |
-
----
 
 ## 📝 Version History
 
@@ -299,42 +284,13 @@ rms()           # Root mean square
 
 <div align="center">
 
-<table>
-<thead>
-<tr>
-<th>Role</th>
-<th>Name</th>
-<th>Affiliation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> <b>Project Lead</b></td>
-<td>Dr. Chang Chuntao</td>
-<td>Wuhan University</td>
-</tr>
-<tr>
-<td> <b>Algorithm</b></td>
-<td>Prof. Jiang Kecai</td>
-<td>Wuhan University</td>
-</tr>
-<tr>
-<td> <b>Core Dev</b></td>
-<td>Dr. Mu Renhai</td>
-<td>Wuhan University</td>
-</tr>
-<tr>
-<td> <b>QA</b></td>
-<td>Prof. Li Bo</td>
-<td>Liaoning Technical University</td>
-</tr>
-<tr>
-<td>🔧 <b>Support</b></td>
-<td>Dr. Wei Hengda</td>
-<td>Wuhan University</td>
-</tr>
-</tbody>
-</table>
+| Role                | Contributor         | Affiliation                          | Contributions                     |
+|---------------------|---------------------|--------------------------------------|-----------------------------------|
+| **Project Lead**    | Dr. Chang Chuntao   | GNSS Research Center, Wuhan University | Architecture, Core Development, Documentation |
+| **Algorithm Expert**| Pd. Jiang Kecai     | GNSS Research Center, Wuhan University | Parallel Computing Optimization |
+| **Core Developer**  | Dr. Mu Renhai       | GNSS Research Center, Wuhan University | Module Development, Testing |
+| **Quality Assurance**| Pd. Li Bo          | Liaoning Technical University        | Testing, User Documentation |
+| **Technical Support**| Dr. Wei Hengda     | GNSS Research Center, Wuhan University | Validation, Tutorial Materials |
 
 </div>
 
