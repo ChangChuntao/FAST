@@ -5,6 +5,10 @@
   ╚═══════════════════════════════════════════════════════════════════════════╝
 -->
 
+<p align="right">
+  <b>English</b> | <a href="README_CN.md">简体中文</a>
+</p>
+
 <div align="center">
 
 <h1>File Download and Signal Processing Toolkit for GNSS</h1>
@@ -327,7 +331,6 @@ GNSS Research Center, Wuhan University
   <img src="https://img.shields.io/github/forks/ChangChuntao/FAST?style=social" alt="Forks">
 </p>
 
-<sub>Made with ❤️ by GNSS Research Center, Wuhan University</sub>
 <br>
 <sub>© 2022-2026 FAST Development Team</sub>
 
