@@ -1,0 +1,14 @@
+Cartopy==0.23.0
+matplotlib==3.10.8
+numpy==2.4.3
+psutil==6.0.0
+psutil==5.9.8
+PyQt5==5.15.11
+PyQt5_sip==12.17.0
+PyQt5_sip==12.13.0
+qbstyles==0.1.4
+QDarkStyle==3.2.3
+setuptools==70.1.0
+setuptools==80.3.1
+setuptools==65.5.0
+setuptools==70.0.0
