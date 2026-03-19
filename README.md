@@ -329,6 +329,6 @@ GNSS Research Center, Wuhan University
 
 <sub>Made with ❤️ by GNSS Research Center, Wuhan University</sub>
 <br>
-<sub>© 2024-2026 FAST Development Team</sub>
+<sub>© 2022-2026 FAST Development Team</sub>
 
 </div>
