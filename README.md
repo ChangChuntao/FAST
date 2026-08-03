@@ -31,7 +31,7 @@
   <img src="https://img.shields.io/badge/Linux-Ubuntu|CentOS-orange?style=flat-square&logo=linux" alt="Linux">
 </p>
 
-<p><em>A comprehensive GNSS data processing solution by GNSS Research Center, Wuhan University</em></p>
+<p><em>A comprehensive GNSS data processing solution by Aerospace Information Research Institute, Chinese Academy of Sciences</em></p>
 
 <p>
   <b><a href="#-quick-start">🚀 Quick Start</a></b> •
@@ -51,7 +51,7 @@
 
 | 📌 Version | 🏢 Organization | 🐍 Language | 🖥️ Interface |
 |:----------:|:---------------:|:-----------:|:------------:|
-| **v3.01.00** | GNSS Research Center, Wuhan University | Python 3.12+ | GUI + CLI |
+| **v3.01.00** | Aerospace Information Research Institute, Chinese Academy of Sciences | Python 3.12+ | GUI + CLI |
 
 </div>
 
@@ -290,7 +290,7 @@ rms()           # Root mean square
 
 | Role                | Contributor         | Affiliation                          | Contributions                     |
 |---------------------|---------------------|--------------------------------------|-----------------------------------|
-| **Project Lead**    | Dr. Chang Chuntao   | GNSS Research Center, Wuhan University | Architecture, Core Development, Documentation |
+| **Project Lead**    | Dr. Chang Chuntao   | Aerospace Information Research Institute, Chinese Academy of Sciences | Architecture, Core Development, Documentation |
 | **Algorithm Expert**| Pd. Jiang Kecai     | GNSS Research Center, Wuhan University | Parallel Computing Optimization |
 | **Core Developer**  | Dr. Mu Renhai       | GNSS Research Center, Wuhan University | Module Development, Testing |
 | **Quality Assurance**| Pd. Li Bo          | Liaoning Technical University        | Testing, User Documentation |
@@ -311,9 +311,9 @@ rms()           # Root mean square
 
 <div align="center">
 
-**Dr. Chang Chuntao** — chuntaochang@whu.edu.cn
+**Dr. Chang Chuntao** — changchuntao@aircas.ac.cn
 
-GNSS Research Center, Wuhan University
+Aerospace Information Research Institute, Chinese Academy of Sciences
 
 </div>
 
